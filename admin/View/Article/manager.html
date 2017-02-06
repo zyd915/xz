@@ -1,0 +1,139 @@
+<div class="portlet box purple">
+   <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>文章编辑/添加</div>
+   </div>
+   <div class="portlet-body form">
+      <!-- BEGIN FORM-->
+      <form action="<?php echo arU('', array('greedyUrl' => true)); ?>" method="post" class="form-horizontal">
+         <input type="hidden" name="aid" value="<?php echo $article['aid']; ?>" />
+         <div class="form-body">
+            <div class="form-group">
+               <label class="col-md-3 control-label">文章名</label>
+               <div class="col-md-4">
+                  <input type="text" name="title" class="form-control" value="<?php echo $article['title']; ?>" placeholder="标题">
+               </div>
+            </div>
+
+             <div class="form-group">
+               <label class="col-md-3 control-label">文章发布时间</label>
+               <div class="col-md-4">
+                  <input type="text" name="ctime" class="form-control datetimepicker" value="<?php echo date('Y-m-d H:i', $article['ctime']); ?>" placeholder="发布时间">
+               </div>
+            </div>
+
+            <div class="form-group">
+               <label class="col-md-3 control-label">排序</label>
+               <div class="col-md-4">
+                  <input type="text" name="sorder" class="form-control" value="<?php echo $article['sorder']; ?>" placeholder="排序">
+                  排序越大越靠前
+               </div>
+            </div>
+
+            <div class="form-group">
+               <label class="col-md-3 control-label">是否最新</label>
+               <div class="col-md-4">
+                 <?php
+      // 调用用html seg 直接输出 input type radio 标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/input_radio',
+            // <select name="name">
+            'name' => 'isnew',
+            // 适配器数据 数组
+            'map' => ArticleModel::$NEW_MAP,
+            // 选中的value checked =checked
+            'checked' => $article['isnew'],
+            // 'valueKey' => 'ss',
+            // 'displayKey' => 'dd',
+            'extra' => 'class="testcheck"'
+         )
+      );
+?>
+               </div>
+            </div>
+
+            <div class="form-group">
+               <label class="col-md-3 control-label">选择分类</label>
+<?php
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'cid',
+            // 适配器数据 数组
+            'map' => $catMap,
+            // 选中的value selected = selected
+            'selected' => $article['cid'],
+         )
+      );
+      ?>
+            </div>
+              <div class="form-group">
+                    <label class="control-label col-md-3">产品logo图</label>
+                    <div class="col-md-1">
+                        <input type="file" name="uploadpic" id="zbankf" onchange="ajaxFileUpload(this.id)" />
+                    </div>
+                    <input name="articlepic" value="<?php echo $article['articlepic'];?>" type="hidden">
+                      <div class="col-md-2 col-md-offset-1 text-center" style="margin:0; margin:10px 30px; padding-top: 10px; border: 1px solid #f1f1f1"> <img height="170" width="170" src="<?php echo $article['articlepic'];?>" id="upImg"<?php if(!$article['articlepic']):?>
+                        style="display:none" <?php endif;?>>  </div>
+                </div>
+
+            <div class="form-group">
+               <label class="control-label col-md-3">简短简介</label>
+               <div class="col-md-5">
+                  <textarea rows="3" cols="20" name="desc" type="text" class="form-control"><?php echo $article['desc']; ?></textarea>
+               </div>
+            </div>
+
+               <script id="baidu_editor"><?php echo stripcslashes($article['content']); ?></script>
+
+         </div>
+         <div class="form-actions nobg fluid">
+            <div class="col-md-offset-3 col-md-9" style="margin-left:18%;">
+               <button type="submit" class="btn green">提交</button>
+            </div>
+         </div>
+      </form>
+      <!-- END FORM-->
+   </div>
+</div>
+<script>
+//上传文件
+  function ajaxFileUpload(oname){
+    $.ajaxFileUpload(
+      {
+        url:'<?php echo arU('uploadRegPic'); ?>',
+        secureuri:false,
+        fileElementId:oname,
+        dataType: 'json',
+        data:{id:'id'},
+        success: function (data, status)
+        {
+          // alert(data);
+          if (data.ret_code == '1000') {
+            $('#upImg').show();
+            $("#upImg").attr('src', data.data.url);
+            $('input[name=articlepic]').val(data.data.url);
+          }
+        },
+        error: function (data, status, e)
+        {
+          alert(e);
+        }
+      }
+    )
+
+  }
+  </script>
+<?php
+    // 调用分类插件
+    arSeg(array('select_cate' => true));
+?>
+<script type="text/javascript">
+  $(function(){
+     $('.datetimepicker').datetimepicker();
+  });
+</script>

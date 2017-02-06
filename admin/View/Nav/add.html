@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>导航管理</title>
+    <link href="<?php echo arCfg('PATH.PUBLIC'); ?>images/main.css" type="text/css" rel="stylesheet">
+    <script src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jquery-1.4.2.min.js" type="text/javascript"></script>
+    <script src="<?php echo arCfg('PATH.PUBLIC'); ?>js/common.js" type="text/javascript"></script>
+
+    <meta http-equiv="x-ua-compatible" content="ie=7" />
+
+  </head>
+  <body class="warp">
+    <div id="artlist" class="addn">
+      <form id="form" action="<?php echo arU(); ?>" method="post">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="addn">
+          <tr>
+            <th colspan="4">添加节点</th>
+          </tr>
+          <tr>
+            <td height="48" align="center" class="tdwidth"><strong>归属节点：</strong></td>
+            <td class="tdleft">
+              <select name="pid">
+                <?php
+                    if (!empty($currentMenu['pid'])) :
+                        $selectPid = $currentMenu['pid'];
+                    else :
+                        $selectPid = arRequest('pid') ? arRequest('pid') : 1;
+                    endif;
+                    foreach ($menus as $menu) :
+                ?>
+                <?php
+                    if ($selectPid == $menu['id']) :
+                ?>
+                <option selected="selected" value="<?php echo $menu['id']; ?>"><?php echo $menu['title']; ?></option>
+                <?php
+                    else :
+                ?>
+                  <?php
+                      if ($menu['level'] < 2) :
+                         $disabled = '';
+                      else :
+                         $disabled = 'disabled';
+                      endif;
+                  ?>
+                <option value="<?php echo $menu['id']; ?>" <?php echo $disabled; ?>><?php echo $menu['title']; ?></option>
+                <?php
+                    endif;
+                ?>
+                <?php
+                    endforeach;
+                ?>
+              </td>
+            </tr>
+            <tr>
+              <td  height="48" align="center"><strong>节点名称：</strong></td>
+              <td class="tdleft"><input type="text" name="title"  class="ipt inputtext" size="45" value="<?php echo $currentMenu['title']; ?>" /></td>
+            </tr>
+            <tr>
+              <td height="48" align="center"><strong>节点名字：</strong></td>
+              <td class="tdleft" height="48"><input type="text" name="name" value="<?php echo $currentMenu['name']; ?>" class="ipt inputtext" size="45" />  <strong>注释：</strong>标志名。</td>
+            </tr>
+             <tr>
+              <td height="48" align="center"><strong>显示类型：</strong></td>
+              <td class="tdleft" height="48">
+                <?php
+                    // 调用用html seg 直接输出 input type radio 标签
+                    arSeg(
+                       array(
+                          // seg文件
+                          'segKey' => 'Html/input_radio',
+                          // <select name="name">
+                          'name' => 'display',
+                          // 适配器数据 数组
+                          'map' => NavModel::$DISPLAY_MAP,
+                          // 选中的value checked =checked
+                          'checked' => $currentMenu['display'],
+                       )
+                    );
+                ?>
+              </td>
+            </tr>
+            
+            <tr>
+              <td height="48" align="center"><strong>节点类型：</strong></td>
+              <td class="tdleft" height="48">
+               <?php
+                    // 调用用html seg 直接输出 input type radio 标签
+                    arSeg(
+                       array(
+                          // seg文件
+                          'segKey' => 'Html/input_radio',
+                          // <select name="name">
+                          'name' => 'ntype',
+                          // 适配器数据 数组
+                          'map' => NavModel::$NTYPE_MAP,
+                          // 选中的value checked =checked
+                          'checked' => $currentMenu['ntype'],
+                       )
+                    );
+              ?>
+              </td>
+            </tr>
+           <tr>
+              <td height="48" align="center"><strong>执行：</strong></td>
+              <td class="tdleft" height="48">
+               <input type="text" size="45" name="dowhat" />注释:对应跳转Url,js执行函数
+              </td>
+            </tr> 
+            <tr>
+              <td height="48" align="center"><strong>备注：</strong></td>
+              <td class="tdleft" height="48"><input type="text" name="remark" size="45" value="<?php echo $currentMenu['remark']; ?>" class="ipt inputtext" /></td>
+            </tr>
+            <tr>
+              <td height="48" align="center"><strong>排序：</strong></td>
+              <td class="tdleft" height="48"><input type="text" name="sort" size="45" value="<?php echo $currentMenu['sort']; ?>" class="ipt inputtext" />  <strong>注释：</strong>按照降序，值越大越靠前显示。</td>
+            </tr>
+            <input type="hidden" name="id" value="<?php echo $currentMenu['id']; ?>"/>
+            <tr>
+              <td height="48" colspan="2"><div id="addkey"></div>
+                <div class="fabu">
+                  <input type="submit" value="添加" class="btn">
+                </div>
+              </td>
+            </tr>
+          </table>
+          </form>
+          <br />
+          <br />
+          <br />
+        </div>
+      </body>
+    </html>

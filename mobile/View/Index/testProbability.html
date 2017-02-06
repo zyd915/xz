@@ -1,0 +1,187 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">测录取概率</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="xz-section admission">
+                <img style="width: 100%;" src="<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner1.jpg">
+                <ul class="personalInfo">
+                    <li class="selectGradeBtn xz-score">
+                        <div class="col-xs-5 font">成绩信息</div>
+                        <div class="col-xs-5">
+                            <span class="score" data-score="450">450分</span>
+                            <span class="subject" data-km="0">理科</span>
+                        </div>
+                        <div class="col-xs-2"><a href="javascript:;"><i class="fa fa fa-pencil-square-o alter"></i></a></div>
+                    </li>
+                    <li class="searchCollegeBtn">
+                        <div class="col-xs-10" id="divCollege">
+                            点击选择您要测试的院校
+                        </div>
+                        <div class="col-xs-2"><a href="javascript:;"><i class="fa fa fa-pencil-square-o alter"></i></a></div>
+                    </li>
+                    <li id="liResult" class="">
+                        <div class="col-xs-10" id="divResult">
+                            <label for="xz-school-pc" style="font-weight: normal;">您的批次：</label>
+                            <select name="xz-slpc" id="xz-school-pc" style="width: 3rem;font-size:.32rem;border-color: #2196F3;border-radius: 3px;">
+                                <option value="0">请选择</option>
+                                <option value="1">本科一批</option>
+                                <option value="2">本科二批</option>
+                                <option value="3">专科一批</option>
+                                <option value="4">专科二批</option>
+                            </select>
+                        </div>
+                    </li>
+                </ul>
+                <div class="xz-lqgl hide">
+                    <a href="<?php echo arU('Index/testProbabilityList') ?>" id="xzlh-xq" class="clearfix">
+                        <span class="xz-lqgl-value"></span>
+                        <span class="glyphicon glyphicon-menu-right"></span>
+                    </a>
+                </div>
+                <button type="button" id="xz-starttest" class="btn btn-primary btn-test bt1">开始测试</button>
+                <a class="btn btn-default hide" id="aLoading" style="margin-left: 30%"><i class="fa fa-spinner fa-spin"></i>努力加载中...</a>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        var dat,xzgljs;
+        $('.xz-score').tap(function(){
+            var index = layer.open({
+                title: '选取成绩',
+                content: '<div class="xz-selectscore" style="font-family:微软雅黑;">\
+                            <div style="text-align:left;">\
+                                <label style="font-weight:normal">您的科类：</label>\
+                                <label style="width: 1.2rem;font-weight:normal" class="km"><input type="radio" name="class" value="文科" checked>&nbsp;文科</label>\
+                                <label style="width: 1.2rem;font-weight:normal" class="km"><input type="radio" name="class" value="理科">&nbsp;理科</label>\
+                            </div>\
+                            <div style="text-align:left;margin-top:10px;">\
+                                <label for="yscore" style="font-weight:normal">您的成绩：</label>\
+                                <input type="text" name="score" class="xzlh-gl-input" id="yscore" style="border-color:#2196F3;border-radius:3px;">\
+                            </div>\
+                        </div>',
+                btn: ['确认', '取消'],
+                shadeClose: false,
+                yes: function(){
+                    var num = $('.xz-selectscore input[name=score]').val(),
+                        km = $('.xz-selectscore input[name=class]:checked').val();
+                    /*function kms(km){
+                        switch(km){
+                            case '理科':
+                                return 0;
+                            case '文科':
+                                return 1;
+                        }
+                    }*/
+                    if (typeof parseInt(num) != 'number' || num == '' || num >= 750 || num <= 0) {
+                        //alert('请输入正确的分数');
+                    }else{
+                        $('.score').text(num + '分').data('score',num);
+                        $('.subject').text(km).data('km',kms(km));
+                        layer.close(index);
+                    }
+                }, no: function(){
+                    layer.close(index);
+                }
+            });
+        });
+
+        $('.searchCollegeBtn').tap(function(){
+            var index = layer.open({
+                title: '选取学校',
+                content: '<div class="xz-schoolname" style="font-family:微软雅黑";>\
+                            <div style="text-align:left;margin-top:10px;">\
+                                <label for="schoolname" style="font-weight:normal;">学校名称：</label>\
+                                <input type="text" name="schoolname" class="xzlh-gl-input" id="schoolname" style="border-color:#2196F3;border-radius:3px;">\
+                            </div>\
+                        </div>',
+                btn: ['确认', '取消'],
+                shadeClose: false,
+                yes: function(){
+                    var num = $('.xz-schoolname input[name=schoolname]').val();
+                    if (num == '') {
+                        alert('请输入院校名称');
+                    }else{
+                        $('#divCollege').text(num);
+                        layer.close(index);
+                    }
+                }, no: function(){
+                    layer.close(index);
+                }
+            });
+        });
+
+        $('#xz-starttest').tap(function(){
+            var pc = $('select[name=xz-slpc]').val(),
+                sname = $('#divCollege').text();
+            if (pc == 0) {
+                layer.open({
+                    content: '请选择批次！',
+                    time: 2 //2秒后自动关闭
+                });
+                return;
+            }
+            if (sname == '点击选择您要测试的院校') {
+                layer.open({
+                    content: '请选择你要测试的院校！',
+                    time: 2 //2秒后自动关闭
+                });
+                return;
+            }
+            dat = {
+                sname: sname,
+                pc: pc,
+                km: $('.subject').data('km'),
+                score: $('.score').data('score')
+            };
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/admissionOdds','POST',dat,callback);
+
+            function callback(dat){
+                if (dat.ret_code == '1000') {
+                    $('.xz-lqgl').removeClass('hide');
+                    $('.xz-lqgl-value').text(sname + '的录取概率为' + dat.data.percent.percent + '%');
+                    xzgljs = dat.data;
+                }else{
+                    layer.open({
+                        content: '抱歉，暂无数据！请更换查询条件',
+                        time: 2 //2秒后自动关闭
+                    });
+                    $('.xz-lqgl').addClass('hide');
+                }
+            }
+        });
+        $('#xzlh-xq').tap(function(){
+            setCookie('xzlqgl',JSON.stringify(dat),1);
+            setCookie('xzlqglsj',JSON.stringify(xzgljs),1);
+        })
+    });
+
+    $(function(){
+        var da = null;
+        //获取userScore接口数据
+        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post','',spage);
+        function spage(dat){
+            if(dat.ret_code == '1000'){
+                da = dat.data;
+                $('#exam-score').val(dat.data.scorez1);
+            }else{
+                var index = layer.open({
+                    type: 0,
+                    shadeClose: false,
+                    content: '你还没有登录，请登录后再查询！',
+                    btn: ['<div style="color:#0078D7">确定'],
+                    yes: function(){
+                        layer.close(index);
+                        location.href="<?php echo arU('User/login')?>";
+                    }
+                });
+            }
+        }
+        $('#examscore').on('change',function(){
+            esoption($('#examscore').val(),da);
+        });
+    });
+</script>

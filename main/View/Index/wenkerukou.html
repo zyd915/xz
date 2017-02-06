@@ -1,0 +1,36 @@
+<div class="roe-kemurukou">
+    <div class="roe-tips">
+        <strong>温馨提示：</strong>
+        <p>1、该测试需要约30分钟，请先安排好自己的时间，找一个不被打扰的环境和充裕的时间，保持一种放松且不假思索的状态下完成测试。</p>
+        <p>2、问卷的任何选项都没有好与坏之分，也没有"正确"答案。根据国际专业心理量表评测和施测标准化要求，测试量表有部分题目实际上并非为其所测维度变量，而是测试你前后态度是否一致，请诚实答题。</p>
+        <p>3、重要提醒：序列号一旦登陆就会失效，请确保一旦进入测试，就一气呵成完成答题。</p>
+        <div>
+            <button id="roe-csbtn">我知道了，现在进入测试</button>
+        </div>
+    </div>
+    <div class="roe-ceshi">
+        <h2>循证高考网</h2>
+        <div class="roe-enterceshi">
+            <label for="">量表版本：</label>
+            <input type="text" readonly="true" value="Major-choice-w测试">
+        </div>
+        <div class="roe-enterceshi">
+            <label for="serial">序列号：</label>
+            <input id="serial" type="text" placeholder="请输入序列号">
+        </div>
+        <div class="roe-enterceshi">
+            <label for="verification">验证码：</label>
+            <input id="verification" type="text">
+            <img src="" style="cursor:pointer;height:30px;border:1px solid #888;">
+        </div>
+        <div class="roe-enter">
+            <input type="submit" value="进入测试">
+        </div>
+    </div>
+</div>
+<script>
+    $('#roe-csbtn').on('click',function(){
+        $('.roe-tips').hide();
+        $('.roe-ceshi').show();
+    });
+</script>

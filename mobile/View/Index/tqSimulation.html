@@ -1,0 +1,797 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">高考模拟填报</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class=" moni center-block">
+                <!-- 诊断成绩模拟填报系统 -->
+                <div class="system-title clearfix">
+                    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;高考成绩模拟填报系统</h2>
+                    <ul class="hmenu">
+                        <li><b>1</b>输入高考成绩</li>
+                        <li><b>2</b>选择填报批次</li>
+                        <li class="selected"><b>3</b>选择院校专业</li>
+                        <li><b>4</b>生成模拟志愿表</li>
+                    </ul>
+                </div>
+                <hr class="fgx">
+                <div>
+                    <div class="bge-bzh row clearfix">
+                        <div class="col-xs-12 xiugai">
+                            <span>您的高考成绩</span> 科类：
+                            <span class="wenke xzlh-zykm"><?php echo arRequest('km'); ?></span>总分：
+                            <span class="wenke "><?php echo arRequest('score'); ?></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="bdr clearfix inputscore">
+                    <h4 class="pl10">
+                        <span class="fa-stack fa-lg fs14px-bzh">
+                            <i class="fa fa-square fa-stack-2x fc3-bzh"></i>
+                            <i class="fa fa-terminal fa-stack-1x fa-inverse "></i>
+                        </span>&nbsp;
+                        <span class="vam-bzh">志愿填报</span>
+                    </h4>
+                </div>
+                <h5 class="text-center xzschool">
+                    <a herf="javascript:;" class="xzlh-zy-title">四川省2016年普通类第一批本科学校志愿智能模拟</a>
+                </h5>
+                <!--志愿专业选择-->
+                <div class="fillin step1">
+                    <ul>
+                        <li class="xzlh-zylist">
+                            <a href="javascript:" class="btn btn-success tianbao">开始填报<span class="caret"></span></a>A志愿
+                            <div class="clearfix zy-wrapper active">
+                                <div class="zycollege">
+                                    <h5 class="text-center xzschool">
+                                        <a herf="javascript:">选择学校</a>
+                                    </h5>
+                                    <div class="xzsc">
+                                        <input readonly="readonly" type="text" name="schoolname" class="text-center bdr">
+                                        <button class="btn btn-info btn-sm pull-right type-Volunteer" value="A" style="width:26%">选择A志愿</button>
+                                    </div>
+                                    <div class="schoolMes clearfix" value="A">
+                                        <ul>
+                                            <li>学校所在地：<span class="scarea"></span></li>
+                                            <!-- <li>录取概率：<span class="odds" value="A"></span>
+                                                <div>
+                                                    <div class="nboxs"></div>
+                                                </div>
+                                            </li>-->
+                                        </ul>
+                                    </div>
+                                    <hr class="fgx">
+                                </div>
+                                <div class="">
+                                    <h5 class="text-center xzschool">
+                                        <a herf="javascript:">选专业</a>
+                                    </h5>
+                                    <ul class="zymk" value="A">
+                                        <li class="xzlh-se">
+                                            <span>1.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="1">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>2.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="2">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>3.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="3">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>4.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="4">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>5.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="5">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>6.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="6">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <!-- <hr class="fgx"> -->
+                                </div>
+                                <div class="diaopei">
+                                    <span class="">是否服从专业调配</span>
+                                    <label>
+                                        <input type="radio" name="checkA" value="是" checked> 是
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="checkA" value="否"> 否
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="xzlh-zylist">
+                            <a href="javascript:;" class="btn btn-success tianbao">开始填报<span class="caret"></span></a>B1志愿
+                            <div class="clearfix zy-wrapper active">
+                                <div class="zycollege">
+                                    <h5 class="text-center xzschool">
+                                        <a herf="javascript:">选择学校</a>
+                                    </h5>
+                                    <div class="xzsc">
+                                        <input readonly="readonly" type="text" name="schoolname" class="text-center bdr">
+                                        <button class="btn btn-info btn-sm pull-right type-Volunteer" value="B1" style="width:26%">选择B1志愿</button>
+                                    </div>
+                                    <div class="schoolMes clearfix" value="B1">
+                                        <ul>
+                                            <li>学校所在地：<span class="scarea"></span></li>
+                                            <!--<li>录取概率：<span class="odds" value="B1"></span>
+                                                <div>
+                                                    <div class="nboxs"></div>
+                                                </div>
+                                            </li> -->
+                                        </ul>
+                                    </div>
+                                    <hr class="fgx">
+                                </div>
+                                <div class="">
+                                    <h5 class="text-center xzschool">
+                                        <a herf="javascript:">选专业</a>
+                                    </h5>
+                                    <ul class="zymk" value="B1">
+                                        <li class="xzlh-se">
+                                            <span>1.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="1">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <!-- <i class="fa fa-arrow-circle-up czup"></i> -->
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>2.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="2">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>3.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="3">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>4.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="4">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>5.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="5">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>6.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="6">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <!-- <i class="fa fa-arrow-circle-down czdown"></i> -->
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <!-- <hr class="fgx"> -->
+                                </div>
+                                <div class="diaopei">
+                                    <span class="">是否服从专业调配</span>
+                                    <label>
+                                        <input type="radio" name="checkB1" value="是" checked> 是
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="checkB1" value="否"> 否
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="xzlh-zylist">
+                            <a href="javascript:;" class="btn btn-success tianbao">开始填报<span class="caret"></span></a>B2志愿
+                            <div class="clearfix zy-wrapper active">
+                                <div class="zycollege">
+                                    <h5 class="text-center xzschool">
+                                        <a herf="javascript:">选择学校</a>
+                                    </h5>
+                                    <div class="xzsc">
+                                        <input readonly="readonly" type="text" name="schoolname" class="text-center bdr">
+                                        <button class="btn btn-info btn-sm pull-right type-Volunteer" value="B2">选择B2志愿</button>
+                                    </div>
+                                    <div class="schoolMes clearfix" value="B2">
+                                        <ul>
+                                            <li>学校所在地：<span class="scarea"></span></li>
+                                            <!-- <li>录取概率：<span class="odds" value="B2"></span>
+                                                <div>
+                                                    <div class="nboxs"></div>
+                                                </div>
+                                            </li>-->
+                                        </ul>
+                                    </div>
+                                    <hr class="fgx">
+                                </div>
+                                <div class="">
+                                    <h5 class="text-center xzschool">
+                                        <a herf="javascript:">选专业</a>
+                                    </h5>
+                                    <ul class="zymk" value="B2">
+                                        <li class="xzlh-se">
+                                            <span>1.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="1">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <!-- <i class="fa fa-arrow-circle-up czup"></i> -->
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>2.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="2">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>3.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="3">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>4.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="4">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>5.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="5">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <i class="fa fa-arrow-circle-down czdown"></i>
+                                            </span>
+                                        </li>
+                                        <li class="xzlh-se">
+                                            <span>6.</span>
+                                            <input readonly="readonly" type="text" name="zyname" class="zy-name">
+                                            <button class="btn btn-default btn-sm " value="6">选择</button>
+                                            <span class="opt-zy" style="display: inline-block">
+                                                <i class="fa fa-arrow-circle-up czup"></i>
+                                                <!-- <i class="fa fa-arrow-circle-down czdown"></i> -->
+                                            </span>
+                                        </li>
+                                    </ul>
+                                    <!-- <hr class="fgx"> -->
+                                </div>
+                                <div class="diaopei">
+                                    <span class="">是否服从专业调配</span>
+                                    <label>
+                                        <input type="radio" name="checkB2" value="是" checked> 是
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="checkB2" value="否"> 否
+                                    </label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="iback">
+                    <a class="btn btn-primary" href="javascript:history.back();">返回批次选择</a>
+                    <a class="btn btn-primary saveForm" href="javascript:;">保存志愿表单</a>
+                </div>
+                <!--选择专业的弹层表格-->
+                <div class="professional-table choose-zhuanye" id="" style="display: none">
+                    <div id="zyxz" class="choosezy">
+                        <div class="alert-warning">
+                            <div class="table-responsive">
+                                <table class="table-bordered text-center profession-inform">
+                                    <thead>
+                                        <tr class="bg3-bzh">
+                                            <th class="" style="">专业名称</th>
+                                            <th style="">2015年录取分数</th>
+                                            <th style="">2015年录取分差</th>
+                                            <th style="">2015年录取位次</th>
+                                            <th style="">2015年招生计划</th>
+                                            <th style="">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--选择志愿的弹层表格-->
+                <div class="professional-table" id="choose-vol" style="display: none">
+                    <div class="choosezy">
+                        <div id="inner-table">
+                            <h4 class="zy-ch-tit">以下学校适合作为<span class="tyVolunteer">A</span>志愿填报，请手动选择：</h4>
+                            <div>
+                                <div class="alert alert-warning" style="display: table;width: 100%;">
+                                    <i class="fa fa-info-circle" style="float:left;color:#b12;margin-top:2px; "></i>
+                                    <div style="width: 92%;float:right;">
+                                        <p class="fsy">1、下面推荐的是对您有意义的学校，过于冒险和过于保守的学校不会被推荐；</p>
+                                        <p class="mly">2、投档概率为系统估算，仅供考生和家长参考，不代表最终实际投档结果！</p>
+                                    </div>
+                                </div>
+                                <div class="clearfix sxys" style="display:none;">
+                                    <div>
+                                        <label>概率类型：</label>
+                                        <button class="btn btn-info btn-xs tabType" value="a" style="font-size: 16px; border-color: rgb(219, 82, 66); background-color: rgb(219, 82, 66);">所 有</button>
+                                        <button class="btn btn-info btn-xs tabType" value="c" style="font-size: 12px; border-color: rgb(0, 90, 170); background-color: rgb(0, 90, 170);">冲一冲</button>
+                                        <button class="btn btn-info btn-xs tabType" value="w" style="font-size: 12px; border-color: rgb(0, 90, 170); background-color: rgb(0, 90, 170);">稳一稳</button>
+                                        <button class="btn btn-info btn-xs tabType" value="b" style="font-size: 12px; border-color: rgb(0, 90, 170); background-color: rgb(0, 90, 170);">保一保</button>
+                                        <button class="btn btn-info btn-xs tabType" value="s" style="font-size: 12px; border-color: rgb(0, 90, 170); background-color: rgb(0, 90, 170);">守一守</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table-bordered text-center xzlh-tab-zy" style="width: 100%">
+                                        <thead>
+                                            <tr class="bg3-bzh" style="background: green;">
+                                                <th>学院名称</th>
+                                                <th>2015录取分数</th>
+                                                <th>2015录取线差</th>
+                                                <th>2015录取位次</th>
+                                                <th>2015招生计划</th>
+                                                <!--<th>录取概率</th>-->
+                                                <th>操作</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="center-block mask ">
+                                <p class="sum-school text-center">本志愿为您推荐的院校共有<em>32</em>所</p>
+                                <a>
+                                    <div class="xzcard text-center">本志愿为VIP用户推荐所有院校</div>
+                                </a>
+                                <p class="pb10 text-center">
+                                    <a href="javascript:;" class="cardIntro">圆梦卡介绍&nbsp;<i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i>&nbsp;&nbsp;</a>
+                                    <a href="javascript:;">他们这么说&nbsp;<i class="fa fa-angle-right"></i><i class="fa fa-angle-right"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        removeCookie('lh-zyschoolname');
+        $(function() {
+            var score = "<?php echo arRequest('score'); ?>", // 取得分数值
+                km = "<?php echo arRequest('km'); ?>", // 取得科目值
+                pc = "<?php echo arRequest('pc'); ?>", // 取得批次值
+                tp = "<?php echo arRequest('tp'); ?>", // 取得批次值
+                arr = [], // 保存的专业名称
+                arrobj = {}, // 保存所有志愿的专业名称，一一对应关系{A：[所选专业]}
+                schoolObj = {}; // 保存所有志愿对应的学校名称,一一对应关系{A:'string'}
+
+            $('.xzlh-zy-title').text('四川省2016年普通类' + pcs(pc) + '学校志愿智能模拟');
+            $('.xzlh-zykm').text(kmnum(km));
+            // 每个选择志愿模块默认隐藏
+            $('.zy-wrapper').hide();
+
+            // 每个志愿的开始填报按钮，点击展开或伸缩
+            $('.tianbao').on('tap', function() {
+                // 每个志愿模块所对应的li索引值
+                var num = $(this).parent('.xzlh-zylist').index();
+                // 判断前一个志愿是否填报
+                if (num >= 1) {
+                    var str = $(this).parent('.xzlh-zylist').prev('.xzlh-zylist').find('.xzlh-se').eq(0).find('input').val();
+                    if (str == '') {
+                        layer.open({
+                            content: '请依次填报志愿',
+                            time: 2
+                        });
+                        return;
+                    }
+                }
+                $(this).parent('.xzlh-zylist').find('.zy-wrapper').toggle();
+                $(this).parent('.xzlh-zylist').siblings().find('.zy-wrapper').hide();
+            });
+            // 院校信息默认隐藏，当选择为志愿后显示
+            $('.schoolMes').hide();
+
+            // 选择志愿对应的学校
+            $('.type-Volunteer').css({
+                width: '26%'
+            });
+            $('.type-Volunteer').tap(function() {
+                var type = $(this).val(),
+                    dat = {
+                        score: score,
+                        km: km,
+                        pc: pc,
+                        type: type
+                    },
+                    _this = $(this);
+                arr = [];
+                if (tp == 'gk') {
+                    ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zySchoolListTqpRel', 'POST', dat, selectzy);
+                } else if (tp == 'zd') {
+                    ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zySchoolListTqp', 'POST', dat, selectzy);
+                }
+
+                function selectzy(dat) {
+                    var html = '';
+                    if (dat.ret_code == 1000) {
+                        for (var i = 0; i < dat.total_lines; i++) {
+                            html += '<tr>\
+                                <td class="xzlh-zy-schoolname">' + dat.data[i].name + '</td>\
+                                <td>' + tdmc(dat.data[i].lqf15) +
+                                '</td>\
+                                <td>' + tdmc(dat.data[i].fc15) + '</td>\
+                                <td>' + tdmc(dat.data[i].lqwc15) + '</td>\
+                                <td>' + tdmc(
+                                    dat.data[i].zsjh15) +
+                                '</td>\
+                                <!--<td class="xzlh-zy-odd">' + tdmc(dat.data[i].odds) +
+                                '%</td>-->\
+                                <td class="xzlh-zybtn">\
+                                    <a href="javascript:" class="xzlh-type-zy btn btn-info btn-xs" style="display:block;margin: .2rem .1rem" data-schoolname="' +
+                                dat.data[i].name + '" data-odds="' + dat.data[i].odds + '" data-addr="' + dat.data[i].dy + '" data-value="' + type + '">选为' + type +
+                                '志愿</a>\
+                                </td>\
+                            </tr>';
+                        }
+                        // 弹出所有符合志愿的学校
+                        layeralt(html, dat, _this, type);
+                    } else {
+                        layer.open({
+                            content: dat.error_msg,
+                            time: 1.5
+                        });
+                    }
+                }
+            });
+            // 弹出所有学校
+            function layeralt(data, dat, _this, type) {
+                layer.open({
+                    title: '选择志愿',
+                    type: 1,
+                    shadeClose: false,
+                    fixed: false,
+                    top: 50,
+                    content: $('#choose-vol').html(),
+                    success: function(elem) {
+                        $(elem).find('.xzlh-tab-zy tbody').html(data);
+                        for (var prot in schoolObj) {
+                            if (schoolObj[prot]) {
+                                $('.xzlh-zy-schoolname').each(function() {
+                                    if ($(this).text() == schoolObj[prot]) {
+                                        $(this).siblings('.xzlh-zybtn').find('a').replaceWith('<span class="fa fa-check-circle text-success" style="display: block;margin: .2rem .1rem;">已选为' + prot + '志愿</span>');
+                                    }
+                                });
+                            }
+                        }
+                        // 点击选为志愿
+                        $(elem).find('.xzlh-type-zy').tap(function() {
+                            if (_this.html() === '重新选择') {
+                                if ($(this).data('data-schoolname') !== _this.prev().val()) {
+                                    _this.parents('.zy-wrapper').find('input[name=zyname]').val('');
+                                    _this.parents('.zy-wrapper').find('button').html('选择');
+                                    _this.parents('.zy-wrapper').find('.opt-zy').hide();
+                                    arrobj[type] = [];
+                                }
+                            }
+                            $(this).html('<span class="fa fa-check-circle"></span>');
+                            schoolObj[type] = $(this).data('schoolname');
+                            //setCookie('lh-zyschoolname',$(this).data('schoolname'));
+                            _this.prev('input[name=schoolname]').val($(this).data('schoolname'));
+                            $('.schoolMes[value=' + $(this).data('value') + ']').show();
+                            $('.schoolMes[value=' + $(this).data('value') + ']').find('.scarea').text($(this).data('addr'));
+                            /*$('.schoolMes[value='+$(this).data('value')+']').find('.odds').text( $(this).data('odds') );*/
+                            _this.html('重新选择');
+                            setTimeout(function() {
+                                layer.closeAll();
+                            }, 100);
+
+                        });
+
+                        //筛选条件处
+                        $('.tabType').tap(function() {
+                            // $(this).parent().css('margin-bottom','20px');
+                            $(this).animate({
+                                fontSize: '16px',
+                                borderColor: 'rgb(219,82,66)',
+                                backgroundColor: 'rgb(219,82,66)'
+                                    /*rotateZ:'45deg',
+                                     position:'static',
+                                     translate3d: '10px,10px,10px'*/
+                            }, 500, 'ease-out').siblings('.tabType').css({
+                                'font-size': '12px',
+                                'border-color': 'rgb(0, 90, 170)',
+                                'background-color': 'rgb(0, 90, 170)'
+                            });
+                        })
+
+                        $('.sum-school em').text(dat.actual_nums);
+                        // 选择概率类型
+                        $('.tabType').tap(function() {
+                            var tabType = $(this).attr('value');
+                            switch (tabType) {
+                                case 'a':
+                                    addyxmes(0, 100);
+                                    break;
+                                case 'c':
+                                    addyxmes(0, 39);
+                                    break;
+                                case 'w':
+                                    addyxmes(40, 59);
+                                    break;
+                                case 'b':
+                                    addyxmes(60, 84);
+                                    break;
+                                case 's':
+                                    addyxmes(85, 100);
+                                    break;
+                            }
+                        });
+                        
+                        //点击学校名称查看更多信息
+                        $('.xzlh-zy-schoolname').tap(function(){
+                            var yxname=$(this).text();
+                            var weizhi=yxname.indexOf("(");
+                            var sub_name=yxname.substring(0,weizhi);
+                            if(weizhi==-1){
+                                window.open('<?php echo arU("Index/schooldetail")?>?name='+yxname,target="_blank")
+                            }else{
+                                window.open('<?php echo arU("Index/schooldetail")?>?name='+sub_name,target="_blank")
+                            }
+                        })
+
+                        $('.vipCard').tap(function() {
+                            window.open('<?php echo arU("User/vipCard") ?>', target = "_blank");
+                        })
+                        $('.xzcard').tap(function() {
+                            window.open('<?php echo arU("User/vipCard") ?>', target = "_blank");
+                        })
+                        $('.cardIntro').tap(function() {
+                            window.open('<?php echo arU("User/vipCard") ?>', target = "_blank");
+                        })
+                    }
+                });
+            }
+            // 依据不同概率选择显示不同的学校
+            function addyxmes(num1, num2) {
+                $('.xzlh-zy-odd').each(function() {
+                    if (parseInt($(this).text()) > num2 || parseInt($(this).text()) < num1) {
+                        $(this).parent().hide();
+                    } else {
+                        $(this).parent().show();
+                    }
+                });
+            }
+
+            $('.opt-zy').hide();
+            $('.zymk li.xzlh-se').eq(0).find('.opt-zy').find('.czup').hide();
+            $('.zymk li.xzlh-se').last().find('.opt-zy').find('.czdown').hide();
+
+            $('.czdown').tap(function() {
+                var prev = $(this).parent('span').siblings('input[name=zyname]').val(),
+                    next = $(this).parents('.xzlh-se').next().find('input[name=zyname]').val();
+                if (next == '') {
+                    $(this).parents('.xzlh-se').next().find('.opt-zy').show().prev('button').text('修改');
+                    $(this).parent().hide().prev('button').text('选择');
+                }
+                $(this).parents('.xzlh-se').next().find('input[name=zyname]').val(prev);
+                $(this).parent('span').siblings('input[name=zyname]').val(next);
+            });
+
+            $('.czup').tap(function() {
+                var prev = $(this).parent('span').siblings('input[name=zyname]').val(),
+                    next = $(this).parents('.xzlh-se').prev().find('input[name=zyname]').val();
+                if (next == '') {
+                    $(this).parents('.xzlh-se').prev().find('.opt-zy').show().prev('button').text('修改');
+                    $(this).parent().hide().prev('button').text('选择');
+                }
+                $(this).parents('.xzlh-se').prev().find('input[name=zyname]').val(prev);
+                $(this).parent('span').siblings('input[name=zyname]').val(next);
+            });
+
+            // 选择专业，请求专业数据
+            $('.zymk button').tap(function() {
+                var schoolname = $(this).parents('li.xzlh-zylist').find('input[name=schoolname]').val(),
+                    zytype = $(this).parents('li.xzlh-zylist').find('input[name=schoolname]').next('button').val();
+                dat = {
+                    sname: schoolname,
+                    pc: pc,
+                    km: km
+                };
+                _this = $(this);
+
+                if (schoolname == '') {
+                    layer.open({
+                        content: '请先选择学校，再选择专业!',
+                        time: 2
+                    });
+                    return;
+                } else {
+                    if ($(this).val() == 1) {
+                        if ($(this).data('falg') != 'yes') {
+                            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zhuanyeList', 'POST', dat, selectzhuanye);
+                        } else {
+                            selectzhuanye(callBackData);
+                            //$(this).data('falg','yes');
+                        }
+                    } else {
+                        var falg = $(this).parents('.zymk').find('li.xzlh-se').eq($(this).val() - 2).find('button').data('falg');
+                        if (falg != 'yes') {
+                            layer.open({
+                                content: '请依次选择专业!',
+                                time: 2
+                            });
+                        } else {
+                            selectzhuanye(callBackData);
+                        }
+                    }
+                }
+                // 专业列表
+                function selectzhuanye(dat) {
+                    callBackData = dat;
+                    var html = '';
+                    if (dat.ret_code == 1000) {
+                        for (var i = 0; i < dat.total_lines; i++) {
+                            html += '<tr>\
+                                    <td class="xzlh-td-zyname">' + dat.data[i].zyname + '</td>\
+                                    <td>' + tdmc(dat.data[i].slqf) +
+                                '</td>\
+                                    <td>' + tdmc(dat.data[i].lqxc) + '</td>\
+                                    <td>\
+                                        <span class="lqwc">' + tdmc(dat.data[
+                                    i].slqwc) + '</span>\
+                                        <a class="clear vipread" title="">仅限VIP用户查看</a>\
+                                    </td>\
+                                    <td>' +
+                                tdmc(dat.data[i].lqrs) +
+                                '</td>\
+                                    <td class="xzlh-zyyes">\
+                                        <button class="btn btn-info btn-xs" style="margin: .18rem .15rem" data-zyname="' + dat.data[
+                                    i].zyname + '">选为专业' + _this.val() +
+                                '\
+                                        </button>\
+                                        <span class="zyupdate clear">\
+                                            <i class="fa fa-check-circle "></i>已选为专业<span>' +
+                                _this.val() + '</span>\
+                                        </span>\
+                                    </td>\
+                                </tr>';
+                        }
+                        //弹出符合的专业列表
+                        zhuanyealt(html, _this, zytype);
+                    } else {
+                        layer.open({
+                            content: dat.error_msg,
+                            time: 1.5
+                        });
+                    }
+                }
+            });
+            //弹出符合的专业列表
+            function zhuanyealt(html, _this, zytype) {
+                layer.open({
+                    title: '选择专业',
+                    type: 1,
+                    shadeClose: false,
+                    fixed: false,
+                    top: 50,
+                    content: $('.choose-zhuanye').html(),
+                    success: function(elem) {
+                        $(elem).find('.profession-inform').find('tbody').html(html);
+                        $('.vipread').hide();
+                        $('span.zyupdate').hide();
+
+                        if (typeof arrobj[zytype] == 'object' && arrobj[zytype].length > 1) {
+                            for (var i = 1; i < arrobj[zytype].length; i++) {
+                                var ind = i;
+                                $('.xzlh-td-zyname').each(function() {
+                                    if ($(this).text() == arrobj[zytype][ind]) {
+                                        $(this).siblings('.xzlh-zyyes').find('button').hide();
+                                        $(this).siblings('.xzlh-zyyes').find('.zyupdate').show().find('span').text(i);
+                                    }
+                                });
+                            }
+                        }
+                        // 点击选择专业
+                        $(elem).find('.profession-inform').find('tbody').find('button').tap(function() {
+                            $(this).hide();
+                            $(this).next('span').show();
+                            _this.data('falg', 'yes');
+                            _this.text('修改');
+                            _this.prev('input[name=zyname]').val($(this).data('zyname'));
+                            arr[_this.val()] = $(this).data('zyname');
+                            arrobj[zytype] = arr;
+                            _this.next('.opt-zy').show();
+                            setTimeout(function() {
+                                layer.closeAll();
+                            }, 100);
+                        });
+                        $('.vipCard').tap(function() {
+                            window.open('<?php echo arU("User/vipCard") ?>', target = "_blank");
+                        })
+                    }
+                });
+            }
+            // 保存志愿表单
+            $('.saveForm').tap(function() {
+                var form = {};
+                var objForm = {};
+                $('.xzlh-zylist').each(function(index) {
+                    var type = $(this).find('.schoolMes').attr('value'),
+                        zyarr = [],
+                        obj = {};
+                    form[type] = obj;
+                    obj.schoolname = $(this).find('input[name=schoolname]').val();
+                    obj.scarea = $(this).find('.schoolMes').find('.scarea').text();
+                    obj.odds = $(this).find('.schoolMes').find('.odds').text();
+                    obj.zytp = $(this).find('.diaopei').find('input[type=radio]:checked').val();
+                    $(this).find('.xzlh-se').each(function(index) {
+                        zyarr[index] = $(this).find('input[name=zyname]').val();
+                    });
+                    obj.zylist = zyarr;
+                });
+                objForm.dataType = 'lh';
+                objForm.formData = form;
+                window.localStorage.setItem('zdzyform', JSON.stringify(objForm));
+                //setCookie('zdzyform',JSON.stringify(form),1);
+                window.location.href = "<?php echo arU('Index/gaokaosave') ?>?pc=" + pc + "&km=" + km + "&score=" + score;
+            });
+        });
+    </script>

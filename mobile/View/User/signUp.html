@@ -1,0 +1,170 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1)" id="xzlh-back"><span class="glyphicon glyphicon-menu-left"></span></a>
+        <span class="page-tit">注册</span>
+        <a href="<?php echo arU('User/login'); ?>" id="xzlh-signup">登录</a>
+    </header>
+    <section class="content xzlh-signUp">
+        <div class="xzlh-login-main">
+            <div class="login-in">
+                <p class="loginerror"></p>
+                <form id="form-horizontal" action="" method="post">
+                    <div class="form-group has-feedback login-user">
+                        <label class="control-label sr-only" for=""></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                            <input type="text" id="phone" class="form-control" name="phone" placeholder="手机号" autofocus="autofocus">
+                        </div>
+                        <span class="glyphicon glyphicon-remove form-control-feedback errorhide errortip" aria-hidden="true"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="control-label sr-only" for=""></label>
+                        <div class="input-group">
+                            <span class="input-group-addon">&nbsp;<i class="fa fa-unlock-alt"></i></span>
+                            <input type="password" name="password" class="form-control" id="userpw" placeholder="密码">
+                        </div>
+                        <span class="glyphicon glyphicon-remove form-control-feedback errorhide errortip" aria-hidden="true"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="control-label sr-only" for=""></label>
+                        <div class="input-group">
+                            <span class="input-group-addon">&nbsp;<i class="fa fa-unlock-alt"></i></span>
+                            <input type="password" name="passwordre" class="form-control" id="userpwre" placeholder="确认密码">
+                        </div>
+                        <span class="glyphicon glyphicon-remove form-control-feedback errorhide errortip" aria-hidden="true"></span>
+                    </div>
+                    <div>
+                        <input type="text" id="ckey" class="form-controlimg" placeholder="请输入图片验证码"/>
+                        <img id="cey" height="43px" width="100px" src='<?php echo arU('Index/captcha'); ?>' onclick="javascript:this.src='<?php echo arU('Index/captcha'); ?>?tm='+Math.random();" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="roe-btn2" class="form-control xzlh-yzcode" placeholder="请输入短信验证码">
+                        <a href="javascript:" class="xzlh-hqcode btn" id="xzlh-hqcode">获取验证码</a>
+                    </div>
+                    <div class="btn-login">
+                        <a href="javascript:" class="btn commit">提&nbsp;交</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+<script type="text/javascript">
+    $('#form-horizontal').on('blur', 'input', function(event) {
+        var phoneReg = /^1[3|4|5|7|8][0-9]{9}$/;
+        if($(this).val() == ''){
+            if($(this).is('input[name="phone"]')){
+                $(this).parent().next('span.glyphicon').removeClass('errorhide');
+            }else if($(this).is('input[name="password"]')){
+                $(this).parent().next('span.glyphicon').removeClass('errorhide');
+            }else if($(this).is('input[name="passwordre"]')){
+                $(this).parent().next('span.glyphicon').removeClass('errorhide');
+            }
+        }else{
+            if ( $(this).is('input[name="phone"]') ) {
+                if ( !phoneReg.test($(this).val()) ) {
+                    $(this).parent().next('span').removeClass('errorhide');
+                }
+            }else  if ($(this).is('input[name="passwordre"]')) {
+                if($('input[name=password]').val() != $('input[name=passwordre]').val()){
+                    $('.loginerror').html('两次输入的密码不一致！');
+                    $(this).parent().next('span.glyphicon').addClass('errorhide');
+                }
+            }else{
+                $(this).parent().next('span.glyphicon').addClass('errorhide');
+            }
+        }
+    });
+    $('#form-horizontal').on('focus', 'input', function(event) {
+        $(this).parent().next('span.glyphicon').addClass('errorhide');
+        $('.loginerror').html('');
+    });
+    $('#form-horizontal .commit').on('tap',function(e){
+        e.preventDefault();
+        $('#form-horizontal').find('input').trigger('blur');
+        var len = $('#form-horizontal .errortip').size(),
+            num = $('.errorhide').size();
+        if(len == num){
+            var name = $('input[name=phone]').val();
+            var pwd = $('input[name=password]').val();
+            var data = {'name': name,'pwd': pwd};
+            $('#form-horizontal').submit();
+            // $.post("<?php echo arU('/main/Index/loginMang')?>",data,function(ev){
+            //    if(ev.success=='1'){
+            //    $('.loginerror').html('');
+            //         window.location.href= '<?php echo arU('User/index'); ?>';
+            //     }else{
+            //         $('.loginerror').html('账号或密码输入错误！').css('color','red');
+            //     }
+            // },'json');
+        }
+    });
+
+    //短信验证
+    $('#xzlh-hqcode').tap(function(){
+        var phoneReg = /^1[3|4|5|7|8][0-9]{9}$/;
+        // alert(123);
+        if($('#phone').val() == ''){
+             layer.close(lid);
+            layer.open({
+                content:'电话号码不能为空！',
+                time:1.5
+            });
+            // layer.msg();
+            return;
+        }else {
+            if(!phoneReg.test($('#phone').val())){
+                layer.open({
+                    content:'电话号码格式不正确！',
+                    time:1.5
+                });
+                return;
+            }
+        }
+        if ($('#ckey').val() == ''){
+            //layer.alert('请先填入验证码');
+            layer.open({
+                content:'请输入图片验证码',
+                time:1.5
+            })
+            //alert(123456);
+            // document.getElementById('cey').onclick();
+            //$('#cey').onclick();
+        }else{
+            var lid = layer.open({type: 2});
+            var _this = $(this);
+            $.post("<?php echo AR_SERVER_PATH; ?>Api/ifMobieCanUse",{'mobile':$('input[name=phone]').val()},function(data){
+                if(data.ret_code == '1000' ){
+                    $.post("<?php echo arU('/main/Index/sendPhoneCode');?>",{'ckey':$('#ckey').val(),'phone':$('input[name=phone]').val()},function(ev){
+                        if(ev.status == 1){
+                            layer.close(lid);
+                            alert('短信发送成功，注意查收');
+                            _this.html('重发',2,-1);
+                            _this.parent().next('span').css('display','inline-block');
+                            $('#roe-time').html('60');
+                            var num = 60;
+                            _this.attr('disabled','disabled');
+                            roeTimer = setInterval(function(){
+                                num--;
+                                $('#roe-time').html(num);
+                                if(num == 0){
+                                    clearInterval(roeTimer);
+                                    $('.roe-btn1').removeAttr('disabled');
+                                }
+                            }, 1000);
+                        }else{
+                            $('#cey').click();
+                            layer.close(lid);
+                            alert(ev.ret_msg);
+                        }
+                    },'json');
+                }else{
+                    $('#cey').click();
+                    layer.close(lid);
+                    alert(data.error_msg);
+                    // layer.msg('此电话号码已注册，请更换号码！');
+                }
+            },'json');
+        }
+    });
+</script>

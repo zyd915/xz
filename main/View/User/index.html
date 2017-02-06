@@ -1,0 +1,565 @@
+<div class="mainIndex ml20 clearfix mb50">
+	<div class="mainHeader pr20">
+		<div class="usual mb20">
+			<div class="school-logo left tac">
+				<i class="fa fa-mortar-board"></i>
+			</div>
+			<div class="card left ml40">
+				<div class="card-img left" title="">
+					<i class="fa fa-vimeo-square"> <?php arEcho($userinfo['type'], UserModel::$TYPE_MAP); ?></i>
+				</div>
+				<div class="left">
+					<?php
+					    if ($userinfo['type'] == UserModel::TYPE_N) :
+					?>
+						<span class="ml10">如何升级为VIP用户：
+							<a href="<?php echo arU('Index/vipCard'); ?>" title="我没有圆梦卡，我要购卡">购卡</a>
+							->
+							<a href="javascript:;" title="我有圆梦卡，我要激活" onclick="jihuo();">激活</a>
+						</span>
+						<span class="ml40">
+							<a href="<?php echo arU('Index/vipCard'); ?>" title="">查看VIP用户特权</a>
+						</span>
+					<?php
+						else :
+					?>
+						<span class="ml40">
+							<a href="<?php echo arU('User/userSetting', array('pgs' => 'myvip')); ?>" title="">查看卡密</a>
+						</span>
+					<?php
+					    endif;
+					?>
+
+				</div>
+				<div id="uname" class="mt20">
+					<h2 class="pt10 pb10"><?php echo $userinfo['truename'];?></h2>
+				</div>
+				<div class="word">
+					<h4>选择提高人生品质</h4>
+				</div>
+			</div>
+		</div>
+		<div class="message mt30">
+			<span>用户权限：<em class="fcl"><?php arEcho($userinfo['type'], UserModel::$TYPE_MAP); ?></em>
+				<?php if ($userinfo['type'] == UserModel::TYPE_A): ?>
+				<a href="<?php echo arU('User/zjSetting'); ?>">配置</a>
+				<?php endif ?>
+			</span>
+			<span class="ml40">手机：
+				<a href="<?php echo arU('User/userSetting'); ?>?dh=phone"><?php if(empty($userinfo['phone'])) :?>您还未曾填写手机，去绑定<?php else :?><?php echo $userinfo['phone'];endif;?> &nbsp;&nbsp;<i class="fa fa-edit"></i> 修改</a>
+			</span>
+			<span class="ml40">目标大学：
+				<a href="<?php echo arU('User/userSetting'); ?>"><?php echo $userinfo['kaosheng']['tschool']; ?> &nbsp;&nbsp;<i class="fa fa-edit"></i> 修改</a>
+			</span>
+		</div>
+		<?php
+		    if (!$userinfo['kaosheng']['name']) :
+		?>
+		<div class="safe-mess mb20 mt30">
+			<i class="fa fa-info-circle  ml20"></i>
+			<span>提醒:完善考生信息才能进行志愿填报</span>
+			<a class="updateMes right pt5 pr30" href="<?php echo arU('User/userSetting'); ?>"> &nbsp;&nbsp;<i class="fa fa-edit"></i> 立即完善</a>
+		</div>
+		<?php
+			else :
+		?>
+		<div class="detail mt30">
+			<a class="updateMes right pt5 pr10" href="<?php echo arU('User/userSetting'); ?>"> &nbsp;&nbsp;<i class="fa fa-edit"></i> 修改资料</a>
+			<p class="pl20 pt20">我叫<?php echo $userinfo['kaosheng']['name'];?>，是<?php echo $userinfo['kaosheng']['proname'];?>省<?php echo $userinfo['kaosheng']['gkyear'];?>年高考（<?php arEcho($userinfo['kaosheng']['lx'],UserModel::$TYPE_SUBJECT);?>）考生，高中就读于<?php echo $userinfo['kaosheng']['proname'];?><?php echo $userinfo['kaosheng']['cityname'];?><?php echo $userinfo['kaosheng']['areaname'];?><?php echo $userinfo['kaosheng']['schoolname'];?>。</p>
+			<?php
+			    if ($userinfo['kaosheng']['scoregk']) :
+			?>
+			<p class="pl20 pb10">
+				我尚未参加高考，我可以通过一二三<a class="updateMes" href="<?php echo arU('User/simulationSystemOne'); ?>">诊断志愿模拟</a>，进行水平自测和志愿规划；参加高考后，我可以通过<a class="updateMes" href="<?php echo arU('User/simulationSystemTwo'); ?>">高考模拟系统</a>，进行准确志愿规划。
+			<!-- <a href="<?php echo arU('User/simulationSystemTwo'); ?>" class="updateMes">志愿智能模拟</a> ，帮我规划志愿表。-->
+			</p>
+			<p class="pl20 pb20"><a href="<?php echo arU('User/myVolunteerForm'); ?>" class="greenf fwb"><i class="fa fa-plus-square mr10"></i>我的志愿表单</a></p>
+			<?php
+				else :
+			?>
+		<p class="pl20 pb10"><!-- 我尚未参加高考，我可以进行诊断模拟 -->
+			<!-- <a href="<?php echo arU('User/simulationSystemOne'); ?>" class="updateMes">志愿智能模拟</a>，帮我规划志愿表。 -->
+			我尚未参加高考，我可以通过一二三<a class="updateMes" href="<?php echo arU('User/simulationSystemOne'); ?>">诊断志愿模拟</a>，进行水平自测和志愿规划；参加高考后，我可以通过<a class="updateMes" href="<?php echo arU('User/simulationSystemTwo'); ?>">高考模拟系统</a>，进行准确志愿规划。
+		</p>
+		<p class="pl20 pb20"><a href="<?php echo arU('User/myVolunteerForm'); ?>" class="greenf fwb"><i class="fa fa-plus-square mr10"></i>我的志愿表单</a></p>
+			<?php
+			    endif;
+			?>
+
+		</div>
+		<?php
+		    endif;
+		?>
+
+	</div>
+<!-- 	<div class="simulation mt10">
+		<div class="simula-header">
+			<h2 class="left">志愿填报模拟系统</h2>
+			<div class="line right mt10"></div>
+		</div>
+		<div class="simula-one">
+			<div class="logo">
+				<h3>诊断成绩模拟填报系统</h3>
+			</div>
+			<div class="simula-left left mt20">
+				<div class="introduction">
+					<h4>采用诊断考试成绩进行推荐</h4>
+					<p>每个用户智能输入四次成绩进行填报，分别表示零诊，一诊，二诊，三诊的成绩。</p>
+					<p>考生输入成绩时，需要选择是哪次诊断考试，并输入相应的分数，输入后不可修改。</p>
+					<p>用户可选择性输入学校所在地以及需要推荐的学校数量。</p>
+				</div>
+			</div>
+			<div class="simula-right right mr10 mt50">
+				<form action="" class="search" name="search" id="search" method="post" onsubmit="return nonempty('#exam-score','分数不能为空！');" >
+					<ul>
+						<li>
+							<div class="score yb-select yb-input-text right mt5 mb5">
+								<label for="exam-score" class="exam-score">
+									<select class="yb-select">
+										<option>一诊分数</option>
+										<option>二诊分数</option>
+										<option>三诊分数</option>
+									</select>
+								</label>
+								<input type="text" name="score" class="" id="exam-score" />
+							</div>
+						</li>
+						<li>
+							<div class="sbtn yb-input-submit right mt5 mb20">
+								<div class="tac">
+									<input type="submit" name="sure-btn" class="sure-btn" value="提交" />
+								</div>
+							</div>
+						</li>
+					</ul>
+				</form>
+			</div>
+		</div>
+		<div class="simula-two mt20">
+			<div class="logo left">
+				<h3>高考成绩模拟填报系统</h3>
+			</div>
+			<div class="simula-left left mt20">
+				<div class="introduction">
+					<h4>采用高考真实成绩进行推荐</h4>
+					<p>VIP用户专享。</p>
+					<p>用户需要输入最终的高考成绩：分数和位次。</p>
+					<p>用户可选择性输入学校所在地以及需要推荐的学校数量。</p>
+				</div>
+			</div>
+			<div class="simula-right right mr10 mt20">
+				<div class="buy-message tac">
+					<h4>
+						<i class="glyphicon glyphicon-exclamation-sign"></i>
+						购买询证志愿卡升级VIP<br/>进入志愿模拟系统2
+					</h4>
+					<div class="item mt20">
+						<a href="">
+							<div class="buy-btn yb-lc">
+								购买
+							</div>
+						</a>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="analysis clearfix">
+		<div class="analysis-header clearfix">
+			<h2 class="left">查询分析功能</h2>
+			<div class="line right mt10"></div>
+		</div>
+		<div class="analysis-detail clearfix mt10">
+			<a class="school-message left" href="" title="院校数据查询">
+				<div class="school-bg">
+					<img src="" />
+				</div>
+				<div class="school-title tac">
+					<h3>院校数据查询</h3>
+				</div>
+				<div class="information">
+					<span>2500多所院校信息及数据，可实现数据区间查询对比。</span>
+					<div class="more tac">
+						<i class="fa fa-chevron-circle-down"></i>
+					</div>
+				</div>
+			</a>
+			<a class="professional-message left" href="" title="专业数据查询">
+				<div class="school-bg">
+					<img src="" />
+				</div>
+				<div class="professional-title tac">
+					<h3>专业数据查询</h3>
+				</div>
+				<div class="information">
+					<span>12大类专业详情及录取信息，可实现数据区间查询对比。</span>
+					<div class="more tac">
+						<i class="fa fa-chevron-circle-down"></i>
+					</div>
+				</div>
+			</a>
+			<a class="examine-message left" href="" title="考生走向查询">
+				<div class="school-bg">
+					<img src="" />
+				</div>
+				<div class="examine-title tac">
+					<h3>考生走向查询</h3>
+				</div>
+				<div class="information">
+					<span>考生去哪了？学了啥？按分查询，3年考生走向一目了然。</span>
+					<div class="more tac">
+						<i class="fa fa-chevron-circle-down"></i>
+					</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="consult mt10 mb20 clearfix">
+		<div class="consult-header">
+			<h2 class="left">咨询服务功能</h2>
+			<div class="line right mt10"></div>
+		</div>
+		<div class="consult-vip ml10 mt20 left">
+			<div class="vip-header left">
+				<img src="" />
+			</div>
+			<div class="counselor-detail left ml20">
+				<h3>赵杨</h3>
+				<p>vip咨询师</p>
+				<p>上海交通大学教授、管理学博士</p>
+				<div class="itme mt20">
+					<a href="">
+						<div class="ensure-btn tac">
+							找他报志愿
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="consult-expert left ml40 mt20">
+			<div class="expert-header left">
+				<img src="" />
+			</div>
+			<div class="expert-detail left ml20">
+				<h3>一对一专家预约</h3>
+				<p>优先预约VIP专家辅导,</p>
+				<p>志愿、专业、职业，一站式解答！</p>
+				<div class="itme mt20">
+					<a href="">
+						<div class="expert-btn tac">
+							预约
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<div class="mt20 clearfix mr20">
+		<div class="menu-mk-yb pt10 pb10 br5">
+		<!-- <ul class="tac clearfix mt20 mb20">
+				<li>
+					<a href="<?php echo arU('User/simulationSystemOne'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-zd-yb mt10 tac">
+								<i class="fa fa-gear"></i>
+							</div>
+							<h4 class="mt10">诊断模拟</h4>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo arU('User/simulationSystemTwo'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-gk-yb mt10 tac">
+								<i class="fa fa-gears"></i>
+							</div>
+							<h4 class="mt10">高考模拟</h4>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo arU('Index/expertConsultation'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-zj-yb mt10 tac">
+								<i class="fa fa-user-md "></i>
+							</div>
+							<h4 class="mt10">专家咨询</h4>
+						</div>
+					</a>
+				</li>
+				<br/>
+				<li>
+					<a href="<?php echo arU('User/universityData'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-yx-yb mt10 tac">
+								<i class="fa fa-server"></i>
+							</div>
+							<h4 class="mt10">院校查询</h4>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo arU('User/professionalData'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-cx-yb mt10 tac">
+								<i class="fa fa-bar-chart"></i>
+							</div>
+							<h4 class="mt10">专业查询</h4>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo arU('User/examinee'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-ks-yb mt10 tac">
+								<i class="fa fa-users"></i>
+							</div>
+							<h4 class="mt10">考生走向</h4>
+						</div>
+					</a>
+				</li>
+				<br/>
+				<li>
+					<a href="<?php echo arU('User/university'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-xx-yb mt10 tac">
+								<i class="fa fa-university"></i>
+							</div>
+							<h4 class="mt10">学校对比</h4>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo arU('User/professional'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-db-yb mt10 tac">
+								<i class="fa fa-leanpub"></i>
+							</div>
+							<h4 class="mt10">专业对比</h4>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="<?php echo arU('Index/Test'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-cs-yb mt10 tac">
+								<i class="fa fa-paste"></i>
+							</div>
+							<h4 class="mt10">专业测试</h4>
+						</div>
+					</a>
+				</li>
+			</ul> -->
+            <!-- <h2 class="text-center mt10 mb20" style="color:orangered">快速入口&nbsp;<i class="fa fa-hand-o-down" style="color: #0078D7;"></i></h2> -->
+			<ul class="tac clearfix mt20 mb20">
+				<li style="left:0px;top:0px;">
+					<a href="<?php echo arU('User/simulationSystemOne'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-zd-yb mt10 tac">
+								<i class="fa fa-gear"></i>
+							</div>
+							<h4>诊断模拟填报</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:121px;top:0px;">
+					<a href="<?php echo arU('User/simulationAcceptanceProbability'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-lg-yb mt10 tac">
+								<i class="fa fa-pie-chart"></i>
+							</div>
+							<h4>测录取概率</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:242px;top:0px;">
+					<a href="<?php echo arU('User/expertDetailForm'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-zj-yb mt10 tac">
+								<i class="fa fa-user-md "></i>
+							</div>
+							<h4>一对一<br/>专家咨询</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:363px;top:0px;">
+					<a href="<?php echo arU('User/examinee'); ?>">
+						<div class="mk-yb tac bor-right">
+							<div class="mk-logo-yb mk-logo-ks-yb mt10 tac">
+								<i class="fa fa-users"></i>
+							</div>
+							<h4>考生走向查询</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:0px;top:121px;">
+					<a href="<?php echo arU('User/university'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-xx-yb mt10 tac">
+								<i class="fa fa-university"></i>
+							</div>
+							<h4>学校对比</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:121px;top:121px;">
+					<a href="<?php echo arU('User/simulationSystemTwo'); ?>" >
+						<div class="center-mk-yb tac" style="height:240px;">
+							<i class="fa fa-mortar-board" style="font-size:85px;padding-top:60px;"></i>
+							<h4>四川高考志愿<br>智能推荐系统</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:363px;top:121px;">
+					<a href="<?php echo arU('Index/tests'); ?>">
+						<div class="mk-yb tac bor-right">
+							<div class="mk-logo-yb mk-logo-wl-yb mt10 tac">
+								<i class="fa fa-users"></i>
+							</div>
+							<h4>文理分科</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:0px;top:242px;">
+					<a href="<?php echo arU('User/professional'); ?>">
+						<div class="mk-yb tac">
+							<div class="mk-logo-yb mk-logo-db-yb mt10 tac">
+								<i class="fa fa-leanpub"></i>
+							</div>
+							<h4>专业对比</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:363px;top:242px;">
+					<a href="<?php echo arU('User/zyTestResult'); ?>">
+						<div class="mk-yb tac bor-right">
+							<div class="mk-logo-yb mk-logo-cs-yb mt10 tac">
+								<i class="fa fa-paste"></i>
+							</div>
+							<h4>专业倾向测试</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:0px;top:363px;">
+					<a href="<?php echo arU('User/myVolunteerForm'); ?>">
+						<div class="mk-yb tac bor-bottom">
+							<div class="mk-logo-yb mk-logo-bd-yb mt10 tac">
+								<i class="fa fa-table"></i>
+							</div>
+							<h4>我的志愿单</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:121px;top:363px;">
+					<a href="<?php echo arU('User/artDatabaseQuery'); ?>">
+						<div class="mk-yb tac bor-bottom">
+							<div class="mk-logo-yb mk-logo-yt-yb mt10 tac">
+								<i class="fa fa-database"></i>
+							</div>
+							<h4>艺术类录取<br/>数据查询</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:242px;top:363px;">
+					<a href="<?php echo arU('User/universityData'); ?>">
+						<div class="mk-yb tac bor-bottom">
+							<div class="mk-logo-yb mk-logo-yx-yb mt10 tac">
+								<i class="fa fa-server"></i>
+							</div>
+							<h4>普通类院校<br/>数据查询</h4>
+						</div>
+					</a>
+				</li>
+				<li style="left:363px;top:363px;">
+					<a href="<?php echo arU('User/professionalData'); ?>">
+						<div class="mk-yb tac bor-bottom bor-right">
+							<div class="mk-logo-yb mk-logo-cx-yb mt10 tac">
+								<i class="fa fa-bar-chart"></i>
+							</div>
+							<h4>普通类专业<br/>数据查询</h4>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	var sz=[0,1,2,3,6,8,12,11,10,9,7,4],si=0,last=-1,mkys,ydzt=true;
+	$(document).ready(function(){
+		$('.menu-mk-yb ul li a').bind({
+			mouseover:function(){
+				ydzt=false;
+				clearInterval(mkys);
+				delstyle($('.menu-mk-yb ul li a').eq(sz[last]));
+				addstyle($(this));
+			},
+			mouseout:function(){
+				mkys=setInterval(gnmk,1000);
+				ydzt=true;
+				delstyle($(this));
+			}
+		});
+	});
+
+	function gnmk(){
+		addstyle($('.menu-mk-yb ul li a').eq(sz[si]));
+		delstyle($('.menu-mk-yb ul li a').eq(sz[last]));
+		if(ydzt){
+			si++;
+			last=si-1;
+
+			if(si + 1 > sz.length){
+				si=0;
+				last=sz.length - 1;
+			}
+		}
+	}
+	mkys=setInterval(gnmk,1000);
+	function addstyle(id){
+		id.children().css({backgroundColor:'#00BC3E'});
+		id.children().children().find('i').css({fontSize:'40px'});
+		id.children().children('h4').css({color:'#fff',fontWeight:'bold'});
+	}
+	function delstyle(id,i){
+		id.children().css({backgroundColor:'#fff'});
+		id.children().children('div').find('i').css({fontSize:'35px'});
+		id.children().children('h4').css({color:'#000',fontWeight:''});
+	}
+
+	// 激活卡
+	function jihuo(){
+		layer.open({
+			title : '激活卡号',
+			type : 1,
+			area : ['auto','auto'],
+			content : '<div class="roe-jihuo">\
+							<label for="roe-number">卡号：</label>\
+							<input id="roe-number" name="vipno" type="text">\
+							<label for="roe-pwd">卡密：</label>\
+							<input id="roe-pwd" type="text" name="vippwd">\
+							<button id="roe-jihuo" class="btn">激活</button>\
+							<div>提示:激活后，原有普通卡和vip卡都可以登陆,普通卡<a style="color:red" href="<?php echo arU('index/vipCard') ?>">在线购买升级</a>可成为vip卡</div>\
+						</div>'
+		});
+
+		$('#roe-jihuo').on('click',function(){
+			var vipno = $("[name='vipno']").val();
+			var vippwd = $("[name='vippwd']").val();
+			if (vipno && vippwd) {
+				// 激活卡片
+				var lid = layer.load('激活中...');
+				$.post('<?php echo arU('User/vipjihuo'); ?>', {"vipno": vipno, "vippwd": vippwd}, function (res) {
+					layer.close(lid);
+					if (res.ret_code == '1000') {
+						layer.msg('激活成功');
+						location.reload();
+					} else {
+						layer.alert(res.ret_msg);
+					}
+				}, 'json');
+			}
+		});
+	}
+</script>

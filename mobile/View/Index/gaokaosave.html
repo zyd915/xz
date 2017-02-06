@@ -1,0 +1,123 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">高考模拟填报</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="moni center-block">
+                <!-- 诊断成绩模拟填报系统 -->
+                <div class="system-title clearfix">
+                    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;高考模拟填报系统</h2>
+                    <ul class="hmenu">
+                        <li><b>1</b>输入高考成绩</li>
+                        <li><b>2</b>选择填报批次</li>
+                        <li><b>3</b>选择院校专业</li>
+                        <li class="selected"><b>4</b>生成模拟志愿表</li>
+                    </ul>
+                </div>
+                <hr class="fgx">
+                <!--志愿表单-->
+                <h4 class="text-center" style="color: #333;font-weight: bold;background: #fbf8ca;padding: 10px 0;font-size: 16px;">我的志愿单--(<span class="scType">普通类第一批本科</span>)</h4>
+                <div class="table-responsive zy-allform">
+                    <table class="table-bordered fs14px-bzh">
+                        <thead>
+                           <tr>
+                                <th class="text-center" style="width:10%;"></th>
+                                <th class="text-center" style="width:40%;">学校名称</th>
+                                <th class="text-center" style="width:35%;">专业名称</th>
+                                <th class="text-center" style="width:15%;">是否服从专业调配</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="text-center iback iback-a">
+                    <a href="javascript:history.back();" title="返回" class="zyBack">返回</a>
+                    <!-- <a title="修改" class="zyUpdate">修改</a> -->
+                    <a title="保存" class="zySave">保存</a>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    //console.log( JSON.parse( getCookie('zyform') ) );
+    $(function(){
+        $('.scType').html('普通类'+pcs("<?php echo arRequest('pc'); ?>"));
+        var objForms = JSON.parse( window.localStorage.getItem('zdzyform') ),
+            html = '',
+            objForm;
+        if (objForms.dataType == 'lh') {
+            objForm = objForms.formData;
+        }
+        for(var a in objForm){
+            html += '<tr>\
+                        <td>'+ a +'<br>志<br>愿</td>\
+                        <td class="item-bzh vat-bzh">\
+                            <ul class="left ">\
+                                <li class="">学校名称：<span class="c-name " value="'+a+'">'+objForm[a].schoolname +'</span></li>\
+                                <li>学校所在地：<span class="scarea">'+ objForm[a].scarea +'</span></li>\
+                                <li class="">投档概率：<span class="verifica-sum">'+objForm[a].odds+'%</span></li>\
+                            </ul>\
+                        </td>\
+                        <td class="item-bzh">\
+                            <ul class="zymk" value="'+a+'">\
+                                <li class="">\
+                                    <span><span>1.</span><span class="" value="1">'+objForm[a].zylist[0]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>2.</span><span class="" value="2">'+objForm[a].zylist[1]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>3.</span><span class="" value="3">'+objForm[a].zylist[2]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>4.</span><span class="" value="4">'+objForm[a].zylist[3]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>5.</span><span class="" value="5">'+objForm[a].zylist[4]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>6.</span><span class="" value="6">'+objForm[a].zylist[5]+'</span></span>\
+                                </li>\
+                            </ul>\
+                        </td>\
+                        <td>\
+                            <span>'+objForm[a].zytp+'</span>\
+                        </td>\
+                    </tr>';
+        }
+        $('.zy-allform').find('tbody').html( html );
+
+        // 保存志愿表单
+        $('.zySave').tap(function(){
+            var dat = {
+                pc: "<?php echo arRequest('pc'); ?>",
+                km: "<?php echo arRequest('km'); ?>",
+                score: "<?php echo arRequest('score'); ?>",
+                ztype: 1,
+                param: window.localStorage.getItem('zdzyform')
+            };
+            // 志愿数据保存到服务器
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/saveUserZy', 'POST', dat, save);
+
+            function save(data){
+                if (data.success == 1) {
+                    layer.open({
+                        title:'<span style="color:#0078D7">信息</span>',
+                        shadeClose:false,
+                        content:'<div>\
+                                    <i class="fa fa-smile-o" style="font-size:22px;color:#ed6517;margin-right:6px;"></i>\
+                                    <div style="display: inline-block;vertical-align:top">恭喜您，志愿表单保存成功！</div>\
+                                 </div>',
+                        btn:['<span style="color:#0078D7;display:block;width:100%;">查看志愿表单</span>'],
+                        yes: function(){
+                            // window.localStorage.removeItem('zdzyform');
+                            window.location.href="<?php echo arU('User/myVolunteerForm',array('uid'=>$uid)) ?>";
+                        }
+                    });
+                }
+            }
+        });
+    });
+</script>

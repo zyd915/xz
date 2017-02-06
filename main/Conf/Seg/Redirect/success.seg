@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <?php include arCfg('DIR.SEG') . 'Sys/css.seg'; ?>
+    </head>
+    <body>
+    </body>
+        <?php
+            $jsInsertBundles = array(
+                // 调用layer插件
+                'jquery.min', 'layer/layer'
+            );
+            include arCfg('DIR.SEG') . 'Sys/js.seg';
+        ?>
+        <script>
+        layer.msg("<?php echo $show; ?>", <?php echo $time; ?>, 1);
+        setTimeout(function () {
+            window.location.href = "<?php echo $url; ?>";
+        }, <?php echo $time; ?> * 1000);
+        </script>
+</html>

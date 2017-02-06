@@ -1,0 +1,66 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">购买圆梦卡</span>
+    </header>
+    <section class="content">
+        <div class="main">
+            <div class="container">
+                <div class="text-center">
+                    <img id="roe-vipImg" src="<?php echo arCfg('PATH.PUBLIC')?>img/VIP11.jpg" alt="" style="width:100%;height:auto;margin-bottom:.15rem;">
+                </div>
+                <p style="height: 1rem;line-height: .66rem;margin-top: .2rem">价格：<b style="color: darkred;font-size: .36rem ">360.00</b>&nbsp;元/张 <a href="<?php echo arU('User/buyCard')?>" class="btn btn-primary fr" id="goBuy" style="border: 0px;">立即购买</a></p>
+
+                <div class="xzws-vip-intro">
+                    <h4 class="text-center" style="margin-top: .2rem;color:green;font-size: .36rem">高考志愿"圆梦卡" 功能</h4>
+                    <p class="vip-intro">本卡为虚拟卡，购买成功后自动为您升级为VIP用户。<br>
+                        VIP功能：<br>
+                        1、查看2500多所院校在川录取数据（分数，分差，位次，招生计划等）。<br>
+                        2、享受一次专业性格测试，专业性格测试报告发送到考生邮箱。<br>
+                        3、一二三诊模拟高考志愿填报。<br>
+                        4、2016高考志愿精确智能推荐。<br>
+                        普通用户功能：<br>
+                        1、查看2500所院校在川录取数据（分数、分差等）。<br>
+                        2、免费试用部分智能推荐功能。
+                    </p>
+
+                    <p class="vip-intro" style="text-indent:0;color:black">
+                        适用省份：四川<br>
+                        适用考生：普通文理科和艺体类考生（艺体类考生仅支持数据查询，不支持智能填报）<br>
+                        适用批次：普通批次和提前批次
+                    </p>
+                </div>
+
+                <div style="margin-bottom: .6rem">
+                    <p><i class="fa fa-circle"></i>&nbsp;2015年志愿推荐成功率<span class="fc6-bzh">100%</span></p>
+                    <p><i class="fa fa-circle"></i>&nbsp;成都<span class="fc6-bzh">四七九</span>等多所名校联合推荐</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $(function(){
+            // $('#goBuy').tap(function(){
+            //     $.post('<?php echo AR_SERVER_PATH; ?>Api/iflogin',function(dat){
+            //             if(dat.ret_code == 1000){
+            //                 window.location.href="<?php echo arU('User/buyCard') ?>"
+            //             }else{
+            //                 var index = layer.open({
+            //                     type: 0,
+            //                     shadeClose: false,
+            //                     content: '你还没有登录，请登录后购买！',
+            //                     btn: ['确定'],
+            //                     yes: function(){
+            //                         layer.close(index);
+            //                         location.href="<?php echo arU('User/login')?>";
+            //                     }
+            //                 });
+            //
+            //             }
+            //     },'json');
+            // })
+        })
+
+    </script>

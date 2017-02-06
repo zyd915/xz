@@ -1,0 +1,136 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">志愿讲堂</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="row xzws-uxy-column">
+                <?php foreach ($class as $class): ?>
+                <div class="col-xs-3 item <?php if ($class['cid'] == $cid): ?>active <?php endif; ?>"><a href="<?php echo arU('Index/lectureMore',array('cid' => $class['cid'])); ?>"><?php echo $class['name']?></a></div>
+                <?php endforeach; ?>
+            </div>
+            <!--搜索框-->
+            <div class="container">
+                <div class="search-box" style="padding-top: .2rem;padding-bottom:.1rem;margin: 0">
+                    <form action="<?php echo arU('Index/lectureMore')?>" method="get">
+                        <div class="">
+                            <span class="glyphicon glyphicon-search xzlh-s-span" ></span>
+                            <input type="text" name="mname" class="xzlh-s-input" placeholder="搜索" >
+                            <button class="xzlh-s-btn">搜索</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div style="height: .28rem;width: 100%;background: #eee;"></div>
+
+            <div class="xzws-tab-content container">
+                <div class="xzws-vd-pup">
+                    <div class="xzws-vedio-list">
+                        <?php foreach ($video as $video): ?>
+                        <div class="item">
+                            <div class="col-xs-4 img" style="padding-left:0 ">
+                                <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>">
+                                    <img style="width: 100%;" title="<?php echo $video['title']; ?>" alt="<?php echo $video['title']; ?>" src="<?php echo $video['videoimg']; ?>"></a>
+                            </div>
+                            <div class="col-xs-8 font">
+                                <h4>
+                                    <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>"><?php echo $video['title']; ?></a>
+                                </h4>
+                                <div class="description">
+                                    <a class="text" href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>">免费</a>
+                                </div>
+                                <p class="expert-info ">
+                                    <span><i class="fa fa-eye"></i><?php echo $video['fnums']; ?></span>
+                                    <span><i class="fa fa-comments"></i>0</span>
+                                    <span>
+                                        <i class="fa fa-user"></i>
+                                        <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>"><?php echo $video['name']; ?></a>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="vedio-list list-page" id="videosContainer"></div>
+                </div>
+            </div>
+
+            <div class="iback" style="margin:0 15px;">
+                <a class="btn btn-primary" href="javascript:;" id="loadingMore">加载更多 >></a>
+                <a class="btn btn-primary" style="background-color:#BEBEBE; border:1px solid #BEBEBE;" href="javascript:;" id="loadingOver">已加载全部<a/>
+                <a class="btn btn-default" style="background: #e6e6e6;border-color:#ccc;margin-top:0" id="loading"><i class="fa fa-spinner fa-spin"></i>努力加载中...</a>
+            </div>
+            <div style="height:.35rem;width: 100%;background: #eee;"></div>
+        </div>
+    </section>
+
+    <script type="text/javascript">
+        $(function(){
+//            $('.xzws-uxy-column .item').eq(0).addClass('active');
+//            $('.xzws-tab-content').children().eq(0).show().siblings().hide();
+//            $('.xzws-uxy-column .item').tap(function(){
+//                $(this).addClass('active').siblings().removeClass('active');
+//                var index=$(this).index();
+//                $('.xzws-tab-content').children().eq(index).show().siblings().hide();
+//            });
+            $("#loadingOver").hide();
+            $("#loading").hide();
+            var page = 2;
+            var lastItemId = 0;
+            $("#loadingMore").tap(function(){
+                $(this).hide(300);
+                $("#loading").show();
+                $.ajax({
+                    type:'POST',
+                    url:'<?php echo arU('lectureMore'); ?>',
+                    dataType:'json',
+                    data:{page:page,ajax:"1",cid:"<?php echo $cid; ?>"},
+                    success: function(data){
+                        // alert(page);
+                        console.log(data.data);
+                        var dataArr = data.data;
+                        
+                        var html = '';
+                        if (page <= data.max_page) {
+                            page++;
+                            for (var i in dataArr) {
+                                html += '<div class="item">\
+                                <div class="col-xs-4 img" style="padding-left:0 ">\
+                                    <a href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">\
+                                    <img style="width: 100%;" title="'+dataArr[i]['title']+'" alt="'+dataArr[i]['title']+'" src="'+dataArr[i]['videoimg']+'"></a>\
+                                </div>\
+                                <div class="col-xs-8 font">\
+                                    <h4>\
+                                        <a href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">'+dataArr[i]['title']+'</a>\
+                                    </h4>\
+                                    <div class="description">\
+                                        <a class="text" href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">免费</a>\
+                                    </div>\
+                                    <p class="expert-info ">\
+                                        <span><i class="fa fa-eye"></i>'+dataArr[i]['fnums']+'</span>\
+                                        <span><i class="fa fa-commenting"></i>0</span>\
+                                        <span>\
+                                            <i class="fa fa-user"></i>\
+                                            <a href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">'+dataArr[i]['name']+'</a>\
+                                        </span>\
+                                    </p>\
+                                    </div>\
+                                </div>'
+                                $('.xzws-vedio-list').append(html);
+                                $("#loading").hide();
+                                $("#loadingMore").show();
+                                 }    
+                        } else {
+                            $("#loading").hide();
+                            $("#loadingMore").hide();
+                            $("#loadingOver").show();
+                        }            
+                    } // 显示操作提示
+                })       
+            })
+
+        })
+
+    </script>

@@ -1,0 +1,670 @@
+    <div id="page">
+        <header class="header">
+            <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+            <span class="page-tit">我的资料</span>
+        </header>
+        <section class="content">
+            <div>
+                <div class="xzlh-userdetail">
+                    <ul>
+                        <li>
+                            <a href="" class="clearfix">
+                                <span>头像</span>
+                                <span><img src="<?php echo arCfg('PATH.GPUBLIC') . 'img/kaosheng' . $user['gender']; ?>.png" alt="头像"><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="clearfix">
+                                <span>用户名</span>
+                                <span><em><?php echo $userinfo['truename']; ?></em><i class="glyphicon glyphicon-menu-right" style="visibility: hidden;"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:" class="clearfix username">
+                                <span>真实姓名</span>
+                                <span><em><?php echo $user['name']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="clearfix gender">
+                                <span>性别</span>
+                                <span><em>
+                                <?php if($user['gender'] == 0): ?>
+                                男
+                                <?php else: ?>
+                                女
+                                <?php endif; ?>
+                                </em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="clearfix">
+                                <span>电话</span>
+                                <span><em><?php echo $userinfo['phone']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:;" class="clearfix provinceArea">
+                                <span>所在地区</span>
+                                <span><em><?php echo $user['proname']; ?>省&nbsp;<?php echo $user['cityname']; ?>&nbsp;<?php echo $user['areaname']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:" class="clearfix school">
+                                <span>就读学校</span>
+                                <span><em><?php echo $user['schoolname']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="javascript:;" class="clearfix xz_user_type">
+                                <span>考生类型</span>
+                                <span><em>
+                                <?php if($user['lx'] == 0): ?>
+                                理科
+                                <?php else: ?>
+                                文科
+                                <?php endif; ?>
+                                </em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="javascript:" class="clearfix scorez1">
+                                <span>一诊成绩</span>
+                                <span><em><?php echo $user['scorez1']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="javascript:" class="clearfix scorez2">
+                                <span>二诊成绩</span>
+                                <span><em><?php echo $user['scorez2']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="javascript:" class="clearfix scorez3">
+                                <span>三诊成绩</span>
+                                <span><em><?php echo $user['scorez3']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                         <li>
+                            <a href="javascript:" class="clearfix scoregk">
+                                <span>高考成绩</span>
+                                <span><em><?php echo $user['scoregk']; ?></em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <!-- <li>
+                            <a href="" class="clearfix">
+                                <span>QQ</span>
+                                <span><em>111111111</em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="clearfix">
+                                <span>邮箱</span>
+                                <span><em>111@qq.com</em><i class="glyphicon glyphicon-menu-right"></i></span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <!-- <a href="javascript:" class="xzlh-pwsign" id="repaw">修改密码</a> -->
+                            <a href="<?php echo arU('loginOut')?>" class="xzlh-pwsign" id="signUp">退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+<script type="text/javascript">
+    $(function(){
+
+        $('.username').tap(function(){
+            var _this = $(this);
+            layerLet('姓名','<?php echo $user["name"]; ?>',_this)
+        })
+
+        function layerLet(title,value, _this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="padding:2px .1rem;">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <input class="xzlh-userInp" name="xgname" value="'+value+'" type="text" placeholder="输入或修改你的姓名"/>\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    var reg = /^[\u4e00-\u9fa5]+$/g;
+                    if ($('input[name=xgname]').val() != ''){
+                            if( reg.test($('input[name=xgname]').val()) ){
+                                var dat ={
+                                    name: $('input[name=xgname]').val(),isajax:1
+                                }
+                                ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                            }else{
+                                layer.open({
+                                    content: '只能输入中文名额，么么哒！',
+                                    time: 1.5
+                                })
+                            }
+                    }else{
+                        layer.open({
+                            content: '姓名不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+    })
+
+    $(function(){
+
+        $('.school').tap(function(){
+            var _this = $(this);
+            layerLet('学校','<?php echo $user["schoolname"]; ?>',_this)
+        })
+
+        function layerLet(title,value,_this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="padding:2px .1rem;">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <input class="xzlh-userInp" name="xgname" value="'+value+'" type="text" placeholder="输入或修改你所在学校" />\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    //var reg = /^[\u4e00-\u9fa5]+$/g;
+                    if ($('input[name=xgname]').val() != ''){
+                        //if( reg.test($('input[name=xgname]').val()) ){
+                        var dat ={
+                            name: $('input[name=xgname]').val(),isajax:2
+                        }
+                        ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                        // }else{
+                        //     layer.open({
+                        //         content: '请输入汉字',
+                        //         time: 1.5
+                        //     })
+                        // }
+                    }else{
+                        layer.open({
+                            content: '学校不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+    })
+
+    //所在地区
+    $(function(){
+        $('.provinceArea').tap(function(){
+            var _this = $(this);
+            var proname='<?php echo $user["proname"] ?>',
+                cityname='<?php echo $user["cityname"] ?>',
+                areaname='<?php echo $user["areaname"] ?>';
+            //将地址信息存入数组；
+            addr=[proname,cityname,areaname];
+//            console.log(typeof addr);
+            layerLet('所在地区',addr,_this)
+        })
+
+        function layerLet(title,value,_this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="width:5.5rem">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <div><label style="width: 20%;text-align: center;">省</label><input class="xzlh-userInp fr" name="xgname" value="'+value[0]+'" type="text" style="width:75%"/></div>\
+                                <div style="margin:15px 0"><label style="width: 20%;text-align: center;">市</label><input class="xzlh-userInp fr" name="xgname" value="'+value[1]+'" type="text" style="width:75%"/></div>\
+                                <div><label style="width: 20%;text-align: center;">区/县</label><input class="xzlh-userInp fr" name="xgname" value="'+value[2]+'" type="text" style="width:75%"/></div>\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    //var reg = /[\u4e00-\u9fa5]\d+$/g;
+                    if ($('input[name=xgname]').val() != ''){
+                           // if( reg.test($('input[name=xgname]').val()) ){
+                        var inputaddr=[$('input[name=xgname]').eq(0).val(),$('input[name=xgname]').eq(1).val(),$('input[name=xgname]').eq(2).val()];
+                        var dat ={
+                                    name: inputaddr,isajax:9
+                                }
+                                ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                           // }else{
+                           //     layer.open({
+                           //          content: '只能输入中文和数字',
+                           //          time: 1.5
+                           //    })
+                           // }
+                    }else{
+                        layer.open({
+                            content: '所在地区不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg['proname']+' '+data.ret_msg['cityname']+' '+data.ret_msg['areaname']);
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+    })
+
+    $(function(){
+
+        $('.scorez1').tap(function(){
+            var _this = $(this);
+            layerLet('一诊分数','<?php echo $user["scorez1"]; ?>',_this)
+        })
+
+        function layerLet(title,value,_this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="padding:2px .1rem;">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <input class="xzlh-userInp" name="xgname" value="'+value+'" type="text" placeholder="输入或修改一诊分数"/>\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    //var reg = /^[\u4e00-\u9fa5]+$/g;
+                    var reg = /^[0-9]+$/g
+                    if ($('input[name=xgname]').val() != ''){
+                            if( reg.test($('input[name=xgname]').val()) ){
+                                if($('input[name=xgname]').val() <= 750){
+                                    var dat ={
+                                        name: $('input[name=xgname]').val(),isajax:3
+                                    }
+                                    ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                                }else{
+                                    layer.open({
+                                    content: '您又调皮了',
+                                    time: 1.5
+                                })
+                                }
+                            }else{
+                                layer.open({
+                                    content: '请输入分数',
+                                    time: 1.5
+                                })
+                            }
+                    }else{
+                        layer.open({
+                            content: '分数不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+    })
+
+    $(function(){
+
+        $('.scorez2').tap(function(){
+            var _this = $(this);
+            layerLet('二诊分数','<?php echo $user["scorez2"]; ?>',_this)
+        })
+
+        function layerLet(title,value,_this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="padding:2px .1rem;">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <input class="xzlh-userInp" name="xgname" value="'+value+'" type="text" placeholder="输入或修改诊分数" />\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    //var reg = /^[\u4e00-\u9fa5]+$/g;
+                    var reg = /^[0-9]+$/g
+                    if ($('input[name=xgname]').val() != ''){
+                            if( reg.test($('input[name=xgname]').val()) ){
+                                if($('input[name=xgname]').val() <= 750){
+                                    var dat ={
+                                        name: $('input[name=xgname]').val(),isajax:4
+                                    }
+                                    ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                                }else{
+                                    layer.open({
+                                    content: '您又调皮了',
+                                    time: 1.5
+                                })
+                                }
+                            }else{
+                                layer.open({
+                                    content: '请输入分数',
+                                    time: 1.5
+                                })
+                            }
+                    }else{
+                        layer.open({
+                            content: '分数不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+    })
+
+    $(function(){
+
+        $('.scorez3').tap(function(){
+            var _this = $(this);
+            layerLet('三诊分数','<?php echo $user["scorez3"]; ?>',_this)
+        })
+
+        function layerLet(title,value,_this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="padding:2px .1rem;">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <input class="xzlh-userInp" name="xgname" value="'+value+'" type="text" placeholder="输入或修改三诊分数"/>\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    //var reg = /^[\u4e00-\u9fa5]+$/g;
+                    var reg = /^[0-9]+$/g
+                    if ($('input[name=xgname]').val() != ''){
+                            if( reg.test($('input[name=xgname]').val()) ){
+                                if($('input[name=xgname]').val() <= 750){
+                                    var dat ={
+                                        name: $('input[name=xgname]').val(),isajax:5
+                                    }
+                                    ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                                }else{
+                                    layer.open({
+                                    content: '您又调皮了',
+                                    time: 1.5
+                                })
+                                }
+                            }else{
+                                layer.open({
+                                    content: '请输入分数',
+                                    time: 1.5
+                                })
+                            }
+                    }else{
+                        layer.open({
+                            content: '分数不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                // style:'background-color:skyblue',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+    })
+
+    $(function(){
+
+        $('.scoregk').tap(function(){
+            var _this = $(this);
+            layer.open({
+                            content: '此分数关系我们对您的测评,请认真填写',
+                            time: 1,
+                            end:function(){
+
+                                layerLet('高考分数','<?php echo $user["scoregk"]; ?>',_this)
+                            }
+
+                        })
+            // alert(1233);
+
+        })
+
+        function layerLet(title,value,_this){
+            var index = layer.open({
+                title: title,
+                content: '<div style="padding:2px .1rem;">\
+                            <!--<div style="line-height:1.5;font-size:.32rem;padding:.1rem 0;">修改'+title+'</div>-->\
+                                <input class="xzlh-userInp" name="xgname" value="'+value+'" type="text" placeholder="输入或修改高考分数"/>\
+                </div>',
+                btn: ['确定', '取消'],
+                yes: function(index){
+                    //var reg = /^[\u4e00-\u9fa5]+$/g;
+                    var reg = /^[0-9]+$/g
+                    if ($('input[name=xgname]').val() != ''){
+                            if( reg.test($('input[name=xgname]').val()) ){
+                                if($('input[name=xgname]').val() <= 750){
+                                    var dat ={
+                                        name: $('input[name=xgname]').val(),isajax:6,
+                                    }
+                                    ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                                }else{
+                                    layer.open({
+                                    content: '您又调皮了',
+                                    time: 1.5
+                                })
+                                }
+                            }else{
+                                layer.open({
+                                    content: '请输入分数',
+                                    time: 1.5
+                                })
+                            }
+                    }else{
+                        layer.open({
+                            content: '分数不能为空',
+                            time: 1.5
+                        })
+                    }
+
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 1.5
+                            })
+                        }else{
+                            layer.close(index);
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5
+                            })
+                        }
+                    }
+                },
+                no: function(index){
+                    layer.closeAll();
+                }
+            })
+        }
+
+        $('.xz_user_type').tap(function(){
+            var _this = $(this);
+            var index = layer.open({
+                title: '科目',
+                content: '<div>\
+                            <span data-value="0" style="display:inline-block;padding: 0 .3rem;font-size:.32rem;color:#0078D7">理科</span>\
+                            <span data-value="1" style="display:inline-block;padding: 0 .3rem;font-size:.32rem;color:#0078D7">文科</span>\
+                        </div>',
+                success: function(item){
+                    $(item).find('span').tap(function(){
+                        var dat ={
+                                        name: $(this).data('value'),isajax:8
+                                    }
+                        ajaxdata("<?php echo arU('User/userdetail');?>","POST",dat,callback);
+                        //alert($(this).data('value'))
+                        layer.closeAll();
+                    })
+                    function callback(data){
+                        if (data.success == 1) {
+                            _this.find('em').text(''+data.ret_msg+'');
+                            //layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 2,
+                                end: function(){
+                                    layer.close(index)
+                                }
+                            })
+                        }else{
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5,
+                                end: function(){
+                                    layer.close(index);
+                                }
+                            })
+                        }
+                    }
+                }
+
+            });
+        })
+
+        $('.gender').tap(function(){
+            var _this = $(this);
+            var index = layer.open({
+                title: '性别',
+                content: '<div>\
+                            <span data-value="0" style="display:inline-block;width:1rem; font-size:.32rem;color:#0078D7">男</span>\
+                            <span data-value="1" style="display:inline-block;width:1rem;font-size:.32rem;color:#0078D7" >女</span>\
+                          </div>',
+                success: function(item){
+                    $(item).find('span').tap(function(){
+                        var dat = {
+                            name: $(this).data('value'),isajax:7
+                        }
+                        ajaxdata("<?php echo arU('User/userdetail')?>",'POST',dat,callback);
+                        //layer.closeAll();
+                    })
+                    function callback(data){
+                        if(data.success == 1) {
+                            _this.find('em').text(data.ret_msg);
+                            //layer.close(index);
+                            layer.open({
+                                content: '修改成功',
+                                time: 2,
+                                end: function(){
+                                    layer.close(index)
+                                }
+                            })
+                        }else{
+                            layer.open({
+                                content: '修改失败',
+                                time: 1.5,
+                                end: function(){
+                                    layer.close(index);
+                                }
+                            })
+                        }
+                    }
+                }
+            })
+        })
+    })
+</script>

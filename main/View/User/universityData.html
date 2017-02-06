@@ -1,0 +1,281 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="examinee-title">
+			<h2 class="left">普通类院校数据查询</h2>
+			<div class="line right mt10"></div>
+		</div>
+	</div>
+	<div class="content-detail clearfloat">
+		<ul class="left mt20">
+			<li>
+				<div class="cards">
+					<label class="tar">适用省市</label>
+					<span class="ml40">四川省</span>
+				</div>
+			</li>
+			<li>
+				 <!-- <div class="cards mt10">
+					<label for="cards" class="tar">使用说明</label>
+					<span id="cards" class="ml40">1、普通类考生同时支持录取数据查询和智能模拟推荐<br/></span>
+					<label for="sdd" class="tar"></label>
+					<span id="sdd" class="ml40">2、艺体类考生仅支持录取数据查询</span>
+				</div> -->
+			</li>
+			<li>
+				<div class="yb-select yb-input-submit yb-input-text">
+					<!-- <form action="" class="detail-area" name="" method="post" onsubmit="return dnonempty();"> -->
+						<ul class="left">
+							<li>
+		                        <div class="item-bzh mt20">
+		                        	<label style="width:120px;">您的科类</label>
+		                            <span style="width: 50px;" class="km ml40"><input type="radio"  name="class" id="" value="文科" checked>&nbsp;文科</span>&nbsp;&nbsp;&nbsp;
+		                            <span style="width: 50px;" class="km"><input type="radio"  name="class" id="" value="理科">&nbsp;理科</span>
+		                        </div>
+		                    </li>
+		                    <li>
+		                    	<div class="lists mt5 school-pc">
+		                    		<label for="school-pc">院校批次</label>
+		                    		<?php
+			                            // 调用用html seg 直接输出 select标签
+			                            arSeg(
+			                                array(
+			                                    // seg文件
+			                                    'segKey' => 'Html/select',
+			                                    // <select name="name">
+			                                    'name' => 'type',
+			                                    // 适配器数据 数组
+			                                    'map' => DataYxModel::$pcMap,
+			                                    // 选中的value selected = selected
+			                                    'selected' => 1
+			                                )
+			                            );
+			                        ?>
+		                    	</div>
+		                    </li>
+							<li>
+								<div class="lists mt5">
+									<label for="school-area">院校所在地</label>
+									<select id="school-area">
+										<option selected="selected" value="0">请选择</option>
+									</select>
+								</div>
+							</li>
+							<li>
+								<div class="lists mt5">
+									<label for="school-name">院校名称</label>
+									<input type="text" id="school-name">
+								</div>
+							</li>
+							<li>
+								<div class="select-div mt10 mb20 tac">
+									<input type="submit" name="btn" class="select-btn mb20" value="查询" />
+								</div>
+							</li>
+						</ul>
+					<!-- </form> -->
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="school-data">
+		<table id="school-data" class="table table-bordered tac fs14px-bzh mb0">
+			<tbody>
+				<tr class="bge-bzh">
+					<th>加入对比</th>
+					<th width="25%">院校名称</th>
+					<th>所在地区</th>
+					<th>院校类型</th>
+					<th>招生批次</th>
+					<th>历年趋势</th>
+					<th>代码</th>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="posfix">
+        <span class="bottom-menu clear"><i class="fa fa-plus-square mr5"></i><span>展开</span></span>
+        <div class="contrast clear" data-off="on">
+            <div class="roe-cont">
+            </div>
+            <div class="tac roe-duibi clear"><a href="javascript:;">查看对比结果</a></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	var sArea,sPc,sPcName,sType,sName,sKm;
+	$(document).ready(function(){
+
+		//查询按钮
+		$('.select-btn').click(function(){
+			if(dnonempty()){
+				Parameter();
+				//console.log(sArea+':'+sType+':'+sPc+';'+sName);
+				$('#school-data tbody tr td').parent().remove();
+				AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/areaSchools?','area='+sArea+'&km='+sType+'&pc='+sPc+'&sname='+sName,snameOption,'#school-data',spage);
+			}
+		});
+
+		//获取地区
+        AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/provinceList','',pOption,'#school-area',spage);
+
+        // 展开-收缩专业对比栏
+        $('.bottom-menu').click(function(){
+            $('.contrast').slideToggle();
+            if($('.contrast').attr('data-off') != 'on'){
+                $('.bottom-menu i').attr('class','fa fa-minus-square mr5');
+                $('.bottom-menu span').text('收缩');
+                $('.contrast').attr('data-off','on');
+            }else{
+                $('.bottom-menu i').attr('class','fa fa-plus-square mr5');
+                $('.bottom-menu span').text('展开');
+                $('.contrast').attr('data-off','');
+            }
+        });
+
+        var falg = 0; //用于判断是否超过最多3条对比信息的记录
+        var falgCount = 0; // 自定义数据，用于同步向对比栏中添加删除数据
+
+        // 向对比栏添加数据
+        $('#school-data').find('tbody').on('change', 'input.compare', function(event) {
+
+            if(this.checked){
+                if(falg>2){
+                    layer.alert('很抱歉！最多只能选择3个专业做对比。');
+                    this.checked = false;
+                    return;
+                }
+                falg++;
+                falgCount++;
+                if(falg >= 2){
+                    $('.roe-duibi').css('display','block');
+                }
+                $(this).attr('falg',falgCount);
+                $('.contrast').css('display','block');
+                $('.bottom-menu').css('display','block');
+                $('.bottom-menu i').attr('class','fa fa-minus-square mr5');
+                $('.bottom-menu span').text('收缩');
+
+                var str = $(this).parents('td').next().text() + '-' +$('.km input[type=radio]:checked').attr('value')+ '-'+ $(this).parents('td').nextAll().eq(-3).text()+ '-'+ $(this).parents('td').nextAll().eq(-5).text()+ '-'+ $(this).parents('td').nextAll().eq(-4).text();
+
+                if($('.roe-cont').find('span').length >= 1){
+                    for(var i=0; i<$('.roe-cont').find('span').length; i++){
+                        if($('.roe-cont').find('span').eq(i).text() == str){
+                            $('.roe-cont').find('span').eq(i).parent().attr('falg',falgCount);
+                            falg--;
+                            return;
+                        }
+                    }
+                }
+
+                $('.roe-cont').append('<div falg="'+ falgCount +'">\
+                                            <span class="roespan">'+str+'</span>\
+                                            <a href="javascript:;">删除</a>\
+                                        </div>');
+            }else{
+                var that = $(this)
+                $('.roe-cont').find('div').each(function(index, el) {
+                    if($(this).attr('falg') == that.attr('falg')){
+                        $(this).remove();
+                    }
+                });
+                $(this).removeAttr('falg');
+                falg--;
+                if(falg == 0){
+                    $('.bottom-menu').css('display','none');
+                    $('.roe-duibi').css('display','none');
+                }
+                if(falg < 2){
+                    $('.roe-duibi').css('display','none');
+                }
+            };
+        });
+
+        // 点击删除按钮删除本条对比信息
+        $('.roe-cont').on('click', 'a', function(event) {
+            var that = $(this);
+            $('input.compare').filter(function(){
+                return $(this).attr('falg') == that.parent('div').attr('falg');
+            }).removeProp('checked').removeAttr('falg');
+            $(this).parent('div').remove();
+            falg--;
+            if(falg == 0){
+                $('.bottom-menu').css('display','none');
+                $('.roe-duibi').css('display','none');
+            }
+            if(falg < 2){
+                $('.roe-duibi').css('display','none');
+            }
+        });
+
+        // 查看对比结果
+        $('.roe-duibi').on('click', 'a', function(event) {
+            var reg = /^([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)$/;
+
+            var array = [];
+            $('.roespan').each(function(index, el) {
+                var str = $(this).text().replace(reg,function($0,$1,$2,$3,$4,$5){
+                    array.push([$1,$2,$3,$4]);
+                });
+            });
+
+            $.cookie('roeyxdb',array.join(','));
+            window.open('<?php echo arU('User/university'); ?>','_blank');
+        });
+	});
+
+	function Parameter(){
+        //科类
+        if($('.km input[type=radio]:checked').attr('value') == "理科"){
+            sType=0;
+        }else{
+            sType=1;
+        }
+        //科目名称
+        sKm=$('.km input[type=radio]:checked').attr('value');
+        //批次名称
+        sPcName=$('.school-pc').children().find('option:selected').text();
+        //批次
+        sPc=$('.school-pc').children().find('option:selected').attr('value');
+        //地区
+        sArea=$('#school-area option:selected').text();
+        //学校名称
+        sName=$('#school-name option:selected').text();
+    }
+
+	//table样式
+	function trbgColor(){
+		$('tr:odd td').parent().css('background-color','#fff');
+		$('tr:even td').parent().css('background-color','#eee');
+	}
+
+	//非空
+	function dnonempty(){
+		if(snonempty('#school-area','请选择学校所在地！')){
+			return true;
+		}
+		return false;
+	}
+
+	//省option
+    function pOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+data.data[i].region_id+'">'+data.data[i].region_name+'</option>');
+        }
+    }
+
+    function snameOption(data,id){
+		for(var i=0;i<data.data.length;i++){
+			$(id).append('<tr><td><div class="item"><label><input type="checkbox" name="" class="compare"> 对比</label></div></td><td align="left"><a href="<?php echo arU("Index/schoolSelectInfo"); ?>?cid='+data.data[i].cid+'">'+data.data[i].name+'</a></td><td>'+sArea+'</td><td>综合</td><td>'+sPcName+'</td><td><a href="<?php echo arU("Index/schoolSelectInfo"); ?>?cid='+data.data[i].cid+'">查看>></a></td><td>-</td></tr>');
+        }
+        trbgColor();
+		$('tr td').bind({
+			mousemove:function(){
+				$(this).parent().css('background-color','#FFF3E0');
+			},
+			mouseout:function(){
+				trbgColor();
+			}
+		});
+    }
+    function spage(){}
+</script>

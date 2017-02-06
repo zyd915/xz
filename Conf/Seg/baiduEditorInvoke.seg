@@ -1,0 +1,10 @@
+<link href="<?php echo arCfg('PATH.GPUBLIC'); ?>/js/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+ <script type="text/javascript" charset="utf-8" src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/umeditor/ueditor.config.js"></script>
+ <script type="text/javascript" charset="utf-8" src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/umeditor/ueditor.all.js"></script>
+ <script type="text/javascript" src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/umeditor/lang/zh-cn/zh-cn.js"></script>
+
+ <script type="text/javascript">
+    //实例化编辑器
+    var ue = UE.getEditor('baidu_editor');
+</script>
+

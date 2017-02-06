@@ -1,0 +1,55 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">相关讲座</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container">
+               <div class="xzws-lecture">
+                   <?php foreach ($articles as $succList) :?>
+                   <div class="case-content-yb">
+                       <div class="case-img-yb right ">
+                          <a href="<?php echo arU('Index/offlineLectureDetail',array('aid'=>$succList['aid'])); ?>">
+                            <?php if($succList['articlepic']): ?>
+                            <img src="<?php echo $succList['articlepic'];?>" width="90px" height="90px">
+                            <?php endif; ?>
+                          </a>
+                       </div>
+                       <a href="<?php echo arU('Index/offlineLectureDetail') ?>" class="title-name-yb"><?php echo stripcslashes($succList['title']); ?></a>
+                       <p><?php echo arModule('Article')->substr_cut(strip_tags($succList['content']), 50);?></p>
+                       <a href="<?php echo arU('Index/offlineLectureDetail',array('aid' => $succList['aid'])); ?>" class="title-detail-yb btn-link">查看详情 &gt;</a>
+                       <!--<a href="javascript:;" class="btn btn-success" style="margin-left:36%;">+已报名</a>-->
+                   </div>
+                 <?php endforeach; ?>
+               </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        // var da = null;
+        // //获取userScore接口数据
+        // ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post','',spage);
+        // function spage(dat){
+        //     if(dat.ret_code == '1000'){
+        //         da = dat.data;
+        //         $('#exam-score').val(dat.data.scorez1);
+        //     }else{
+        //         var index = layer.open({
+        //             type: 0,
+        //             shadeClose: false,
+        //             content: '你还没有登录，请登录后再查询！',
+        //             btn: ['确定'],
+        //             yes: function(){
+        //                 layer.close(index);
+        //                 location.href="<?php echo arU('User/login')?>";
+        //             }
+        //         });
+        //     }
+        // }
+        // $('#examscore').on('change',function(){
+        //     esoption($('#examscore').val(),da);
+        // });
+    });
+</script>

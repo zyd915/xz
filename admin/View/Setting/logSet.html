@@ -1,0 +1,41 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix"><span></span>
+     <a id="cate-add" href="<?php echo arU('articleManager', array('opt' => 'add')); ?>" class="btn btn-success pull-right">日志记录</a>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>用户</th>
+            <th>事件</th>
+            <th>时间</th>
+            <th>详情</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($log as $log) :
+          ?>
+          <tr>
+            <td><?php echo $log['lid']; ?></td>
+            <td><?php echo $log['who']; ?></td>
+            <td><?php echo $log['do']; ?></td>
+            <td><?php echo date('Y-m-d H:i:s', $log['attime']); ?></td>
+            <td><?php echo $log['what']; ?></td>
+
+
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>

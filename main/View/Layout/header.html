@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title><?php echo SettingModel::getSet('title'); ?></title>
+    <meta name="description" content="<?php echo SettingModel::getSet('des'); ?>"/>
+    <meta name="keywords" content="<?php echo SettingModel::getSet('keywords'); ?>"/>
+
+    <link href="<?php echo arCfg('PATH.PUBLIC'); ?>css/m.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?php echo arCfg('PATH.PUBLIC'); ?>css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?php echo arCfg('PATH.PUBLIC'); ?>video-js/video-js.min.css" rel="stylesheet" type="text/css" media="all" />
+    <!-- <link href="<?php echo arCfg('PATH.PUBLIC'); ?>css/index.css" rel="stylesheet" type="text/css" /> -->
+    <script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jquery.js"></script>
+    <script src="<?php echo arCfg('PATH.PUBLIC'); ?>js/public.js"></script>
+    <script src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jquery.cookie.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>js/My97DatePicker/WdatePicker.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
+    <script language="javascript" type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jqprint/jquery.jqprint-0.3.js"></script>
+    <?php /**必须加载的 css seg*/ include arCfg('DIR.SEG') . 'Sys/css.seg'; ?>
+    <link rel="shortcut icon" type="image/ico" href="<?php echo arCfg('PATH.PUBLIC'); ?>img/favicon.ico">
+</head>
+
+<body>
+<!-- 头部 顶部-->
+<div class="bar-top">
+    <div class="mainContent tar auto">
+        <?php
+            if (!empty($_SESSION['uid']) &&isset($_SESSION['uid'])) :
+        ?>
+            <?php
+                if (!empty($userSessInfo['kaosheng']['name'])) :
+            ?>
+你好,
+        <a href="<?php echo arU('User/index'); ?>"><?php echo $userSessInfo['kaosheng']['name']; ?></a>
+            <?php
+                else :
+            ?>
+                <?php if ($userSessInfo['vip']): ?>
+
+        VIP卡号:<a href="<?php echo arU('User/index'); ?>"><?php echo $userSessInfo['vip']['cno']; ?></a>
+                <?php else: ?>
+        普通卡号:<a href="<?php echo arU('User/index'); ?>"><?php echo $userSessInfo['normal']['cno']; ?></a>
+                <?php endif ?>
+            <?php
+                endif;
+            ?>
+
+        <a href="<?php echo arU('Index/loginOut'); ?>">安全退出</a>
+        <?php
+            else :
+        ?>
+        <i class="fa fa-user fcr"></i>&nbsp;请<a href="javascript:;" onclick="login();" class="fcr">[登录]</a>&nbsp;<a href="<?php echo arU('Index/register'); ?>">注册</a>
+        <?php
+            endif;
+        ?>
+        <?php foreach ($navs as $nav): ?>
+            <?php if ($nav['display'] == NavModel::DISPLAY_HEAD): ?>
+               <a target="_blank" href="<?php echo $nav['dowhat']; ?>" class="<?php echo $nav['name']; ?>">&nbsp;<?php echo $nav['title']; ?></a>
+            <?php endif ?>
+        <?php endforeach ?>
+    </div>
+</div>
+
+<!-- 弹窗登录框 -->
+<div id="roe-login" style="display:none;">
+    <h2>用户登录</h2>
+    <div id="login_index">
+        <div class="roe-up">
+            <label for="user">帐号：</label>
+            <input type="text" name="user" class="" id="user" value="" placeholder="手机号/卡号">
+        </div>
+        <div class="roe-up">
+            <label for="password">密码：</label>
+            <input type="password" name="password" id="password" class="" value="" placeholder="密码">
+        </div>
+        <div class="roe-status">
+            <a target="_blank" href="<?php echo arU('Findpw/findpw'); ?>">忘记密码</a>
+            <br>
+            <input type="checkbox" name="rememberpassg" id="rememberpassg"> 记住我的登录状态
+        </div>
+        <div class="roe-status">还没有账号:
+            <a href="<?php echo arU('Index/register'); ?>">请注册</a>
+        </div>
+        <div class="roe-up">
+            <input type="button" value="登&nbsp;&nbsp;录" class="btn btn-info" style="width: 120px;background-color:#37B68D;">
+        </div>
+    </div>
+</div>
+
+<!-- header头部-->
+<div class="header-bzh">
+    <div class="logo-bzh mb20 mainContent auto" style="background: url('<?php echo arCfg('PATH.PUBLIC'); ?>img/logo-index1.jpg') 0 center no-repeat;height:74px;">
+    </div>
+    <div style="background-color:#0078D7;width:100%;">
+        <div class="nav-bzh mainContent auto">
+            <ul class="clearfix">
+                <li class="left"><a href="<?php echo arU('Index/index'); ?>" class="active">首页</a></li>
+                <li class="left dropdown">
+                    <a href="<?php echo arU('Index/summary') ?>" style="min-width:80px;">循证介绍&nbsp;<i class="fa fa-caret-down"></i></a>
+                    <ul class="dn dropdown-menu" style="width:120px;min-width:120px;text-align: center;">
+                        <li><a href="<?php echo arU('Index/summary') ?>">简介</a></li>
+                        <li><a href="<?php echo arU('Index/expertConsultation'); ?>">专家介绍</a></li>
+                    </ul>
+                </li>
+                <li class="left dropdown">
+                    <a href="javascript:;" style="min-width:80px;">循证讲堂&nbsp;<i class="fa fa-caret-down"></i></a>
+                    <ul class="dn dropdown-menu" style="width:120px;min-width:120px;">
+                        <li><a href="<?php echo arU('Index/videolist') ?>">视频讲座</a></li>
+                        <li><a href="http://www.xzgk.net/Article/list/cid/8">现场讲座</a></li>
+                    </ul>
+                </li>
+                <li class="left dropdown">
+                    <a href="javascript:;">高考录取数据&nbsp;<i class="fa fa-caret-down"></i></a>
+                    <ul class="dn dropdown-menu">
+                        <li><a href="<?php echo arU('Index/schoolSelect')?>">院校库</a></li>
+                        <li><a href="<?php echo arU('Index/professionalSelect')?>">专业库</a></li>
+                        <li><a href="<?php echo arU('Index/scoreLine') ?>">批次线</a></li>
+                    </ul>
+                </li>
+                <li class="left"><a href="<?php echo arU('System/index'); ?>" class="successCase-yb">成功案例</a></li>
+                <li class="left"><a href="<?php echo arU('Index/expertConsultation'); ?>">专家一对一</a></li>
+                <li class="left dropdown"><a>专业倾向测试&nbsp;<i class="fa fa-caret-down"></i></a>
+                    <ul class="dn dropdown-menu">
+                        <li><a href="<?php echo arU('Index/Test')?>">高三专业选择</a></li>
+                        <li><a href="<?php echo arU('Index/tests')?>">高一文理分科</a></li>
+                    </ul>
+                </li>
+
+                <li class="left"><a href="javascript:;" onclick="expertf();">个人中心</a></li>
+                <li class="left"><a href="<?php echo arU('Index/vipCard'); ?>">圆梦卡</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php /**首页才显示*/ if (arCfg('requestRoute.a_c') == 'Index' && arCfg('requestRoute.a_a') == 'index'): ?>
+<div class="banner-bzh">
+    <div class="slider1">
+        <ul class="slides">
+            <?php foreach ($headerListGallery as $ad): ?>
+            <li style="background:url('<?php echo $ad['galleryUrl']['url']; ?>') 50% 0% no-repeat;">
+                <a href="<?php echo $ad['url']; ?>" target="_blank"></a>
+            </li>
+            <?php endforeach ?>
+        </ul>
+        <ol class="fix-slider-nav"></ol>
+    </div>
+    <div class="xz-recommend">
+        <div class="xz-gktjxt">
+            <h4>四川高考志愿智能推荐系统</h4>
+            <a href="<?php echo arU('User/simulationSystemTwo'); ?>" target="_blank">去填报</a>
+        </div>
+        <div class="xz-zdtjxt">
+            <h4>一二三诊智能推荐系统</h4>
+            <a href="<?php echo arU('User/simulationSystemOne'); ?>" target="_blank">去填报</a>
+        </div>
+    </div>
+</div>
+<div class="menu-mk-yb-roe">
+    <ul class="tac">
+        <li>
+            <a href="<?php echo arU('User/simulationAcceptanceProbability'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-lg-yb">
+                    <i class="fa fa-pie-chart"></i>
+                </span>
+                <em>测录取概率</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('User/expertDetailForm'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-zj-yb">
+                    <i class="fa fa-user-md"></i>
+                </span>
+                <em>一对一专家咨询</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('User/examinee'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-ks-yb">
+                    <i class="fa fa-users"></i>
+                </span>
+                <em>考生走向查询</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('Index/tests'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-wl-yb">
+                    <i class="fa fa-users"></i>
+                </span>
+                <em> 文理分科</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('User/zyTestResult'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-cs-yb">
+                    <i class="fa fa-paste"></i>
+                </span>
+                <em>专业趋向测试</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('Index/professionalSelect'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-cx-yb">
+                    <i class="fa fa-bar-chart"></i>
+                </span>
+                <em>找专业</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('Index/schoolSelect'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-yx-yb">
+                    <i class="fa fa-server"></i>
+                </span>
+                <em>找大学</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('User/artDatabaseQuery'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-yt-yb">
+                    <i class="fa fa-database"></i>
+                </span>
+                <em>艺体类录取数据查询</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('User/university'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-xx-yb">
+                    <i class="fa fa-university"></i>
+                </span>
+                <em>学校对比</em>
+            </a>
+        </li>
+        <li>
+            <a href="<?php echo arU('User/professional'); ?>" target="_blank">
+                <span class="tac mk-yb mk-logo-db-yb">
+                    <i class="fa fa-leanpub"></i>
+                </span>
+                <em>专业对比</em>
+            </a>
+        </li>
+    </ul>
+</div>
+<?php endif ?>
+<script type="text/javascript">
+    $('.nav-bzh li a').click(function(){
+        if($(this).hasClass('isNa')){
+
+        }else{
+            localStorage.setItem('menuName',$(this).text());
+            localStorage.setItem('menuClass',$(this).attr('class'));
+        }
+    });
+    $(function(){
+        // 默认跳转用户中心
+        JSV.LOGIN_BACK_URL = '<?php echo arU('User/index'); ?>';
+        $('#login_index input[type=button]').click(function(){
+            var lid = layer.load('...');
+            var name = $('input[name=user]').val();
+            var pwd = $('input[name=password]').val();
+            var rem = $('#rememberpassg').is(':checked');
+            var data = {'name': name,'pwd': pwd,'rem': rem};
+            $.post("<?php echo arU('Index/loginMang')?>",data,function(ev){
+                // //console.log(ev);
+                if(ev.success=='1')
+                {
+                    layer.close(lid);
+                    layer.msg(ev.ret_msg,2,-1);
+                    // 跳转URL
+                    window.location.href= JSV.LOGIN_BACK_URL;
+                }else{
+                    layer.close(lid);
+                    layer.msg(ev.ret_msg,2,-1);
+                }
+            },'json')
+        });
+    });
+</script>
+
+<!--中间部分内容-->
+<div class="mainContent auto clearfix">

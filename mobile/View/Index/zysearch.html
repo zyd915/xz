@@ -1,0 +1,40 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">查专业</span>
+    </header>
+    <section class="content">
+        <div class="main">
+                <div class="search-box" style="padding-top: .3rem;">
+                    <form action="<?php echo arU('Index/zysearch')?>" method="get">
+                        <div class="">
+                            <span class="glyphicon glyphicon-search xzlh-s-span" ></span>
+                            <input type="text" name="mname" class="xzlh-s-input" placeholder="搜索院校" >
+                            <button class="xzlh-s-btn">搜索</button>
+                        </div>
+                    </form>
+                </div>
+
+            <div class="xzlh-czy-search">
+                <?php foreach ($majors as $key => $value): ?>
+                <section>
+                    <div class="clearfix">
+                        <h2><?php echo $key; ?></h2>
+                    </div>
+                    <?php foreach ($value as $k => $v): ?>
+                    <section class="xzlh-czy-sec">
+                        <h3><?php echo $k; ?></h3>
+                        <ul class="clearfix">
+                            <?php foreach($v as $major): ?>
+                            <li>
+                                <a href="<?php echo arU('Index/professionaldetail',array('mid' => $major['mid'])); ?>"><?php echo $major['mname']?></a>
+                            </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </section>
+                    <?php endforeach; ?>
+                </section>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>

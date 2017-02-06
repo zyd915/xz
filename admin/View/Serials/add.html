@@ -1,0 +1,51 @@
+<div class="portlet box purple">
+   <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>序列号编辑/添加</div>
+   </div>
+   <div class="portlet-body form">
+      <!-- BEGIN FORM-->
+      <form action="<?php echo arU('', array('greedyUrl' => true)); ?>" method="post" class="form-horizontal">
+         <input type="hidden" name="sid" value="<?php echo $serial['sid']; ?>" />
+         <div class="form-body">
+            <div class="form-group">
+               <label class="col-md-3 control-label">序列号</label>
+               <div class="col-md-4">
+                  <input type="text" name="num" class="form-control" value="<?php echo $serial['num']; ?>" placeholder="名称">
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="col-md-3 control-label">剩余使用次数</label>
+               <div class="col-md-4">
+                  <input type="text" name="times" class="form-control" value="<?php echo $serial['times']; ?>" placeholder="次数">
+               </div>
+            </div>
+             <div class="form-group">
+               <label class="col-md-3 control-label">类型</label>
+               <div class="col-md-4">
+                 <?php
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'stype',
+            // 适配器数据 数组
+            'map' => SerialsModel::$STYPE_MAPS,
+            // 选中的value selected = selected
+            'selected' => $serial['stype']
+         )
+      );
+?> 
+               </div>
+            </div>
+         </div>
+         <div class="form-actions nobg fluid">
+            <div class="col-md-offset-3 col-md-9" style="margin-left:18%;">
+               <button type="submit" class="btn green">提交</button>
+            </div>
+         </div>
+      </form>
+      <!-- END FORM-->
+   </div>
+</div>

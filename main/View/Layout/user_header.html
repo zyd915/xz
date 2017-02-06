@@ -1,0 +1,145 @@
+<?php include_once('header.html');?>
+        <div class="centerNav row-25">
+        	<div class="system-logo">
+        		<img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/logo.png" />
+        	</div>
+        	<div class="user-message">
+        		<div class="tac">
+        			<div class="user-logo mt10">
+        				<img src="<?php echo arCfg('PATH.GPUBLIC') . 'img/kaosheng' . $userSessInfo['kaosheng']['gender']; ?>.png" />
+        			</div>
+                    <div>
+                        <?php
+                            if (empty($userSessInfo['kaosheng']['name'])) :
+                        ?>
+                        <a href="<?php echo arU('User/userSetting'); ?>" title="完善资料">立即完善资料</a>
+                        <?php
+                            else :
+                        ?>
+                        <a href="<?php echo arU('User/userSetting'); ?>" title="编辑资料">编辑资料</a>
+                        <?php
+                            endif;
+                        ?>
+                    </div>
+        		</div>
+                <?php
+                    if ($userSessInfo['kaosheng']['name']) :
+                ?>
+                <div class="mess tac">
+                    <p>亲爱的<?php
+                    echo $userSessInfo['kaosheng']['name'];?>同学</p>
+                    <p>
+                        <?php if($userSessInfo['type'] == UserModel::TYPE_N) :?>
+                        您是普通用户，购买志愿卡享VIP特权<?php endif;?>
+                    </p>
+                </div>
+                <?php
+                    endif;
+                ?>
+
+        	</div>
+			<div class="left-menu pl10 pr10">
+				<ul style="text-indent:10px;">
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/simulationSystemOne'); ?>" class="pl10">
+								<i class="fa fa-gear"></i>
+								<span>诊断模拟填报</span>
+							</a>
+						</h2>
+					</li>
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/simulationSystemTwo'); ?>" class="pl10">
+								<i class="fa fa-gears"></i>
+								<span>四川高考志愿智能推荐</span>
+							</a>
+						</h2>
+					</li>
+                    <li>
+                        <h2>
+                            <a href="<?php echo arU('User/simulationAcceptanceProbability'); ?>" class="pl10">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>测录取概率</span>
+                            </a>
+                        </h2>
+                    </li>
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/expertDetailForm'); ?>" class="pl10">
+								<i class="fa fa-user-md"></i>
+								<span>1对1专家咨询</span>
+							</a>
+						</h2>
+					</li>
+
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/examinee'); ?>" class="pl10">
+								<i class="fa fa-users"></i>
+								<span>考生走向查询</span>
+							</a>
+						</h2>
+					</li>
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/university'); ?>" class="pl10">
+								<i class="fa fa-university"></i>
+								<span>学校对比</span>
+							</a>
+						</h2>
+					</li>
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/professional'); ?>" class="pl10">
+								<i class="fa fa-leanpub"></i>
+								<span>专业对比</span>
+                            </a>
+						</h2>
+					</li>
+					<li>
+						<h2>
+							<a href="<?php echo arU('User/zyTestResult'); ?>" class="pl10">
+								<i class="fa fa-paste"></i>
+								<span>专业倾向测试</span>
+							</a>
+						</h2>
+					</li>
+                    <li>
+                        <h2>
+                            <a href="<?php echo arU('User/artDatabaseQuery'); ?>" class="pl10">
+                                <i class="fa fa-database"></i>
+                                <span>艺体类录取数据查询</span>
+                            </a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <a href="<?php echo arU('User/universityData'); ?>" class="pl10">
+                                <i class="fa fa-server"></i>
+                                <span>普通类院校数据查询</span>
+                            </a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <a href="<?php echo arU('User/professionalData'); ?>" class="pl10">
+                                <i class="fa fa-bar-chart"></i>
+                                <span>普通类专业数据查询</span>
+                            </a>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>
+                            <a href="<?php echo arU('User/myVolunteerForm'); ?>" class="pl10">
+                                <i class="fa fa-table"></i>
+                                <span>我的志愿表单</span>
+                            </a>
+                        </h2>
+                    </li>
+				</ul>
+			</div>
+		</div>
+
+		<!--中间部分内容-->
+		<div class="auto left row-100 mt20">

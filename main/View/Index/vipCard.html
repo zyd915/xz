@@ -1,0 +1,172 @@
+<!-- 循征志愿卡 -->
+<div class="vipCard main1-bzh auto pt30 ">
+    <div class="clearfix"><!-- 循征志愿卡 -->
+        <div class="tag1-bzh left clearfix">
+            <div style="height:300px;line-height:300px;">
+                <img id="roe-vipImg" src="<?php echo arCfg('PATH.PUBLIC'); ?>img/VIP11.jpg" alt="" style="max-height: 300px;max-width:300px;margin-bottom: 6px;" >
+            </div>
+
+            <div class="roe-vipImgs">
+                <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/VIP111.jpg" data-src="<?php echo arCfg('PATH.PUBLIC'); ?>img/VIP11.jpg"  class="minImg left" >
+                <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/VIP222.jpg" data-src=
+                "<?php echo arCfg('PATH.PUBLIC'); ?>img/VIP22.jpg" class="minImg left" >
+                <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/ty111.jpg" data-src="<?php echo arCfg('PATH.PUBLIC'); ?>img/ty11.jpg" class="minImg left" >
+                <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/ty222.jpg" data-src="<?php echo arCfg('PATH.PUBLIC'); ?>img/ty22.jpg" class="minImg left" >
+            </div>
+        </div>
+        <div class="right" style="width: 490px;">
+            <h3 >高考志愿“圆梦卡”</h3>
+            <p class="fc5-bzh">本卡为虚拟卡，购买成功后自动为您升级为VIP用户。</br>
+            VIP功能：</br>
+            1、查看2500多所院校在川录取数据（分数，分差，位次，招生计划等）。</br>
+            2、享受一次专业性格测试，专业性格测试报告发送到考生邮箱。</br>
+            3、一二三诊模拟高考志愿填报。</br>
+            4、2016高考志愿精确智能推荐。</br>
+            普通用户功能：</br>
+            1、查看2500所院校在川录取数据（分数、分差等）。</br>
+            2、免费试用部分智能推荐功能。
+            </p>
+            <p>
+                适用省份：四川<br/>
+                适用考生：普通文理科和艺体类考生（艺体类考生仅支持数据查询，不支持智能填报）<br/>
+                适用批次：普通批次和提前批次
+            </p>
+
+            <p class="mb30">价格：<span class="fc5-bzh fwb fs16px-bzh">360.00</span>&nbsp;元/张</p>
+            <a href="javascript:gouka();" class="btn btn-success" id="goBuy" style="border:0;background-color:#00BC3E;">立即购买</a>
+            <p><i class="fa fa-circle"></i>&nbsp;2015年志愿推荐成功率<span class="fc6-bzh">100%</span></p>
+            <p><i class="fa fa-circle"></i>&nbsp;成都<span class="fc6-bzh">四七九</span>等多所名校联合推荐</p>
+        </div>
+    </div>
+    <div class="newInfo-bzh w100"><!-- 最新资讯 -->
+        <div class="main1-bzh auto clearfix">
+            <div class="left mb20">
+              <a class="minTag1-bzh br3 dib">最新购卡</a><span class="angle"></span>
+            </div>
+            <div id="gongao" class="left">
+                <div style="width:900px;height:30px;margin:0 auto;white-space: nowrap;overflow:hidden;" id="scroll_div" class="scroll_div">
+                    <div id="scroll_begin">
+                        <?php foreach ($logs as $log): ?>
+                        <span class="ml20 mr20"><?php echo $log['where']; ?><?php echo $log['who']; ?><span class="ml10 mr10"><?php echo $log['time']; ?></span><?php echo $log['dowhat']; ?></span>
+                        <?php endforeach ?>
+                    </div>
+                    <div id="scroll_end"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="tab-menu bg4-bzh w100 clearfix tac pt10 br5">
+        <div class="row4-bzh"><a class="fcw dib tab">圆梦卡介绍</a></div>
+        <div class="row4-bzh"><a class="fcw dib tab">成功案例</a></div>
+        <div class="row4-bzh"><a class="fcw dib tab">购买须知</a></div>
+        <div class="row4-bzh"><a class="fcw dib tab">使用指导</a></div>
+    </div>
+    <div class="tab-content w100 dn tac"><!-- 功能介绍 -->
+        <h3 style="border-top:2px solid #222;" class="pr mt30 clearfix tac"><span class="dib pr line-solid-bzh fcb">高考志愿圆梦卡为您志愿填报保驾护航</span></h3>
+        <img width="85%" src="<?php echo arCfg('PATH.PUBLIC'); ?>img/vipjp.jpg">
+    </div>
+    <div class="tab-content w100 dn tac"><!-- 成功案例 -->
+        <h3 style="border-top:2px solid #222;" class="pr mt30 clearfix tac"><span class="dib pr line-solid-bzh fcb">成功案例</span></h3>
+        <div class="main3-bzh main3-bzh-sucCase clearfix auto">
+            <?php
+                foreach ($cases as $case) :
+            ?>
+            <div class="row4-bzh">
+                <img src="<?php echo $case['articlepic']; ?>" alt="" class="img-circle img-index1-bzh img-thumbnail">
+                <dl class="word-width-bzh">
+                    <dt class="fcl fwb mt10 wt word-en"><?php echo $case['title']; ?></dt>
+                    <dd class="wc word-en"><?php echo arModule('Article')->substr_cut(strip_tags($case['content']), 30);?></dd>
+                    <dd><a href="<?php echo arU('System/Detail',array('aid'=>$case['aid']));?>" class="fcl">查看详情》</a></dd>
+                </dl>
+            </div>
+            <?php
+                endforeach;
+            ?>
+        </div>
+        <div class="tac addmore mt20"><a href="<?php echo arU('System/index'); ?>">更多…</a></div>
+    </div>
+    <div class="tab-content w100 dn"><!-- 购买须知 -->
+        <h3 style="border-top:2px solid #222;" class="pr mt30 clearfix tac"><span class="dib pr line-solid-bzh fcb">购买须知</span></h3>
+        <div class="w80 auto pp20-bzh roe-gkxz" style="background-color: #eee;">
+            <p>● 目前本卡只适用于 四川地区的考生。</p>
+            <p>● 本系统适合普通类文理科考生使用；<span>艺体类仅支持数据查询，不支持智能推荐；自主招生暂不适用。</span>。</p>
+            <p>● 所购志愿卡仅用于循证高考网志愿填报产品，用于专业倾向测试、高校分数线及位次查询、院校专业开设查询、学校专业对比、考生走向查询、根据分数/位次模拟填报等<span>九项功能服务</span>。</p>
+            <p>● 购买后（实体卡激活后）即可开始使用各项系统功能，激活后<span>有效期为一年。有效期截止为每年9月1日</span>。</p>
+            <p>● 每张圆梦卡仅供1位考生使用，高考成绩（分数/位次）<span>一旦确认不可修改，请勿转借</span>！</p>
+            <p>● 系统数据统计时包含特长生分数，最低分和平均分可能与院校公布数据不一致，请以各高校正式公布的数据为准</p>
+            <p>● 本卡为电子虚拟卡，不记名、不挂失，一经出售，概不退换！</p>
+        </div>
+    </div>
+    <div class="tab-content w100 dn"><!-- 使用指导 -->
+        <h3 style="border-top:2px solid #222;" class="pr mt30 clearfix tac"><span class="dib pr line-solid-bzh fcb">使用指导</span></h3>
+        <div class=" auto pp20-bzh tac" style="background-color: #eee;">
+          <img width="85%" src="<?php echo arCfg('PATH.PUBLIC'); ?>img/syzd.jpg" alt="">
+        </div>
+    </div>
+</div>
+<script>
+    $(".tab-content:eq(0)").fadeIn();
+    $(".tab-menu .tab:eq(0)").addClass("tab-active");
+    $(".tab-menu").children().click(function(){
+        $(this).children(".tab").addClass("tab-active").parent().siblings().children(".tab").removeClass("tab-active");
+        num = $(this).index();
+        $(".tab-content").hide();
+        $(".tab-content:eq("+num+")").fadeIn();
+    });
+    textArea(".wt",24,1);
+    textArea(".wc",55,2);
+    //vip卡图片切换
+    $('.roe-vipImgs').on('click','img.minImg',function(){
+        $('#roe-vipImg').attr('src',$(this).attr('data-src'));
+    });
+
+    // 购卡
+    function gouka(){
+       $.get(JSV.PATH_APP_SERVER + 'api/iflogin', function (res) {
+          if (res.ret_code == '1000') {
+                // window.location.href = '<?php echo arU('Alipay/pay');?>';
+                //window.location.href = '<?php echo arU('User/tobeVip');?>';
+                window.location.href = '<?php echo arU('Index/tip');?>';
+          } else {
+                // 登陆了跳转回来
+                JSV.LOGIN_BACK_URL = '<?php echo arU(''); ?>';
+                login();
+          }
+       }, 'json');
+    }
+
+    $(function(){
+        $.post(JSV.PATH_APP_SERVER + 'api/ifVip',function(data){
+            if(data.ret_code == '1000'){
+                $('#goBuy').css('background-color','');
+                $('#goBuy').attr('disabled','true');
+            }else{
+                $('#goBuy').css('background-color','#00BC3E');
+                $('#goBuy').removeAttr('disabled');
+            }
+        },'json');
+    });
+</script>
+
+<!-- 滚动新闻      -->
+<script type="text/javascript">
+$(document).ready(function(){
+    ScrollImgLeft();
+});
+function ScrollImgLeft(){
+    var speed=50;
+    var scroll_begin = document.getElementById("scroll_begin");
+    var scroll_end = document.getElementById("scroll_end");
+    var scroll_div = document.getElementById("scroll_div");
+    scroll_end.innerHTML=scroll_begin.innerHTML;
+    function Marquee(){
+        if(scroll_end.offsetWidth-scroll_div.scrollLeft<=0)
+            scroll_div.scrollLeft-=scroll_begin.offsetWidth;
+        else
+            scroll_div.scrollLeft++;
+    }
+    var MyMar=setInterval(Marquee,speed);
+    scroll_div.onmouseover=function() {clearInterval(MyMar);}
+    scroll_div.onmouseout=function() {MyMar=setInterval(Marquee,speed);}
+}
+</script>

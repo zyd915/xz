@@ -1,0 +1,129 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1)" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">测录取概率报告</span>
+        <!-- <a class="zone-picker" onclick=""><i class="fa fa-map-marker"></i>江苏</a> -->
+    </header>
+    <section class="content">
+        <div class="main">
+            <div class="xzlh-mse">
+                <p>你本次测试的信息如下：</p>
+                <em>600</em>分
+                <em>理科</em>
+                <em>四川大学</em>
+                <em>本科一批</em>
+            </div>
+            <div class="xzlh-mse">
+                <p>测试结果：概率为<em class="xzlh-gl">90</em>%</p>
+                <!-- <p class="xzlh-mse-tip">风险极小，基本可任选专业</p> -->
+            </div>
+            <div class="xzlh-gl-tab">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>年份</th>
+                            <th>分数</th>
+                            <th>位次</th>
+                            <th>人数</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="xzlh-yxdt">
+                <h3>院校动态</h3>
+                <section class="clearfix">
+                    <a href="">院校概况</a>
+                    <a href="">院校数据</a>
+                </section>
+            </div>
+            <!-- <div class="uzy-content APtest">
+                <div class="other">
+                    <h4>
+                        <a href="/APTests/APtest.aspx" class="btn btn-info">我还要测</a>当前地区共生成了<span id="spanTotalReport">54080</span>份报告
+                    </h4>
+
+                    <ul id="ulReport">
+                        <a href="/APtests/AptestResult.aspx?rid=745954">
+                            <li>
+                                <p>
+                                    <img class="img-circle" src="<?php echo arCfg('PATH.PUBLIC');?>img/case1.jpg ?>" width="43" height="43">
+                                    <b class="ng-binding">450</b>分， 文科
+                                    <span class="time ng-binding">2016/3/4 16:15:54测过</span>
+                                </p>
+                                <p class="ng-binding">
+                                    <span>
+                            <label class="btn btn-default pull-right">查 看</label>
+                        </span>目标院校：温州医科大学
+                                </p>
+                                <p>测试结果：<b class="ng-binding">1%</b></p>
+                            </li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="page-list-loading">
+                    <a class="btn btn-danger" onclick="OtherAptestApp.nextPage();" id="divLoadMore">加载更多</a>
+                    <a class="btn btn-default hide" id="aLoading"><i class="fa fa-spinner fa-spin"></i>努力加载中...</a>
+                </div>
+                <div class="form-box" style="width: 90%; margin: 0 auto;">
+                    <button type="button" class="btn btn-empty btn-block" onclick="location.href='/';">返回个人中心</button>
+                </div>
+            </div> -->
+        </div>
+    </section>
+<script type="text/javascript">
+    (function(){
+        if (getCookie('xzlqgl') && getCookie('xzlqglsj')) {
+            var xzlqgl = JSON.parse(getCookie('xzlqgl'));
+            var xzlqglsj = JSON.parse(getCookie('xzlqglsj'));
+            $('.xzlh-mse').find('em').eq(0).text(xzlqgl.score);
+            $('.xzlh-mse').find('em').eq(1).text(xzkmzh(xzlqgl.km));
+            $('.xzlh-mse').find('em').eq(2).text(xzlqgl.sname);
+            $('.xzlh-mse').find('em').eq(3).text(xzpczh(xzlqgl.pc));
+            $('.xzlh-gl').text(xzlqglsj.percent.percent);
+            var html = '<tr>\
+                            <td>2015</td>\
+                            <td>'+ xzlqglsj.lqf15 +'</td>\
+                            <td>'+ xzlqglsj.lqwc15 +'</td>\
+                            <td>'+ xzlqglsj.zsjh15 +'</td>\
+                        </tr>\
+                        <tr>\
+                            <td>2014</td>\
+                            <td>'+ xzlqglsj.lqf14 +'</td>\
+                            <td>'+ xzlqglsj.lqwc14 +'</td>\
+                            <td>'+ xzlqglsj.zsjh14 +'</td>\
+                        </tr>\
+                        <tr>\
+                            <td>2013</td>\
+                            <td>'+ xzlqglsj.lqf13 +'</td>\
+                            <td>'+ xzlqglsj.lqwc13 +'</td>\
+                            <td>'+ xzlqglsj.zsjh13 +'</td>\
+                        </tr>';
+            $('.xzlh-gl-tab').find('tbody').html(html);
+        }
+    })();
+
+    function xzkmzh(km){
+        if (km == 0) {
+            return '理科';
+        }else if (km == 1) {
+            return '文科';
+        }
+    }
+    function xzpczh(pc){
+        switch(pc){
+            case '1':
+                return '本科一批';
+                break;
+            case '2':
+                return '本科二批';
+                break;
+            case '3':
+                return '专科一批';
+                break;
+            case '4':
+                return '专科二批';
+                break;
+        }
+    }
+</script>

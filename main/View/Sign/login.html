@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="UTF-8">
+    <title><?php echo SettingModel::getSet('title'); ?></title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="shortcut icon" type="image/ico" href="<?php echo arCfg('PATH.PUBLIC'); ?>img/favicon.ico">
+    <link href="<?php echo arCfg('PATH.PUBLIC'); ?>css/m.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="<?php echo arCfg('PATH.PUBLIC'); ?>css/login.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jquery.js"></script>
+</head>
+<body>
+    <div class="xz-login-box">
+        <div class="login-main clearfix">
+            <div class="login-banner">
+                <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/login-banner.jpg" alt="" width="533" height="527">
+            </div>
+            <div class="login-in">
+                <div class="log" >
+                    <h1 style="background: url('<?php echo arCfg('PATH.PUBLIC'); ?>img/logo-index.png') no-repeat;">循证高考</h1>
+                </div>
+                <div class="login-title">
+                    <h3>登录循证</h3>
+                    <p class="loginerror" style="margin-left:30px;height:20px;margin-top:0;"></p>
+                </div>
+                <form id="form-horizontal">
+                    <div class="form-group has-feedback login-user">
+                        <label class="control-label sr-only" for=""></label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></span>
+                            <input type="text" class="form-control" name="user" placeholder="输入您的卡号或手机号">
+                        </div>
+                        <span class="glyphicon glyphicon-remove form-control-feedback errorhide errortip" aria-hidden="true" style="color: #a94442; top:5px;"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <label class="control-label sr-only" for=""></label>
+                        <div class="input-group">
+                            <span class="input-group-addon">&nbsp;<i class="fa fa-unlock-alt"></i></span>
+                            <input type="password" name="password" class="form-control" id="userpw" placeholder="输入密码">
+                        </div>
+                        <span class="glyphicon glyphicon-remove form-control-feedback errorhide errortip" aria-hidden="true" style="color: #a94442; top:5px;"></span>
+                    </div>
+                    <div>
+                        <label>
+                            <input id="rememberpassg" type="checkbox" name="repw">&nbsp;记住密码
+                        </label>
+                        <span style="float:right;"><a href="<?php echo arU('Findpw/findpw'); ?>" target="_blank">忘记密码？</a></span>
+                    </div>
+                    <div class="btn-login">
+                        <button class="btn">登 录</button>
+                    </div>
+                </form>
+                <div class="sign">
+                    <p>还没有循证账号？<a href="<?php echo arU('Index/register'); ?>">马上注册</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $('#form-horizontal').on('blur', 'input', function(event) {
+            if($(this).val() == ''){
+                if($(this).is('input[name="username"]')){
+                    $(this).parent().next('span.glyphicon').removeClass('errorhide');
+                }else if($(this).is('input[name="password"]')){
+                    $(this).parent().next('span.glyphicon').removeClass('errorhide');
+                }
+            }else{
+                $(this).parent().next('span.glyphicon').addClass('errorhide');
+            }
+        });
+        $('#form-horizontal').on('focus', 'input', function(event) {
+            $(this).parent().next('span.glyphicon').addClass('errorhide');
+            $('.loginerror').html('');
+        });
+        $('#form-horizontal .btn').click(function(event){
+            event.preventDefault();
+            $('#form-horizontal').find('input').trigger('blur');
+            var len = $('#form-horizontal .errortip').length,
+                num = $('.errorhide').length;
+            if(len == num){
+                var name = $('input[name=user]').val();
+                var pwd = $('input[name=password]').val();
+                var rem = $('#rememberpassg').is(':checked');
+                var data = {'name': name,'pwd': pwd,'rem': rem};
+                $.post("<?php echo arU('Index/loginMang')?>",data,function(ev){
+                    if(ev.success=='1'){
+                        $('.loginerror').html('');
+                        window.location.href= '<?php echo arU('User/index'); ?>';
+                    }else{
+                        $('.loginerror').html('账号或密码输入错误！').css('color','red');
+                    }
+                },'json');
+            }
+        });
+    </script>
+</body>
+</html>

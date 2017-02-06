@@ -1,0 +1,5 @@
+项目 询证高考志愿平台
+
+数据库默认密码为本地 localhost  用户名root  密码root
+新建数据库  xz   导入 xz.sql
+线上http://www.xzgk.net/

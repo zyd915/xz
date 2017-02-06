@@ -1,0 +1,371 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="examinee-title clearfix">
+			<h2 class="left">普通类专业数据查询</h2>
+			<div class="line right mt10"></div>
+		</div>
+	</div>
+	<div class="content-detail clearfloat">
+		<ul class="mt20">
+			<li>
+				<div class="cards">
+					<label class="tar">适用省市</label>
+					<span class="ml40">四川省 </span>
+				</div>
+			</li>
+			<li>
+				 <!-- <div class="cards mt10">
+					<label for="cards" class="tar">使用说明</label>
+                    <span id="cards" class="ml40">1、普通类考生同时支持录取数据查询和智能模拟推荐<br/></span>
+                    <label for="sdd" class="tar"></label>
+                    <span id="sdd" class="ml40">2、艺体类考生仅支持录取数据查询</span>
+				</div> -->
+			</li>
+			<li>
+				<div class="yb-select yb-input-submit">
+					<!-- <form action="" class="detail-area" name="" method="post" onsubmit="return dnonempty();"> -->
+						<ul class=" mt10">
+							<li>
+                                <div class="lists mt5 school-km">
+                                    <label for="school-km">您的科类</label>
+                                    <!-- <?php
+                                        // 调用用html seg 直接输出 select标签
+                                        arSeg(
+                                            array(
+                                            // seg文件
+                                            'segKey' => 'Html/select',
+                                            // <select name="name">
+                                            'name' => 'km',
+                                            // 适配器数据 数组
+                                            'map' => DataYxModel::$kmMap,
+                                            // 选中的value selected = selected
+                                            'selected' => 0
+                                            )
+                                        );
+                                    ?> -->
+                                    <select name="km" id="school-km">
+                                        <option value="-1">请选择科类</option>
+                                        <option value="0">理科</option>
+                                        <option value="1">文科</option>
+                                    </select>
+                                    <span style="color:red;"><i class="fa fa-asterisk"></i>必选项</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="lists mt5 school-pc">
+                                    <label for="school-pc">招生批次</label>
+                                    <select id="school-pc" name="pc">
+                                        <option value="-1">请选择批次</option>
+                                        <!-- <option value="提前批">提前批</option> -->
+                                        <option value="本科一批">本科一批</option>
+                                        <option value="本科二批">本科二批</option>
+                                        <option value="专科一批">专科一批</option>
+                                        <option value="专科二批">专科二批</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="lists mt5 school-year">
+                                    <label for="school-year">招生年份</label>
+                                    <select id="school-year" name="year">
+                                        <option value="-1">请选择年份</option>
+                                        <option value="2015">2015</option>
+                                        <option value="2014">2014</option>
+                                        <option value="2013">2013</option>
+                                        <option value="2012">2012</option>
+                                        <option value="2011">2011</option>
+                                        <option value="2010">2010</option>
+                                        <option value="2009">2009</option>
+                                        <option value="2008">2008</option>
+                                        <option value="2007">2007</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <!-- <li>
+                                <div class="lists mt5 roe-school">
+                                    <label for="school-addr">院校所在地</label>
+                                    <select id="school-addr" name="addr">
+                                        <option value="-1">请选择院校所在地</option>
+                                    </select>
+                                </div>
+                            </li> -->
+                            <li>
+                                <div class="lists mt5 school-name">
+                                    <label for="school-name">院校名称</label>
+                                    <select id="school-name" name="scname">
+                                        <option value="-1">请选择院校名称</option>
+                                    </select>
+                                    <span style="color:red;"><i class="fa fa-asterisk"></i>必选项</span>
+                                </div>
+                            </li>
+							<li>
+								<div class=" mt10 mb20 tac">
+									<input type="submit" name="btn" class="select-btn mb20" value="查询" />
+								</div>
+							</li>
+						</ul>
+					<!-- </form> -->
+				</div>
+			</li>
+		</ul>
+	</div>
+    <div class="chart roe-chart mb20">
+        <p style="display:none;" class="pt20 pb20">很抱歉，暂未查到符合条件的招生信息，请更改条件后重新查询！</p>
+        <table id="roe-table" class="roe-table table-tr roe-noCtrlc" style="width:100%;">
+            <thead>
+                <tr class="bg4-bzh">
+                    <th>对比</th>
+                    <th width="30%">专业名称</th>
+                    <th>分差</th>
+                    <th>最低分</th>
+                    <th>批次</th>
+                    <th>科类</th>
+                    <!-- <th>年份</th> -->
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div class="posfix">
+        <span class="bottom-menu clear"><i class="fa fa-plus-square mr5"></i><span>展开</span></span>
+        <div class="contrast clear" data-off="on">
+            <div class="roe-cont">
+            </div>
+            <div class="tac roe-duibi clear"><a href="javascript:;">查看对比结果</a></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+        //院校所在地
+        /*$.post('<?php echo AR_SERVER_PATH; ?>Api/provinceList', function(data) {
+            addData(data, $('.roe-school'), 'addr');
+        }, "json");*/
+
+        // 请求院校名称
+        $('#school-km,#school-pc,#school-year').change(function(){
+            var km = $('.school-km').find('select').val();
+            var pc = $('.school-pc').find('select').val();
+            var year = $('.school-year').find('select').val();
+            var area = -1;
+            var dat = {};
+            if(km == -1){
+                $('#school-name').html('<option value="-1">请选择院校名称</option>');
+                return;
+            }
+            if(km != -1 && pc == -1 && year == -1 && area == -1){
+                dat = {'km' : km};
+            }else if(km != -1 && pc != -1 && year == -1 && area == -1){
+                dat = {'km' : km,'pc' : pc}
+            }else if(km != -1 && pc != -1 && year != -1 && area == -1){
+                dat = {'km' : km,'pc' : pc,'year' : year}
+            }else if(km != -1 && pc != -1 && year != -1 && area != -1){
+                dat = {'km' : km,'pc' : pc,'year' : year,'area' : area}
+            }else if(km != -1 && pc == -1 && year != -1 && area != -1){
+                dat = {'km' : km,'year' : year,'area' : area}
+            }else if(km != -1 && pc == -1 && year == -1 && area != -1){
+                dat = {'km' : km,'area' : area}
+            }else if(km != -1 && pc == -1 && year != -1 && area == -1){
+                dat = {'km' : km,'year' : year}
+            }
+            /*
+            if(year == '2015'){
+                $('#school-name').html('<option value="-1">请选择院校名称</option>');
+                layer.alert('由于各高校2015年的专业录取数据未完全公布，因此目前暂不支持2015年的专业录取数据查询。',{icon: 5});
+            }else{
+                console.log('123');
+                ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/schoolsQuery','POST',dat,yxsearch);
+            }
+            */
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/schoolsQuery','POST',dat,yxsearch);
+
+            function yxsearch(data){
+                var html = '<option value="-1">请选择院校名称</option>';
+                if(data.ret_code == 1000){
+                    for(var i=0; i<data.total_lines; i++){
+                        html += '<option value="'+data.data[i].yxname+'">'+data.data[i].yxname+'</option>';
+                    }
+                    $('#school-name').html(html);
+                }else{
+                    $('#school-name').html(html);
+                    layer.alert('很抱歉！没有查询到院校名称相关数据。',{icon: 5});
+                }
+            }
+        });
+
+        // 查询院校下的所有专业
+        $('.select-btn').on('click',function(){
+            var km = $('.school-km').find('select').val();
+            var pc = $('.school-pc').find('select').val();
+            var year = $('.school-year').find('select').val();
+            var area = -1/*$('#school-addr').val()*/;
+            var yxname = $('#school-name').val();
+            var dat = {};
+            if(km == -1 || yxname == -1){
+                layer.alert('科目和院校名称为必选项！');
+                $('#roe-table').find('tbody').html('');
+                return;
+            }
+            if(pc == -1 && year == -1 && area == -1 ){
+                dat = {'km' : km,'yxname' : yxname};
+            }else if(pc != -1 && year == -1 && area == -1){
+                dat = {'km' : km,'yxname' : yxname,'pc' : pc};
+            }else if(pc == -1 && year == -1 && area != -1){
+                dat = {'km' : km,'yxname' : yxname,'area' : area};
+            }else if(pc == -1 && year != -1 && area == -1){
+                dat = {'km' : km,'yxname' : yxname,'year' : year};
+            }else if(pc != -1 && year != -1 && area == -1){
+                dat = {'km' : km,'yxname' : yxname,'pc' : pc,'year' : year};
+            }else if(pc != -1 && year != -1 && area != -1){
+                dat = {'km' : km,'yxname' : yxname,'pc' : pc,'year' : year,'area' : area};
+            }else if(pc != -1 && year == -1 && area != -1){
+                dat = {'km' : km,'yxname' : yxname,'pc' : pc,'area' : area};
+            }else if(pc == -1 && year != -1 && area != -1){
+                dat = {'km' : km,'yxname' : yxname,'year' : year,'area' : area};
+            }
+
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/schoolZysQuery','POST',dat,zyQuery);
+            function zyQuery(data){
+                var html = '';
+                if(data.ret_code == 1000){
+                    for(var i=0; i<data.total_lines; i++){
+                        html += '<tr>\
+                                    <td class="roecheck"><div><label><input type="checkbox" class="compare">对比</label></div></td>\
+                                    <td><a>'+data.data[i].zyname+'</a></td>\
+                                    <td>'+data.data[i].fc+'</td>\
+                                    <td>'+tdmc(data.data[i].fsmin)+'</td>\
+                                    <td>'+data.data[i].pc+'</td>\
+                                    <td>'+data.data[i].kl+'</td>\
+                                    </tr>';
+                                    // <td><a target="_blank" href="<?php echo arU('Index/professionalSelect'); ?>">'+data.data[i].zyname+'</a></td>\
+                                    // <td>'+data.data[i].year+'</td>\
+
+                    }
+                    $('#roe-table').find('tbody').html(html);
+                    $(".table-tr tbody tr").filter(":odd").css("background-color",'#eee');
+                    $(".table-tr td").css("border", "1px solid #ddd");
+
+                    //$('.compare').click(function(){};);
+                }else{
+                    $('#roe-table').find('tbody').html('');
+                    layer.alert('很抱歉！没有查询到相关数据。',{icon: 5});
+                }
+            }
+        });
+
+        // 展开-收缩专业对比栏
+        $('.bottom-menu').click(function(){
+            $('.contrast').slideToggle();
+            if($('.contrast').attr('data-off') != 'on'){
+                $('.bottom-menu i').attr('class','fa fa-minus-square mr5');
+                $('.bottom-menu span').text('收缩');
+                $('.contrast').attr('data-off','on');
+            }else{
+                $('.bottom-menu i').attr('class','fa fa-plus-square mr5');
+                $('.bottom-menu span').text('展开');
+                $('.contrast').attr('data-off','');
+            }
+        });
+
+        var falg = 0; //用于判断是否超过最多3条对比信息的记录
+        var falgCount = 0; // 自定义数据，用于同步向对比栏中添加删除数据
+
+        // 向对比栏添加数据
+        $('#roe-table').find('tbody').on('change', 'input.compare', function(event) {
+
+            if(this.checked){
+                if(falg>2){
+                    layer.alert('很抱歉！最多只能选择3个专业做对比。');
+                    this.checked = false;
+                    return;
+                }
+                falg++;
+                falgCount++;
+                if(falg >= 2){
+                    $('.roe-duibi').css('display','block');
+                }
+                $(this).attr('falg',falgCount);
+                var yxname = $('#school-name').val();
+                $('.contrast').css('display','block');
+                $('.bottom-menu').css('display','block');
+                $('.bottom-menu i').attr('class','fa fa-minus-square mr5');
+                $('.bottom-menu span').text('收缩');
+                var str = yxname + '-' + $(this).parents('td').next().text() + '-' + $(this).parents('td').nextAll().eq(-3).text() + '-'+$(this).parents('td').nextAll().eq(-2).text() + '-' +$(this).parents('td').nextAll().eq(-1).text();
+
+                if($('.roe-cont').find('span').length >= 1){
+                    for(var i=0; i<$('.roe-cont').find('span').length; i++){
+                        if($('.roe-cont').find('span').eq(i).text() == str){
+                            $('.roe-cont').find('span').eq(i).parent().attr('falg',falgCount);
+                            falg--;
+                            return;
+                        }
+                    }
+                }
+
+                /*if(document.querySelectorAll('.roespan').length>=1){
+                    for(var i=0; i<document.querySelectorAll('.roespan').length; i++){
+                        if(document.querySelectorAll('.roespan')[i].innerHTML == str){
+                            document.querySelectorAll('.roespan')[i].parentNode.setAttribute('falg', falgCount);
+                            falg--;
+                            return;
+                        }
+                    }
+                }*/
+
+                $('.roe-cont').append('<div falg="'+ falgCount +'">\
+                                            <span class="roespan">'+str+'</span>\
+                                            <a href="javascript:;">删除</a>\
+                                        </div>');
+            }else{
+                var that = $(this)
+                $('.roe-cont').find('div').each(function(index, el) {
+                    if($(this).attr('falg') == that.attr('falg')){
+                        $(this).remove();
+                    }
+                });
+                $(this).removeAttr('falg');
+                falg--;
+                if(falg == 0){
+                    $('.bottom-menu').css('display','none');
+                    $('.roe-duibi').css('display','none');
+                }
+                if(falg < 2){
+                    $('.roe-duibi').css('display','none');
+                }
+            };
+        });
+
+        // 点击删除按钮删除本条对比信息
+        $('.roe-cont').on('click', 'a', function(event) {
+            var that = $(this);
+            $('input.compare').filter(function(){
+                return $(this).attr('falg') == that.parent('div').attr('falg');
+            }).removeProp('checked').removeAttr('falg');
+            $(this).parent('div').remove();
+            falg--;
+            if(falg == 0){
+                $('.bottom-menu').css('display','none');
+                $('.roe-duibi').css('display','none');
+            }
+            if(falg < 2){
+                $('.roe-duibi').css('display','none');
+            }
+        });
+
+        // 查看对比结果
+        $('.roe-duibi').on('click', 'a', function(event) {
+            var reg = /^([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)-([\u4e00-\u9fa5]+)-(\d+)$/;
+
+            var array = [];
+            $('.roespan').each(function(index, el) {
+                var str = $(this).text().replace(reg,function($0,$1,$2,$3,$4,$5){
+                    array.push([$1,$2,$4]);
+                });
+            });
+
+            $.cookie('roezydb',array.join(','));
+            window.open('<?php echo arU('User/professional'); ?>','_blank');
+        });
+	});
+</script>

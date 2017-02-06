@@ -1,0 +1,45 @@
+<div class="left case-yb auto">
+    <div class="ml20 title-border-yb">
+        <div class="case-title-yb">
+            <i class="fa fa-tasks"><span class="ml10"></span></i>
+        </div>
+        <div class="mb20">
+            <div class="mt10 ml20 mr20 pb10 case-content-yb">
+                <div class="tac">
+                    <h3 class="title-name-yb"><?php echo $art['title'];?></h3>
+                    <p>发布日期：<?php echo date('Y-m-d H:i',$art['ctime']);?></p>
+                </div>
+                <div class="case-img-yb tac">
+                  <?php if($art['galleryUrl']['url']):?> <img src="<?php echo $art['galleryUrl']['url'];?>"><?php endif;?>
+                </div>
+                <div class="mt20 text-i2em">
+                    <?php echo $art['content'];?>
+                </div>
+            </div>
+        </div>
+       <!--  <div class="case-bar-yb mt20 mb20"></div>
+        <div class="ml40 article-yb">上一篇：<a href="">区域定位西安科技大学</a></div>
+        <div class="case-img-yb tac mt20 mb20">
+            <a href="<?php echo arU('User/simulationSystemOne'); ?>">
+                <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/ad1.png" width="646px" height="100px">
+            </a>
+        </div> -->
+    </div>
+</div>
+<script type="text/javascript">
+    var menuName,menuClass;
+    $(document).ready(function(){
+        if(localStorage.getItem('menuName') != "" && localStorage.getItem('menuClass') != ""){
+            menuName=localStorage.getItem('menuName');
+            $('.case-title-yb i span').text(menuName+'-详情');
+            $('.menuName-yb').text(menuName);
+
+            menuClass=localStorage.getItem('menuClass');
+            $('.menu-border-yb ul li').find('a').each(function(){
+                if($(this).attr('class') == menuClass){
+                    $(this).children().addClass('active-yb');
+                }
+            });
+        }
+    });
+</script>

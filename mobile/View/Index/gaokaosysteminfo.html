@@ -1,0 +1,164 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">高考模拟填报</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="moni center-block">
+                <div class="system-title clearfix">
+                    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;高考模拟填报系统</h2>
+                    <ul class="hmenu">
+                        <li><b>1</b>输入高考成绩</li>
+                        <li class="selected"><b>2</b>选择填报批次</li>
+                        <li><b>3</b>选择院校专业</li>
+                        <li><b>4</b>生成模拟志愿表</li>
+                    </ul>
+                </div>
+                <hr class="fgx">
+                <div class="">
+                    <div class="bge-bzh row clearfix">
+                        <div class="col-xs-12 xiugai">
+                            <span>您的高考成绩</span> 科类：
+                            <span class="wenke"><?php echo arRequest('km'); ?></span>总分：
+                            <span class="wenke "><?php echo arRequest('score'); ?></span>
+                            <span class=""></span>
+                        </div>
+                        <a class="col-xs-12 text-center" href="javascript:history.go(-1);"><i class="fa fa-wrench"></i>&nbsp;修改成绩</a>
+                    </div>
+                </div>
+                <div class="bdr clearfix inputscore">
+                    <h4 class="pl10">
+                        <span class="fa-stack fa-lg fs14px-bzh">
+                            <i class="fa fa-square fa-stack-2x fc3-bzh"></i>
+                            <i class="fa fa-terminal fa-stack-1x fa-inverse "></i>
+                        </span>&nbsp;
+                        <span class="vam-bzh">选择模拟填报批次 </span>
+                        <a id="imgtips" class="btn btn-xs btn-default pull-right">
+                            <img src="<?php echo arCfg('PATH.PUBLIC')?>img/imgtips.png" width="24" height="24"/>
+                        </a>
+                    </h4>
+                    <div class="fs12px-bzh alert alert-warning texttip">
+                        <b class="fs14px-bzh"><i class="fa fa-info-circle"></i>&nbsp;重要提示：</b>
+                        <p>1、本系统提供高考志愿填报智能模拟功能，不等同于实际的网上填报志愿，仅作志愿填报参考；</p>
+                        <p>2、本系统依据高校历年录取数据，协助考生筛选学校并科学填报志愿，但我们不对实际录取结果提供担保，建议考生在填报志愿时，结合本系统的推荐，再进一步咨询相关高校，以完善志愿表；</p>
+                        <p>3、本系统推荐的专业，依据的是历年录取数据，在正式填报时，以高校公布的最新招生专业为准；</p>
+                        <p>4、您正在使用的是四川版，提供“本科第一批，本科第二批，专科第一批，专科第二批”4个批次的志愿智能模拟功能。您可以按系统的重点填报提示选择适合自己的批次模拟，也可直接选择自己关注的批次模拟；</p>
+                        <p>5、<a class="fc2-bzh" target="_blank" href="#">志愿填报智能模拟系统使用指南</a></p>
+                    </div>
+                </div>
+                <div class="fillin step1">
+                    <ul>
+                        <li><a href="javascript:" class="btn btn-warning" id="no-open">提前批</a>提前批填报院校</li>
+                        <li class="" id="tbzy-tip"><a href="javascript:" class="btn">重点填报</a>普通类第一批本科</li>
+                        <li><a href="javascript:" class="btn" id="bx1">备选填报</a>普通类第二批本科</li>
+                        <li><a href="javascript:" class="btn" id="bx3">备选填报</a>普通类第一批（专科）</li>
+                        <li><a href="javascript:" class="btn" id="bx4">备选填报</a>普通类第二批（专科）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        var score = "<?php echo arRequest('score'); ?>",
+            km = kms("<?php echo arRequest('km'); ?>");
+
+        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/pcinfo','POST',{score: score,km:km,isgk:1},pcinfo);
+
+        function pcinfo(dat){
+            if (dat.ret_code == 1000) {
+                seclect(dat.data);
+            }else{
+                layer.open({
+                    content: dat.error_msg,
+                    time: 1.5
+                });
+                $('.fillin li').find('a').text('无效填报').removeClass('btn-warning').addClass('btn-default').css('color','#0078D7').tap(function(){
+                    layerlt('你的分数不够本批次，无法点击选择！',['重新选择','取消'],yes);
+                    function yes(){layer.closeAll();};
+                })
+            }
+        }
+
+        function seclect(data){
+            var cat = 0;
+            for (var i = 0; i < data.length; i++) {
+                if (data[i].is_disabled == 1) {
+                    cat += 1;
+                }
+            }
+            for (var i = 0; i < data.length; i++) {
+                pd(data[i].pcnumber,data[i]);
+            }
+
+            function pd(num,obj){
+                if (num != 0) {
+                    if (obj.is_disabled == 0) {
+                        if (obj.is_zd == 1 && obj.is_bx == 0) {
+                            $('.fillin li').eq(num).append('<span class="badge" style="margin-left: .1rem">推荐</span>').find('a').text('重点填报').addClass('btn-primary').data('value',num).tap(function(){
+                                layerlt('您马上进入志愿填报，请谨慎填写!',['马上使用','重新选择'],yes);
+                                var pc = $(this).data('value');
+                                function yes(){
+                                    window.location.href="<?php echo arU('Index/gaokaomoni') ?>?score="+score+"&km="+km+"&pc="+pc+"&ms=zd";
+                                };
+                            });
+                        }else if(obj.is_zd == 0 && obj.is_bx == 1){
+                            $('.fillin li').eq(num).find('a').text('备选填报'+(num-cat)).addClass('btn-info').data('value',num).tap(function(){
+                                layerlt('您马上进入志愿填报，请谨慎填写!',['马上使用','重新选择'],yes);
+                                var pc = $(this).data('value');
+                                function yes(){
+                                    window.location.href="<?php echo arU('Index/gaokaomoni') ?>?score="+score+"&km="+km+"&pc="+pc+"&ms=bx";
+                                };
+                            });
+                        }
+                    }else{
+                        $('.fillin li').eq(num).find('a').text('无效填报').addClass('btn-default').css('color','#0078D7').tap(function(){
+                            layerlt('你的分数不够本批次，无法点击选择！',['重新选择','取消'],yes);
+                            function yes(){layer.closeAll();};
+                        });
+                    }
+                }else{
+                    // $('.fillin li').eq(0).find('a').text('尚未开启').tap(function(){
+                    //     layerlt('此批次院校填报尚未开启，您不能填报次批次！',['重新选择','取消'],yes);
+                    //     function yes(){layer.closeAll();};
+                    // });
+                    if(obj.pcmark == 'tqp'){
+                        $('.fillin li').eq(0).find('a').text('提前批').data('value',0).tap(function(){
+                            layerlt('武警，军校，公安，司法，国防生，免费师范生，小语种，港校等特色院校及专业可以选择提前批！',['马上使用','重新选择'],yes);
+                            var pc = $(this).data('value');
+                            function yes(){
+                                window.location.href="<?php echo arU('Index/tqSimulation') ?>?score="+score+"&km="+km+"&pc="+pc+"&tp=gk";
+                            }
+                        });
+                    }
+                }
+            }
+        }
+
+        function layerlt(msg,btn,yescallback,nocallback){
+            layer.open({
+                title:['信息','color:#0078D7;font-size:18px;font-weight:600;padding-left: 10px;'],
+                // style:'background:#eee',
+                shadeClose:false,
+                className:'tips-container',
+                content: '<div class="m-content clearfix" style="margin: 10px auto">\
+                            <i class="fa fa-exclamation-circle fl" style="color:orangered;font-size: 20px;width: 10%;"></i>\
+                            <div class="fl" style="width: 88%;">'+msg+'</div>\
+                          </div>',
+                btn:btn,
+                yes: function(index){
+                    yescallback();
+                },
+                no: function(){
+                    layer.closeAll();
+                }
+            });
+        }
+        //填报提示
+        $('.texttip').hide();
+        $('#imgtips').bind('click',function(){
+            $('.texttip').toggle();
+        });
+    });
+</script>

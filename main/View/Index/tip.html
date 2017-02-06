@@ -1,0 +1,56 @@
+<div id="buyTip">
+<p>支付方式：</p>
+<p>1、支付宝（支付成功后，系统自动升级为VIP）。</p>
+<p>2、公司购买。购买地址：四川成都人民南路四段桐梓林北路2号凯莱帝景C座27B（地铁一号线桐梓林站B口下前行50米）。</p>
+<p>3、货到付款；请致电客户400-0668208告知详细地址和联系方式。</p>
+<p>4、银行转账；
+ 请转账到工商银行成都滨江支行营业室（开户人：章博&nbsp;6222 0244 0206 1965 087），然后致电400-0668208，客户人员核实支付款到账后，十分钟内会发送圆梦卡账号和密码给您。</p>
+<!-- <p class="pay"><a target="_blank" href="<?php echo arU('User/tobeVip');?>">支付宝支付</a><a class="wxpay ml20">微信支付</a></p> -->
+<div class="tac">
+    <label>选择支付方式：</label>
+    <a target="_blank" href="<?php echo arU('User/tobeVip');?>" title="支付宝支付" class="paybk">
+        <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/zfb.png" height="45px" class='zimg'>
+    </a>
+    <a class="paybk wxpay ml10" title="微信支付">
+        <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/wxzf.jpg" style="height:45px;" class="zimg">
+        微信支付
+    </a>
+</div>
+</div>
+<div class="clear tac paypage">
+    <h4 class="pt5">请用“微信扫一扫”扫码支付</h4>
+    <img id="payqrimg" src="<?php echo arCfg('PATH.PUBLIC'); ?>img/qrcode.png" style="width:100%;height:100%;"/>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('#buyTip').height($(window).height()-372-40);
+        $(window).resize(function(event) {
+            $('#buyTip').height($(window).height()-372-40);
+        });
+        var hasGetQrimg = false;
+        $('.wxpay').click(function(){
+            if (hasGetQrimg) {
+                CaptruePage('#id','100px','100px','25%','55%','.paypage',false,'');
+            } else {
+                var lid = layer.load();
+                $.get('<?php echo arU('Weixinpay/pay'); ?>', function(res) {
+                    window.setInterval(function () {
+                        $.get('<?php echo arU('api/checkPayOk'); ?>', function (res) {
+                            if (res.success == '1') {
+                                window.location.href = '<?php echo arU('Index/paySuccess'); ?>';
+                            }
+                        }, 'json');
+                    }, 5000);
+                    if (res.success == '1') {
+                        hasGetQrimg = true;
+                        $('#payqrimg').attr('src', res.ret_msg).show();
+                        CaptruePage('#id','100px','100px','25%','50%','.paypage',false,'');
+                    } else {
+                        layer.alert(res.ret_msg);
+                    }
+                    layer.close(lid);
+                }, 'json');
+            }
+        });
+    });
+</script>

@@ -1,0 +1,60 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading clearfix"><span>序列号管理</span>
+
+     <a id="seriale-add" href="<?php echo arU('serialAdd'); ?>" class="btn btn-success pull-right">添加序列号</a>
+  </div>
+ <div id="a" style="border-bottom:1px solid #ccc; padding:10px;">
+
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>序列号</th>
+            <th>剩余次数</th>
+            <th>类型</th>
+            <th>使用状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($serials as $serial) :
+          ?>
+          <tr>
+            <td><?php echo $serial['sid']; ?></td>
+            <td><?php echo $serial['num']; ?></td>
+            <td><?php echo $serial['times']; ?></td>
+            <td><?php arEcho($serial['stype'], serialsModel::$STYPE_MAPS); ?></td>
+            <td><?php arEcho($serial['status'], serialsModel::$STATUS_MAPS); ?></td>
+            <td value="<?php echo $serial['sid']; ?>">
+              <a href="<?php echo arU('serialEdit', array('sid' => $serial['sid'])); ?>" type="button" class="btn ad-edit">编辑</a>
+              <button type="button" onclick="delserial(<?php echo $serial['sid']; ?>)" class="btn ad-delete">删除</button>
+            </td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+// 删除专家
+function delserial(sid)
+{
+    layer.confirm('确定要删除吗', function (){
+        window.loserialion.href = '<?php echo arU('serialDel'); ?>/sid/' + sid;
+    });
+
+}
+</script>
+

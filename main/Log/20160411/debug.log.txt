@@ -1,0 +1,440 @@
+------2016-04-11 02:16:58 1460341018------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 02:24:12 1460341452------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:13:42 1460344422------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:23:29 1460345009------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:32:53 1460345573------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:35:14 1460345714------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:36:31 1460345791------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:36:37 1460345797------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:36:42 1460345802------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:36:57 1460345817------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:37:10 1460345830------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 03:38:14 1460345894------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 04:00:40 1460347240------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 07:31:52 1460359912------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:01:55 1460361715------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:02:48 1460361768------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:02:50 1460361770------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:12:23 1460362343------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:33:15 1460363595------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:33:17 1460363597------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 08:33:25 1460363605------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:13:40 1460366020------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:20:44 1460366444------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:20:53 1460366453------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:20:55 1460366455------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:21:16 1460366476------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:21:20 1460366480------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:21:27 1460366487------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:21:36 1460366496------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:21:40 1460366500------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:22:00 1460366520------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:33:13 1460367193------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:34:01 1460367241------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:35:38 1460367338------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:35:41 1460367341------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:36:55 1460367415------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:37:01 1460367421------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:37:03 1460367423------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:37:07 1460367427------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:52:45 1460368365------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:53:15 1460368395------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:56:08 1460368568------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 09:57:50 1460368670------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:07:08 1460369228------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:07:12 1460369232------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:07:55 1460369275------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:17:26 1460369846------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:19:35 1460369975------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:19:46 1460369986------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:19:46 1460369986------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:19:47 1460369987------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:19:51 1460369991------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:21:04 1460370064------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:23:26 1460370206------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-11 10:24:31 1460370271------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : PublicController does not exist !<br />
+  Fatal error on line 128 in file E:\\wamp\\www\\xz\\arphp.php, PHP 5.4.16 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)

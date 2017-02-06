@@ -1,0 +1,46 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">购买圆梦卡</span>
+    </header>
+    <section class="content">
+        <div class="main">
+            <div class="xzlh-userhead">
+                <div class="xzlh-head">
+                    <span>
+                         <img src="<?php echo arCfg('PATH.GPUBLIC') . 'img/kaosheng' . $userSessInfo['kaosheng']['gender']; ?>.png" alt="头像">
+                    </span>
+                </div>
+            </div>
+            <div class="container">
+                <p class="xzws-portrait">Hi~ <?php arEcho($userinfo['phone'], $userinfo['truename']);?><a href="" style="color: #e84c33;margin-left: .3rem;font-size: .3rem">查看VIP特权</a></p>
+
+                <div class="vip-upgrade-con">
+                    <div class="list">
+                        <div class="title">升级账号</div>
+                        <div class="con"><?php arEcho($userinfo['phone'], $userinfo['truename']);?></div>
+                    </div>
+                    <div class="list">
+                        <div class="title">支付方式</div>
+                        <div class="con">
+                            <img src="<?php echo arCfg('PATH.PUBLIC')?>img/weixin.png" style="margin-top:-.35rem;height: 1.05rem">
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="title">支付金额</div>
+                        <div class="con "><b>360.00</b> 元</div>
+                    </div>
+                    <div class="form-box">
+                        <a href="<?php echo arU('WxJsapi/pay'); ?>" type="button" class="btn btn-info" style="color: white;background: #0078D7;">去支付</a>
+                        <button type="button" class="btn btn-empty btn-block" id="backUsercenter">返回个人中心</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        $('#backUsercenter').tap(function(){
+            window.location.href="<?php echo arU('User/index') ?>"
+        })
+    </script>

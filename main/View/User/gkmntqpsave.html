@@ -1,0 +1,173 @@
+<!-- 选择院校专业 -->
+<div id="print">
+    <div class="system-title pl20 pt10 pb10 clearfix">
+        <h2 class="left"><i class="fa fa-gear"></i>&nbsp;四川高考志愿智能填报系统</h2>
+        <ul class="hmenu right">
+            <li>输入真实高考成绩</li>
+            <li>选择填报批次</li>
+            <li>选择院校专业</li>
+            <li class="selected">生成模拟志愿表</li>
+        </ul>
+    </div>
+    <hr>
+    <h4 class="tac fwb fc8-bzh mt20 mb20">我的志愿单--（<span class="scType">提前批</span>）</h4>
+    <div class="bge-bzh pp10-bzh ml20 mr20 mb10">
+        <span class="fwb mr20">本志愿表单使用您的真实高考成绩</span>科类：<span class="fc6-bzh mr20 s-subject"></span>总分：<span class="fc6-bzh mr20 s-score"></span><span class="fc6-bzh s-rank"></span>
+    </div>
+    <table style="width: 695px;" class="tac table-bordered auto fs14px-bzh xzlh-tqpform">
+        <thead>
+            <tr class="fwb">
+                <th style="width: 50px;"></th>
+                <th style="width: 270px;">学校<i class="fa fa-question-circle quest ml10 mr10 quest-s"></i><span class="mfc">志愿知识</span></th>
+                <th style="width: 270px;">专业<i class="fa fa-question-circle quest ml10 mr10 quest-p"></i><span class="mfc">志愿知识</span></th>
+                <th style="width: 80px;">是否服从<br>专业调配</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+<div class="iback mt20 mb20 ml20 tac">
+    <a href="<?php echo arU('User/simulationSystemTwo'); ?>" title="返回" class="zyBack">返回</a>
+    <!-- <a title="修改" class="zyUpdate ml20">修改</a> -->
+    <a title="打印" class="zyPrint ml20">打印</a>
+    <a title="保存" class="zySave ml20">保存</a>
+</div>
+<!-- 保存成功提示 -->
+<div id="z-order" class="t-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml50 clearfix">
+         <i class="fa fa-smile-o ml20 mr10 left"></i>
+         <div class="left conts">恭喜您，保存志愿表单成功！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a href="<?php echo arU('User/myVolunteerForm'); ?>" class="pb5 pt5 right"><div class="mr10">查看志愿表单</div></a>
+         <a href="<?php echo arU('User/gkmntqp'); ?>" class="pb5 pt5 right"><div class="mr10">继续填报</div></a>
+     </div>
+</div>
+
+<script type="text/javascript">
+    $(function(){
+        var score = "<?php echo arRequest('score'); ?>",
+            km = "<?php echo arRequest('km'); ?>",
+            pc = "<?php echo arRequest('pc'); ?>",
+            zid = "<?php echo arRequest('zid'); ?>",
+            tqpform = null,
+            html = '';
+        $('.s-subject').text(kmnum(km));
+        $('.s-score').text(score);
+
+        if (zid) {
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/getUserZy?', 'POST', "zid="+zid, function(data){
+                if (data.ret_code == 1000) {
+                    tqpform = JSON.parse(data.data.param);
+                    tqpdata(tqpform.formData);
+                }
+            });
+            $('.zySave').hide();
+        }else{
+            tqpform = JSON.parse( $.cookie('tqpGkzyform') );
+            tqpdata(tqpform.formData);
+        }
+        function tqpdata(tqpform){
+            for (var tqp in tqpform) {
+                html += '<tr>\
+                    <td>'+tqp+'<br>志<br>愿</td>\
+                    <td class="item-bzh pt10 vat-bzh">\
+                        <span class="schoolMes" value="A" >\
+                            <ul class="left tal jgz">\
+                                <li class="">学校名称：<span class="c-name fwb" value="'+tqp+'">'+ tqpform[tqp].schoolname +'</span></li>\
+                                <li class="mt10">学校所在地：<span class="scarea">'+ tqpform[tqp].scarea +'</span></li>\
+                                <li class="xbj clearfix mt10">历年录取：<span><a href="javascript:" class="sc-detail" target="_blank" data-sname='+tqpform[tqp].schoolname+'><i class="fa fa-bar-chart"></i></a></span></li>\
+                                <li class="mt10" style="display:none;">投档概率：<span class="verifica-sum">'+ tqpform[tqp].odds +'%</span></li>\
+                            </ul>\
+                        </span>\
+                    </td>\
+                    <td class="item-bzh">\
+                        <ul class="zymk" value="'+tqp+'">\
+                            <li class="mt10">\
+                                <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1">'+ tqpform[tqp].zylist[0] +'</span></span>\
+                            </li>\
+                            <li class="mt10 clearfloat">\
+                                <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2">'+ tqpform[tqp].zylist[1] +'</span></span>\
+                            </li>\
+                            <li class="mt10 clearfloat">\
+                                <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3">'+ tqpform[tqp].zylist[2] +'</span></span>\
+                            </li>\
+                            <li class="mt10 clearfloat">\
+                                <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4">'+ tqpform[tqp].zylist[3] +'</span></span>\
+                            </li>\
+                            <li class="mt10 clearfloat">\
+                                <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5">'+ tqpform[tqp].zylist[4] +'</span></span>\
+                            </li>\
+                            <li class="mt10 mb10 clearfloat">\
+                                <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6">'+ tqpform[tqp].zylist[5] +'</span></span>\
+                            </li>\
+                        </ul>\
+                    </td>\
+                    <td>\
+                        <span>'+ tqpform[tqp].zytp +'</span>\
+                    </td>\
+                </tr>';
+            }
+            $('.xzlh-tqpform').find('tbody').html( html );
+            // 判断是否VIP
+            var vip = false;
+            $('.sc-detail').click(function(){
+                var reg = /^([\u4e00-\u9fa5]+)(\([\u4e00-\u9fa5]+\))*$/g;
+                //var reg = /\([\u4e00-\u9fa5]+\)/g;
+                var sname = $(this).data('sname');
+                var _this = $(this);
+                if (sname == '') {
+                    return;
+                }
+                //sname = sname.replace(reg,'');
+                sname = sname.replace(reg, function($0,$1){
+                    return $1;
+                });
+                if (!vip) {
+                    ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/ifVip', 'POST', '', function(data){
+                        if (data.ret_msg == '你是VIP用户') {
+                            vip = true;
+                            window.open('<?php echo arU("Index/schoolSelectInfo?name='+sname+'"); ?>','_blank');
+                            //_this.attr('href','<?php echo arU("Index/schoolSelectInfo?name='+sname+'"); ?>');
+                        }else{
+                            alert('VIP用户才能查看');
+                        }
+                    });
+                }else{
+                    window.open('<?php echo arU("Index/schoolSelectInfo?name='+sname+'"); ?>','_blank');
+                }
+            });
+        }
+        // 保存自愿表单
+        $('.zySave').click(function(){
+            var dat = {
+                pc: 0,
+                km:km,
+                score: score,
+                ztype: 1,
+                param: $.cookie('tqpGkzyform')
+            };
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/saveUserZy', 'POST', dat, tqpsave);
+        });
+
+        function tqpsave(data){
+            if (data.success == 1) {
+                layer.open({
+                    type: 1,
+                    title: false,
+                    shade: 0.6,
+                    closeBtn: 2,
+                    scrollbar: false,
+                    area: ['400px', '170px'],
+                    content: $('#z-order'),
+                });
+            }
+        }
+
+        //打印
+        $('.zyPrint').click(function(){
+            $('#print').jqprint();
+        });
+    });
+</script>

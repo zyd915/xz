@@ -1,0 +1,44 @@
+<div id="page">
+<header class="header">
+    <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+    <span class="page-tit">讲座报名信息</span>
+</header>
+<section class="content">
+    <div class="main clearfix">
+        <div class="container" >
+            <div class="xzws-bminfo">
+                <p><span><?php echo $user['name'];?></span>，性别：<span><?php if ($user['gender'] == 0): ?>男<?php else:?>女<?php endif;?></span><br>就读学校：<span><?php echo $user['schoolname'];?></span><br></p>
+            </div>
+            <div class="xzws-bmjz">
+                <h4 class="bmjz-tit">已报名的讲座<a href="<?php echo arU('Index/offlineLecture')?>" class="btn btn-xs btn-primary fr">继续报名</a></h4>
+                <ul>
+                    <?php foreach ($chair as $chair): ?>
+                    <li class="clearfix">
+                        <i class="fa fa-arrow-right"></i>
+                        <a href="javascript:;"><?php echo $chair['chair']; ?></a>
+                        <span class="fr">
+                             <a href="<?php echo arU('Index/offlineLectureDetail',array('aid' => $chair['xid'])) ?>"><button class="btn-xs btn-info btnLook">查看</button></a>
+                             <a onclick="javascript:deletejz('<?php echo $chair['aid'];?>')"><button class="btn-xs btn-warning btnDel">取消</button></a>
+                        </span>
+                        <p class="text-center" style="background:#CCE6A3;margin-top: .1rem;margin-bottom: .05rem;color:#0078D7">已订座位数:&nbsp;<b style="color:orangered"><?php echo $chair['seating']?></b>&nbsp;个</p>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function deletejz(aid){
+            var index = layer.open({
+                content: '确认取消报名吗?',
+                btn: ['<div style="color:#0078D7">取消</div>','<div style="color:#0078D7">确认</div>'],
+                yes:function(){
+                    layer.close(index);
+                },
+                no:function(){
+                   location.href="<?php echo arU('Index/offlineLectureDelete') ?>/aid/" +aid;
+                }
+            })
+    }
+</script>

@@ -1,0 +1,19 @@
+<h3>修改客服</h3> <a id="cate-add" href="<?php echo arU('cListService');?>" class="btn btn-success pull-right">返回</a>
+<form role="form" action='<?php echo arU('cListManager',array('opt'=>'editing')); ?>' method='post'>
+  <div class="form-group">
+    <label for="exampleInputEmail1">客服名称</label>
+    <input type="hidden" name='c_sid'value="<?php echo $edit['c_sid']; ?>">
+    <input type="text" class="form-control" name='c_sname' value="<?php echo $edit['c_sname']; ?>">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">客服号码</label>
+    <input type="text" class="form-control" name='c_snumber'value="<?php echo $edit['c_snumber']; ?>">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">客服号类型</label>
+     <select name="c_stype">
+     <option value="0" <?php if($edit['c_stype']==0){echo 'selected="selected" ';}?>>QQ </option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-default">添加</button>
+</form>

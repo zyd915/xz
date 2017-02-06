@@ -1,0 +1,181 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="examinee-title">
+			<h2 class="left">艺体数据库查询</h2>
+			<div class="line right mt10"></div>
+		</div>
+	</div>
+	<div class="content-detail clearfloat">
+		<ul class="left mt20">
+			<li>
+				<div class="cards">
+					<label class="tar">适用省市</label>
+					<span class="ml40">四川省</span>
+				</div>
+			</li>
+			<!-- <li>
+				 <div class="cards mt10">
+					<label for="cards" class="tar">使用说明</label>
+					<span id="cards" class="ml40">1、普通类考生同时支持录取数据查询和智能模拟推荐<br/></span>
+					<label for="sdd" class="tar"></label>
+					<span id="sdd" class="ml40">2、艺体类考生仅支持录取数据查询</span>
+				</div>
+			</li> -->
+			<li>
+				<div class="yb-select yb-input-submit yb-input-text">
+					<ul class="left">
+						<li>
+							<div class="lists mt5 school-area">
+								<label for="school-area">院校所在地</label>
+								<select id="school-area" name="area">
+									<option selected="selected" value="-1">请选择</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<div class="lists mt5">
+								<label for="school-km">您的科类</label>
+								<select id="school-km">
+									<option selected="selected" value="-1">请选择</option>
+									<option value="全投">全投</option>
+									<option value="文化">文化</option>
+									<option value="专业">专业</option>
+									<option value="折算">折算</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<div class="lists mt5">
+								<label for="school-pc">您的批次</label>
+								<select id="school-pc">
+									<option selected="selected" value="-1">请选择</option>
+									<option value="本科">本科</option>
+									<option value="专科">专科</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<div class="lists mt5">
+								<label for="school-year">录取年份</label>
+								<select id="school-year">
+									<option selected="selected" value="-1">请选择</option>
+									<option value="2012">2012</option>
+									<option value="2013">2013</option>
+									<option value="2014">2014</option>
+								</select>
+							</div>
+						</li>
+						<li>
+							<div class="lists mt5">
+								<label for="school-name">院校名称</label>
+								<input type="text" id="school-name">
+							</div>
+						</li>
+						<li>
+							<div class="select-div mt10 mb20 tac">
+								<input id="roeSearch" type="submit" name="btn" class="select-btn mb20" value="查询" />
+							</div>
+						</li>
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="school-data">
+		<table id="school-data" class="table table-bordered tac fs14px-bzh mb0">
+			<thead>
+				<tr class="bge-bzh">
+					<th width="100px;">学校</th>
+					<th width="150px;">专业</th>
+					<th>批次</th>
+					<th>省份</th>
+					<th>年份</th>
+					<th>类别</th>
+					<th>投档分数</th>
+					<th>计划数</th>
+					<th>第一<br/>志愿<br/>录取<br/>人数</th>
+					<th>其他录<br/>取人数</th>
+				</tr>
+			</thead>
+			<tbody></tbody>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+	$(function(){
+		// 院校所在地
+		$.post('<?php echo AR_SERVER_PATH; ?>Api/provinceList', function(data) {
+	        addData(data, $('.school-area'), 'area');
+	    }, "json");
+
+		$('#roeSearch').on('click',function(){
+			var lb = $('#school-km').val(),
+				pc = $('#school-pc').val(),
+				area = $('#school-area').val(),
+				year = $('#school-year').val(),
+				sname = $('#school-name').val(),
+				dat = {},
+				seg = /^[\u4e00-\u9fa5]+$/;
+
+			if(!seg.test(sname)){
+				sname = -1;
+			}
+
+			if(lb == -1 && pc == -1 && area == -1 && year == -1 && sname == -1){
+				layer.alert('请选择相关查询条件。')
+				return;
+			}
+
+			function pd(str){
+				if(str!=-1){return str;}else{return '';}
+			}
+			dat = {
+				"lb":pd(lb),
+				"pc":pd(pc),
+				"area":pd(area),
+				"year":pd(year),
+				"sname":pd(sname)
+			};
+
+			ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/yitiScore','POST',dat,yitidata);
+			function yitidata(data){
+				if(data.ret_code == 1000){
+					var html = '';
+					for(var i=0; i<data.total_lines; i++){
+						html += '<tr>\
+									<td>'+data.data[i].sname+'</td>\
+									<td>'+data.data[i].zyname+'</td>\
+									<td>'+data.data[i].pc+'</td>\
+									<td>'+data.data[i].area+'</td>\
+									<td>'+data.data[i].year+'</td>\
+									<td>'+data.data[i].lb+'</td>\
+									<td>'+tdmc(data.data[i].tdfs)+'</td>\
+									<td>'+tdmc(data.data[i].jhs)+'</td>\
+									<td>'+tdmc(data.data[i].lqrs)+'</td>\
+									<td>'+tdmc(data.data[i].olqrs)+'</td>\
+								</tr>';
+					}
+					$('#school-data').find('tbody').html(html);
+					$("#school-data tbody tr").filter(":odd").css("background-color",'#eee');
+					trbgColor();
+					$('tr td').bind({
+						mousemove:function(){
+							$(this).parent().css('background-color','#FFF3E0');
+						},
+						mouseout:function(){
+							trbgColor();
+						}
+					});
+				}else{
+					$('#school-data').find('tbody').html('');
+					layer.alert('很抱歉！没有查询到相关数据，请更改条件后再查询。')
+				}
+			}
+		});
+	});
+	//table样式
+	function trbgColor(){
+		$('tr:odd td').parent().css('background-color','#fff');
+		$('tr:even td').parent().css('background-color','#eee');
+	}
+</script>

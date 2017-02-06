@@ -1,0 +1,39 @@
+<div class="panel-heading clearfix"><span>内容管理</span>
+    <a id="cate-add" href="<?php echo arU('setManager',array('opt'=>'add'));?>" class="btn btn-success pull-right">添加新内容</a>
+
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>名称</th>
+        <th>内容</th>
+        <th>备注</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($set as $set) :
+      ?>
+      <tr>
+        <td><?php echo $set['s_sid']; ?></td>
+        <td><?php echo $set['s_sname']; ?></td>
+        <td><?php echo $set['s_content']; ?></td>
+        <td><?php arEcho($set['s_remark'],SettingModel::$SITE_MAP);?></td>
+        <td value="<?php echo $set['s_sid']; ?>">
+          <button type="button" class="btn product-edit">编辑</button>
+          <button type="button" onclick="delSet(<?php echo $set['s_sid']; ?>)" class="btn product-delete">删除</button>
+        </td>
+      </tr>
+      <?php
+      endforeach;
+      ?>
+    </tbody>
+  </table>
+</div>
+<nav class="col-md-12 text-center">
+  <?php echo $page; ?>
+</nav>
+

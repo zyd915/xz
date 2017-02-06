@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=GB18030"/>
+	<title></title> 
+	<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.5.2/jquery.js" ></script> 
+	<link href="./demo.css" rel="stylesheet"/>
+	<link href="../css/order.css" rel="stylesheet"/>
+	<script type="text/javascript" src="../js/cookie.js" ></script> 
+	<script type="text/javascript" src="../js/jsorder.js" ></script> 
+	 </head>  
+<body>
+	<h1>JSORDER 案例</h1>
+	<h3>由<a href="http://www.wuzhi.me" target="_blank">eric_zyh</a>提供，目前版本为1.0beta不支持IE</h3> 
+	<table><tr><td colspan="3" align="left">案例一：我的菜单（点击菜名即可加入菜单）</td></tr><tr><td class="jsorderadd" id="no_1" price="12" jsordername="红烧豆腐">红烧豆腐 12元</td>
+	       <td class="jsorderadd" id="no_2" price="32" jsordername="毛血旺">毛血旺 32元</td>
+	       <td class="jsorderadd" id="no_3" price="18" jsordername="套餐:京酱肉丝+2米饭 18元">套餐:京酱肉丝+2米饭 18元</td></tr></table>  
+	<div id="result"></div>
+</body>
+</html> 
+<script>
+//jsorder配置
+$.fn.jsorder.defaults = {
+	staticname : 'jsorder',
+	jsorderclass : 'jsorder',
+	savecookie : true,
+	cookiename : 'jsorder',
+	numpre : 'no_',
+	jsorderpre : 'jsorder_',
+	jsorderspanpre : 'jsorderspan_',
+	pricefiled : 'price',
+	namefiled : 'jsordername',
+	leftdemo : '我的菜单',
+	subbuttom : '',
+	//addbuttom : 'a.jsorderadd', 
+	addbuttom : 'td.jsorderadd', 
+	nomessage : '你今天的食谱是还空的',
+	dosubmit : function(data) {$("#result").html("json内容："+JSON.stringify(data)).css('background','#e0e0e0');}
+};
+$("body").jsorder();</script>

@@ -1,0 +1,77 @@
+<div class="info"><h1>说明:导出保存院校相关 数据库，导入请选则正确Excle文件格式.xlsx,务必正确选择科目和批次，确保数据的完整正确</h1></div>
+<div>
+科目类别:<?php
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'km',
+            // 适配器数据 数组
+            'map' => DataYxModel::$kmMap,
+            // 选中的value selected = selected
+            'selected' => 0
+         )
+      );
+?>
+选择批次:<?php
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'pc',
+            // 适配器数据 数组
+            'map' => DataYxModel::$pcMap,
+            // 选中的value selected = selected
+            'selected' => 0
+         )
+      );
+?>
+</div>
+<div>
+    <button id="export">导出xlsx文件</button>
+    <br>
+    <br>
+    <br>
+    导入xlsx文件<input onchange="ajaxFileUpload()" type="file" id="inportFile" name="inportFile">
+</div>
+<div class="result">操作结果:</div>
+<script>
+$(function() {
+    $('#export').click(function () {
+        var cid = layer.confirm('确定要导出数据吗', function () {
+            layer.close(cid);
+            window.location.href = JSV.PATH_APP_SERVER + 'Data/export?pc='+$("[name='pc']").val()+'&km='+$("[name='km']").val();
+            layer.alert('导出成功');
+        });
+    });
+});
+
+// 上传
+function ajaxFileUpload(){
+    $.ajaxFileUpload(
+        {
+            url:'<?php echo arU('import'); ?>',
+            secureuri:false,
+            fileElementId:'inportFile',
+            dataType: 'json',
+            data:{name:'logan', id:'id','pc':$("[name='pc']").val(),'km':$("[name='km']").val()},
+            success: function (data, status)
+            {
+                layer.alert(data.ret_msg);
+                // if (data.ret_code == '1000') {
+
+                // }
+            },
+            error: function (data, status, e)
+            {
+                alert(e);
+            }
+        }
+    )
+
+}
+</script>

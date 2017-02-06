@@ -1,0 +1,105 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="o2o-title">
+			<h2 class="left">1对1专家咨询详情</h2>
+			<div class="line right mt10 mb30"></div>
+		</div>
+	</div>
+	<div class="mt20 mb20 clearfix clearfloat">
+		<ul class="tac lbul">
+			<li>
+				<div class="fjyj tac left">
+					<span>选择专家</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-user-plus"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<li>
+				<div class="fjyj tac left">
+					<span>预约咨询</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-clock-o"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<li>
+				<div class="fjyj tac selection left">
+					<span>订单付款</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-cc-visa"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<li>
+				<div class="fjyj tac left">
+					<span>专家1对1咨询</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-group"></i>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="o2o clearfix">
+		<div class="left ml10 mt20 mb20">
+			<div class="vip-header"><img src="<?php echo $yuyue['expert']['headpic'];?>"/></div>
+		</div>
+		<div class="left ml50 mr20 item expert-detail">
+			<p class="detail-font">
+				您选择了
+				<span><?php echo $yuyue['expert']['name'];?></span>
+				专家为您提供高考志愿填报咨询
+			</p>
+			<ul>
+				<li class="ml20">预约日期：<?php echo $yuyue['startdate']; ?>-<?php echo $yuyue['enddate']; ?><span></span></li>
+				<li class="ml20 mt10 mb10">通话时段：<?php echo $yuyue['ytime']; ?><span></span></li>
+				<li class="ml20 mt10 mb10">咨询问题：<?php echo $yuyue['theme']; ?><span></span></li>
+				<li class="ml20 mt10 mb10">其他问题：<?php echo $yuyue['otherinfo']; ?><span></span></li>
+				<li class="ml20 mt10 mb10">手机号码：<?php echo $yuyue['mobile']; ?><span></span></li>
+			</ul>
+		</div>
+	</div>
+	<div class="mt20 mr20">
+		<div class="dbg clearfix mb20">
+			<ul class="ml10 mr10">
+				<!-- <li>
+					<h2 class="fs18 fwb pt10 pb10"><i class="fa fa-hand-o-right mr10 orangei"></i>选择付款方式，进行付款</h2>
+					<div class="lbbg lbwt mb20">
+						<div class="ml20 mt20 mb20">
+							<label><i class="fa fa-asterisk mr5 redi"></i>付款方式：</label>
+							<span class="ml10">
+								<input type="radio">
+								<img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/zfb.png" class="ml10">
+							</span>
+							<span class="ml20">
+								<input type="radio">
+								<img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/wxzf.jpg" height="50px" class="ml10">
+							</span>
+						</div>
+					</div>
+				</li> -->
+				<li class="mt10 mb30">
+					<p class="detail-font">目前一对一专家咨询只支持现场付款，请继续点击确定完成专家咨询预约</p>
+				</li>
+				<li class="tac mb20">
+					<a href="<?php echo arU('User/expertDetailMessage'); ?>" class="tjan">确认付款</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	});
+</script>

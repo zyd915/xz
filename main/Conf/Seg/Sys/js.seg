@@ -1,0 +1,44 @@
+<script type="text/javascript">
+// 全局JS变量集合
+var JSV = {
+    // 公用路径
+    PATH_PUBLIC: "<?php echo arCfg('PATH.PUBLIC'); ?>",
+    // 服务地址
+    PATH_SERVER: "<?php echo AR_SERVER_PATH; ?>",
+    // 应用服务地址
+    PATH_APP_SERVER: "<?php echo arCfg('PATH.APP_SERVER_PATH'); ?>",
+    // 当前请求path
+    PATH_CURRENT: "<?php echo arU(''); ?>",
+    // SESSION
+    SESSION: "<?php echo session_id(); ?>",
+};
+</script>
+
+<?php
+// 批量 js 插入
+if (isset($jsInsertBundles)) :
+    foreach ($jsInsertBundles as $bundle) :
+        // APP 项目目录
+        $jsServerFile = arCfg('PATH.PUBLIC') . 'js/' . $bundle . '.js';
+        $jsFile = AR_APP_PATH . 'Public' . DS . 'js' . DS . $bundle . '.js';
+        if (!is_file($jsFile)) :
+            // 公共目录
+            $jsServerFile = arCfg('PATH.GPUBLIC') . 'js/' . $bundle . '.js';
+            $jsFile = AR_ROOT_PATH . 'Public' . DS . 'js' . DS . $bundle . '.js';
+            if (!is_file($jsFile)) :
+                continue;
+            endif;
+        endif;
+?>
+    <script src="<?php echo $jsServerFile; ?>" type="text/javascript"></script>
+<?php
+    endforeach;
+endif;
+    // 加载 js Seg
+if (isset($jsSeg)) :
+    foreach ($jsSeg as $seg) :
+        // 加载对应的seg文件
+        arSeg(array($seg => true));
+    endforeach;
+endif;
+?>

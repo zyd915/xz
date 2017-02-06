@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading clearfix"><span>专家管理</span>
+
+     <a id="cate-add" href="<?php echo arU('add'); ?>" class="btn btn-success pull-right">添加专家</a>
+  </div>
+ <div id="a" style="border-bottom:1px solid #ccc; padding:10px;">
+
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>专家姓名</th>
+            <th>头像</th>
+            <th>简介</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($experts as $expert) :
+          ?>
+          <tr>
+            <td><?php echo $expert['eid']; ?></td>
+            <td><?php echo $expert['name']; ?></td>
+            <td><img style="width:100px;width:100px;" src="<?php echo $expert['headpic']; ?>" /></td>
+            <td><?php echo $expert['shortdes']; ?></td>
+            <td value="<?php echo $expert['eid']; ?>">
+              <a href="<?php echo arU('edit', array('eid' => $expert['eid'])); ?>" type="button" class="btn ad-edit">编辑</a>
+              <button type="button" onclick="delZj(<?php echo $expert['eid']; ?>)" class="btn ad-delete">删除</button>
+            </td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+// 删除专家
+function delZj(eid)
+{
+    layer.confirm('确定要删除吗', function (){
+        window.location.href = '<?php echo arU('del'); ?>/eid/' + eid;
+    });
+
+}
+</script>
+

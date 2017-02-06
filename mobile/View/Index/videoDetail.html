@@ -1,0 +1,119 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">视频详情</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="xzws-video">
+                <div class="xzws-play">
+                    <video id="xzws-play-vedio" class="video-js vjs-default-skin" controls preload="auto" poster="<?php echo $video['videoimg']; ?>" data-setup='{}'>
+                        <?php if (!$video['link']): ?>
+                        <?php if ($format == 'mp4'): ?>
+                        <source src="<?php echo $video['video']; ?>" type="video/mp4">
+                        <?php elseif ($format == 'webm'): ?>
+                        <source src="<?php echo $video['video']; ?>" type="video/webm">
+                        <?php elseif ($format == 'ogv'): ?>
+                        <source src="<?php echo $video['video']; ?>" type="video/ogg">
+                        <?php endif; ?>
+                        <?php else: ?>
+                        <?php if ($forma == 'mp4'): ?>
+                        <source src="<?php echo $video['link']; ?>" type="video/mp4">
+                        <?php elseif ($forma == 'webm'): ?>
+                        <source src="<?php echo $video['link']; ?>" type="video/webm">
+                        <?php elseif ($forma == 'ogv'): ?>
+                        <source src="<?php echo $video['link']; ?>" type="video/ogg">
+                        <?php endif; ?>
+                        <?php endif; ?>
+                        <p class="vjs-no-js">
+                            很抱歉，你的浏览器不支持该视频的播放！
+                            <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                        </p>
+                    </video>
+                </div>
+            </div>
+
+            <div class="row xzws-uxy-column">
+                <div class="col-xs-4 item active"><a href="javascript:;">课程目录</a></div>
+                <div class="col-xs-4 item"><a href="javascript:;">讲师简介</a></div>
+                <div class="col-xs-4 item"><a href="javascript:;">相关课程</a></div>
+                <!-- <div class="col-xs-3 item"><a href="javascript:;">评论</a></div> -->
+            </div>
+
+            <div class="xzws-tab-content container">
+                <div class="xzws-vd-pup">
+                    <p>
+                        <em class="xzws-vd-kc">课程名称：</em>
+                        <span class="xzws-vd-span"><?php echo $video['title']; ?></span>
+                    </p>
+                    <p>
+                        <em class="xzws-vd-kc">课程介绍：</em>
+                        <span class="xzws-vd-span"><?php echo $video['desc']; ?></span>
+                    </p>
+                </div>
+                <div class="xzws-vd-pup">
+                    <p>
+                        <em class="xzws-vd-kc">讲师姓名：</em>
+                        <span class="xzws-vd-span"><?php echo $video['name']; ?></span>
+                    </p>
+                    <p><?php echo $video['intro']; ?></p>
+                </div>
+                <div class="xzws-vd-pup clearfix" >
+                    <?php
+                        $related = VideolistModel::model()
+                            ->getDb()
+                            ->where(array('cid' => $video['cid']))
+                            ->order('sorder desc , aid desc')
+                            ->limit(4)
+                            ->queryAll();
+                        foreach($related as $related):
+                    ?>
+                    <div class="xzws-cover">
+                        <div class="xzws-wrap">
+                            <a target="_self" class="wrap" href="<?php echo arU('',array('aid' => $related['aid']))?>" data-href="/course/introduction/1218004.htm" data-index="1" data-name="<?php echo $related['title']; ?>">
+                                <div class="">
+                                    <div class="xzws-pic">
+                                        <img class="imgPic" src="<?php echo $related['videoimg']; ?>" data-originsrc="" d="videoid">
+                                        <div class="xzws-l-watch">
+                                            <span class="xzws-l-watch2">
+                                                <i class="glyphicon glyphicon-eye-open"></i>&nbsp;<i><?php echo $related['fnums']; ?></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <h3 class="word-lf"><?php echo $related['title']; ?></h3>
+                                    <div class="orgName word-lf"><?php echo $related['desc']; ?></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+<!--                 <div class="xzws-vd-pup">
+                    <p>
+                        I don't know this page if will do or not.
+                    </p>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>video-js/video.min.js"></script>
+    <script type="application/x-javascript">
+        var player = videojs('xzws-play-vedio', {  /*Options */ }, function() {
+            this.play();
+        });
+        videojs.options.flash.swf = "<?php echo arCfg('PATH.PUBLIC'); ?>video-js/video-js.swf";
+    </script>
+
+    <script type="text/javascript">
+        $(function(){
+            $('.xzws-uxy-column .item').eq(0).addClass('active');
+            $('.xzws-tab-content').children().eq(0).show().siblings().hide();
+            $('.xzws-uxy-column .item').tap(function(){
+                $(this).addClass('active').siblings().removeClass('active');
+                var index=$(this).index();
+                $('.xzws-tab-content').children().eq(index).show().siblings().hide();
+
+            });
+        })
+    </script>

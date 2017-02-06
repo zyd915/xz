@@ -1,0 +1,91 @@
+<div class="auto mt50">
+    <a href="<?php echo arU('Index/Test'); ?>" class="fcl">测试页面显示</a><br/>
+    <div style="margin-top:20px;">
+    	<p>密码：</p>
+    	<input type="text" name="name" id="name" style="border:1px solid orange;height:30px;" />
+    	<input type="submit" name="sure" id="sure" value="提交" style="margin-left:20px;width:70px;height:30px;" />
+    </div>
+
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		//layer.msg('what happen');
+		var indexLoad;
+
+		$('#sure').click(function(){
+			if($.trim($('#name').val()) == 'qwe'){
+				$.ajax({
+					type: 'POST',
+					url: '<?php echo arU('index/itest'); ?>',
+					data: {
+						a: 'a',
+						b: 'b'
+					},
+					dataType: 'json',
+					cache: false,
+					// contentType: 'application/json',
+					beforeSend: function(){
+						indexLoad=layer.load(2);
+					},
+					complete: function(){
+						layer.close(indexLoad);
+					},
+					success: function(data,status,XHR){
+						if(XHR.status == 200){
+							//console.log(data);
+							//console.log(status);
+							//console.log(XHR);
+							// //console.log(data.length);
+							//console.log(data.a);
+							//console.log(data.b);
+							//console.log(data.msg);
+							//console.log("< == >");
+							//console.log(XHR.readyState);
+							//console.log(XHR.responseText);
+							// //console.log(XHR.responseJSON.a);
+							////console.log(XHR.responseJSON.b);
+							////console.log(XHR.responseJSON.msg);
+							////console.log(XHR.responseJSON);
+							//console.log(XHR.status);
+							//console.log(XHR.statusText);
+						}
+					},
+					error: function(){
+						layer.alert('',{
+							type:0,
+							title:['提示信息','color:#FF34B3;font-size:28px;font-famliy:"隶书";'],
+							area:['300px','200px'],
+							content:'你放弃吧，服务器是不会理你的，你再等下去也没什么卵用的！',
+							icon:5,
+							btn:['确定','取消'],
+							yes:function(index,layero){
+								$('#name').focus();
+								layer.close(index);
+							},
+							cancel:function(index){
+								layer.close(index);
+							}
+						});
+					}
+				});
+			}else{
+				layer.alert('',{
+					type:0,
+					title:['提示信息','color:#FF34B3;font-size:28px;font-famliy:"隶书";'],
+					area:['300px','200px'],
+					content:'这么简单的密码都输不正确，太没用了，放弃吧，就算你输正确了，我也是不会让你进去的！',
+					icon:5,
+					btn:['确定','取消'],
+					yes:function(index,layero){
+						$('#name').focus();
+						layer.close(index);
+					},
+					cancel:function(index){
+						layer.close(index);
+					}
+				});
+			}
+		});
+	});
+</script>

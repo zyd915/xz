@@ -1,0 +1,26 @@
+<?php include_once('header.html');?>
+<!-- 小导航 -->
+<div class="minNav w100 bg3-bzh pt10 pb10 fcw clearfix">
+    <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="<?php echo arU('Index/index'); ?>">循证高考</a>&nbsp;>&nbsp;<a href="<?php echo arU('Article/list'); ?>" >新闻资讯</a>&nbsp;>&nbsp;<a href="<?php echo arU('Article/list', array('cid' => $currentCat['cid'])); ?>" ><?php echo $currentCat['name']; ?></a>
+</div>
+<div class="centerNav mt10 row-25 left-menu-yb clearfix">
+    <div class="menu-border-yb">
+        <ul class="mb10 tal">
+            <?php foreach ($cats as $cat) : ?>
+                <li>
+                    <a href="<?php echo arU('Article/list', array('cid' => $cat['cid'])); ?>" class="systemIndex-yb">
+                        <div class="menu-style-yb <?php if ($currentCat['cid'] == $cat['cid']): ?>
+                            active-yb
+                        <?php endif ?>">
+                            <i class="fa fa-circle-o"></i>
+                            <?php echo $cat['name']; ?>
+                        </div>
+                    </a>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    </div>
+</div>
+
+<!--中间部分内容-->
+<div class="auto left row-75 mt10">

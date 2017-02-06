@@ -1,0 +1,77 @@
+<div class="portlet box purple">
+    <div class="portlet-title">
+        <div class="caption"><i class="icon-reorder"></i>链接添加</div>
+    </div>
+    <div class="portlet-body form">
+        <!-- BEGIN FORM-->
+        <form action="<?php echo arU('editLink',array('lid'=>$link['lid'])); ?>" method="post" class="form-horizontal" >
+             <input type="hidden" name="gid"  value="<?php echo $link['gid'];?>"/>
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">链接名称</label>
+                    <div class="col-md-4">
+                        <input type="text" name="name" class="form-control"  placeholder="名称" value="<?php echo $link['name']?>">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-3 control-label">所属分类</label>
+                    <div class="col-md-4">
+                        <?php
+                  // 调用用html seg 直接输出 select标签
+                  arSeg(
+                     array(
+                        // seg文件
+                        'segKey' => 'Html/select',
+                        // <select name="name">
+                        'name' => 'type',
+                        // 适配器数据
+                        'map' => LinkModel::$COOPER_MAP,
+                        // 选中的value selected = selected
+                        'selected' => $link['type']
+                     )
+                  );
+                  ?>
+                    </div>
+                </div>
+
+
+                <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">链接路径</label>
+                    <div class="col-md-4">
+                        <input type="text" name="url" class="form-control" placeholder="名称" value="<?php echo $link['url']?>">
+                    </div>
+                </div>
+                 <div class="form-group">
+                    <label class="col-md-3 control-label">高度</label>
+                    <div class="col-md-4">
+                        <input type="text" name="height" class="form-control" value="<?php echo $link['height']?>" placeholder="像素 px">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">宽度</label>
+                    <div class="col-md-4">
+                        <input type="text" name="width" class="form-control" value="<?php echo $link['width']?>"placeholder="像素 px">
+                    </div>
+                </div>
+
+              <div class="form-group">
+                    <label class="control-label col-md-3">广告logo图</label>
+                    <div class="col-md-1"> <span class="btn btn-success form-control" id="upload_ad_logo">添加</span> </div>
+                </div>
+                <div class="form-group col-md-8" style="margin-left:20%;" >
+                    <div class=" col-md-offset-1 text-left" style="border: 1px solid #f1f1f1; height:auto; width:auto; padding: 5px; margin:0 auto;"><img id="img-ad-show" src="<?php echo $link['gallery']['url']; ?>"> </div>
+                    '; </div>
+
+            </div>
+            <div class="form-actions nobg fluid">
+                <div class="col-md-offset-3 col-md-9">
+                    <button type="submit" class="btn green">提交</button>
+                    <button type="reset" class="btn default">重置</button>
+                </div>
+            </div>
+        </form>
+        <!-- END FORM-->
+    </div>
+</div>

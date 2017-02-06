@@ -1,0 +1,76 @@
+<div class="portlet box purple">
+   <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>专家编辑/添加</div>
+   </div>
+   <div class="portlet-body form">
+      <!-- BEGIN FORM-->
+      <form action="<?php echo arU('', array('greedyUrl' => true)); ?>" method="post" class="form-horizontal">
+         <input type="hidden" name="eid" value="<?php echo $expert['eid']; ?>" />
+         <div class="form-body">
+            <div class="form-group">
+               <label class="col-md-3 control-label">姓名</label>
+               <div class="col-md-4">
+                  <input type="text" name="name" class="form-control" value="<?php echo $expert['name']; ?>" placeholder="姓名">
+               </div>
+            </div>
+            <div class="form-group">
+               <label class="col-md-3 control-label">排序</label>
+               <div class="col-md-4">
+                  <input type="text" name="sorder" class="form-control" value="<?php echo $expert['sorder']; ?>" placeholder="排序">
+               </div>
+            </div>
+              <div class="form-group">
+                    <label class="control-label col-md-3">头像</label>
+                    <div class="col-md-1">
+                        <input type="file" name="uploadpic" id="zbankf" onchange="ajaxFileUpload(this.id)" />
+                    </div>
+                    <input name="headpic" value="<?php echo $expert['headpic'];?>" type="hidden">
+                      <div class="col-md-2 col-md-offset-1 text-center" style="margin:0; margin:10px 30px; padding-top: 10px; border: 1px solid #f1f1f1"> <img height="170" width="170" src="<?php echo $expert['headpic'];?>" id="upImg"<?php if(!$expert['headpic']):?>
+                        style="display:none" <?php endif;?>>  </div>
+                </div>
+            <div class="form-group">
+               <label class="control-label col-md-3">简短简介</label>
+               <div class="col-md-5">
+                  <textarea rows="3" cols="20" name="shortdes" type="text" class="form-control"><?php echo $expert['shortdes']; ?></textarea>
+               </div>
+            </div>
+            <script id="baidu_editor"><?php echo stripcslashes($expert['des']); ?></script>
+         </div>
+         <div class="form-actions nobg fluid">
+            <div class="col-md-offset-3 col-md-9" style="margin-left:18%;">
+               <button type="submit" class="btn green">提交</button>
+            </div>
+         </div>
+      </form>
+      <!-- END FORM-->
+   </div>
+</div>
+<script>
+//上传文件
+  function ajaxFileUpload(oname){
+    $.ajaxFileUpload(
+      {
+        url:'<?php echo arU('uploadPic'); ?>',
+        secureuri:false,
+        fileElementId:oname,
+        dataType: 'json',
+        data:{id:'id'},
+        success: function (data, status)
+        {
+          // alert(data);
+          if (data.ret_code == '1000') {
+            $('#upImg').show();
+            $("#upImg").attr('src', data.data.url);
+            $("[name='headpic']").attr('value', data.data.url);
+            // $('input[name=gid]').val(data.data.gid);
+          }
+        },
+        error: function (data, status, e)
+        {
+          alert(e);
+        }
+      }
+    )
+
+  }
+  </script>

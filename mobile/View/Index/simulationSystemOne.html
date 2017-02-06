@@ -1,0 +1,130 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1)" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">诊断模拟填报</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="auto left row-100 mt20 moni center-block">
+                <!-- 诊断成绩模拟填报系统 -->
+                <div class="system-title pl20 pt10 pb10 clearfix">
+                    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;诊断成绩模拟填报系统</h2>
+                    <ul class="hmenu">
+                        <li class="selected"><b>1</b>输入诊断成绩</li>
+                        <li><b>2</b>选择填报批次</li>
+                        <li><b>3</b>选择院校专业</li>
+                        <li><b>4</b>生成模拟志愿表</li>
+                    </ul>
+                </div>
+                <hr class="fgx">
+                <div class="bdr auto pb20 pt10 br5 mt20 ml10 mr10 clearfix inputscore">
+                    <h4 class="pl10">
+                        <span class="fa-stack fa-lg fs14px-bzh"><i class="fa fa-square fa-stack-2x fc3-bzh"></i><i class="fa fa-terminal fa-stack-1x fa-inverse "></i></span>&nbsp;<span class="vam-bzh">输入诊断考试成绩</span>
+                    </h4>
+                    <form class="w80 auto" action="<?php echo arU('Index/simulationSystemOneInfo') ?>"  method="post" id="xzlh-zd">
+                        <div class="item-yb mt50">
+                            <label for="city" class="">地区：</label>
+                            <select id="city" class="item-yb yb-select" name="city">
+                                <option value="0">请选择</option>
+                                <option value="cd" selected="">成都</option>
+                                <option value="my">绵阳</option>
+                            </select>
+                        </div>
+                        <div class="item-bzh mt20 clearfix">
+                            <select id="examscore" class="form-control input-sm-yb pull-left" style="float:left;" name="zdnum">
+                                <option value="1" selected="selected">一诊分数</option>
+                                <option value="2">二诊分数</option>
+                                <option value="3">三诊分数</option>
+                            </select>
+                            <input type="text" name="score" class="ml10 pull-left" id="exam-score" maxlength="3">
+                        </div>
+                        <div class="item-bzh mt20"><label>您的科类：</label>
+                            <label style="width: 50px;" class="km"><input type="radio" name="class" id="" value="文科" checked>&nbsp;文科</label>&nbsp;&nbsp;&nbsp;
+                            <label style="width: 50px;" class="km"><input type="radio" name="class" id="" value="理科">&nbsp;理科</label>
+                        </div>
+                        <!-- <div class="item-bzh mt20"><label>您的总分：</label>
+                            <input type="text" name="" id="s-score" class="brc" maxlength="3" title="总分为3位正整数,并且要小于750">
+                        </div> -->
+                        <!-- <div class="item-bzh mt20"><label>您的位次：</label>
+                            <input type="text" name="" id="s-rank" class="brc" title="位次至少为1位数字">
+                        </div> -->
+                        <div class="item-bzh">
+                            <input type="submit" value="下一步" class="btn btn-success bg3-bzh mb10 hdd center-block">
+                        </div>
+                        <hr>
+                        <div class="item-bzh mt20">
+                            <label></label>
+                            诊断成绩模拟填报系统使用方法请参考：<a href="http://www.xzgk.net/Article/detail/aid/1960?" class="text-primary" target="_blank">使用指南</a>
+                        </div>
+                    </form>
+                </div>
+             </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        var da = null;
+        //获取userScore接口数据
+        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post',{},spage);
+        function spage(dat){
+            if(dat.ret_code == '1000'){
+                da = dat.data;
+                $('#exam-score').val(dat.data.scorez1);
+            }else{
+                var index = layer.open({
+                    type: 0,
+                    shadeClose: false,
+                    content: '你还没有登录，请登录后再填报！',
+                    btn: ['<div style="color:#0078D7">确定</div>'],
+                    yes: function(){
+                        layer.close(index);
+                        location.href="<?php echo arU('User/login')?>";
+                    }
+                });
+            }
+        }
+        $('#examscore').on('change',function(){
+            esoption($('#examscore').val(),da);
+        });
+    });
+
+    function esoption(zscore,da){
+        switch(zscore){
+            case '1':
+                $('#exam-score').val(da.scorez1);
+                break;
+            case '2':
+                $('#exam-score').val(da.scorez2);
+                break;
+            case '3':
+                $('#exam-score').val(da.scorez3);
+                break;
+        }
+    }
+
+    $('#xzlh-zd').submit(function(){
+        if ($('#city').val() == 0 || !km()) {
+            return false;
+        }else{
+            return true;
+        }
+    });
+
+    function km(){
+        var num = $('#exam-score').val();
+        if (num >= 750 || num <= 0) {
+            var index = layer.open({
+                    type: 0,
+                    shadeClose: false,
+                    content: '请输入正确的分数！',
+                    btn: ['确定'],
+                    yes: function(){
+                        layer.close(index);
+                    }
+                });
+            return false;
+        }else{
+            return true;
+        }
+    }
+</script>

@@ -1,0 +1,57 @@
+<div class="portlet box purple">
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-reorder"></i>链接编辑/添加</div>
+	</div>
+	<div class="portlet-body form">
+		<!-- BEGIN FORM-->
+		<form action="<?php echo arU('', array('greedyUrl' => true)); ?>" method="post" class="form-horizontal">
+			<input type="hidden" name="lid" value="<?php echo $link['lid']; ?>" />
+			<div class="form-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">链接名称</label>
+					<div class="col-md-4">
+						<input type="text" name="name" class="form-control" value="<?php echo $link['name']; ?>" placeholder="名称">
+					</div>
+				</div>
+
+				<div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">链接路径</label>
+                    <div class="col-md-4">
+                        <input type="text" name="url" class="form-control" value="<?php echo $link['url']; ?>" placeholder="名称">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3">链接logo图</label>
+                    <div class="col-md-1 tianjia">
+                    <span class="btn btn-success form-control" id="upload_product_logo">添加</span>
+                     </div>
+                </div>
+
+                <div class="form-group"  style=" margin:0 auto; width:1250px;">
+                    <div class="col-md-12 clearfix" id="img-manager"  style=" float:left;">
+                        <?php
+                        foreach ($product['galleryBundle'] as $img) :
+                        ?>
+                        <div class="col-md-2 col-md-offset-1 text-center" style="margin:0; margin:10px 30px; padding-top: 10px; border: 1px solid #f1f1f1"> <img height="170" width="170" src="<?php echo $img['curl']; ?>"> <span class="btn" onclick="delImg(<?php echo $img['gid']; ?>, <?php echo $product['pid']; ?>, this)" >删除</span> </div>
+                        ';
+                        <?php
+                        endforeach;
+                        ?>
+                    </div>
+                </div>
+
+
+
+			</div>
+			<div class="form-actions nobg fluid">
+				<div class="col-md-offset-3 col-md-9">
+					<button type="submit" class="btn green">提交</button>
+					<button type="reset" class="btn default">重置</button>
+				</div>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>

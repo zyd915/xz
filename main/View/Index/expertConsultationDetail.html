@@ -1,0 +1,32 @@
+<!-- 小导航 -->
+<div class="minNav w100 mt10 bg3-bzh pt10 pb10 fcw clearfix">
+    <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="<?php echo arU('Index/index'); ?>">循证高考</a>&nbsp;>&nbsp;<a href="<?php echo arU('Index/expertConsultation'); ?>">专家咨询</a>&nbsp;<a>专家咨询</a>
+</div>
+
+<div class="mt10 clearfix">
+    <div class="mainHeader">
+		<div class="profession-title">
+			<h2 class="left ml20 mb10">专家咨询</h2>
+		</div>
+	</div>
+	<div class="o2o clearfix">
+		<div class="left ml10 mt20 mb20">
+			<div class="vip-header"><img src="<?php echo $showOne['galleryUrl']['url'] ?>"/></div>
+		</div>
+		<div class="left ml20 mr20 mt20 item expert-detail">
+			<p class="detail-font">
+				您选择了
+				<span><?php echo $showOne['title'];?></span>
+				专家为您提供高考志愿填报咨询
+				<span class="right mr10">
+					<a href="<?php echo arU('Index/expertConsultation'); ?>">[返回选择其他专家]</a>
+				</span>
+			</p>
+			<p><?php echo $showOne['content'];?></p>
+			<span class="right mr20 sure tac mt10 mb20">
+				<a href="">预约</a>
+			</span>
+			
+		</div>
+	</div>
+</div>

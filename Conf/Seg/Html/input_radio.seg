@@ -1,0 +1,74 @@
+<?php
+/*
+      // 调用用html seg 直接输出 input type radio 标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/input_radio',
+            // <select name="name">
+            'name' => 'type',
+            // 适配器数据 数组
+            'map' => AdModel::$TYPE_MAP,
+            // 选中的value checked =checked
+            'checked' => $ad['type'],
+            // 'valueKey' => 'ss',
+            // 'displayKey' => 'dd',
+            'extra' => 'class="testcheck"'
+         )
+      );
+*/
+?>
+    <?php
+        foreach ($map as $k => $v) :
+    ?>
+    <input
+    <?php
+        if (isset($checked) && $checked == $k) :
+    ?>
+    checked="checked"
+    <?php
+        endif;
+    ?>
+    type="radio"
+    name="<?php echo $name; ?>"
+    <?php
+        if (isset($value)) :
+    ?>
+        value="<?php echo $value; ?>"
+    <?php
+        else :
+    ?>
+        <?php
+            if (isset($valueKey)) :
+        ?>
+        value="<?php echo $v[$valueKey]; ?>"
+        <?php
+            elseif (isset($mapVal)) :
+        ?>
+        value="<?php echo $v; ?>"
+        <?php
+            else :
+        ?>
+        value="<?php echo $k; ?>"
+        <?php
+            endif;
+        ?>
+    <?php
+        endif;
+    ?>
+    <?php if (isset($extra)) : arEcho($extra, ''); endif; ?>
+    />
+        <?php
+            if (isset($displayKey)) :
+        ?>
+            <?php echo $v[$displayKey]; ?>
+        <?php
+            else :
+        ?>
+            <?php echo $v; ?>
+        <?php
+            endif;
+        ?>
+    <?php
+        endforeach;
+    ?>

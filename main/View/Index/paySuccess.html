@@ -1,0 +1,11 @@
+<!-- 支付成功提示页面 -->
+<style type="text/css">
+    #paysuccss {font-size: 20px;}
+
+</style>
+<div id="paysuccss" class="mt40 pl20 pb40 pr20 h300 h50">
+    <h2 class="tac">恭喜您，您已成功购买VIP服务</h2>
+    <div class="title mt30"><span>您的VIP卡号：</span><em style="color: #F38C00"><?php echo $card['cno']; ?></em> 密码：</span><em style="color: #F38C00"><?php echo $card['pwd']; ?></em></div>
+    <div class="tips">请牢记您的账号密码，您可以在<a href="<?php echo arU('User/userSetting', array('pgs' => 'myvip')); ?>" class="fcl">我的Vip卡</a>中查看您的账号密码！</div>
+    <div class="back">你可以点击<a href="<?php echo arU('Index/index'); ?>" class="fcl"> 返回首页 </a>到网站首页，或点击<a href="<?php echo arU('User/index'); ?>" class="fcl"> 个人中心 </a>进行查看</a></div>
+</div> 

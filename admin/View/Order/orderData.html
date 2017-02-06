@@ -1,0 +1,247 @@
+<div class="panel panel-default">
+<div class="lqselection2">
+  <form>
+    <div class="lqsampleDiv">
+      查找类型：<?php
+            // 调用用html seg 直接输出 select标签
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'selectfield',
+                  // 适配器数据 数组
+                  'map' => array(
+                        'uid' => '用户',
+                        'pid' => '商品',
+
+                    ),
+                  // 选中的value selected = selected
+                  'selected' => arRequest('selectfield', 'uid'),
+               )
+            );
+          ?>
+    </div>
+     <div class="lqsampleDiv">
+    <input name="uname" type="text" id="lqselectionInput" class="lqselectionInput">
+     </div>
+    <div class="lqsampleDiv">
+      支付类型：<?php
+            // 调用用html seg 直接输出 select标签
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'pstatus',
+                  // 适配器数据 数组
+                  'map' => array(
+                        0 => '未支付',
+                        1 => '已支付',
+                        'not_mind' => '不计',
+                    ),
+                  // 选中的value selected = selected
+                  'selected' => arRequest('pstatus', 'not_mind'),
+               )
+            );
+          ?>
+    </div>
+    <div class="lqsampleDiv">
+      排序类型：<?php
+            // 调用用html seg 直接输出 select标签
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'field',
+                  // 适配器数据 数组
+                  'map' => array(
+                        0 => '交易额',
+                        1 => '成交单数',
+                    ),
+                  // 选中的value selected = selected
+                  'selected' => arRequest('field', '0'),
+               )
+            );
+          ?>
+    </div>
+    <div class="lqsampleDiv">
+      每页条数：<?php
+              // 调用用html seg 直接输出 select标签
+              arSeg(
+                 array(
+                    // seg文件
+                    'segKey' => 'Html/select',
+                    // <select name="name">
+                    'name' => 'countperpage',
+                    // 适配器数据 数组
+                    'map' => array(5 => 5, 10 => 10, 20 => 20, 30 => 30, 50 => 50),
+                    // 选中的value selected = selected
+                    'selected' => arRequest('countperpage', 30),
+                 )
+              );
+            ?>
+    </div>
+    <div class="lqsampleDiv">
+      时间段：<?php
+              // 调用用html seg 直接输出 select标签
+              arSeg(
+                 array(
+                    // seg文件
+                    'segKey' => 'Html/select',
+                    // <select name="name">
+                    'name' => 'searchTime',
+                    // 适配器数据 数组
+                    'map' => array('0'=>'不计','ctime' => '下单时间', 'stime' => '发货时间', 'etime' => '完成时间'),
+                    // 选中的value selected = selected
+                    'selected' => arRequest('searchTime','0'),
+                 )
+              );
+            ?>
+    </div>
+    <div class="lqsampleDiv">
+      开始时间：<input type="text" name="stime" value="<?php echo arRequest('stime', date('Y-m-d H:i', time())); ?>" id="datetimepicker" class="lqselectionInput" placeholder="不过期则不选" />
+    </div>
+    <div class="lqsampleDiv">
+      截止时间：<input type="text" name="etime" value="<?php echo arRequest('etime', date('Y-m-d H:i', time())); ?>" id="datetimepickera" class="lqselectionInput" placeholder="不过期则不选" />
+    </div>
+     <div class="lqsampleDiv">
+        消费金额区间：<input type="text" value="<?php echo arRequest('dprice'); ?>" name="dprice" class="lqselectionInput" style="width:200px;" placeholder ="两个数字之间用　-　号链接"/>
+      </div>
+    <div class="lqsampleDiv">
+      <input type="submit" value="查询" class="btn btn-success pull-right" />
+    </div>
+    <div class="clearfix"></div>
+  </form>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th> <?php
+      if(arRequest('selectfield') == 'pid') :
+      ?>
+      产品
+      <?php
+      else :
+      ?>
+      用户
+     <?php
+     endif;
+      ?>
+      </th>
+      <th>成交单数</th>
+      <th>交易额</th>
+      <th>支付类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php
+        foreach ($orders as $order) :
+    ?>
+
+      <?php
+      if(arRequest('selectfield') == 'pid') {
+      ?> <tr class="data" value="<?php echo $order['pid']; ?>">
+       <td><input type="checkbox" name="ids" nest = "<?php echo $order['uname']; ?>"value="<?php echo $order['pid']; ?>"><?php echo $order['subject']; ?></td>
+
+      <?php
+    }else{
+
+      ?>
+    <tr class="data" value="<?php echo $order['uid']; ?>">
+    <td><input type="checkbox" name="ids" nest = "<?php echo $order['uname']; ?>"value="<?php echo $order['uid']; ?>"><?php echo $order['uid']; ?>(<?php echo $order['uname']; ?>)</td>
+      <?php
+    }
+      ?>
+      <td><?php echo $order['total']; ?></td>
+      <td><?php echo $order['toatlprice']; ?></td>
+      <td><?php arEcho($order['pstatus'], OrderModel::$STATUS_PAY_MAP); ?></td>
+    </tr>
+    <?php
+        endforeach;
+    ?>
+    <tr><td colspan="5"><input type="checkbox" name="selectall">全选</td></tr>
+  </tbody>
+</table>
+<nav class="col-md-12 text-center">
+  <?php echo $page; ?>
+</nav>
+<div class="lqorderDateDiv">
+    <button id="sendusergift" class="btn btn-success pull-left">给选中的用户发红包</button>(说明:双击单元格显示详细信息)
+</div>
+</div>
+<script>
+var imgUrlId;
+$(".data td").dblclick(function () {
+    uid = $(this).parent().attr('value');
+    var that = $(this);
+    var searchTime = $('select[name=searchTime]').val();
+    var pstatus = $('select[name=pstatus]').val();
+    var stime = $('input[name=stime]').val();
+    var etime = $('input[name=etime]').val();
+    $.get('<?php echo arU('order/userOrderCount', array('greedyUrl' => true)); ?>', {<?php
+      if(arRequest('selectfield') =='pid') : echo 'pid'; else : echo 'uid'; endif;?>: uid,'pstatus':pstatus,'searchTime' :searchTime,'etime':etime,'stime':stime}, function (res) {
+      var dataStr = '';
+      for (var i = 0; i < res.data.length; i++) {
+        var currentData = res['data'][i];
+        dataStr += '<div>单号:'+currentData['otradeno']+'名称:'+currentData['subject']+' 下单用户：'+currentData['uname']+' 成交额:'+currentData['dprice']+'下单时间:'+currentData['ctimedata']+'</div><br>';
+      }
+      console.log(res);
+      imgUrlId = layer.tips(dataStr, that);
+    }, 'json');
+});
+
+
+
+$("[name='selectall']").change(function (){
+    if ($(this).attr('checked') == 'checked') {
+        $("[name='ids']").each(function () {
+            $(this).attr('checked', true);
+        });
+    } else {
+        $("[name='ids']").each(function () {
+            $(this).attr('checked', false);
+        });
+    }
+});
+
+// 发送红包
+$('#sendusergift').click(function () {
+    var selectUser = [];
+    var sendUser = [];
+    $("[name='ids']").each(function () {
+        if ($(this).attr('checked')) {
+            selectUser.push($(this).attr('value'));
+            sendUser.push($(this).attr('nest'));
+        }
+    });
+    if (selectUser.length > 0) {
+        var uidlist = selectUser.join(',');
+        var userList = sendUser.join(',');
+        location.href = '<?php echo arU('Coupon/putout'); ?>?uidlist=' + uidlist+'&&userList='+userList;
+    } else {
+        layer.alert('必须先选择一个用户');
+    }
+});
+
+// $('.data').dblclick(function () {
+//     layer.closeAll();
+// });
+
+$(document).ready(function () {
+    // 日期选择
+    $('#datetimepicker').datetimepicker();
+    $('#datetimepickera').datetimepicker();
+    $("select[name=selectfield]").change(function(){
+      if($(this).val() == 'pid'){
+        // $('#lqselectionInput').show();
+        $('#lqselectionInput').attr('name','subject');
+      }else{
+        // $('#lqselectionInput').hide();
+         $('#lqselectionInput').attr('name','uname');
+      }
+    });
+});
+</script>

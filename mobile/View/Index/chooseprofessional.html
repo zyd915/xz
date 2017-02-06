@@ -1,0 +1,141 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">查专业</span>
+        <!-- <div class="page-tit zy-tit inner-el">
+            <a class="inner-el fl">本科</a>
+            <a class="inner-el fl">专科</a>
+        </div> -->
+    </header>
+    <section class="content">
+        <div class="main">
+            <div class="xzlh-zy-tab">
+                <ul class="nav nav-tabs row">
+                    <li class="col-xs-6 active">
+                        <a href="javascript:" id="xzlh-zy-bk">本科</a>
+                    </li>
+                    <li class="col-xs-6">
+                        <a href="javascript:" id="xzlh-zy-zk">专科</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="search-box">
+                <form action="<?php echo arU('Index/zysearch')?>" method="get">
+                    <div class="">
+                        <span class="glyphicon glyphicon-search xzlh-s-span" ></span>
+                        <input type="text" name="mname" class="xzlh-s-input" placeholder="搜索院校" >
+                        <button class="xzlh-s-btn">搜索</button>
+                    </div>
+                </form>
+            </div>
+            <!--专业列表-->
+            <div class="clearfix xzlh-zy-list">
+                <div class="xzlh-zy-item fl">
+                    <ul>
+                        <li class="zy-item-li active">哲学</li>
+                        <li class="zy-item-li">经济学</li>
+                        <li class="zy-item-li">法学</li>
+                        <li class="zy-item-li ">教育学</li>
+                        <li class="zy-item-li">文学</li>
+                        <li class="zy-item-li">历史学</li>
+                        <li class="zy-item-li">理学</li>
+                        <li class="zy-item-li">工学</li>
+                        <li class="zy-item-li">农学</li>
+                        <li class="zy-item-li">医学</li>
+                        <li class="zy-item-li">管理学</li>
+                        <li class="zy-item-li">艺术学</li>
+                    </ul>
+                </div>
+                <div class="fl xzlh-zy-detail">
+                    <?php foreach ($majors as $key => $value): ?>
+                    <ul class="xzlh-zy-detaillist">
+                        <?php foreach ($value as $k => $v): ?>
+                        <li class="">
+                            <a class="xzlh-zy-name" href="javascript:"><?php echo $k; ?>&nbsp;<i class="fa fa-caret-down"></i></a>
+                            <ul class="xzlh-zy-namelist">
+                                <?php foreach ($v as $major): ?>
+                                <li><a href="<?php echo arU('Index/professionaldetail',array('mid' => $major['mid'])); ?>"><?php echo $major['mname']; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="clearfix xzlh-zy-zklist" style="display: none;">
+                <div class="xzlh-zy-item fl">
+                    <ul>
+                        <li class="zy-item-li active">农业牧鱼大类</li>
+                        <li class="zy-item-li">交通运输大类</li>
+                        <li class="zy-item-li ">生化与药品大类</li>
+                        <li class="zy-item-li">资源开发与测绘大类</li>
+                        <li class="zy-item-li">材料与能源大类</li>
+                        <li class="zy-item-li">土建大类</li>
+                        <li class="zy-item-li">水利大类</li>
+                        <li class="zy-item-li">制造大类</li>
+                        <li class="zy-item-li">电子信息大类</li>
+                        <li class="zy-item-li">环保、气象与安全大类</li>
+                        <li class="zy-item-li">轻纺食品大类</li>
+                        <li class="zy-item-li">财经大类</li>
+                        <li class="zy-item-li">医药卫生大类</li>
+                        <li class="zy-item-li">旅游大类</li>
+                        <li class="zy-item-li">公共事业大类</li>
+                        <li class="zy-item-li">文化教育大类</li>
+                    </ul>
+                </div>
+                <div class="fl xzlh-zy-detail">
+                    <?php foreach ($major1 as $a => $s): ?>
+                    <ul class="xzlh-zy-detaillist">
+                        <?php foreach ($s as $q => $w): ?>
+                        <li class="">
+                            <a class="xzlh-zy-name" href="javascript:"><?php echo $q; ?>&nbsp;<i class="fa fa-caret-down"></i></a>
+                            <ul class="xzlh-zy-namelist">
+                                <?php foreach ($w as $m): ?>
+                                <li><a href="<?php echo arU('Index/professionaldetail',array('mid' => $m['mid'])) ?>"><?php echo $m['mname']; ?></a></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        $('#xzlh-zy-bk').tap(function(){
+            $('#xzlh-zy-zk').parent().removeClass('active');
+            $(this).parent().addClass('active');
+            $('.xzlh-zy-zklist').hide();
+            $('.xzlh-zy-list').show();
+        });
+        $('#xzlh-zy-zk').tap(function(){
+            $('#xzlh-zy-bk').parent().removeClass('active');
+            $(this).parent().addClass('active');
+            $('.xzlh-zy-list').hide();
+            $('.xzlh-zy-zklist').show();
+        });
+
+        $('.xzlh-zy-list .xzlh-zy-detaillist').eq(0).show();
+        // $('.xzlh-zy-zklist .xzlh-zy-detaillist').eq(0).show();
+
+        $('.xzlh-zy-list .zy-item-li').tap(function(){
+            $('.xzlh-zy-list .zy-item-li').removeClass('active');
+            $(this).addClass('active');
+            $('.xzlh-zy-list .xzlh-zy-detaillist').hide();
+            $('.xzlh-zy-list .xzlh-zy-detaillist').eq($(this).index()).show();
+        });
+        $('.xzlh-zy-zklist .zy-item-li').tap(function(){
+            $('.xzlh-zy-zklist .zy-item-li').removeClass('active');
+            $(this).addClass('active');
+            $('.xzlh-zy-zklist .xzlh-zy-detaillist').hide();
+            $('.xzlh-zy-zklist .xzlh-zy-detaillist').eq($(this).index()).show();
+        });
+
+        $('.xzlh-zy-name').tap(function(){
+            $(this).next('.xzlh-zy-namelist').toggle();
+        });
+    });
+</script>

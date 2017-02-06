@@ -1,0 +1,143 @@
+<div class="portlet box purple">
+	<div class="portlet-title">
+		<div class="caption"><i class="icon-reorder"></i>广告编辑/添加</div>
+	</div>
+	<div class="portlet-body form">
+		<!-- BEGIN FORM-->
+		<form action="<?php echo arU('', array('greedyUrl' => true)); ?>" method="post" class="form-horizontal">
+			<input type="hidden" name="aid" value="<?php echo $ad['aid']; ?>" />
+			<input type="hidden" name="galleryid" value="<?php echo $ad['galleryid']; ?>" />
+			<div class="form-body">
+				<div class="form-group">
+					<label class="col-md-3 control-label">广告名</label>
+					<div class="col-md-4">
+						<input type="text" name="name" class="form-control" value="<?php echo $ad['name']; ?>" placeholder="名称">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">链接</label>
+					<div class="col-md-4">
+						<input type="text" name="url" class="form-control" value="<?php echo $ad['url']; ?>" placeholder="链接">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">高度</label>
+					<div class="col-md-4">
+						<input type="text" name="height" class="form-control" value="<?php echo $ad['height']; ?>" placeholder="像素 px">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">宽度</label>
+					<div class="col-md-4">
+						<input type="text" name="width" class="form-control" value="<?php echo $ad['width']; ?>" placeholder="像素 px">
+					</div>
+				</div>
+				<?php
+                if (!arGet('level', '')) :
+            ?>
+				<div class="form-group">
+					<label class="col-md-3 control-label">位置</label>
+					<div class="col-md-4">
+						<?php
+                    // 调用用html seg 直接输出 select标签
+                    arSeg(
+                      array(
+                        // seg文件
+                        'segKey' => 'Html/select',
+                        // <select name="name">
+                        'name' => 'type',
+                        // 适配器数据
+                        'map' => AdModel::$TYPE_MAP,
+                        // 选中的value selected = selected
+                        'selected' => $ad['type']
+                      )
+                    );
+                  ?>
+					</div>
+				</div>
+				<?php
+                else:
+            ?>
+				<div class="form-group">
+					<label class="col-md-3 control-label">分类</label>
+					<div class="col-md-4">
+						<input type="hidden" name="cid" class="form-control" value="<?php echo $ad['cid']; ?>" placeholder="排序越大越靠前">
+						<input type="text" name="cidshow" class="form-control" value="<?php echo $ad['cid']; ?>" placeholder="分类">
+					</div>
+				</div>
+				<script>
+            $(document).ready(function () {
+                $("[name='cidshow']").select_cate({
+                    onSelected: function(res) {
+                        $("[name='cid']").attr('value', res.cid);
+                        $("[name='cidshow']").attr('value', res.name);
+                    },
+                    level: <?php echo arGet('level'); ?>,
+                    cid: '<?php echo $ad['cid']; ?>',
+                    onInit: function (res) {
+                        $("[name='cidshow']").attr('value', res.name);
+                    },
+                });
+            });
+            </script>
+				<?php
+                endif;
+            ?>
+				<div class="form-group">
+					<label class="col-md-3 control-label">排序</label>
+					<div class="col-md-4">
+						<input type="text" name="sorder" class="form-control" value="<?php echo $ad['sorder']; ?>" placeholder="排序越大越靠前">
+                        <span>排序越大越靠前</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-3">广告logo图</label>
+					<div class="col-md-1"> <input type="file" class="btn btn-success form-control" onchange="ajaxFileUpload(this.id)" id="upload_ad_logo" name="uploadpic"/>添加 </div>
+				</div>
+				<div class="form-group col-md-8" style="margin-left:20%;" >
+					<div class=" col-md-offset-1 text-left" style="border: 1px solid #f1f1f1; height:auto; width:auto; padding: 5px; margin:0 auto;"><img id="img-ad-show"  width="400px" <?php if(!$ad['galleryUrl']['url']) :?>style="display:none"<?php else : ?>src="<?php echo $ad['galleryUrl']['url']; ?>"<?php endif;?>> </div>
+					 </div>
+				<div class="form-group">
+					<label class="control-label col-md-3">简短简介</label>
+					<div class="col-md-5">
+						<textarea rows="3" cols="20" name="des" type="text" class="form-control"><?php echo $ad['desc']; ?></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions nobg fluid">
+				<div class="col-md-offset-3 col-md-9">
+					<button type="submit" class="btn green">提交</button>
+					<button type="reset" class="btn default">重置</button>
+				</div>
+			</div>
+		</form>
+		<!-- END FORM-->
+	</div>
+</div>
+
+<script type="text/javascript">
+function ajaxFileUpload(oname){
+    $.ajaxFileUpload(
+      {
+        url:'<?php echo arU('uploadRegPic'); ?>',
+        secureuri:false,
+        fileElementId:oname,
+        dataType: 'json',
+        data:{id:'id'},
+        success: function (data, status)
+        {
+            console.log(data);
+          if (data.ret_code == '1000') {
+            $('#img-ad-show').show();
+            $("#img-ad-show").attr('src', data.data.url);
+            $('input[name=galleryid]').val(data.data.gid);
+          }
+        },
+        error: function (data, status, e)
+        {
+          alert(e);
+        }
+      }
+    )
+  }
+</script>

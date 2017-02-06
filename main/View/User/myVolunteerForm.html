@@ -1,0 +1,136 @@
+<div class="mainIndex ml10 clearfix">
+	<div class="mainHeader">
+		<div class="profession-title">
+			<h4 class="mt10 ml20 greenf fwb"><i class="fa fa-plus-square mr10"></i>我的志愿表单</h4>
+		</div>
+	</div>
+	<div class="mt20 mr10">
+		<div class="mt10 mr10 mb10">
+			<button type="button" class="btn btn-primary btnform" value="all">所有志愿单</button>
+			<button type="button" class="btn btn-success btnform" value="gk">高考志愿单</button>
+			<button type="button" class="btn btn-success btnform" value="zd">诊断志愿单</button>
+		</div>
+		<table class="table table-bordered zyb tac">
+			<tr>
+				<th class="">编号</th>
+				<th class="">考生姓名</th>
+				<th class="">志愿类型</th>
+				<th class="">批次</th>
+				<th class="">分数</th>
+				<th class="">科目</th>
+				<th class="">时间</th>
+				<th class="">操作</th>
+			</tr>
+			<?php foreach ($zys as $zy): ?>
+			<tr>
+				<td class="formID"><?php echo $zy['zid'] ?></td>
+				<td class="examName"><?php echo $zy['name'] ?></td>
+				<td class="formType"><?php arEcho($zy['ztype'], DataYxModel::$typeMap);  ?></td>
+				<td class="formName"><?php arEcho($zy['pc'], DataYxModel::$pcMap);  ?></td>
+				<td class="formScore"><?php echo $zy['score'] ?></td>
+				<td class="formSubject"><?php arEcho($zy['km'], DataYxModel::$kmMap);  ?></td>
+				<td class="formTime"><?php echo date('Y-m-d H:i:s', $zy['ctime']) ?></td>
+				<td class="formBtn">
+					<button onclick="javascript:readZy('<?php echo $zy['zid']; ?>',this)" type="button" class="btn btn-info btn-sm readbtn">查看</button>
+					<!-- <button onclick="javascript:updateZy('<?php echo $zy['zid']; ?>',this)" type="button" class="btn btn-danger btn-sm updatebtn">修改</button> -->
+					<button onclick="javascript:deleteZy('<?php echo $zy['zid']; ?>')" type="button" class="btn btn-warning btn-sm">删除</button>
+				</td>
+			</tr>
+			<?php endforeach ?>
+		</table>
+	</div>
+</div>
+<script type="text/javascript">
+	//删除
+	function deleteZy(zid)
+	{
+		layer.confirm('确定要删除', function(){
+			$.post(JSV.PATH_APP_SERVER + 'User/deleteZy', {'zid': zid}, function (res) {
+				location.reload();
+			}, 'json');
+		});
+
+	}
+
+	//查看
+	function readZy(zid,id){
+		if($(id).parent().parent().children('.formType').attr('value') == 'gk'){
+			if ($(id).parent().siblings('.formName').text() == '提前批') {
+				surl = 'gkmntqpsave';
+			}else {
+				surl='simulationSystemTwoSaveForm';
+			}
+		}else{
+			surl='simulationSystemOneSaveForm';
+		}
+		window.location.href='<?php echo arU("User/'+surl+'/zid/'+zid+'"); ?>';
+
+	}
+
+	// //修改
+	// function updateZy(zid,id)
+	// {
+	// 	if($(id).parent().parent().children('.formType').attr('value') == 'gk'){
+	// 		surl='simulationSystemTwoSchool';
+	// 	}else{
+	// 		surl='simulationSystemOneSchool';
+	// 	}
+	// 	window.location.href='<?php echo arU("User/'+surl+'/zid/'+zid+'"); ?>';
+	// }
+
+	var type,surl;
+	$(document).ready(function(){
+		delCookie();
+		trbgColor();
+		$('tr td').bind({
+			mousemove:function(){
+				$(this).parent().css('background-color','#FFF3E0');
+			},
+			mouseout:function(){
+				trbgColor();
+			}
+		});
+
+		//设置模拟参数
+		$('.formType').each(function(index){
+			if($('.formType').eq(index).text() == '高考模拟'){
+				$('.formType').eq(index).attr('value','gk');
+			}else{
+				$('.formType').eq(index).attr('value','zd');
+			}
+		});
+
+		//筛选表单
+		$('.btnform').click(function(){
+			if($(this).hasClass('btn-primary')){
+
+			}else{
+				$('.btnform').each(function(){
+					$(this).addClass('btn-success');
+					$(this).removeClass('btn-primary');
+				});
+				$(this).addClass('btn-primary');
+				$(this).removeClass('btn-success');
+				type=$(this).attr('value');
+				bltable('.formType',type);
+			}
+		});
+	});
+
+	//目标table
+	function bltable(id,value){
+		$(id).each(function(index){
+			if($(id).eq(index).attr('value') == value || value == 'all'){
+				$(id).eq(index).parent().show();
+			}else{
+				$(id).eq(index).parent().hide();
+			}
+		});
+	}
+
+	//tr样式
+	function trbgColor(){
+		$('tr:odd td').parent().css('background-color','#fff');
+		$('tr:even td').parent().css('background-color','#eee');
+	}
+</script>

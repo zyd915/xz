@@ -1,0 +1,261 @@
+<!-- 小导航 -->
+<div class="minNav w100 mt10 bg3-bzh pt10 pb10 fcw clearfix">
+    <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="">循证高考</a>&nbsp;>&nbsp;<a href="">院校库</a>&nbsp;
+</div>
+<!-- 查院校 -->
+<div class="clearfix">
+    <div class="schoolSelect mt10 left">
+        <div class="column1-bzh bdr  mb20" style="border-top:3px solid #DB5242;">
+            <div class="pt20 pb20 pl20 bge-bzh mt10 mb10 tac">
+                <form action="<?php echo arU(''); ?>" id="roe-searchPro">
+                    <label for="search">搜索院校:</label>
+                    <input name="sname" class="search" id="search" type="text">
+                    <button class="btn btn-info btn-sm"><i class="fa fa-search"></i>&nbsp;搜索</button>
+                </form>
+            </div>
+            <div class="pp10-bzh roe-yxts">
+                <dl class="roe-character clearfix">
+                    <dt>院校特色：</dt>
+                    <dd>
+                        <em><a class="
+                            <?php
+                                if (arRequest('ts') == '') :
+                            ?>
+                            selected
+                            <?php
+                                endif;
+                            ?>
+                            " href="<?php echo arU('', array('page' => '', 'ts' => '', 'greedyUrl' => true)); ?>">全部</a></em>
+                        <ul>
+                            <li><a class="
+                            <?php
+                                if (arRequest('ts') == 211) :
+                            ?>
+                            selected
+                            <?php
+                                endif;
+                            ?>
+                            " href="<?php echo arU('', array('page' => '', 'ts' => '211', 'greedyUrl' => true)); ?>">211</a></li>
+                            <li><a class="
+                            <?php
+                                if (arRequest('ts') == 985) :
+                            ?>
+                            selected
+                            <?php
+                                endif;
+                            ?>
+                                " href="<?php echo arU('', array('page' => '', 'ts' => '985', 'greedyUrl' => true)); ?>">985</a></li>
+                            <li><a class="
+                            <?php
+                                if (urldecode(arRequest('ts')) == '教育部') :
+                            ?>
+                            selected
+                            <?php
+                                endif;
+                            ?>
+                                " href="<?php echo arU('', array('page' => '', 'ts' => '教育部', 'greedyUrl' => true)); ?>">教育部直属</a></li>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl class="roe-location clearfix" style="border:0;">
+                    <dt>所在地区：</dt>
+                    <dd>
+                        <em><a class="
+                            <?php
+                                if (!arRequest('area')) :
+                            ?>
+                            selected
+                            <?php
+                                endif;
+                            ?>
+                            " href="<?php echo arU('', array('area' => '', 'ts' => '', 'page' => '', 'greedyUrl' => true)); ?>">全部</a></em>
+                        <ul>
+                            <?php
+                                foreach ($provinces as $province) :
+                            ?>
+                            <li><a class="
+                                <?php
+                                    if (urldecode(arRequest('area')) == $province['region_name']) :
+                                ?>
+                                selected
+                                <?php
+                                    endif;
+                                ?>
+                                " href="<?php echo arU('', array('area' => $province['region_name'], 'page' => '', 'greedyUrl' => true)); ?>"><?php echo $province['region_name']; ?></a></li>
+                            <?php
+                                endforeach;
+                            ?>
+                        </ul>
+                    </dd>
+                </dl>
+
+            </div>
+        </div>
+        <div class="roe-collegeTotal">
+            <span><i class="fa fa-long-arrow-down"></i>&nbsp;共找到&nbsp;<strong><?php echo $schoolCount; ?></strong>&nbsp;所</span>
+        </div>
+        <div class="roe-collegeList">
+            <div class="list">
+                <table id="roe-table" class="roe-table table-tr" style="width:750px;">
+                    <thead>
+                        <tr class="bg4-bzh">
+                            <th width="150px">院校名称</th>
+                            <th width="141px">院校排名</th>
+                            <th width="80px">所在地区</th>
+                            <th width="99px">院校特色</th>
+                            <th width="121px">院校隶属</th>
+                            <th width="76px">院校举办</th>
+                            <th width="76px">办学类型</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                            foreach ($colleges as $college) :
+                        ?>
+                        <tr>
+                            <td><a href="<?php echo arU('Index/schoolSelectInfo', array('cid' => $college['cid'])); ?>"><?php echo $college['sname']; ?></a></td>
+                            <td>
+                                <span><?php echo $college['pm1']; ?></span>
+                                <span><?php echo $college['pm2']; ?></span>
+                            </td>
+                            <td><?php echo $college['area']; ?></td>
+                            <td><?php echo $college['ts']; ?></td>
+                            <td><?php echo $college['ls']; ?></td>
+                            <td><?php echo $college['jb']; ?></td>
+                            <td><?php echo $college['lx']; ?></td>
+                        </tr>
+                        <?php
+                            endforeach;
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="roe-page">
+                <?php echo $page; ?>
+            </div>
+        </div>
+    </div>
+    <div class="kuang-reg-log-bzh right mt10 clearfix">
+        <div class="bdr p10 mt20 br5 clearfix">
+            <h4 class="fwb mb10">四川院校推荐</h4>
+            <ul class="ranking-bzh">
+               <?php
+                    for ($i = 0; $i < count($scColleges); $i++) :
+                        if ($i < 3) :
+                            $class = 'bg4-bzh';
+                        else :
+                            $class = 'bge-bzh';
+                        endif;
+                        $school = $scColleges[$i];
+                ?>
+                <li class="mt5 clearfix"><div class="left w50 word-en word-lf"><span class="min-num-bzh tac mr5 dib fcw <?php echo $class; ?>"><?php echo $i + 1; ?></span><a href="<?php echo arU('schoolSelectInfo', array('cid' => $school['cid'])); ?>"><?php echo $school['sname']; ?></a></div><span class="dib right"><?php echo $school['hot']; ?></span></li>
+                <?php
+                    endfor;
+                ?>
+            </ul>
+        </div>
+        <div class="mt10 pt10 pb10 bdr br5 clearfix">
+            <span class="fwb tac db">高考志愿填报参考数据查询</span>
+            <hr>
+            <div class="min-dataSearch pl10 clearfix">
+                <dt class="fwb ml5">院校投档分数线</dt>
+                <form target="_blank" action="<?php echo arU('Index/schoolSelectInfo'); ?>" id="roe-school">
+                    <select name="km" class="form-control input-sm">
+                        <option value='-1' class="dn">类型</option>
+                        <option value="0" class="">理科</option>
+                        <option value="1" class="">文科</option>
+                    </select>
+                    <select name="pc" class="form-control input-sm">
+                        <option value='-1' class="dn">录取批次</option>
+                        <option value="0" class="">提前批</option>
+                        <option value="1" class="">本一</option>
+                        <option value="2" class="">本二</option>
+                        <option value="3" class="">专一</option>
+                        <option value="4" class="">专二</option>
+                    </select>
+                    <select name="yxaddress" class="form-control input-sm">
+                        <option value='-1'>院校所在地</option>
+                        <!-- <?php foreach ($chinaCityArray as $key => $chinaCityArray) { ?>
+                            <option>
+                                <?php echo $chinaCityArray['name'];?>
+                            </option>
+                            <?php
+                        }?> -->
+                    </select>
+                    <select name="cid" class="form-control input-sm">
+                        <option class="dn" value='-1'>院校名称</option>
+                    </select>
+                    <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+                </form>
+            </div>
+            <hr>
+            <div class="min-dataSearch pl10 clearfix">
+                <dt class="fwb ml5">专业录取分数线</dt>
+                <form target="_blank" action="<?php echo arU('Index/professionalSelectInfo'); ?>" id="roe-fraction">
+                    <select name="lb" class="form-control input-sm">
+                        <option value='-1'>专业层次</option>
+                        <option value="0">本科</option>
+                        <option value="1">专科</option>
+                    </select>
+                    <select name="xk" class="form-control input-sm">
+                        <option value='-1'>专业学科</option>
+                    </select>
+                    <select name="ml" class="form-control input-sm">
+                        <option value='-1'>专业门类</option>
+                    </select>
+                    <select name="dm" class="form-control input-sm">
+                        <option value='-1'>专业名称</option>
+                    </select>
+                    <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.roe-character').find('a').on('click', function() {
+        $('.roe-character').find('a').removeClass('selected');
+        $(this).addClass('selected');
+    });
+    $('.roe-location').find('a').on('click', function() {
+        $('.roe-location').find('a').removeClass('selected');
+        $(this).addClass('selected');
+    });
+    // 切换多选地区
+    /*$('#roe-select').on('click', function() {
+        $('.roe-location').css('display', 'none');
+        $('.roe-location-multiple').css('display', 'block');
+    });
+
+    $('#roe-cancel').on('click', function() {
+        $('.roe-location-multiple').css('display', 'none');
+        $('.roe-location').css('display', 'block');
+    });*/
+    //tr 行颜色
+    $(".table-tr tbody tr").filter(":odd").css("background-color",'#eee');
+    $(".table-tr td").css("border", "1px solid #ddd");
+
+    $(function(){
+        //院校所在地
+        $.post('<?php echo AR_SERVER_PATH; ?>Api/provinceList', function(data) {
+            addData(data, $('#roe-school'), 'yxaddress');
+        }, "json");
+        //院校名称
+        yxnamesearch('<?php echo AR_SERVER_PATH; ?>Api/areaSchools?');
+        //院校投档分数线查询判断
+        $('#roe-school').submit(function(event) {
+            return panduan('#roe-school','km','pc','yxaddress','cid');
+            //return false;
+        });
+        //专业录取分数线判断
+        $('#roe-fraction').submit(function(event) {
+            return panduan('#roe-fraction','dm','xk','ml','lb');
+        });
+        //学科
+        zylqsearchfn('lb','<?php echo AR_SERVER_PATH; ?>Api/majorXks?','xk','xk','专业学科');
+        //门类
+        zylqsearchfn('xk','<?php echo AR_SERVER_PATH; ?>Api/majorMls?','ml','ml','专业门类');
+        //专业名称
+        zylqsearchfn('ml','<?php echo AR_SERVER_PATH; ?>Api/majorsByMl?','dm','mname','专业名称');
+    });
+</script>

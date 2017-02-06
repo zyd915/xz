@@ -1,0 +1,136 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left"></span></a>
+        <span class="page-tit">忘记密码</span>
+    </header>
+    <section class="content xzlh-forget">
+        <form class="" action="" method="post" style="width:6.6rem;margin: .5rem auto;">
+            <div class="form-group">
+                <label class="control-label sr-only" for=""></label>
+                <input type="text" class="form-control" name="phone" placeholder="请输入您的手机号码">
+            </div>
+            <div class="form-group clearfix" style="display:none;">
+                <label class="control-label sr-only" for=""></label>
+                <input type="text" class="form-control" name="picVerific" placeholder="请输入验证码" style="width:4rem;float:left;">
+                <a href="javascript:;" style="width:2.4rem;height:.9rem;float:right;"><img src="" alt="" style="height:100%;" /></a>
+            </div>
+            <div class="form-group clearfix">
+                <label class="control-label sr-only" for=""></label>
+                <input type="text" class="form-control" name="phoneVerific" placeholder="请输入手机收到的验证码" style="width:4rem;float:left;">
+                <button class="phoneBtn" type="button" name="button">获取手机验证码</button>
+            </div>
+            <div class="form-group">
+                <label class="control-label sr-only" for=""></label>
+                <input type="password" class="form-control" name="password" placeholder="请设置新密码">
+            </div>
+            <div class="form-group">
+                <label class="control-label sr-only" for=""></label>
+                <input type="password" class="form-control" name="passwordre" placeholder="请再次输入新密码">
+            </div>
+            <div class="form-group lhxz-error" style="text-align:center;background-color:#f2dede;color:#b94a48;">
+
+            </div>
+            <div class="form-group">
+                <button class="btn" type="button" name="button">确定</button>
+            </div>
+            <div class="form-group clearfix">
+                <a href="<?php echo arU("User/login"); ?>" style="float:left;margin-left:.2rem;">登陆</a>
+                <a href="<?php echo arU("User/signUp"); ?>" style="float:right;margin-right:.2rem;">注册</a>
+            </div>
+        </form>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        var phoneReg = /^1[3|4|5|7|8][0-9]{9}$/g;
+        $('.xzlh-forget').on('blur','input',function(){
+            var that = $(this);
+            if ( $(this).val() == '' ) {
+                $(this).addClass('error');
+            }
+        });
+        $('.xzlh-forget').on('focus','input',function(){
+            $(this).removeClass('error phoneErroe');
+            $('.lhxz-error').text('').hide();
+        });
+
+        function reg(){
+            if ($('input[name="phone"]').val() == '') {
+                $('input[name="phone"]').addClass('error phoneErroe');
+                $('.lhxz-error').text('电话号码不能为空').show();
+            }else {
+                if (!phoneReg.test($('input[name="phone"]').val())) {
+                    $('input[name="phone"]').addClass('error phoneErroe');
+                    $('.lhxz-error').text('电话号码格式错误').show();
+                }else{
+                    $('input[name="phone"]').removeClass('error phoneErroe');
+                    $('.lhxz-error').text('').hide();
+                }
+
+            }
+            // if ($('input[name="picVerific"]').val() == '') {
+            //     $('input[name="picVerific"]').addClass('error phoneErroe');
+            //     $('.lhxz-error').text('验证码不能为空').show();
+            // }else{
+            //     $('input[name="picVerific"]').addClass('error phoneErroe');
+            //     $('.lhxz-error').text('验证码不能为空').show();
+            // }
+        }
+        // 获取短信验证码
+        $('.phoneBtn').click(function(){
+            reg();
+            var phone = $('input[name="phone"]').val();
+            if ( $('.phoneErroe').size() == 0 ) {
+                $.post("<?php echo arU('/main/api/sendPhoneCpCode');?>", {'phone': phone}, function (res) {
+                    if (res.success == '1') {
+                        layer.open({
+                            content: '重置密码验证码已发送，请注意查收',
+                            time: 2000
+                        });
+                    } else {
+                        layer.open({
+                            content: res.ret_msg,
+                            time: 2000
+                        });
+                    }
+                }, 'json');
+            }
+        });
+        // 提交表单
+        $('.xzlh-forget .btn').click(function(){
+            var pwd = $('input[name="password"]').val(),
+                code = $('input[name="phoneVerific"]').val(),
+                phone = $('input[name="phone"]').val();
+            reg();
+            if( $('input[name="phoneVerific"]').val() == ''){
+                $('input[name="phoneVerific"]').addClass('error');
+                $('.lhxz-error').text('短信验证码不能为空').show();
+            }
+            if ($('input[name="password"]').val() == '') {
+                $('input[name="password"]').addClass('error');
+                $('.lhxz-error').text('密码不能为空').show();
+            }
+            if( $('input[name="password"]').val() != $('input[name="passwordre"]').val()){
+                $('input[name="passwordre"]').addClass('error');
+                $('.lhxz-error').text('两次输入的密码不一样').show();
+            }
+            if ($('.error').size() == 0) {
+                $.post("<?php echo arU('/main/api/changePwd');?>", {'code': code, 'phone': phone, 'new_pwd': pwd},function(res){
+                    if (res.success == '1') {
+                        layer.open({
+                            content: res.ret_msg,
+                            time: 1800,
+                            end:function(){
+                                window.location.href='<?php echo arU('User/login'); ?>';
+                            }
+                        });
+                    } else {
+                        layer.open({
+                            content: res.ret_msg,
+                            time: 1800
+                        });
+                    }
+                },'json');
+            }
+        })
+    });
+</script>

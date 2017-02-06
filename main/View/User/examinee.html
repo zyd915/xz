@@ -1,0 +1,239 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="examinee-title">
+			<h2 class="left">考生走向查询</h2>
+			<div class="line right mt10"></div>
+		</div>
+		<div class="clearfloat pt5">
+			<p>考生输入分数或位次，查询往年录取去向。</p>
+		</div>
+	</div>
+	<div class="type-menu clearfix">
+		<div id="t-score" class="t-menu left tac current" onclick="Tmenu('#t-score','current','true','#type','0')">按分数查询</div>
+		<div id="t-index" class="t-menu left tac" onclick="Tmenu('#t-index','current','true','#type','1')">按位次查询</div>
+		<!-- <div id="t-expert" class="t-menu left tac" onclick="Tmenu('#t-expert','current','true','#type','2')">按专业查询</div> -->
+	</div>
+	<div class="content-detail mt20">
+		<ul class=" mt20">
+			<li>
+				<div class="cards">
+					<label class="tar">适用省市</label>
+					<span class="ml40">四川省</span>
+				</div>
+			</li>
+			<!-- <li>
+				 <div class="cards mt10">
+					<label for="cards" class="tar">使用说明</label>
+					<span id="cards" class="ml40">小系统不含体育、艺术类院校信息</span>
+				</div>
+			</li> -->
+			<li>
+				<div class="yb-select yb-input-text yb-input-submit">
+					<form id="roe-fssearch" action="" class="detail-area" name="" method="post" onsubmit="return nonempty('#score','分数不能为空！');">
+						<ul class="mt10">
+							<li>
+								<div class="lists">
+									<label for="school">科目选择：</label>
+									<?php
+			                            // 调用用html seg 直接输出 select标签
+			                            arSeg(
+			                                array(
+			                                // seg文件
+			                                'segKey' => 'Html/select',
+			                                // <select name="name">
+			                                'name' => 'km',
+			                                // 适配器数据 数组
+			                                'map' => DataYxModel::$kmMap,
+			                                // 选中的value selected = selected
+			                                'selected' => 0
+			                                )
+			                            );
+			                        ?>
+								</div>
+							</li>
+							<li>
+								<div class="lists mt5">
+									<label for="year">批次：</label>
+									<?php
+			                            // 调用用html seg 直接输出 select标签
+			                            arSeg(
+			                                array(
+			                                // seg文件
+			                                'segKey' => 'Html/select',
+			                                // <select name="name">
+			                                'name' => 'pc',
+			                                // 适配器数据 数组
+			                                'map' => DataYxModel::$pcMap,
+			                                // 选中的value selected = selected
+			                                'selected' => 0
+			                                )
+			                            );
+			                        ?>
+								</div>
+							</li>
+							<li>
+								<div class="lists mt5">
+									<label for="year">年份：</label>
+									<select id="year" name="year">
+										<option selected value="13">2013</option>
+										<option value="14">2014</option>
+										<option value="15">2015</option>
+									</select>
+								</div>
+							</li>
+							<li>
+								<div class="lists mt5">
+									<label for="type">类型：</label>
+									<select id="type" name="type">
+										<option selected value="lqf" id="t-score">按分数查询</option>
+										<option value="lqwc" id="t-index">按位次查询</option>
+										<!-- <option id="t-expert">按专业查询</option> -->
+									</select>
+								</div>
+							</li>
+							<li>
+								<div class="lists mt5">
+									<label for="score">分数范围：</label>
+									<input type="text" name="score" id="score"/><span style="padding:0 5px;">--</span>
+									<input type="text" name="score1" id="score1">
+									<span class="socregeshi" style="color:red;">分数格式为：528-536</span>
+								</div>
+							</li>
+							<li>
+								<div class="select-div mt10 mb20">
+									<input style="background:#37B68D;" type="button" name="btn" class="select-btn" value="查询" />
+								</div>
+							</li>
+						</ul>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="examinee-data">
+		<p></p>
+		<table id="data" class="table table-bordered tac fs14px-bzh mb0">
+			<thead>
+				<tr class="bge-bzh">
+					<th>学校名称</th>
+					<th>年份</th>
+					<th>录取分</th>
+					<th>录取分线差</th>
+					<th>平均分</th>
+					<th>平均分线差</th>
+					<th>录取位次</th>
+					<th>录取人数</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#type').click(function(){
+			Tmenu('#'+$('#type option:selected').attr('id'),'current',false,'','');
+		});
+		//trbgColor();
+		function trhover(){
+			$('tbody tr').bind({
+				mousemove:function(){
+					$(this).css('background-color','#FFF3E0');
+				},
+				mouseout:function(){
+					trbgColor();
+				}
+			});
+		}
+
+		//按分数查询/按位次查询
+		$('#roe-fssearch').find('input[name="btn"]').on('click',function(){
+			var km = $('#roe-fssearch').find('select[name="km"]').val();
+			var pc = $('#roe-fssearch').find('select[name="pc"]').val();
+			var year = $('#roe-fssearch').find('select[name="year"]').val();
+			var stype = $('#roe-fssearch').find('select[name="type"]').val();
+			var range = $('#roe-fssearch').find('input[name="score"]').val();
+			var range1 = $('#roe-fssearch').find('input[name="score1"]').val();
+			var dat = {
+				'stype' : stype,
+				'km' : km,
+				'pc' : pc,
+				'year' : year,
+				'range' : range+'-'+range1
+			};
+			var reg = /^(\d+)-(\d+)$/g;
+			var bRange = range+'-'+range1;
+			var tf = bRange.replace(reg,function($0,$1,$2){
+				$1 = Number($1);
+				$2 = Number($2);
+				if($2 > $1){
+					return true;
+				}else{
+					return false;
+				}
+			});
+			if(tf == 'true'){
+				ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/kaoshengZx','POST',dat,kszx);
+				function kszx(data){
+				//$.post('<?php echo AR_SERVER_PATH; ?>Api/kaoshengZx',dat,function(data){
+					var html = '';
+					if(data.ret_code == 1000){
+						for(var i=0; i<data.total_lines; i++){
+							html += '<tr>\
+										<td>'+data.data[i].name+'</td>\
+										<td>'+'20'+year+'</td>\
+										<td>'+tdmc(data.data[i].lqf)+'</td>\
+										<td>'+tdmc(data.data[i].fc)+'</td>\
+										<td>'+tdmc(data.data[i].jf)+'</td>\
+										<td>'+tdmc(data.data[i].jfxc)+'</td>\
+										<td>'+tdmc(data.data[i].lqwc)+'</td>\
+										<td>'+tdmc(data.data[i].zsjh)+'</td>\
+									</tr>';
+						}
+						$('#data').find('tbody').html(html);
+						$('#data').prev('p').html('20'+year+'年该分数范围的考生走向:');
+						trhover();
+						trbgColor();
+					}else{
+						$('#data').prev('p').html('很抱歉，没有查询到相关数据。');
+						$('#data').find('tbody').html('');
+					}
+				//},'json');
+				}
+			}else{
+				layer.msg('分数或位次范围格式不正确！');
+				$('#data').find('tbody').html('');
+			}
+		});
+	});
+
+	var tindex='#t-score';
+	function Tmenu(id,cl,a,sid,s){
+		if($(id).hasClass(cl)){
+
+		}else{
+			$(id).addClass(cl);
+			$(tindex).removeClass(cl);
+			if(a){
+				$(sid)[0].selectedIndex=s;
+			}
+			tindex=id;
+		}
+
+		if($('#type').val() == 'lqf'){
+			$('label[for="score"]').html('分数范围：');
+			$('.socregeshi').html('分数格式为：528-536');
+		}else{
+			$('label[for="score"]').html('位次范围：');
+			$('.socregeshi').html('位次格式为：1528-1536');
+		}
+	}
+
+	function trbgColor(){
+		$('tr:odd').css('background-color','#fff');
+		$('tr:even').css('background-color','#eee');
+	}
+</script>

@@ -1,0 +1,77 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="o2o-title">
+			<h2 class="left">1对1专家咨询详情</h2>
+			<div class="line right mt10 mb30"></div>
+		</div>
+	</div>
+	<div class="mt20 mb20 clearfix clearfloat">
+		<ul class="tac lbul">
+			<li>
+				<div class="fjyj tac left">
+					<span>选择专家</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-user-plus"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<li>
+				<div class="fjyj tac left">
+					<span>预约咨询</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-clock-o"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<!-- <li>
+				<div class="fjyj tac left">
+					<span>订单付款</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-cc-visa"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li> -->
+			<li>
+				<div class="fjyj tac selection left">
+					<span>专家1对1咨询</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-group"></i>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="o2o clearfix">
+		<div class="left ml10 mt20 mb20">
+			<div class="vip-header"><img src="<?php echo $showOne['galleryUrl']['url'] ?>"/></div>
+		</div>
+		<div class="left mb10 mr20 item expert-detail">
+			<p class="detail-font">
+				您选择了
+				<span><?php echo $showOne['title'];?></span>
+				专家为您提供高考志愿填报咨询<span class="ml20">已成功！</span>
+				<span class="right mr10">
+					<a href="<?php echo arU('User/expert'); ?>">[返回继续预约]</a>
+				</span>
+			</p>
+			<p class="mt10 pb10">请等待审核，审核通过后专家会在您所填时间段主动联系到您，请您耐心等待！</p>
+			<div class="tac mt20 mb20">
+				<a href="<?php echo arU('User/expertDetailForm'); ?>" class="tjan">查看预约订单</a>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+	});
+</script>

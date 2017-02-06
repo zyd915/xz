@@ -1,0 +1,95 @@
+
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">院校数据查询</span>
+    </header>
+    <section class="content">
+        <div class="main">
+            <!--搜索框 search-box-->
+            <div class="search-box">
+                <form action="<?php echo arU(''); ?>" method="get">
+                    <div>
+                        <span class="glyphicon glyphicon-search xzlh-s-span" ></span>
+                        <input type="text" class="xzlh-s-input" name="sname" placeholder="搜索院校" >
+                        <button class="xzlh-s-btn">搜索</button>
+                    </div>
+                </form>
+            </div>
+                <!--院校特色.地区-->
+            <div class="ts-area" style="background-color: #EEE;">
+                <div class="top-tit clearfix">
+                    <div class="ts">
+                        <a class="text-center" id="xzlh-yxts" href="javascript:;">院校特色 <span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                    </div>
+                    <div class="ts area">
+                        <a class="text-center" id="xzlh-addr" href="javascript:;">所在地区<span class="glyphicon glyphicon-triangle-bottom"></span></a>
+                    </div>
+                </div>
+                <div class="xzlh-yx-totle">
+                    <span>共<i><?php echo $total; ?></i>所学校</span>
+                </div>
+                <div class="college-list">
+                    <ul>
+                    <?php foreach ($school as $school): ?>
+                        <li class="li-item">
+                            <div class="li-warpper clearfix">
+                                <div class="sc-info">
+                                    <div class="clearfix xzlh-sc-yxinfo">
+                                        <a class="xuexiao" href="<?php echo arU('schooldetail', array('cid' => $school['cid'])); ?>"><?php echo $school['sname']; ?></a>
+                                        <span class="fr">
+                                            <i class="school-985"><?php echo $school['ts']?></i>
+                                        </span>
+                                    </div>
+                                    <div class="clearfix xzlh-sc-addr">
+                                        <a href="<?php echo arU('schooldetail', array('cid' => $school['cid'])); ?>" class="fl">查历年录取数据</a>
+                                        <address class="fr">所在地:<?php echo $school['area'];?></address>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
+                    </ul>
+                    <div class="text-center"><?php echo $page; ?></div>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        $('#xzlh-yxts').tap(function(){
+            layer.closeAll();
+            var html = '<div class="xzlh-yxts-alert">\
+                            <a href="<?php echo arU('', array('greedyUrl' => true,'ts' => '')); ?>" class="<?php if (arRequest('ts') == '') :?>\
+                            active\
+                            <?php endif;?> btn">全部</a>\
+                            <a class="<?php if(arRequest('ts') == 211):?>active<?php endif;?> btn"\
+                            href="<?php echo arU('', array('greedyUrl' => true,'ts' => 211)); ?>">211</a>\
+                            <a class="<?php if(arRequest('ts') == 985):?>active<?php endif;?> btn" href="<?php echo arU('', array('greedyUrl' => true,'ts' => 985)); ?>">985</a>\
+                            <a class="<?php if(arRequest('ts') == '教育部'):?>active<?php endif;?> btn" href="<?php echo arU('', array('greedyUrl' => true,'ts' => '教育部')); ?> " style="width:45%">教育部直属</a>\
+                        </div>';
+            alertlayer('院校特色',html);
+        });
+        $('#xzlh-addr').tap(function(){
+            layer.closeAll();
+            //var html = $('.xzlh-area').html()
+             var html = '<div class="xzlh-yxdq-alert">\
+                             <a href="<?php echo arU('', array('greedyUrl' => true,'area' => '')); ?>" class=" <?php if (!arRequest('area')) :?>\
+                            active\
+                            <?php endif;?> btn">全部</a>\
+                             <?php foreach($provinces as $provinces): ?>\
+                             <a class=" <?php if (urldecode(arRequest('area')) == $provinces['region_name']) :?>\
+                                active\
+                                <?php endif;?> btn" href="<?php echo arU('', array('greedyUrl' => true,'area' => $provinces['region_name'])); ?>"><?php echo $provinces['region_name']; ?></a>\
+                             <?php endforeach; ?>\
+                          </div>';
+            alertlayer('地区',html);
+        });
+        function alertlayer(title,cont){
+            layer.open({
+                title: '<span style="color:#0078D7;font-weight:600;">'+title+'</span>',
+                content: cont
+            })
+        }
+    })
+</script>

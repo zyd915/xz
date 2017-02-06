@@ -1,0 +1,86 @@
+<!-- 小导航 -->
+<div class="minNav w100 mt10 bg3-bzh pt10 pb10 fcw clearfix">
+    <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="<?php echo arU('Index/index'); ?>">循证高考</a>&nbsp;>&nbsp;<a href="<?php echo arU('Index/expertConsultation'); ?>">专家咨询</a>&nbsp;
+</div>
+
+<div class="mt10 clearfix">
+    <div class="mainHeader">
+		<!-- <div class="profession-title">
+			<h2 class="left ml20 mb10 expertT">专家咨询</h2>
+		</div> -->
+	</div>
+	<div class="ml20 o2o clearfix">
+		<div class="tac mt20 mb20">
+			<div class="roe-expert-img">
+				<!-- <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/expert.jpg"> -->
+				<img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/zjzx.jpg">
+			</div>
+		</div>
+		<div class="o2o-mess mes-gk mt20 mb20 item">
+			<p>高考志愿填报被称为 “第二次高考” ，重要性不言而喻，从选择学校到专业，从研究录取数据到关注招生计划，从考生个人意愿到未来职业规划……高考志愿填报其实是一个非常复杂的统工程。但相比较考生和家长备战高考数年的充分准备，很多家长和考生对志愿填报的准备则显得极其不足。即使有部分家长提前做了功课，但面对这么庞大的选择范围和复杂程度的各种规则，依然感觉没有把握。然而，志愿填报中对任何一个细节的忽视都有可能造谬以千里的失误！<br/>
+			<a href="javascript:;" class="mt10">1对1专家咨询 </a>
+			<span class="ml10"> VIP志愿填报辅导，助您解决志愿填报困扰！</span>
+			</p>
+		</div>
+	</div>
+	<div class="detail-expert tac clearfix mt20">
+		<?php foreach ($experts as $expert) {
+			# code...
+		?>
+		<div class="detail-vip ml30 mt30 left">
+			<div class="vip-header left">
+				<img src="<?php echo $expert['headpic'];?>" />
+			</div>
+			<div class="left ml20 mt20">
+				<h3><?php echo $expert['name'];?></h3>
+				<p>vip咨询师</p>
+			</div>
+			<div class="mes left ">
+				<p class="shortdes"><?php echo $expert['shortdes'];?></p>
+				<a onclick="expertf('<?php echo $expert['eid']; ?>')">
+					<div class="itme mt20 mb20 tac ensure-btn">
+						预约
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<?php } ?>
+	</div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.mes p').each(function(index){
+			if($('.mes p').eq(index).text() != ""){
+				if($('.mes p').eq(index).text().length >= 53){
+					$('.mes p').eq(index).text($('.mes p').eq(index).text().substring(0,53)+'……');
+				}
+			}
+		});
+
+		//图片轮换
+		/*(function(){
+			var len = $('.roe-expert-img').find('img').length;
+			var i = 0;
+			var timer = setInterval(expertTimer, 2500);
+			function expertTimer(){
+				if(i != len-1){
+					$('.roe-expert-img').find('img').eq(i).fadeOut();
+					i++;
+					$('.roe-expert-img').find('img').eq(i).fadeIn();
+				}else{
+					$('.roe-expert-img').find('img').eq(i).fadeOut();
+					i = 0;
+					$('.roe-expert-img').find('img').eq(i).fadeIn();
+				}
+			}
+			$('.roe-expert-img').find('img').on('mousemove',function(){
+		        clearInterval(timer);
+		    });
+
+		    $('.roe-expert-img').find('img').on('mouseout',function(){
+		        timer = setInterval(expertTimer, 2500);
+		    });
+		})();*/
+	});
+</script>

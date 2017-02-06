@@ -1,0 +1,38 @@
+        <footer class="footer">
+            <a href="<?php echo arU('Index/index'); ?>" <?php if (arCfg('requestRoute.a_c') == 'Index' && arCfg('requestRoute.a_a') == 'index'):?>class="active" <?php endif; ?>>
+                <span class="glyphicon glyphicon-home"></span>
+                <p>首页</p>
+            </a>
+            <a href="<?php echo arU('Index/gaokaosystem'); ?>" <?php if (arCfg('requestRoute.a_a') == 'gaokaosystem' && arCfg('requestRoute.a_c') == 'Index'):?>class="active" <?php endif; ?>>
+                <span class="glyphicon glyphicon-heart-empty"></span>
+                <p>志愿智能推荐</p>
+            </a>
+            <a href="<?php echo arU('Index/findExpert'); ?>" <?php if (arCfg('requestRoute.a_c') == 'Index' && arCfg('requestRoute.a_a') == 'findExpert'):?>class="active" <?php endif; ?>>
+                <span class="glyphicon glyphicon-th-large"></span>
+                <p>专家咨询</p>
+            </a>
+            <a href="<?php echo arU('User/index'); ?>" <?php if (arCfg('requestRoute.a_c') == 'User'):?>class="active" <?php endif; ?>>
+                <span class="glyphicon glyphicon-user"></span>
+                <p>个人</p>
+            </a>
+        </footer>
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            (function(){
+                $('.xzlh-banner ul').width($('.xzlh-banner').find('li').size() * $('.xzlh-banner').find('li').eq(0).width());
+            })();
+            bannerSlider($('.xzlh-banner'), 3.5);
+        });
+        //底部导航
+        var navbar=$('.footer a');
+        // navbar.click(function(){
+        //    $(this).addClass("active").siblings().removeClass("active");
+        // })
+        navbar.on('tap',function(){
+
+            $(this).addClass("active").siblings().removeClass("active");
+        })
+    </script>
+</body>
+</html>

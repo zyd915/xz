@@ -1,0 +1,65 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">专家预约清单</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container">
+                <div class="xzws-yuyue-tit clearfix">
+                    <h4>
+                        <i class="fa fa-plus-square"></i>&nbsp;&nbsp;我的预约单
+                        <a href="<?php echo arU('Index/findExpert') ?>" class="btn btn-xs btn-success fr">再次预约</a>
+                    </h4>
+                </div>
+
+                <div class="xwws-expertFprm">
+
+                    <table class="table table-bordered" width="100%">
+                        <thead>
+                            <tr>
+                                <th>家长手机号</th>
+                                <th>预约时间</th>
+                                <th>预约专家</th>
+                                <th>操作</th>
+                            </tr>
+                            <?php foreach ($yuyue as $yuyue):
+                                $expert = ExpertModel::model()->getDb()->where(array('eid' => $yuyue['eid']))->queryRow();
+                                ?>
+                            <tr style="background-color: rgb(255, 243, 224);">
+                                <td><?php echo $yuyue[mobile]; ?></td>
+                                <td><?php echo $yuyue['startdate'] ?>&nbsp;&nbsp;<?php echo $yuyue['ytime']; ?></td>
+                                <td><?php echo $expert['name']; ?></td>
+                                <td class="czform">
+                                    <a href="<?php echo arU('Index/expertZixun',array('yids' => $yuyue['yid'])); ?>" class="btn btn-xs btn-info">修改</a>
+                                    <a href="javascript:deleteYuyue('<?php echo $yuyue['yid']; ?>');" class="btn btn-xs btn-warning">删除</a>
+                                </td>
+                            </tr>
+                            <?php endforeach;?>
+                        </thead>
+                        <tbody class="text-center" style="vertical-align: middle">
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+            // 删除预约
+            function deleteYuyue(yid){
+                var index=layer.open({
+                    content: '确定要删除吗？',
+                    btn:['<div style="color:#0078D7">确定</div>','<div style="color:#0078D7">取消</div>'],
+                    yes: function(){
+                        window.location.href="/xz/mobile/Index/deleteYuyue?yid=" + yid;
+                        layer.close(index);
+                    },
+                    no: function(){
+                        layer.close(index);
+                    }
+                })
+
+            }
+
+    </script>

@@ -1,0 +1,45 @@
+<div class="left case-yb auto">
+    <div class="ml20 title-border-yb">
+        <div class="case-title-yb">
+            <i class="fa fa-tasks"><span class="ml10">成功案例</span></i>
+        </div>
+        <div>
+            <?php foreach ($cases as $succList) {
+                # code...
+            ?>
+            <div class="mt10 ml20 mr20 pb10 case-content-yb">
+                <div class="case-img-yb right ml20">
+                    <a href="<?php echo arU('System/Detail',array('aid'=>$succList['aid'])); ?>">
+                        <img <?php if($succList['articlepic']): ?>src="<?php echo $succList['articlepic'];?>"<?php else:?>src="<?php echo arCfg('PATH.PUBLIC'); ?>img/pic1.png" <?php endif;?>width="120px" height="90px">
+                    </a>
+                </div>
+                <a href="<?php echo arU('System/Detail',array('aid'=>$succList['aid'])); ?>" class="title-name-yb"><?php echo stripcslashes($succList['title']) ;?></a>
+                <p class="ml20"><?php echo arModule('Article')->substr_cut(strip_tags($succList['content']), 150);?></p>
+                <a href="<?php echo arU('System/Detail',array('aid'=>$succList['aid'])); ?>" class="title-detail-yb">查看详情 ></a>
+            </div>
+            <?php } ?>
+        </div>
+        <div class="case-bar-yb mb20">
+        </div>
+    </div>
+    <div style="text-align:center">
+            <?php echo $page; ?>
+    </div>
+</div>
+<script type="text/javascript">
+    var menuName,menuClass;
+    $(document).ready(function(){
+        if(localStorage.getItem('menuName') != "" && localStorage.getItem('menuClass') != ""){
+            menuName=localStorage.getItem('menuName');
+            $('.case-title-yb i span').text(menuName);
+            $('.menuName-yb').text(menuName);
+
+            menuClass=localStorage.getItem('menuClass');
+            $('.menu-border-yb ul li').find('a').each(function(){
+                if($(this).attr('class') == menuClass){
+                    $(this).children().addClass('active-yb');
+                }
+            });
+        }
+    });
+</script>

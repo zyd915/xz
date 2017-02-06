@@ -1,0 +1,48 @@
+<?php
+function cateReplace($cates)
+{
+    foreach ($cates as $cate) :
+        $rank = $cate['rank'] + 2;
+    ?>
+        <div style="margin-left:20px" class="catagory">
+        <?php
+            if (!empty($cate['children'])) :
+        ?>
+        <h<?php echo $rank; ?> class="can-add-cate" value="<?php echo $cate['cid']; ?>"><span class="icon-th-list"></span><?php echo $cate['name']; ?></h<?php echo $rank; ?>>
+        <ul class="clearfix" style="display:none">
+            <?php
+                foreach ($cate['children'] as $children) :
+            ?>
+            <?php
+                if (!empty($children['children'])) :
+                    $cate = $children;
+                    $rank = $cate['rank'] + 2;
+            ?>
+            <li>
+            <h<?php echo $rank; ?> class="can-add-cate" value="<?php echo $children['cid']; ?>"><span class="icon-th-list"></span><?php echo $cate['name']; ?></h<?php echo $rank; ?>>
+                <?php cateReplace($children['children']); ?>
+            </li>
+            <?php
+                else:
+            ?>
+                <li class="can-add-cate" value="<?php echo $children['cid']; ?>"><span class="icon-file"></span><?php echo $children['name']; ?></li>
+            <?php
+                endif;
+            ?>
+            <?php
+            endforeach;
+            ?>
+        </ul>
+        <?php
+           else :
+        ?>
+            <h<?php echo $rank; ?> class="can-add-cate" value="<?php echo $cate['cid']; ?>"><span class="icon-file"></span><?php echo $cate['name']; ?></h<?php echo $rank; ?>>
+        <?php
+        endif;
+        ?>
+    </div>
+    <?php
+    endforeach;
+}
+cateReplace($cates);
+?>

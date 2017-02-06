@@ -1,0 +1,683 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="profession-title clearfix">
+			<h2 class="left">用户设置</h2>
+			<div class="line right mt10"></div>
+		</div>
+	</div>
+	<div class="mt20 clearfix">
+		<ul class="tmenu left">
+			<li>
+				<a href="#">
+					<div class="selected user-mess" onclick="userMenu('.user-mess','selected','.mb-Mess','clear')">个人资料</div>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<div class="user-pwd" onclick="userMenu('.user-pwd','selected','.mb-Pwd','clear')">账号密码</div>
+				</a>
+			</li>
+			<li>
+				<a href="#" >
+					<div class="user-safe" onclick="userMenu('.user-safe','selected','.mb-Safe','clear')">安全设置</div></a>
+			</li>
+			<li>
+				<a href="#" >
+					<div class="user-vip" onclick="userMenu('.user-vip','selected','.mb-vip','clear')">我的vip卡</div></a>
+			</li>
+		</ul>
+	</div>
+	<div class="mb-Mess mt20 yb-select yb-input-submit yb-input-text yb-input-radio">
+		<form action="" class="userMessage" id="userMessage" method="post" onsubmit="return unonempty(1);">
+			<ul class="left">
+				<li>
+					<div class="cards">
+						<label for="uArea" class="required pl100"><i class="fa fa-asterisk"></i> 所在省市：</label>
+						<select id="uArea" class="uAreap" name="areapid">
+							<option selected="selected" value="0">请选择</option>
+							<?php
+							    if ($provinces) :
+							?>
+								<?php
+								    foreach ($provinces as $province) :
+								    	if ($province['region_id'] == $userinfo['kaosheng']['areapid']) :
+								    		$selected = 'selected="selected"';
+								    	else :
+								    		$selected = '';
+								    	endif;
+								?>
+
+								<option <?php echo $selected; ?> value="<?php echo $province['region_id']; ?>"><?php echo $province['region_name']; ?></option>
+								<?php
+								    endforeach;
+								?>
+							<?php
+								else :
+							?>
+
+							<?php
+							    endif;
+							?>
+						</select>
+						<select class="uAreac" name="areacid">
+							<option selected="selected" value="0">请选择</option>
+							<?php
+							    if ($citys) :
+							?>
+								<?php
+								    foreach ($citys as $city) :
+								    	if ($city['region_id'] == $userinfo['kaosheng']['areacid']) :
+								    		$selected = 'selected="selected"';
+								    	else :
+								    		$selected = '';
+								    	endif;
+								?>
+
+								<option <?php echo $selected; ?> value="<?php echo $city['region_id']; ?>"><?php echo $city['region_name']; ?></option>
+								<?php
+								    endforeach;
+								?>
+							<?php
+								else :
+							?>
+
+							<?php
+							    endif;
+							?>
+						</select>
+						<select class="uAreaa" name="areaaid">
+							<option selected="selected" value="0">请选择</option>
+							<?php
+							    if ($countys) :
+							?>
+								<?php
+								    foreach ($countys as $county) :
+								    	if ($county['region_id'] == $userinfo['kaosheng']['areaaid']) :
+								    		$selected = 'selected="selected"';
+								    	else :
+								    		$selected = '';
+								    	endif;
+								?>
+
+								<option <?php echo $selected; ?> value="<?php echo $county['region_id']; ?>"><?php echo $county['region_name']; ?></option>
+								<?php
+								    endforeach;
+								?>
+							<?php
+								else :
+							?>
+
+							<?php
+							    endif;
+							?>
+						</select>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="uSchool" class="required"><i class="fa fa-asterisk"></i> 就读中学：</label>
+						<select id="uSchool" class="uSchool" name="schoolid">
+							<option selected="selected" value="0">请选择</option>
+							<?php
+							    if ($schools) :
+							?>
+								<?php
+								    foreach ($schools as $school) :
+									    if ($school['school_id'] == $userinfo['kaosheng']['schoolid']) :
+								    		$selected = 'selected="selected"';
+								    	else :
+								    		$selected = '';
+								    	endif;
+								?>
+									<option <?php echo $selected; ?> value="<?php echo $school['school_id']; ?>"><?php echo $school['school_name']; ?></option>
+								<?php
+								    endforeach;
+								?>
+
+							<?php
+								else :
+							?>
+
+							<?php
+							    endif;
+							?>
+						</select>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="uHigh" class="required"><i class="fa fa-asterisk"></i> 就读班级：</label>
+							<?php
+							      // 调用用html seg 直接输出 select标签
+							      arSeg(
+							         array(
+							            // seg文件
+							            'segKey' => 'Html/select',
+							            // <select name="name">
+							            'name' => 'grade',
+							            // 适配器数据 数组
+							            'map' => UserKaoshengModel::$GRADE_MAP,
+							            // 选中的value selected = selected
+							            'selected' => $userinfo['kaosheng']['grade']
+							         )
+							      );
+							?>
+						<input id="uClass" name="banji" type="text" value="<?php echo $userinfo['kaosheng']['banji']; ?>" name="班级"/>
+						<span>班</span>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="usName" class="required"><i class="fa fa-asterisk"></i> 考生姓名：</label>
+						<input id="usName" type="text" name="name" value="<?php echo $userinfo['kaosheng']['name']; ?>" />
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="uSex" class="required"><i class="fa fa-asterisk"></i> 考生性别：</label>
+						 <?php
+                         arSeg(
+                             array(
+                                // seg文件
+                                'segKey' => 'Html/input_radio',
+                                // <select name="name">
+                                'name' => 'gender',
+                                // 适配器数据 数组
+                                'map' => UserModel::$TYPE_SEX,
+                                // 选中的value checked =checked
+                                'checked' => $userinfo['kaosheng']['gender'],
+                             )
+                          );
+                       ?>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="uType" class="required"><i class="fa fa-asterisk"></i> 考生类型：</label>
+						 <?php
+                         arSeg(
+                             array(
+                                // seg文件
+                                'segKey' => 'Html/input_radio',
+                                // <select name="name">
+                                'name' => 'lx',
+                                // 适配器数据 数组
+                                'map' => UserModel::$TYPE_SUBJECT,
+                                // 选中的value checked =checked
+                                'checked' => $userinfo['kaosheng']['lx'],
+                             )
+                          );
+                       ?>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="uYear" class="required"><i class="fa fa-asterisk"></i> 高考年份：</label>
+						<input type="text" id="uYear" name="gkyear" value="<?php echo $userinfo['kaosheng']['gkyear']; ?>" />
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label ><i class="fa fa-asterisk"></i> 目标大学：</label>
+						<input  type="text" name="tschool" value="<?php echo $userinfo['kaosheng']['tschool']; ?>" />
+					</div>
+				</li>
+				<li>
+					<div class="cards kscore">
+						<label for="usName" ><i class="fa fa-asterisk"></i> 诊断分数：</label>
+					</div>
+					<div class="cards kscore">
+						<label for="one-zd" class="required"> 一诊分数：</label>
+
+						<input id="one-zd" type="text" name="scorez1" value="<?php echo $userinfo['kaosheng']['scorez1']; ?>" />
+						<span class="ml20"> 二诊分数：</span>
+						<input id="two-zd" type="text" name="scorez2" value="<?php echo $userinfo['kaosheng']['scorez2']; ?>" />
+						<span class="ml20"> 三诊分数：</span>
+						<input id="three-zd" type="text"  name="scorez3" value="<?php echo $userinfo['kaosheng']['scorez3']; ?>" />
+					</div>
+				</li>
+				<li>
+					<div class="cards kscore mt10 mb10">
+						<label for="kscore" class="required"><i class="fa fa-asterisk"></i> 高考成绩：</label>
+						<span class="ts-color">每个考生输入高考分数，位次会根据分数自动生成，保存后不可修改！</span>
+					</div>
+					<div class="cards kscore">
+						<label for="gk-score" class="required"> 高考分数：</label>
+						<?php if(date('YmdHis',time()) > 20160622200000):
+							$users = UserModel::model()->getDb()->where(array('uid' => $_SESSION['uid']))->queryRow();
+						?>
+							<?php if ($users['time'] < 1): ?>
+								<input id="gk-score" type="text" name="scoregk" value="<?php echo $userinfo['kaosheng']['scoregk']; ?>" />
+								<span class="ml20"> 高考名次：</span>
+								<input id="gk-sum" type="text" readonly="readonly" />
+							<?php else: ?>
+								<input id="gk-score" type="text" name="scoregk" value="<?php echo $userinfo['kaosheng']['scoregk']; ?>" disabled="true"/>
+								<span class="ml20"> 高考名次：</span>
+								<input id="gk-sum" type="text" disabled="true" />
+							<?php endif; ?>
+						<?php else: ?>
+						<input id="gk-score" type="text" name="scoregk" value="<?php echo $userinfo['kaosheng']['scoregk']; ?>" />
+						<span class="ml20"> 高考名次：</span>
+						<input id="gk-sum" type="text" readonly="readonly" />
+						<?php endif; ?>
+					</div>
+				</li>
+				<li class="formbtn">
+					<input type="submit" class="save-btn" value="保存个人资料" />
+				</li>
+			</ul>
+		</form>
+	</div>
+	<div class="mb-Pwd clear mt20 ml30 yb-input-password yb-input-submit yb-input-text">
+		<form name="changePwd" class="userPwd" id="userPwd" method="post" onsubmit="return unonempty(2);">
+			<ul class="left" id="changepwd">
+				<li>
+					<div class="cards">
+						<label for="uPwd" class="required"><i class="fa fa-asterisk"></i> 当前密码：</label>
+						<input id="uPwd" type="password" name="uPwd" value="" style="line-height:35px;"/>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="nPwd" class="required"><i class="fa fa-asterisk"></i> 新密码：</label>
+						<input id="nPwd" type="password" value="" style="line-height:35px;"/>
+						<span>密码为6-16位数字、字母或者符号，建议混合使用</span>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="rPwd" class="required"><i class="fa fa-asterisk"></i> 确认密码：</label>
+						<input id="rPwd" type="password" value="" style="line-height:35px;"/>
+					</div>
+				</li>
+				<li class="formbtn">
+					<input class="save-btn" name="savepwd" type="button" value="修改密码"/>
+				</li>
+			</ul>
+		</form>
+	</div>
+	<div class="mb-Safe clear mt20 yb-input-submit yb-input-text">
+		<div class="safe-mess mb20">
+			<i class="fa fa-info-circle  ml20"></i>
+			<span>绑定后，可直接使用手机号码/邮箱地址登录，并有助于您的密码安全！</span>
+		</div>
+		<div class="mt10 mobile clearfix">
+			<form action="" class="userMob" id="userMob" method="post" onsubmit="return unonempty(3);">
+				<ul class="safe left">
+					<li>
+						<div class="cards pt10 rMobile">
+                            <p><?php if($userinfo['phone']) :echo "你绑定的手机号码：";else:echo "你还未绑定手机号";endif;?>
+                                <span style="color:red;"><?php echo $userinfo['phone'];?></span>
+                                <a id="btnMob" href="javascript:;"><?php if($userinfo['phone']) :echo "更换号码";else:echo "去绑定";endif;?></a>
+                            </p>
+							<!-- <label for="uMobile" class="required"> 手机号码：</label>
+                            <input id="uMobile" type="text" value="<?php echo $userinfo['phone'];?>"/>
+                            <span class="ml10">
+                                <input class="save-btn" type="submit" value="<?php if($userinfo['phone']) :echo "已绑定";else:echo "绑定手机";endif;?>"/>
+                            </span> -->
+						</div>
+						<div class="cards clear pt30 Umobile">
+                            <div>
+    							<label for="uMobile" class="required"> 手机号码：</label>
+    							<input id="uMobile" type="text" value=""/>
+                                <span class="dxbtn">短信验证</span>
+                            </div>
+                            <div>
+                                <label for="umsg" class="required"> 验证码：</label>
+                                <input id="umsg" type="text" value=""/>
+                                <p>
+                                    <a id="roeCancel">取消</a>
+                                    <a id="roeYes">确定</a>
+                                </p>
+                            </div>
+						</div>
+						<p class="mMess">输入手机号，点击短信验证，系统将自动发送随机验证码到您的手机！</p>
+					</li>
+				</ul>
+			</form>
+		</div>
+		<!-- <div class="mt20 mobile clearfix">
+			<form action="" class="userEmail" id="userEmail" method="post" onsubmit="return unonempty(4);">
+				<ul>
+					<li>
+						<div class="cards pt30 clear Remail">
+							<label for="uEmail" class="required"> 电子邮箱：</label>
+							<input id="uEmail" type="text" value="<?php echo $userinfo['email'];?>" name="email"/>
+							<span class="ml10">
+								<input class="save-btn" type="submit" value="绑定邮箱"/>
+							</span>
+						</div>
+						<div class="cards pt30 Uemail">
+							<label for="uEmail" class="required"> 电子邮箱：</label>
+							<span id="uEmail"><?php echo $userinfo['email'];?></span>
+							<span class="ml10 update-btn tac update-ema">修改</span>
+						</div>
+
+						<p class="mMess">输入邮箱地址，点击绑定邮箱按钮，系统将自动发送验证邮件到您的邮箱，点击邮件里的验证链接即可绑定成功！</p>
+					</li>
+				</ul>
+			</form>
+		</div> -->
+	</div>
+	<div class="mb-vip clear mt20 ml30 yb-input-password yb-input-submit yb-input-text">
+		<form name="changeVip" class="userVip" id="userVip" method="post" onsubmit="">
+			<?php if ($userinfo['vip']) : ?>
+			<ul class="left" id="changeVip">
+				<li>
+					<div class="cards" style="margin-bottom:10px;font-size:16px;font-weight:bold;color:red;"><strong style="width:120px;display:inline-block;text-align:right;">vip卡号：</strong><span><?php echo $userinfo['vip']['cno']; ?></span></div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="uvPwd" class="required"><i class="fa fa-asterisk"></i> 当前密码：</label>
+						<span><?php echo htmlspecialchars($userinfo['vip']['pwd']); ?></span>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="nvPwd" class="required"><i class="fa fa-asterisk"></i> 新密码：</label>
+						<input id="nvPwd" type="password" value="" style="line-height:35px;"/>
+						<span>密码为6-16位数字、字母或者符号，建议混合使用</span>
+					</div>
+				</li>
+				<li>
+					<div class="cards">
+						<label for="rvuPwd" class="required"><i class="fa fa-asterisk"></i> 确认密码：</label>
+						<input id="rvuPwd" type="password" value="" style="line-height:35px;"/>
+					</div>
+				</li>
+				<li class="formbtn">
+					<input class="save-btn" name="savevippwd" type="button" value="修改密码"/>
+				</li>
+			</ul>
+			<?php else: ?>
+			<div>你还不是VIP用户，<a href="<?php echo arU('Index/vipCard'); ?>">点击升级成为VIP</a></div>
+			<?php endif; ?>
+		</form>
+	</div>
+</div>
+
+<script type="text/javascript">
+	var score,km,tsum,tind=0,nind=0,sind=0,cind=0;
+	$(document).ready(function(){
+		$('#btnMob').click(function(){
+			$('.Umobile').show();
+            $('.rMobile').hide();
+		});
+        $('#roeCancel').click(function() {
+            $('.Umobile').hide();
+            $('.rMobile').show();
+        });
+		$('.update-ema').click(function(){
+			$('.Uemail').hide();
+			$('.Remail').show();
+		});
+
+		AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/provinceList','',pOption,'.uAreap',spage);
+        $('.uAreap').change(function(){
+            var opIndex=$('.uAreap option:selected').attr("value");
+            $(".uAreac option[value!='0']").remove();
+            $(".uAreaa option[value!='0']").remove();
+            $(".uSchool option[value!='0']").remove();
+            if(opIndex != 0){
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/subRegionList?','pid='+opIndex+'',pOption,'.uAreac',spage);
+            }
+        });
+        $('.uAreac').change(function(){
+            var opIndex=$('.uAreac option:selected').attr("value");
+            $(".uAreaa option[value!='0']").remove();
+            $(".uSchool option[value!='0']").remove();
+            if(opIndex != 0){
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/subRegionList?','pid='+opIndex+'',pOption,'.uAreaa',spage);
+            }
+        });
+        $('.uAreaa').change(function(){
+            var opIndex=$('.uAreaa option:selected').attr("value");
+            $(".uSchool option[value!='0']").remove();
+            if(opIndex != 0){
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/schools?','aid='+opIndex+'',sOption,'.uSchool',spage);
+            }
+        });
+
+        if($('#gk-score').val() > 0){
+        	tsum=1;
+        	hqmes();
+            /*
+        	$('#gk-score').click(function(){
+        		if(nind == 0){
+        			tsmes();
+        			nind=1;
+        		}
+        	});
+        	$('#gk-sum').click(function(){
+        		if(sind == 0){
+        			tsmes();
+        			sind=1;
+        		}
+        	});
+        	$('#gk-score').attr('readonly','readonly');
+            */
+        }else{
+        	tsum=0;
+        	$('#gk-score').click(function(){
+        		if(tind == 0){
+        			tsmes();
+        			tind=1;
+        		}
+        	});
+        	$('#gk-sum').click(function(){
+        		if(cind == 0){
+        			tsmes();
+        			cind=1;
+        		}
+        	});
+        }
+        $('#gk-score').focus(function(){
+			var index=layer.tips('<b style="font-size:15px;">温馨提示:</b><br>1、使用原则，一人一卡使用。<br>2、6月22日20：00之前，不限试用次数。<br>3、6月22日20：00之后，每位考生只能输入一次真实高考分数（有加分的考生，请输入加分后的总分），查询次数不限。',$(this), {time:false,tips: [1, '#37B68D']});
+		}).blur(function(){
+			layer.closeAll();
+		})
+        $('#gk-score,input[type=radio][name=lx]').change(function(){
+        	if($('#gk-score').val() > 0){
+        		if(tsum == 1){
+		        	// $('#gk-score').attr('readonly','readonly');
+	        	}
+        		hqmes();
+        	}
+        });
+
+	});
+
+	function hqmes(){
+		score=$('#gk-score').val();
+    	km=$('input[type=radio][name=lx]:checked').attr('value');
+    	AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/wc?','score='+score+'&km='+km,wcoption,'#province',spage);
+	}
+
+	function tsmes(){
+		var index=layer.alert('',{
+	        title:'警告信息',
+	        content:'每个考生只需输入高考分数，位次会根据分数自动生成，保存后不可修改！',
+	        closeBtn:2,
+	        icon:5,
+	        shift:6,
+	        end:function(){
+	        	$('#gk-score').focus();
+	        }
+	    });
+	}
+
+	function wcoption(data,id){
+		$('#gk-sum').val(data.data.wc);
+	}
+
+	//省option
+    function pOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+data.data[i].region_id+'">'+data.data[i].region_name+'</option>');
+        }
+    }
+
+    //学校option
+    function sOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+data.data[i].school_id+'">'+data.data[i].school_name+'</option>');
+        }
+    }
+
+    function spage(){
+
+    }
+
+	var fid='.user-mess';
+	var lid='.mb-Mess';
+	function userMenu(id,icl,cid,ccl){
+		if($(id).hasClass(icl)){
+
+		}else{
+			$(id).addClass(icl);
+			$(cid).removeClass(ccl);
+			$(fid).removeClass(icl);
+			$(lid).addClass(ccl);
+			fid=id;
+			lid=cid;
+		}
+	}
+    var page_selected = '<?php echo arRequest('pgs'); ?>';
+	var phone = '<?php echo arRequest('dh'); ?>';
+
+	// 默认选中
+	if (page_selected == 'myvip') {
+		userMenu('.user-vip','selected','.mb-vip','clear');
+	}
+    if (phone == 'phone') {
+        userMenu('.user-safe','selected','.mb-Safe','clear');
+    }
+
+	var npwd,rpwd,uemail,umobile;
+	function unonempty(sum){
+		if(sum == 1){
+			if(snonempty('.uAreap','请选择所在省份！') &&  snonempty('.uAreac','请选择所在市！') && snonempty('.uAreaa','请选择所在区/县！') && snonempty('#uSchool','请选择就读中学！') && nonempty('#uClass','所在班级不能为空！') && snonempty('#uYear','请选择高考年份')){
+				return true;
+			}
+			return false;
+		}
+		if(sum == 2){
+			if(nonempty('#uPwd','当前密码不能为空！') && nonempty('#nPwd','新密码不能为空！') && nonempty('#rPwd','确认密码不能为空！')){
+				npwd=$.trim($('#nPwd').val());
+				rpwd=$.trim($('#rPwd').val());
+				if(npwd != rpwd){
+					message('新密码和确认密码不匹配！');
+				}else{
+					return true;
+				}
+			}
+			return false;
+		}
+		if(sum == 3){
+			if(nonempty('#uMobile','手机号码不能为空！')){
+				umobile = $.trim($('#uMobile').val());
+                var re1 = /^(0|86|17951)?(13[0-9]|15[012356789]|17[678]|18[0-9]|14[57])[0-9]{8}$/;
+                if(re1.test(umobile)){
+                	return true;
+                }else{
+                	message('手机号码格式不正确！');
+                }
+			}
+			return false;
+		}
+		if(sum == 4){
+			if(nonempty('#uEmail','电子邮箱不能为空！')){
+				uemail=$.trim($('#uEmail').val());
+				var re2 = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+				if(re2.test(uemail)){
+					return true;
+				}else{
+					message('电子邮箱格式不正确！');
+				}
+			}
+			return false;
+		}
+
+	}
+	$(function(){
+		// 保存会员密码
+		$('input[name=savepwd]').click(function(e){
+			e.preventDefault();
+			var oPwd = $('input[name=uPwd]').val();
+			var nPwd = $('input[id=nPwd]').val();
+			var data = {'oPwd':oPwd,'nPwd':nPwd};
+			var lid = layer.load('...');
+			$.post("<?php echo arU('changePwd');?>",data,function(ev){
+				if(ev.success=='1')
+				{
+					layer.close(lid);
+                    layer.msg(ev.ret_msg,2,-1);
+                    window.location.href=window.location.href;
+				}else{
+					layer.close(lid);
+                    layer.msg(ev.ret_msg,2,-1);
+				}
+			},'json');
+		});
+		// 保存vip密码
+		$('input[name=savevippwd]').click(function(e){
+			e.preventDefault();
+			var oPwd = $('input[id=rvuPwd]').val();
+			var nPwd = $('input[id=nvPwd]').val();
+			if (!nPwd || nPwd != oPwd) {
+				return layer.alert('两次输入密码不同');
+			}
+			var data = {'nPwd':nPwd};
+			var lid = layer.load('...');
+			$.post("<?php echo arU('changevipPwd');?>",data,function(ev){
+				if(ev.success=='1')
+				{
+					layer.close(lid);
+                    location.reload();
+				}else{
+					layer.close(lid);
+                    layer.msg(ev.ret_msg,2,-1);
+				}
+			},'json');
+		});
+
+        // 短信验证
+        $('.dxbtn').click(function () {
+            var mobile = $('#uMobile').val();
+            if (mobile) {
+                $.post(JSV.PATH_APP_SERVER + 'Api/ifMobieCanUse', {'mobile': mobile, 'type': 'reset'}, function (res) {
+                    if (res.ret_code == '1000') {
+                        var lid = layer.load();
+                        $.post(JSV.PATH_APP_SERVER + 'Api/sendPhoneBdCode', {'phone' : mobile}, function (res){
+                            layer.close(lid);
+                            if (res.ret_code == '1000') {
+                                layer.alert('短信已发送');
+                            } else {
+                                layer.alert('短信发送失败');
+                            }
+                        }, 'json');
+                    } else {
+                        layer.alert(res.ret_msg);
+                    }
+                }, 'json');
+            }
+        });
+
+        // 点击确定
+        $('#roeYes').click(function () {
+            var mobile = $('#uMobile').val();
+            var code = $('#umsg').val();
+            if (mobile && code) {
+                $.post(JSV.PATH_APP_SERVER + 'Api/bdphone', {'mobile': mobile, 'code': code}, function (res) {
+                    if (res.ret_code === '1000') {
+                        layer.msg('绑定成功');
+                        location.reload();
+                    } else {
+                        layer.alert(res.ret_msg);
+                    }
+                }, 'json');
+            }
+        });
+
+	});
+</script>

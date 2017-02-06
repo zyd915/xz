@@ -1,0 +1,274 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <span>订单管理</span>
+    <a style="margin: 10px" href="<?php echo arU('', array('pstatus' => OrderModel::STATUS_PAY_YES, 'status' => OrderModel::STATUS_APPROVED)); ?>" class="btn btn-success pull-right">交易完成</a>
+    <a style="margin: 10px" href="<?php echo arU('', array('pstatus' => OrderModel::STATUS_PAY_YES, 'sstatus' => OrderModel::STATUS_SHIPPING_YES, 'status' => OrderModel::STATUS_FORBIDDEN)); ?>" class="btn btn-warning pull-right">正在配送中(待确认收货)</a>
+    <a style="margin: 10px" href="<?php echo arU('', array('pstatus' => OrderModel::STATUS_PAY_YES, 'sstatus' => OrderModel::STATUS_SHIPPING_NO)); ?>" class="btn btn-danger pull-right">待发货(已付款)</a>
+  </div>
+  <div class="lqselection">
+    <form action="<?php echo arU('Order/index', array('greedyUrl' => true));?>" method="get">
+      <div class="lqsampleDiv">
+        产品名称：<input type="text" value="<?php echo arRequest('subject'); ?>" name="subject" class="lqselectionInput" style="width:200px;" />
+      </div>
+      <div class="lqsampleDiv">
+        消费金额区间：<input type="text" value="<?php echo arRequest('dprice'); ?>" name="dprice" class="lqselectionInput" style="width:200px;" placeholder ="两个数字之间用　-　号链接"/>
+      </div>
+      <div class="lqsampleDiv">
+        开始时间：<input type="text" name="sestime" value="<?php if(isset($sestime)){echo date('Y-m-d H:i',$sestime);}else{echo date('Y-m-d H:i',time());} ?>" id="datetimepicker" class="lqselectionInput" placeholder="不过期则不选" />
+      </div>
+      <div class="lqsampleDiv">
+        截止时间：<input type="text" name="seetime" value="<?php if(isset($seetime)){echo date('Y-m-d H:i',$seetime);}else{echo date('Y-m-d H:i',time());} ?>" id="datetimepickera" class="lqselectionInput" placeholder="不过期则不选" />
+      </div>
+      <div class="lqsampleDiv">
+        排序：<?php
+                // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'orderfiled',
+                      // 适配器数据 数组
+                      'map' => array('oid' => 'oid','price' => '价格', 'dprice' => '折扣价', 'ctime' => '下单时间','stime' => '发货时间', 'etime' => '完成时间','quantity' => '数量','oquantity' =>'购买数量'),
+                      // 选中的value selected = selected
+                      'selected' => arRequest('orderfiled', 'oid'),
+                   )
+                );
+              ?>
+              <?php
+                // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'ordertype',
+                      // 适配器数据 数组
+                      'map' => array('desc' => '降序', 'asc' => '升序'),
+                      // 选中的value selected = selected
+                      'selected' => arRequest('ordertype', 'desc'),
+                   )
+                );
+              ?>
+      </div>
+      <div class="lqsampleDiv">
+        支付状态：<?php
+                 // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'pstatus',
+                      // 适配器数据 数组
+                      'map' => array('2'=>'不计','0' => '未支付', '1' => '已支付'),
+                      // 选中的value selected = selected
+                      'selected' => arRequest('pstatus', '2'),
+                   )
+                );
+              ?>
+      </div>
+      <div class="lqsampleDiv">
+        发货状态：<?php
+                 // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'sstatus',
+                      // 适配器数据 数组
+                      'map' => array('2'=>'已收货','0' => '未发货', '1' => '已发货','3'=>'不计'),
+                      // 选中的value selected = selected
+                      'selected' => arRequest('sstatus', '3'),
+                   )
+                );
+              ?>
+      </div>
+      <input type="text" value="<?php echo $_GET['do'];?>" >
+      <div class="lqsampleDiv">
+        完成状态：<?php
+                 // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'status',
+                      // 适配器数据 数组
+                      'map' => array('0' => '未完成', '1' => '已完成','2'=>'不计'),
+                      // 选中的value selected = selected
+                      'selected' => arRequest('status', '2'),
+                   )
+                );
+              ?>
+      </div>
+    
+      <div class="lqsampleDiv">
+        每页条数：<?php
+                // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'countperpage',
+                      // 适配器数据 数组
+                      'map' => array(5 => 5, 10 => 10, 20 => 20, 30 => 30, 50 => 50),
+                      // 选中的value selected = selected
+                      'selected' => $countperpage,
+                   )
+                );
+              ?>
+      </div>
+      <div class="lqsampleDiv">
+        时间段查询：<?php
+                // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'searchTime',
+                      // 适配器数据 数组
+                      'map' => array('0'=>'不计','ctime' => '下单时间', 'stime' => '发货时间', 'etime' => '完成时间'),
+                      // 选中的value selected = selected
+                      'selected' => arRequest('searchTime','0'),
+                   )
+                );
+              ?>
+      </div>
+      <div class="lqsampleDiv">
+        每页条数：<?php
+                // 调用用html seg 直接输出 select标签
+                arSeg(
+                   array(
+                      // seg文件
+                      'segKey' => 'Html/select',
+                      // <select name="name">
+                      'name' => 'countperpage',
+                      // 适配器数据 数组
+                      'map' => array(5 => 5, 10 => 10, 20 => 20, 30 => 30, 50 => 50),
+                      // 选中的value selected = selected
+                      'selected' => $countperpage,
+                   )
+                );
+              ?>
+      </div>
+      <div class="lqsampleDiv">
+        <button type="submit" value="查询 " class="btn btn-success pull-right" id="lqselectionBtn">查询</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+ 
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>订单名称</th>
+            <th>下单人(uid)</th>
+            <th>收货人</th>
+            <th>订单号</th>
+            <th>
+            <?php
+            if ($type == ProductModel::TYPE_JF) :
+              echo '积分';
+            else :
+              echo '价格';
+            endif;
+            ?>
+            </th>
+            <th>折扣价</th>
+            <th>下单时间</th>
+            <th>发货时间</th>
+            <th>完成时间</th>
+            <th>数量</th>
+            <th>支付状态</th>
+            <th>发货状态</th>
+            <th>订单完成状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($orders as $order) :
+          ?>
+          <tr>
+            <td><?php if(arRequest('do') == 'delete') : ?><input type="checkbox" name="mydel" value="<?php echo $order['oid']; ?>" /><?php endif; ?><?php echo $order['oid']; ?></td>
+            <td><?php if($group) :  $w= explode("*", $order['subject']); echo $w[0]; else : echo $order['subject'];endif; ?></td>
+            <td><?php if($group) : else : echo $order['myname']; ?>(<?php echo $order['uid']; ?>)<?php endif;?></td>
+            <td><?php if($group) : else : echo $order['uname'];  endif;?></td>
+            
+            <td><?php if($group) : else : echo $order['otradeno']; endif;?></td>
+            <td>
+            <?php if($group) : else : 
+
+            if ($type == ProductModel::TYPE_JF) :
+              echo $order['jf'];
+            else :
+              echo $order['price'];
+            endif;
+           endif;?>
+            </td>
+            <td><?php if($group) : else : echo $order['dprice']; endif;?></td>
+            <td><?php  if($group) : else : echo date('Y-m-d H:i:s', $order['ctime']);endif;?></td>
+            <td style="width:48px"><?php if($group) : else : if($order['stime']) :echo date('Y-m-d H:i:s', $order['stime']); else: echo '未发货'; endif;endif;?></td>
+            <td style="width:48px"><?php if($group) : else : if($order['etime']) :echo date('Y-m-d H:i:s', $order['etime']); else: echo '未完成'; endif;endif;?></td>
+            <td style="width:48px"><?php echo $order['quantity']; ?></td>
+            <td style="width:48px">
+            <?php
+            if ($type == ProductModel::TYPE_JF) :
+              echo '已支付';
+            else :
+              arEcho($order['pstatus'], OrderModel::$STATUS_PAY_MAP);
+            endif;
+            ?>
+            </td>
+            <td style="width:48px"><?php arEcho($order['sstatus'], OrderModel::$STATUS_SHIPPING_MAP); ?></td>
+            <td style="width:48px"><?php arEcho($order['status'], OrderModel::$STATUS_MAP); ?></td>
+            <td><span class="btn btn-success show-order-info" value="<?php echo $order['oid']; ?>">查看</span></td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+          <?php if(arRequest('do') == 'delete') : ?>
+          <td colspan="13"><input type="checkbox" name="selectall">全选 <button id="deleteAll">删除</button></td>
+        <?php endif;?>
+        </tbody>
+      </table>
+    </div>
+    <nav class="col-md-12 text-center">
+      <?php echo $page; ?>
+    </nav>
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function () {
+    // 日期选择
+    $('#datetimepicker').datetimepicker();
+    $('#datetimepickera').datetimepicker();
+    $('input[name=selectall]').change(function(){
+      if($(this).attr('checked'))
+      {
+        $('input[type=checkbox]').each(function(){
+          $(this).attr('checked',true);
+        });
+      }else{
+        $('input[type=checkbox]').each(function(){
+          $(this).attr('checked',false);
+        });
+      }
+    });
+    $('#deleteAll').click(function(){
+      var uid = [];
+      $('input[name=mydel]:checked').each(function(){
+        uid.push($(this).val());
+      });
+      location.href="<?php echo arU('deleteOrder');?>"+'/oid/'+uid;
+    });
+});
+</script> 

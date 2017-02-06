@@ -1,0 +1,89 @@
+<?php
+    // 调用layer插件例子
+    // arSeg(array(
+    //         'loader' => array(
+    //             'plugin' => 'layer',
+    //             'this' => $this
+    //         )
+    //     )
+    // );
+
+    $sourceObj = $loader['this'];
+    $plugins = explode(',', $loader['plugin']);
+
+    if (is_array($plugins)) :
+        foreach ($plugins as $plugin) :
+            switch ($plugin) {
+                case 'bdeditor':
+                    // 加载百度 editor seg
+                    $sourceObj->assign(array('baiduEditorInvoke' => true));
+                    break;
+                case 'uploadify':
+                    // 动态 加载的 css
+                    $sourceObj->assign(array('cssInsertBundles' => array('../js/uploadify/uploadify')));
+                    // 动态加载的js
+                    $sourceObj->assign(array('jsInsertBundles' => array('uploadify/jquery.uploadify.min')));
+                    break;
+                case 'layer':
+                    // layer弹出层代码
+                    $sourceObj->assign(array('jsInsertBundles' => array('layer/layer.min', 'layer/extend/layer.ext')));
+                    break;
+                case 'msg':
+                    // 消息显示
+                    $sourceObj->assign(array('jsSeg' => array('msg_show')));
+                    break;
+                // 日期选择
+                // case 'datepicker':
+                //     $sourceObj->assign(array('cssInsertBundles' => array('../js/Zebra_Datepicker-master/public/css/default')));
+                //     $sourceObj->assign(array('jsInsertBundles' => array('Zebra_Datepicker-master/public/javascript/zebra_datepicker')));
+                //     break;
+                case 'datepicker':
+                    $sourceObj->assign(array('cssInsertBundles' => array('../js/jquery_datepicker/css/jquery-ui')));
+                    $sourceObj->assign(array('jsInsertBundles' => array('jquery_datepicker/js/jquery-ui-datepicker')));
+                    break;
+                // 时间选择
+                case 'datetimepicker':
+                    $sourceObj->assign(array('cssInsertBundles' => array('../js/datetimepicker/jquery.datetimepicker')));
+                    $sourceObj->assign(array('jsInsertBundles' => array('datetimepicker/jquery.datetimepicker')));
+                    break;
+                // 选择地区
+                case 'select_area':
+                    $sourceObj->assign(array('jsSeg' => array('select_area')));
+                    break;
+                // 选择分类
+                case 'select_cate':
+                    $sourceObj->assign(array('jsSeg' => array('select_cate')));
+                    break;
+                // 图片放大镜效果
+                case 'zoom':
+                    $sourceObj->assign(array('jsInsertBundles' => array('elevatezoom-master/jquery.elevatezoom')));
+                    break;
+                // cart 购物车
+                case 'cart':
+                    $sourceObj->assign(array('cssInsertBundles' => array('../js/jquery.jsorder/css/order')));
+                    $sourceObj->assign(array('jsInsertBundles' => array('jquery.jsorder/js/jsorder', 'jquery.jsorder/js/cookie')));
+                    break;
+                // 时钟插件
+                case 'flipclock':
+                    $sourceObj->assign(array('cssInsertBundles' => array('../js/flipclock/compiled/flipclock')));
+                    $sourceObj->assign(array('jsInsertBundles' => array('flipclock/compiled/flipclock')));
+                    break;
+                // 时钟插件
+                case 'countdown':
+                    $sourceObj->assign(array('jsInsertBundles' => array('countdown/countdown')));
+                    break;
+                // 文件上传
+                case 'ajaxfileupload':
+                    $sourceObj->assign(array('jsInsertBundles' => array('ajaxfileupload/ajaxfileupload')));
+                    break;
+                // 图片裁剪
+                case 'jcrop':
+                    $sourceObj->assign(array('jsInsertBundles' => array('Jcrop/js/jquery.Jcrop')));
+                    $sourceObj->assign(array('cssInsertBundles' => array('../js/Jcrop/css/jquery.Jcrop')));
+                    break;
+                default:
+                    # code...
+                    break;
+            }
+        endforeach;
+    endif;

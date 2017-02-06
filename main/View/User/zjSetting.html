@@ -1,0 +1,54 @@
+<div class="zj-setting">
+    <h3>专家参数设置</h3>
+    <div class="zj-form yb-input-text yb-input-submit">
+        <form action="<?php echo arU(''); ?>" method="post" id="zj-form">
+            <div>说明：默认采用全局配置,具体说明见算法文档相关描述, 批次描述:TQP提前批，BX备选</div>
+            <div>线差偏移量(针对诊断)</div>
+            <?php foreach (arCfg('XCM') as $pc => $value): ?>
+            <div class="cards">
+                <label for="txt1"><?php echo $pc ?>志愿：</label>
+                <input id="txt1" type="text" name="<?php echo 'XCM||' . $pc; ?>" value="<?php echo $value; ?>">
+                <span class="errortip errorlen"></span>
+            </div>
+            <?php endforeach ?>
+             <div>位次偏移量(高考)</div>
+            <?php foreach (arCfg('WCM') as $pc => $value): ?>
+            <div class="cards">
+                <label for="txt1"><?php echo $pc ?>志愿：</label>
+                <input id="txt1" type="text" name="<?php echo 'WCM||' . $pc; ?>" value="<?php echo $value; ?>">
+                <span class="errortip errorlen"></span>
+            </div>
+            <?php endforeach ?>
+            <div>配置常量</div>
+            <div>说明:m(循环进阶步长)同理,m_max(m最大到此值,退出条件1),k（最大查询条数,退出条件2），k_r为高考,具体算法见算法文档描述</div>
+            <?php foreach (arCfg('FORMULA') as $pc => $value): ?>
+            <div class="cards">
+                <label for="txt1"><?php echo $pc ?>：</label>
+                <input id="txt1" type="text" name="<?php echo 'FORMULA||' . $pc; ?>" value="<?php echo $value; ?>">
+                <span class="errortip errorlen"></span>
+            </div>
+            <?php endforeach ?>
+            
+            <div class="zj-submit">
+                <input type="submit" value="保存设置">
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#zj-form').on('blur', 'input', function(event) {
+        if($(this).val() == ''){
+            $(this).next('span.errortip').removeClass('errorlen').html('此项不能为空！');
+        }else{
+            $(this).next('span.errortip').addClass('errorlen').html('');
+        }
+    });
+    $('#zj-form').submit(function(event) {
+        $('#zj-form').find('input[type="text"]').trigger('blur');
+        var len = $('.errorlen').length,
+            len1 = $('.errortip').length;
+        if(len != len1){
+            return false;
+        }
+    });
+</script>

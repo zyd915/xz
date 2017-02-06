@@ -1,0 +1,31 @@
+<h3>添加属性</h3> <a id="cate-add" href="<?php echo arU('sysSetting');?>" class="btn btn-success pull-right">返回</a>
+<form role="form" action='<?php echo arU('setManager',array('opt'=>'editing')); ?>' method='get'>
+  <div class="form-group">
+    <label for="exampleInputEmail1">名称</label>
+    <input type="hidden" class="form-control" name='s_sid'  value="<?php echo $set['s_sid'];?>">
+    <input type="text" class="form-control" name='s_sname'  placeholder="" value="<?php echo $set['s_sname'];?>">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">内容</label>
+    <input type="text" class="form-control" name='s_content'  placeholder="" value="<?php echo $set['s_content'];?>">
+  </div>
+   <div class="form-group">
+    <label for="exampleInputPassword1">备注</label>
+    <?php
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 's_remark',
+            // 适配器数据 数组
+            'map' => SettingModel::$SITE_MAP,
+            // 选中的value selected = selected
+            'selected' => $set['s_remark']
+         )
+      );
+    ?>
+  </div>
+  <button type="submit" class="btn btn-default">保存</button>
+</form>

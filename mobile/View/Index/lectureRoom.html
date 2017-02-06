@@ -1,0 +1,88 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">循证讲堂</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <!-- <div id="iSlider-effect-wrapper" class="clearfix">
+                <div id="animation-effect" class="iSlider-effect"></div>
+            </div> -->
+            <?php
+            foreach ($class as $class):
+            $color1 = '';
+            $color2 = 'border-color: orange;color: orange';
+            $color3 = 'border-color: #3ed77b;color: #3ed77b';
+            $color4 = 'border-color: saddlebrown;color:saddlebrown';
+            ?>
+            <div class="container xzws-content">
+                <h3 style="<?php if ($class['cid'] == 1):?><?php echo $color1; ?><?php elseif ($class['cid'] == 2):?><?php echo $color2; ?><?php elseif ($class['cid'] == 3):?><?php echo $color3; ?><?php elseif ($class['cid'] == 4):?><?php echo $color4; ?><?php elseif ($class['cid'] == 5):?><?php echo $color1; ?><?php elseif ($class['cid'] == 6):?><?php echo $color2; ?><?php elseif ($class['cid'] == 7):?><?php echo $color3; ?><?php elseif ($class['cid'] == 8):?><?php echo $color4; ?><?php endif; ?>"><?php echo $class['name']; ?><a href="<?php echo arU('Index/lectureMore',array('cid' => $class['cid'])) ?>" class="more">更多 &gt;&gt;</a></h3>
+                <div class="xzws-vedio-list">
+                    <?php 
+                        $video = VideolistModel::model()
+                            ->getDb()
+                            ->limit(4)
+                            ->where(array('cid'=>$class['cid']))
+                            ->order('sorder desc , aid desc')
+                            ->queryAll();
+                        foreach ($video as $video):
+                    ?>
+                    <div class="item">
+                        <div class="col-xs-4 img" style="padding-left:0 ">
+                            <a href="<?php echo arU('Index/videoDetail',array('aid'=>$video['aid']))?>">
+                                <img style="width: 100%;" title="<?php echo $video['title']; ?>" alt="<?php echo $video['title']; ?>" src="<?php echo $video['videoimg']; ?>">
+                            </a>
+                        </div>
+                        <div class="col-xs-8 font">
+                            <h4>
+                                <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>"><?php echo $video['title']; ?></a>
+                            </h4>
+                            <div class="description">
+                                <a class="text" href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>">免费</a>
+                            </div>
+                            <p class="expert-info ">
+                                <span><i class="fa fa-eye"></i><?php echo $video['fnums']; ?></span>
+                                <span><i class="fa fa-comments"></i>0</span>
+                                <span>
+                                    <i class="fa fa-user"></i>
+                                    <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>"><?php echo $video['name']; ?></a>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div style="height:.35rem;width: 100%;background: #eee;"></div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+<!--     <script type="text/javascript">
+        var picList = [
+            {
+                content: "<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner1.jpg ?>"
+            },
+            {
+                content: "<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner2.jpg ?>"
+            },
+            {
+                content: "<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner3.jpg ?>"
+            },
+            {
+                content:"<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner2.jpg ?>"
+            },
+            {
+                content:"<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner1.jpg ?>"
+            }
+        ];
+        var islider1 = new iSlider({
+            data: picList,
+            dom: document.getElementById("animation-effect"),
+            duration: 3500,
+            animateType: 'rotate',
+            isAutoplay: true,
+            isLooping: true
+            /*isVertical: true //是否垂直滚动*/
+        });
+    </script> -->

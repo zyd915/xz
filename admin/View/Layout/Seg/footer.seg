@@ -1,0 +1,49 @@
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/respond.min.js"></script>
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/excanvas.min.js"></script>
+<![endif]-->
+<!--包含底层用户交互、动画、特效和可更换主题的可视控件。 -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery-ui/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+<!-- 一个非官方的Bootstrap插件使引导下拉菜单激活悬停和提供更好的用户体验。-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js" type="text/javascript" ></script>
+<!--支持把内容放在一个盒子里面,固定一个高度,超出的则使用滚动。 -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<!-- 不锁定浏览器的情况下使用Ajax时模拟同步行为。-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<!--一个轻量级的cookie 插件,可以读取、写入、删除 cookie。 -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery.cookie.min.js" type="text/javascript"></script>
+<!-- -->
+<!--Jquery下图表插件,具有简单使用,交互效果,具有吸引力外观特点。-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/flot/jquery.flot.js" type="text/javascript"></script>
+<!-- -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/flot/jquery.flot.resize.js" type="text/javascript"></script>
+<!-- 为元素增加了脉动效果, 绘制吸引用户关注的动画。-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery.pulsate.min.js" type="text/javascript"></script>
+<!-- 日期处理类库,用于解析、检验、操作、以及显示日期 -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/bootstrap-daterangepicker/moment.min.js" type="text/javascript"></script>
+<!--基于Bootstrap 框架的日期范围选择插件 -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+<!-- -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/gritter/js/jquery.gritter.js" type="text/javascript"></script>
+<!-- 开发者可以根据FullCalendar提供的API快速完成一个日历日程的开发-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/fullcalendar/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+<!-- 用来统计新的访问、跳出率、服务器负载、使用的RAM等-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
+ <!-- jQuery线状图插件Sparkline -->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>plugins/jquery.sparkline.min.js" type="text/javascript"></script>
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>js/app.js" type="text/javascript"></script>
+<script>
+jQuery(document).ready(function() {
+    App.init();
+    // initlayout and core plugins
+    // Tasks.initDashboardWidget();
+});
+</script>
+
+<?php
+    // 代码片段插入
+    // 百度editor
+    if (isset($baiduEditorInvoke)) :
+      arSeg(array('baiduEditorInvoke' => $baiduEditorInvoke));
+    endif;
+
+?>

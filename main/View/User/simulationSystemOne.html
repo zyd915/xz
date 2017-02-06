@@ -1,0 +1,130 @@
+<!-- 诊断成绩模拟填报系统 -->
+<div class="system-title pl20 pt10 pb10 clearfix">
+	<h2 class="left"><i class="fa fa-gear"></i>&nbsp;诊断成绩模拟填报系统</h2>
+	<ul class="hmenu right">
+		<li class="selected">输入诊断成绩</li>
+		<li>选择填报批次</li>
+		<li>选择院校专业</li>
+<!-- 		<li>志愿表验证</li> -->
+		<li>生成模拟志愿表</li>
+	</ul>
+</div>
+<hr>
+<div class="bdr auto pb20 pt10 br5 mt20 ml10 mr10 clearfix" >
+	<h4 class="pl10"><span class="fa-stack fa-lg fs14px-bzh"><i class="fa fa-square fa-stack-2x fc3-bzh"></i><i class="fa fa-terminal fa-stack-1x fa-inverse"></i></span>&nbsp;<span class="vam-bzh">输入诊断考试成绩</span></h4>
+	<hr>
+	<form class="w80 auto" action="<?php echo arU('User/simulationSystemOneInfo'); ?>" method="POST" onsubmit="return gnonempty();">
+		<div class="item-yb mt50">
+			<label for="city">地区：</label>
+			<select id="city" class="item-yb yb-select ">
+				<option value="0">请选择</option>
+				<option value="cd" selected>成都</option>
+				<option value="my">绵阳</option>
+			</select>
+		</div>
+		<div class="item-bzh mt20">
+			<select id="examscore" class="form-control input-sm-yb" style="float:left;">
+				<option value="1" selected="selected">一诊分数</option>
+				<option value="2">二诊分数</option>
+				<option value="3">三诊分数</option>
+			</select>
+			<input type="text" name="score" class="ml10" id="exam-score" maxlength="3" title="诊段分数为3位正整数,并且要小于750" />
+		</div>
+		<div class="item-bzh mt20"><label>您的科类：</label>
+			<label style="width: 50px;" class="km"><input type="radio"  name="class" id="" value="文科" checked>&nbsp;文科</label>&nbsp;&nbsp;&nbsp;
+			<label style="width: 50px;" class="km"><input type="radio"  name="class" id="" value="理科">&nbsp;理科</label>
+		</div>
+		<div class="item-bzh"><label></label>
+			<input type="submit" value="下一步" class="btn btn-success bg3-bzh mb10 hdd">
+		</div>
+
+		<div class="item-bzh mt20">
+			<label></label>
+			诊断成绩模拟填报系统使用方法请参考 <a href="http://www.xzgk.net/Article/detail/aid/1960?" class="text-primary" target="_blank">使用指南</a>
+		</div>
+	</form>
+</div>
+<script type="text/javascript">
+	var zscore='1',zdfs;
+	$(document).ready(function(){
+		delCookie();
+		//获取诊断分数
+        AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/userScore','',esoption,'#province',spage);
+
+		$('#examscore').change(function(){
+			zscore=$('#examscore option:selected').attr('value');
+			//获取诊断分数
+        	AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/userScore','',esoption,'#province',spage);
+		});
+	});
+
+	function esoption(data,id){
+		switch(zscore){
+			case '1':
+				zdfs=data.data.scorez1;
+				break;
+			case '2':
+				zdfs=data.data.scorez2;
+				break;
+			case '3':
+				zdfs=data.data.scorez3;
+				break;
+		}
+		$('#exam-score').val(zdfs);
+	}
+
+	function spage(){}
+
+	function gnonempty(){
+		if(nonempty('#exam-score','您的诊段分数不能为空！') && valType()){
+			return true;
+		}
+		return false;
+	}
+	var r=/^\d*$/;
+	var svalue,skm;
+	function valType(){
+		svalue=($.trim($('#exam-score').val())).replace(/\b(0+)/gi,"");
+		if($('.km input[type=radio]:checked').attr('value') == "理科"){
+			skm=0;
+		}else{
+			skm=1;
+		}
+		if(snonempty('#city','请选择地区！')){
+			if(r.test(svalue) && svalue.length >= 1 && svalue <= 750){
+				if(skm == 1){
+					if(svalue <= 200){
+						message("文科最低分数必须大于200分！");
+					}else{
+						setcookie();
+						return true;
+					}
+				}else{
+					if(svalue <= 180){
+						message("理科最低分数必须大于180分！");
+					}else{
+						setcookie();
+						return true;
+					}
+				}
+			}else{
+				message('分数必须为小于750的正整数！');
+			}
+		}
+		return false;
+	}
+	//cookie
+	function setcookie(){
+		// 科目，类型为string'理科'
+		$.cookie('subject',$('.km input[type=radio]:checked').attr('value'),{expires:date,path:paths});
+		// 诊断分数
+		$.cookie('score',$('#exam-score').val(),{expires:date,path:paths});
+		// 科目类型为number
+		$.cookie('km',skm,{expires:date,path:paths});
+		// 诊断地区
+		$.cookie('city',$('#city option:selected').attr('value'),{expires:date,path:paths});
+		$.cookie('ztype','0',{expires:date,path:paths});
+		// 诊断类型 123 类型number
+		$.cookie('zdnum',$('#examscore option:selected').attr('value'),{expires:date,path:paths});
+	}
+</script>

@@ -1,0 +1,268 @@
+    <div id="page">
+        <header class="header">
+            <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left"></span></a>
+            <span class="page-tit"><?php echo $college['sname']; ?></span>
+        </header>
+        <section class="content">
+            <div>
+                <div class="xzlh-yxmain">
+                    <div class="xzlh-yxhead clearfix">
+                        <a href="javascript:" class="active">学校介绍</a>
+                        <a href="javascript:">院校录取数据</a>
+                        <a href="javascript:">专业录取数据</a>
+                    </div>
+                    <div class="xzlh-yxtab">
+                        <div class="xzlh-yxinfo">
+                            <div class="xzlh-yxpic">
+                                <!-- <img src="" alt=""> -->
+                                <div class="xzlh-yxname">
+                                    <h4><?php echo $college['sname']; ?></h4>
+                                    <span><?php echo $college['ts']; ?></span>
+                                    <span><?php echo $college['ls']; ?></span>
+                                </div>
+                            </div>
+                            <div class="xzlh-yxmes">
+                                <p>
+                                    <span>所在地：<?php echo $college['area']; ?></span>
+                                    <span>院校性质：<?php echo $college['jb']; ?></span>
+                                </p>
+                                <p>
+                                    <span>学校隶属：<?php echo $college['ls']; ?></span>
+                                    <span>学历层次：大学招生章程</span>
+                                </p>
+                                <p>
+                                    <span>办学类型：大学</span>
+                                    <span>排名：全国1综合1</span>
+                                </p>
+                                <p>院校特色：<?php echo $college['ts']; ?></p>
+                                <p>院校地址：<?php echo $college['address']; ?></p>
+                                <p>招生网址：<?php echo $college['url']; ?></p>
+                            </div>
+                        </div>
+                        <div class="xzlh-yxIntroduction">
+                            <h3>学校介绍</h3>
+                            <p class="justify"><?php echo $college['des']; ?></p>
+                        </div>
+                    </div>
+                    <div class="xzlh-yxtab hide">
+                        <div class="xzlh-yxlq-search">
+                            <div class="xzlh-yxlq-xz">
+                                <a href="javascript:" class="xzlh-kn"><span data-value="-1">科类</span>&nbsp;<span class="glyphicon glyphicon-menu-down"></span></a>
+                                <a href="javascript:" class="xzlh-pc"><span data-value="-1">批次</span>&nbsp;<span class="glyphicon glyphicon-menu-down"></span></a>
+                            </div>
+                            <div class="xzlh-yxlq-sbtn">
+                                <button class="xzlh-yxlq-btn btn">查询</button>
+                            </div>
+                            <div class="xzlh-yxlq-table hide">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>年份</th>
+                                            <th>最低分</th>
+                                            <th>分差</th>
+                                            <th>招收人数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div class="fcc6-bzh">
+                                    <div class="">
+                                        <span class="fcc6-bzh">温馨提示：</span>
+                                        <p>本系统的专业录取数据，来源于四川省教育考试院公布的数据。因各级教育部门与学校统计、发布专业录取数据的口径不同（部分会将自主招生、艺术特长生、体育特长生等特殊类型考生以及校内优惠加分包含在内），若数据有出入，请以各高校正式公布的专业录取数据为准。</p>
+                                        <p>本系统提供的专业查询，按照教育部的本科专业目录分类。因各高校近年来实行学科交叉、大类招生，部分专业未能包含在教育部的专业目录内，使用系统进行专业查询时可能未显示，请考生参考具体院校的专业录取信息。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="xzlh-yxlq-error hide">
+                                <p>很抱歉！未能查询到相关数据，请更改查询条件后再查询。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="xzlh-yxtab hide">
+                        <div class="xzlh-zylq-search">
+                            <div class="xzlh-zylq-xz">
+                                <a href="javascript:" class="xzlh-kn"><span data-value="-1">科类</span>&nbsp;<span class="glyphicon glyphicon-menu-down"></span></a>
+                                <a href="javascript:" class="xzlh-pc"><span data-value="-1">批次</span>&nbsp;<span class="glyphicon glyphicon-menu-down"></span></a>
+                            </div>
+                            <div class="xzlh-zylq-sbtn">
+                                <button class="xzlh-zylq-btn btn">查询</button>
+                            </div>
+                            <div class="xzlh-zylq-table hide">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th width="15%">年份</th>
+                                            <th width="25%">专业</th>
+                                            <th width="20%">最低分</th>
+                                            <th width="20%">平均分</th>
+                                            <th width="20%">位次</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                                <div class="xzlh-zylq-tip">
+                                    <div class="">
+                                        <span class="fcc6-bzh">温馨提示：</span>
+                                        <p>本系统的专业录取数据，来源于四川省教育考试院公布的数据。因各级教育部门与学校统计、发布专业录取数据的口径不同（部分会将自主招生、艺术特长生、体育特长生等特殊类型考生以及校内优惠加分包含在内），若数据有出入，请以各高校正式公布的专业录取数据为准。</p>
+                                        <p>本系统提供的专业查询，按照教育部的本科专业目录分类。因各高校近年来实行学科交叉、大类招生，部分专业未能包含在教育部的专业目录内，使用系统进行专业查询时可能未显示，请考生参考具体院校的专业录取信息。</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="xzlh-zylq-error hide">
+                                <p>很抱歉！未能查询到相关数据，请更改查询条件后再查询。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+<script type="text/javascript">
+    $(function(){
+        $('.xzlh-yxhead').on('tap','a',function(){
+            $('.xzlh-yxhead a').removeClass('active');
+            $(this).addClass('active');
+            $('.xzlh-yxtab').addClass('hide');
+            $('.xzlh-yxtab').eq($(this).index()).removeClass('hide');
+        });
+
+        $('.xzlh-kn').tap(function(){
+            var _this = $(this);
+            var index = layer.open({
+                title: '<span style="color:#0078D7">学科类型</span>',
+                content: '<div class="xzlh-yxts-alert">\
+                            <a href="javascript:" data-value="0" class="btn btn-sm btn-info" style="width:40%;color:white">理科</a>\
+                            <a href="javascript:" data-value="1" class="btn btn-sm btn-info" style="width:40%;color:white">文科</a>\
+                        </div>',
+                btn: ['<div style="color:#0078D7">确定</div>'],
+                success: function(){
+                    $('.xzlh-yxts-alert').on('tap','a',function(){
+                        $(this).addClass('active').siblings('a').removeClass('active');
+                    })
+                },
+                yes: function(){
+                    if ($('.xzlh-yxts-alert').find('.active').size() != 1) {
+                        return;
+                    }
+                    _this.find('span').eq(0).text($('.xzlh-yxts-alert').find('.active').text()).data('value',$('.xzlh-yxts-alert').find('.active').data('value'));
+                    layer.close(index);
+                }
+            });
+        });
+
+        $('.xzlh-pc').tap(function(){
+            var _this = $(this);
+            var index = layer.open({
+                title: '<span style="color:#0078D7">学科类型</span>',
+                content: '<div class="xzlh-yxts-alert">\
+                            <a href="javascript:" data-value="0" class="btn btn-sm btn-info" style="width:auto;color:white">提前批</a>\
+                            <a href="javascript:" data-value="1" class="btn btn-sm btn-info" style="width:auto;color:white">本科一批</a>\
+                            <a href="javascript:" data-value="2" class="btn btn-sm btn-info" style="width:auto;color:white">本科二批</a>\
+                            <a href="javascript:" data-value="3" class="btn btn-sm btn-info" style="width:auto;color:white">专科一批</a>\
+                            <a href="javascript:" data-value="4" class="btn btn-sm btn-info" style="width:auto;color:white">专科二批</a>\
+                        </div>',
+                btn: ['<div style="color:#0078D7">确定</div>'],
+                success: function(){
+                    $('.xzlh-yxts-alert').on('tap','a',function(){
+                        $(this).addClass('active').siblings('a').removeClass('active');
+                    })
+                },
+                yes: function(){
+                    if ($('.xzlh-yxts-alert').find('.active').size() != 1) {
+                        return;
+                    }
+                    _this.find('span').eq(0).text($('.xzlh-yxts-alert').find('.active').text()).data('value',$('.xzlh-yxts-alert').find('.active').data('value'));
+                    layer.close(index);
+                }
+            });
+        });
+
+        function jsondata(obj){
+            var sname = $('.header .page-tit').text(),
+                pc = obj.find('.xzlh-pc').find('span').eq(0).data('value'),
+                km = obj.find('.xzlh-kn').find('span').eq(0).data('value'),
+                dat = {sname: sname,km: km,pc: pc};
+            return dat;
+        }
+        function pd(obj){
+            if ( obj.km == -1){
+                layer.open({
+                    content: '请选择科目',
+                    time: 1.5
+                });
+                return false;
+            }else if (obj.pc == -1) {
+                layer.open({
+                    content: '请选择批次',
+                    time: 1.5
+                });
+                return false;
+            }else{
+                return true;
+            }
+        }
+        $('.xzlh-yxlq-btn').tap(function(){
+            var dat = jsondata($('.xzlh-yxlq-xz'));
+            if(pd(dat)){;
+                ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/yxzs','POST',dat,yxlqdata);
+            }
+        });
+        function yxlqdata(dat){
+            var html = '';
+            if (dat.ret_code == 1000) {
+                html = '<tr>\
+                            <td>2015</td>\
+                            <td>'+tdmc(dat.data.lqf15)+'</td>\
+                            <td>'+tdmc(dat.data.fc15)+'</td>\
+                            <td>'+tdmc(dat.data.zsjh15)+'</td>\
+                        </tr>\
+                        <tr>\
+                            <td>2014</td>\
+                            <td>'+tdmc(dat.data.lqf14)+'</td>\
+                            <td>'+tdmc(dat.data.fc14)+'</td>\
+                            <td>'+tdmc(dat.data.zsjh14)+'</td>\
+                        </tr>\
+                        <tr>\
+                            <td>2013</td>\
+                            <td>'+tdmc(dat.data.lqf13)+'</td>\
+                            <td>'+tdmc(dat.data.fc13)+'</td>\
+                            <td>'+tdmc(dat.data.zsjh13)+'</td>\
+                        </tr>';
+                $('.xzlh-yxlq-table').removeClass('hide').find('tbody').html(html);
+                $('.xzlh-yxlq-error').addClass('hide');
+            }else{
+                $('.xzlh-yxlq-table').addClass('hide');
+                $('.xzlh-yxlq-error').removeClass('hide');
+            }
+        }
+
+        $('.xzlh-zylq-btn').tap(function(){
+            var dat = jsondata($('.xzlh-zylq-xz'));
+            if(pd(dat)){
+                ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zhuanyeList','POST',dat,zylqdata);
+            }
+        });
+
+        function zylqdata(dat){
+            var html = '';
+            if (dat.ret_code == 1000) {
+                for (var i = 0; i < dat.total_lines; i++) {
+                    html += '<tr>\
+                                <td style="vertical-align: middle">'+dat.data[i].year+'</td>\
+                                <td style="vertical-align: middle">'+dat.data[i].zyname+'</td>\
+                                <td style="vertical-align: middle">'+tdmc(dat.data[i].lqf14)+'</td>\
+                                <td style="vertical-align: middle">'+tdmc(dat.data[i].jf14)+'</td>\
+                                <td style="vertical-align: middle">'+tdmc(dat.data[i].lqwc14)+'</td>\
+                            </tr>';
+                }
+                $('.xzlh-zylq-table').removeClass('hide').find('tbody').html(html);
+                $('.xzlh-zylq-error').addClass('hide');
+                $('.vipCard').tap(function(){
+                    window.open('<?php echo arU("User/vipCard")?>','_self');
+                })
+            }else{
+                $('.xzlh-zylq-table').addClass('hide');
+                $('.xzlh-zylq-error').removeClass('hide');
+            }
+        }
+    })
+</script>

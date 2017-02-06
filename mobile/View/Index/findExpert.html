@@ -1,0 +1,203 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">查找专家</span>
+    </header>
+    <section class="content">
+<!--         <div class="main clearfix">
+            <div class="search-province">
+                <div class="col-xs-6">
+                    <a class="btn btn-white selectProvince" data-toggle="modal" data-target="#selectProvinceDialog">四川&nbsp;
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                </div>
+                <div class="col-xs-6"><a class="btn btn-white" href="#">招募专家</a></div>
+            </div> -->
+            <!--专家列表-->
+            <div class="experts-framework expert-list" id="expertContainer">
+                <?php foreach ($experts as $expert): ?>
+                <div class="list">
+                    <div class="col-xs-3 avater">
+                        <a href="<?php echo arU('expertDetail',array('eid' => $expert['eid']))?>">
+                            <img class="img-circle" src="<?php echo $expert['headpic']?>">
+                        </a>
+                    </div>
+                    <div class="col-xs-9 info">
+                        <div class="row">
+                            <div class="col-xs-12 base">
+                                <p>
+                                    <a href="javascript:;"><span class="name"><?php echo $expert['name']; ?></span>
+                                    </a>
+                                    <a href="javascript:;">
+                                        <span class="btn btn-xs btn-danger fr xzws-book">预约</span>
+                                    </a>
+                                    <!--  <span class="experience">20年经验</span> -->
+                                </p>
+                                <!-- <i class="data article"></i><span class="num">72</span>
+                                <i class="data fans"></i><span class="num">299</span> -->
+                            </div>
+                           <!--  <div class="col-xs-4 col-xs-pull-0">
+                                <a class="btn btn-block btn-default" style="display: none;">已关注</a>
+                                <a class="btn btn-block btn-blue " >关注+</a>
+                            </div> -->
+                        </div>
+                        <div class="services">
+                            <span class="label-brown">简介</span>
+                            &nbsp;&nbsp;<?php echo $expert['shortdes']; ?>
+                        </div>
+                        <a class="fr" href="<?php echo arU('expertDetail',array('eid' => $expert['eid']))?>" style="font-size: .33rem">专家详情>></a>
+                    </div>
+                </div>
+                <?php endforeach; ?>
+            </div>
+            <!--加载更多-->
+            <!-- <div class="page-list-loading">
+                <a class="btn btn-danger" id="load_more" style="display: block;">加载更多</a>
+                <a class="btn btn-default" style="display: none;"><i class="fa fa-spinner fa-spin"></i>努力加载中...</a>
+            </div>
+ -->
+
+    </section>
+
+    <!--选择城市弹出框-->
+    <div id="selectProvinceDialog" style="display:none;">
+        <div class="search-condition province">
+            <a href="javascript:void(0)" class="btn btn-default ">不限</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">安徽</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">北京</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">福建</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">甘肃</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">广东</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">广西</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">贵州</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">海南</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">河北</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">河南</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">黑龙江</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">湖北</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">湖南</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">吉林</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">江苏</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">江西</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">辽宁</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">内蒙古</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">宁夏</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">青海</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">山东</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">山西</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">陕西</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">上海</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">四川</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">天津</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">西藏</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">香港</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">新疆</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">云南</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">浙江</a>
+
+            <a href="javascript:void(0)" class="btn btn-default ">重庆</a>
+        </div>
+    </div>
+<script type="text/javascript">
+    // $(function(){
+    //     var da = null;
+    //     //获取userScore接口数据
+    //     ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post','',spage);
+    //     function spage(dat){
+    //         if(dat.ret_code == '1000'){
+    //             da = dat.data;
+    //             $('#exam-score').val(dat.data.scorez1);
+    //         }else{
+    //             var index = layer.open({
+    //                 type: 0,
+    //                 shadeClose: false,
+    //                 content: '你还没有登录，请登录后在查询！',
+    //                 btn: ['确定'],
+    //                 yes: function(){
+    //                     layer.close(index);
+    //                     location.href="<?php echo arU('User/login')?>";
+    //                 }
+    //             });
+    //         }
+    //     }
+    //     $('#examscore').on('change',function(){
+    //         esoption($('#examscore').val(),da);
+    //     });
+
+    // });
+    $(function(){
+        var da = null;
+        //获取userScore接口数据
+//        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post','',spage);
+//        function spage(dat){
+//            if(dat.ret_code == '1000'){
+//                da = dat.data;
+//                $('#exam-score').val(dat.data.scorez1);
+//            }else{
+//                var index = layer.open({
+//                    type: 0,
+//                    shadeClose: false,
+//                    content: '你还没有登录，请登录后再查询！',
+//                    btn: ['确定'],
+//                    yes: function(){
+//                        layer.close(index);
+//                        location.href="<?php echo arU('User/login')?>";
+//                    }
+//                });
+//            }
+//        }
+        $(".xzws-book").tap(function(){
+            $.post('<?php echo AR_SERVER_PATH; ?>Api/iflogin',function(dat){
+                if(dat.ret_code == 1000){
+                    window.location.href="<?php echo arU('Index/expertZixun',array('eid' => $expert['eid']))?>"
+                }else{
+                    var index = layer.open({
+                        type: 0,
+                        shadeClose: false,
+                        content: '你还没有登录，请登录后再预约！',
+                        btn: ['<div style="color:#0078D7">确定</div>'],
+                        yes: function(){
+                            layer.close(index);
+                            location.href="<?php echo arU('User/login')?>";
+                        }
+                    });
+
+                }
+            },'json');
+        })
+        $('#examscore').on('change',function(){
+            esoption($('#examscore').val(),da);
+        });
+    });
+</script>

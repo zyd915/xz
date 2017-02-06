@@ -1,0 +1,184 @@
+<div class="portlet box purple">
+   <div class="portlet-title">
+      <div class="caption"><i class="icon-reorder"></i>视频编辑/添加</div>
+   </div>
+   <div class="portlet-body form">
+      <!-- BEGIN FORM-->
+      <form action="<?php echo arU('', array('greedyUrl' => true)); ?>" method="post" class="form-horizontal">
+         <input type="hidden" name="aid" value="<?php echo $article['aid']; ?>" />
+         <div class="form-body">
+            <div class="form-group">
+               <label class="col-md-3 control-label">视频标题</label>
+               <div class="col-md-4">
+                  <input type="text" name="title" class="form-control" value="<?php echo $article['title']; ?>" placeholder="标题">
+               </div>
+            </div>
+
+             <div class="form-group">
+               <label class="col-md-3 control-label">视频发布时间</label>
+               <div class="col-md-4">
+                  <input type="text" name="ctime" class="form-control datetimepicker" value="<?php echo date('Y-m-d H:i', $article['ctime']); ?>" placeholder="发布时间">
+               </div>
+            </div>
+
+         <div class="form-group">
+               <label class="col-md-3 control-label">排序</label>
+               <div class="col-md-4">
+                  <input type="text" name="sorder" class="form-control" value="<?php echo $article['sorder']; ?>" placeholder="排序">
+                  排序越大越靠前
+               </div>
+            </div>
+
+<!--             <div class="form-group">
+               <label class="col-md-3 control-label">是否最新</label>
+               <div class="col-md-4">
+
+               </div>
+            </div> -->
+            <div class="form-group">
+               <label class="col-md-3 control-label">选择分类</label>
+      <?php
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'cid',
+            // 适配器数据 数组
+            'map' => $catMap,
+            // 选中的value selected = selected
+            'selected' => $article['cid'],
+         )
+      );
+      ?>
+            </div>
+             <div class="form-group">
+                    <label class="control-label col-md-3">视频封面图片</label>
+                    <div class="col-md-1">
+                        <input type="file" name="uploadimgpic" id="zbankfimg" onchange="ajaxFileUploads(this.id)" />
+                    </div>
+                    <input name="videoimg" value="<?php echo $article['videoimg'];?>" type="hidden">
+                      <div class="col-md-2 col-md-offset-1 text-center" style="margin:0; margin:10px 30px; padding-top: 10px; border: 1px solid #f1f1f1"> <img height="170" width="170" src="<?php echo $article['videoimg'];?>" id="upImgs"<?php if(!$article['videoimg']):?>
+                        style="display:none" <?php endif;?>>  </div>
+              </div>
+
+              <div class="form-group">
+                    <label class="control-label col-md-3">视频</label>
+                    <div class="col-md-1">
+                        <input type="file" name="uploadpic" id="zbankf" onchange="ajaxFileUpload(this.id)" />
+                    </div>
+                    <input name="video" value="<?php echo $article['video'];?>" type="hidden">
+                      <div class="col-md-2 col-md-offset-1 text-center" style="margin:0; margin:10px 30px; padding-top: 10px;">
+                        <div style="width:200px; margin-left:80px;">
+                        路径:<input value="<?php echo $article['video'];?>" id="upImg" <?php if(!$article['video']):?> style="display:none" <?php endif;?>/>
+                        </div>
+                      </div>
+              </div>
+
+              <div class="form-group">
+                <label class="control-label col-md-3">视频链接上传</label>
+                <div class="col-md-4">
+                  <p style="font-size:10px; color:#F45551;">（如上传视频则不需要填视频链接）</p>
+                  <input type="text" name="link" class="form-control" value="<?php echo $article['link']; ?>" placeholder="视频链接">
+               </div>
+              </div>
+
+              <div class="form-group">
+                 <label class="control-label col-md-3">视频简介</label>
+                 <div class="col-md-5">
+                    <textarea rows="3" cols="20" name="desc" type="text" class="form-control"><?php echo $article['desc']; ?></textarea>
+                 </div>
+              </div>
+            <div class="form-group">
+               <label class="col-md-3 control-label">讲师姓名</label>
+               <div class="col-md-4">
+                  <input type="text" name="name" class="form-control" value="<?php echo $article['name']; ?>" placeholder="讲师姓名">
+               </div>
+            </div>
+            <div class="form-group">
+                 <label class="control-label col-md-3">讲师介绍</label>
+                 <div class="col-md-5">
+                    <textarea rows="3" cols="20" name="intro" type="text" class="form-control"><?php echo $article['intro']; ?></textarea>
+                 </div>
+              </div>
+          </div>
+            <div class="form-actions nobg fluid">
+            <div class="col-md-offset-3 col-md-9" style="margin-left:18%;">
+               <button type="submit" class="btn green">提交</button>
+            </div>
+         </div>
+      </form>
+      <!-- END FORM-->
+   </div>
+</div>
+<script>
+// 上传视频
+  function ajaxFileUpload(oname){
+    $.ajaxFileUpload(
+      {
+        url:'<?php echo arU('uploadRegPic'); ?>',
+        secureuri:false,
+        fileElementId:oname,
+        dataType: 'json',
+        data:{id:'id'},
+        success: function (data, status)
+        {
+          // alert(data);
+          if (data.ret_code == '1000') {
+            $('#upImg').show();
+            $("#upImg").attr('value', data.data.url);
+            //$("upImg").html('data.data.url');
+            $('input[name=video]').val(data.data.url);
+          }else{
+            layer.alert(data.error_msg);
+          }
+        },
+        error: function (data, status, e)
+        {
+          alert(e);
+        }
+      }
+    )
+
+  }
+
+  // 上传视频封面
+  function ajaxFileUploads(oname){
+    $.ajaxFileUpload(
+      {
+        url:'<?php echo arU('videopic'); ?>',
+        secureuri:false,
+        fileElementId:oname,
+        dataType: 'json',
+        data:{id:'id'},
+        success: function (data, status)
+        {
+          // alert(data);
+          if (data.ret_code == '1000') {
+            $('#upImgs').show();
+            $("#upImgs").attr('src', data.data.url);
+            //$("upImgs").html('data.data.url');
+            $('input[name=videoimg]').val(data.data.url);
+          }else{
+            layer.alert(data.error_msg);
+          }
+        },
+        error: function (data, status, e)
+        {
+          alert(e);
+        }
+      }
+    )
+
+  }
+  </script>
+<?php
+    // 调用分类插件
+    arSeg(array('select_cate' => true));
+?>
+<script type="text/javascript">
+  $(function(){
+     $('.datetimepicker').datetimepicker();
+  });
+</script>

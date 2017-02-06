@@ -1,0 +1,98 @@
+<script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>video-js/ie8/videojs-ie8.min.js"></script>
+<div class="minNav w100 mt10 bg3-bzh pt10 pb10 fcw clearfix">
+     <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="<?php echo arU('Index/index'); ?>">循证高考</a>&nbsp;>&nbsp;<a href="<?php echo arU('Index/videolist'); ?>">视频讲座</a>&nbsp;>&nbsp;<a href="">课程目录</a>&nbsp;
+</div>
+<div class="xzlh-vd-title">
+    <h3>课程目录</h3>
+</div>
+<div class="xzlh-video">
+    <div class="xzlh-play">
+        <video id="xzlh-play-vedio" class="video-js vjs-default-skin" controls preload="auto" poster="<?php echo $video['videoimg']; ?>" data-setup='{}'>
+            <?php if (!$video['link']): ?>
+                <?php if ($format == 'mp4'): ?>
+                    <source src="<?php echo $video['video']; ?>" type="video/mp4">
+                <?php elseif ($format == 'webm'): ?>
+                    <source src="<?php echo $video['video']; ?>" type="video/webm">
+                <?php elseif ($format == 'ogv'): ?>
+                    <source src="<?php echo $video['video']; ?>" type="video/ogg">
+                <?php endif; ?>
+            <?php else: ?>
+                <?php if ($forma == 'mp4'): ?>
+                    <source src="<?php echo $video['link']; ?>" type="video/mp4">
+                <?php elseif ($forma == 'webm'): ?>
+                    <source src="<?php echo $video['link']; ?>" type="video/webm">
+                <?php elseif ($forma == 'ogv'): ?>
+                    <source src="<?php echo $video['link']; ?>" type="video/ogg">
+                <?php endif; ?>
+            <?php endif; ?>
+            <p class="vjs-no-js">
+                很抱歉，你的浏览器不支持该视频的播放！
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+        </video>
+    </div>
+</div>
+<div class="xzlh-vd-summary">
+    <h4>课程简介</h4>
+    <div class="xzlh-vd-pup">
+        <p>
+            <em class="xzlh-vd-kc">课程名称：</em>
+            <span class="xzlh-vd-span"><?php echo $video['title']; ?></span>
+        </p>
+        <p>
+            <em class="xzlh-vd-kc">课程介绍：</em>
+            <span class="xzlh-vd-span"><?php echo $video['desc']; ?></span>
+        </p>
+    </div>
+</div>
+<div class="xzlh-vd-summary">
+    <h4>讲师简介</h4>
+    <div class="xzlh-vd-pup">
+        <p>
+            <em class="xzlh-vd-kc">讲师姓名：</em>
+            <span class="xzlh-vd-span"><?php echo $video['name']; ?></span>
+        </p>
+        <p><?php echo $video['intro']; ?></p>
+    </div>
+</div>
+<div class="xzlh-vd-summary">
+    <h4>相关课程</h4>
+    <div class="xzlh-vd-pup clearfix" style="margin-top: 15px;">
+        <?php
+        $related = VideolistModel::model()
+            ->getDb()
+            ->where(array('cid' => $video['cid']))
+            ->limit(4)
+            ->queryAll();
+        foreach($related as $related):
+        ?>
+        <div class="xzlh-cover" id="">
+            <div class="xzlh-wrap">
+                <a target="_blank" class="wrap" href="<?php echo arU('Index/videodetail', array('vid' => $video['aid'])) ?>" data-href="/course/introduction/1218004.htm" data-index="1" data-name="<?php echo $related['title']; ?>">
+                    <div class="">
+                        <div class="xzlh-pic">
+                            <img class="imgPic" src="<?php echo $related['videoimg']?>" data-originsrc="http://imgsize.ph.126.net/?enlarge=true&amp;imgurl=http://nos.netease.com/edu-image/846B6C7A0DD1455ACCE8F88C00B71FF4.png?imageView&amp;thumbnail=225y142&amp;quality=100_225x142x1x95.png?imageView&amp;thumbnail=225y142&amp;quality=100" alt="<?php echo $related['title']; ?>" id="videoid">
+                            <div class="xzlh-l-watch">
+                                <!-- <span class="xzlh-l-watch1">1课</span> -->
+                                <span class="xzlh-l-watch2">
+                                    <i class="glyphicon glyphicon-eye-open"></i>&nbsp;<i><?php echo $video['fnums']; ?></i>
+                                </span>
+                            </div>
+                        </div>
+                        <h3 class="word-lf"><?php echo $related['title']; ?></h3>
+                        <div class="orgName word-lf"><?php echo $related['desc']; ?></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+<script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>video-js/video.min.js"></script>
+<script type="text/javascript">
+    var player = videojs('really-cool-video', { /* Options */ }, function() {
+        this.play();
+    });
+    videojs.options.flash.swf = "<?php echo arCfg('PATH.PUBLIC'); ?>video-js/video-js.swf";
+</script>

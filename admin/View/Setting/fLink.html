@@ -1,0 +1,46 @@
+<div class="panel-heading clearfix"><span>内容管理</span>
+    <a id="cate-add" href="<?php echo arU('addLink');?>" class="btn btn-success pull-right">添加新内容</a>
+
+  <a id="cate-add" href="<?php echo arU('fLink',array('type' => LinkModel::COOPER_LINK)); ?>" class="btn btn-success pull-right">友情链接</a>
+     <a id="cate-add" href="<?php echo arU('fLink',array('type' => LinkModel::COOPER_COMPANY)); ?>" class="btn btn-success pull-right">合作机构</a>
+     <a id="cate-add" href="<?php echo arU('fLink',array('type' => LinkModel::COOPER_MEDIA)); ?>" class="btn btn-success pull-right">合作媒体</a>
+      <a id="cate-add" href="<?php echo arU('fLink',array('type' => LinkModel::COOPER_FOOTER)); ?>" class="btn btn-success pull-right">footer链接</a>
+      <a id="cate-add" href="<?php echo arU('fLink'); ?>" class="btn btn-default pull-right">全部</a>
+
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>名称</th>
+        <th>链接</th>
+        <th>所属分类</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($link as $set) :
+      ?>
+      <tr>
+        <td><?php echo $set['lid']; ?></td>
+        <td><?php echo $set['name']; ?></td>
+        <td><?php echo $set['url']; ?></td>
+        <td><?php arEcho($set['type'],LinkModel::$COOPER_MAP); ?></td>
+        <td value="<?php echo $set['lid']; ?>">
+          <button type="button" class="btn link-edit">编辑</button>
+          <button type="button" onclick="delLink(<?php echo $set['lid']; ?>)" class="btn product-delete">删除</button>
+        </td>
+
+      </tr>
+      <?php
+      endforeach;
+      ?>
+    </tbody>
+  </table>
+</div>
+<nav class="col-md-12 text-center">
+  <?php echo $page; ?>
+</nav>
+

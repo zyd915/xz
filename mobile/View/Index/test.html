@@ -1,0 +1,137 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.back();" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">性格职业测评</span>
+    </header>
+    <section class="content">
+        <div class="main">
+            <div class="container">
+                <div class="roe-rukou row">
+                    <a id="wenkerukou" href="javascript:;"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/rkpic.jpg"><br>文科入口</a>
+                    <a id="likerukou" href="javascript:;"><img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/rkpic.jpg"><br>理科入口</a>
+                </div>
+                <script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC');?>js/jquery.js"></script>
+                <?php /**必须调用自动加载的js seg*/ include arCfg('DIR.SEG') . 'Sys/js.seg'; ?>
+                <div class="roe-testEntrance">
+                    <!--     <div style="text-align:center;margin-top:10px;">
+                            <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/kemurukou.jpg" alt="" style="width:700px;">
+                        </div> -->
+                </div>
+                <div class="roe-kemurukou">
+                    <div class="roe-tips">
+                        <strong style="color:#0078D7">温馨提示：</strong>
+                        <P>亲爱的同学：
+                            <br>欢迎使用“循证高考专业选择测评系统”我们希望借助美国霍普金斯大学、麻省理工大学潜心研制的心理学成果，为你做准确的性格、专业测评。</P>
+                        <p style="color:red;">1、高考专业选择测试分文理科， 文科生选择文科入口，理科生选理科入口；未进行文理分科的学生请选择文理分科入口。</p>
+                        <p>2、测试题目会针对科目偏好、思维模式、性格分析、职业匹配度多个因素结合时下国际最为推荐的Holland、MBTI、职业锚进行测评分析，得出个性化测试报告。</p>
+                        <p>3、该测试需要大约30分钟，在整个测试过程中请按照您第一感觉进行答题，所有回答没有对错。请在安静的环境下保持放松的心情进行答题，以免影响测试结果。</p>
+                        <p style="color:red;">4、提醒：每位会员只有一次测试机会，进入测试后请务必一次性答题完成测试。</p>
+                    </div>
+                </div>
+
+                <div id="roe-email-cs" style="display: none">
+                    <h4 style="font-size:.34rem">请输入您的常用邮箱:</h4>
+                    <div class="email" style="padding-bottom:.15rem">
+                        <label for="">邮&nbsp;箱：</label>
+                        <input value="" name="test_email" type="text" style="  border:1px solid #2196F3;border-radius: 3px;width:75%">
+                    </div>
+                    <div class="tips">
+                        <span style="color:#2196F3;padding-bottom:.2rem;display:block">温馨提示：</span>
+                        <p>1、此测试大概需要30分钟，请一气呵成完成答题，如果中途停止将会出现测试结果不准确或者没有报告产生。</p>
+                        <p>2、此邮箱将用于接收您的测试的结果，我们不会向任何人泄露，请放心填写。</p>
+                    </div>
+                    <div class="ok text-center">
+                        <button class="btn btn-info mail-confirm">确&nbsp;定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        $(document).ready(function() {
+            $('#wenkerukou,#likerukou,#wlfkrukou').on('click', function() {
+                var id = $(this).attr('id');
+                $.post('<?php echo AR_SERVER_PATH; ?>Api/iflogin?', function(data) {
+                    if (data.ret_code == 1000) {
+                        $.post('<?php echo AR_SERVER_PATH; ?>Api/ifVip', function(dat) {
+                            if (dat.ret_code == 1000) {
+                                if (id == 'likerukou') {
+                                    JSV.kl = 'lk';
+                                } else if (id == 'wenkerukou') {
+                                    JSV.kl = 'wk';
+                                } else {
+                                    JSV.kl = 'wlfk';
+                                }
+                                roeEmail();
+                            } else {
+                                roeVip();
+                            }
+                        }, 'json');
+                    } else {
+                        login();
+                        //console.log('login')
+                    }
+                }, 'json');
+            });
+
+            // 跳转
+            $('.mail-confirm').on('tap',function(){
+                console.info(1);
+                testRedirect();
+            })
+            function testRedirect() {
+                var email = $("[name='test_email']").val();
+                var objexp = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/g;
+                if (email != '') {
+                    if (objexp.test(email)) {
+                        window.location.href = "<?php echo arU('User/testRedirect'); ?>" + '?email=' + email + '&kl=' + JSV.kl;
+                    } else {
+                        layer.alert('你的邮箱格式有误！');
+
+                    }
+                } else {
+                    layer.alert('邮箱必填！');
+                }
+
+            }
+
+            function roeEmail() {
+                layer.open({
+                    title: '<div style="color:#0078D7;font-size:.36rem;">联系邮箱</div>',
+                    type: 1,
+                    area: ['90%', 'auto'],
+                    content: $('#roe-email-cs')
+                });
+            }
+
+            function roeVip() {
+                roeCloseTips = layer.open({
+                    type: 1,
+                    area: ['350px', 'auto'],
+                    title: '请升级为Vip',
+                    content: '<div style="padding:10px 5px;">\
+                            <p style="margin:5px 0;color:red;font-size:15px;">很抱歉，此功能需要Vip才能使用，请升级为Vip。</p>\
+                            <div style="text-align:center;padding-top:10px;">\
+                                <a href="<?php echo arU("User/vipCard") ?>" style="padding:3px 5px;background-color:#17B4BB" class="btn quedingBtn" ;">升级VIP</a>\
+                            </div>\
+                        </div>',
+                });
+            }
+
+            function login() {
+                var index = layer.open({
+                    type: 0,
+                    shadeClose: false,
+                    content: '你还没有登录，请登录后再查询！',
+                    btn: ['确定'],
+                    yes: function() {
+                        layer.close(index);
+                        location.href = "<?php echo arU('User/login')?>";
+                    }
+                });
+            }
+            /*function roeclose(){
+                 layer.close(roeCloseTips);
+             }*/
+        })
+    </script>

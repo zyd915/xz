@@ -1,0 +1,63 @@
+  <script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jquery.js"></script>
+<script type="text/javascript">
+    $(function(){
+         var value = 0;
+
+        $('input[type=submit]').click(function(){
+          var page = $('input[name=page]').val();
+          var pageLen = page.split('-');
+          var first = pageLen[0];
+          var last = pageLen[1];
+          // 最开始运行的页数
+          // 最后运行的页数
+             aa(value,first,last);
+        });
+
+
+
+})
+    function aa(value,first,last){
+
+
+          if(value<10 && first<=last){
+                var data = {'page':first,'list':value};
+                 $.post("<?php echo arU('getCont');?>",data,function(ev){
+                  // //console.log(ev);
+                    if(ev.data.Name){
+
+                        $('#ui2').append('<li>'+ev.data.Name+'success</li>');
+                        // value ++;
+                        // aa(value);
+                        var con = {'Name':ev.data.Name,'content':ev.data.content};
+                        $.post("<?php echo arU('insertData');?>",con,function(e){
+                          // //console.log(e);
+                           value ++;
+                           if(value == 10)
+                           {
+                            value = 0;
+                            first ++;
+                           }
+                           aa(value,first,last);
+                        });
+
+
+                    }else{
+                        $('#ui2').append('<li>'+ev.data.Name+'error</li>');
+                        value ++;
+                        aa(value,first,last);
+                    }
+
+                 },'json');
+        }
+
+    }
+</script>
+<?php echo $play;?>
+<input type="text" value="" name="page">
+<input type="submit" value="点击">
+<ul id="ui1">
+
+</ul>
+<ul id="ui2">
+
+</ul>

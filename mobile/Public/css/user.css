@@ -1,0 +1,31 @@
+#myTab{
+    margin-top: .2rem;
+    border-bottom: 2px solid #73AD21;
+}
+#myTab li a{
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    padding: .21rem .2rem;
+}
+#myTab li.active{
+    border-bottom:none;
+}
+#myTab li.active a{
+    background:#73AD21;
+    color: #fff;
+}
+#myTabContent{
+    margin-top: .25rem;
+}
+#myTabContent table tr th{
+    padding:0.2rem 0.15rem;
+    vertical-align: middle;
+}
+#myTabContent table tr td{
+    padding:0.2rem 0.15rem;
+    vertical-align: middle;
+}
+#myTabContent table tr td a{
+    margin: 3px;
+}

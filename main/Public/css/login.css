@@ -1,0 +1,82 @@
+@charset "utf-8";
+.xz-login-box{
+    padding: 50px 0;
+}
+.login-main{
+    width: 910px;
+    height: 530px;
+    margin: 0 auto 40px;
+}
+.login-banner{
+    float: left;
+    width: 540px;
+    height: 530px;
+    margin-right: 20px;
+    overflow: hidden;
+}
+.login-in{
+    width: 348px;
+    height: 528px;
+    float: left;
+    border: 1px solid #eaeaea;
+    border-bottom: 1px solid #cbcbcb;
+    background: #fefefe;
+    position: relative;
+}
+.login-in .log{
+    padding: 40px 20px 30px;
+    border-bottom: 1px solid #cbcbcb;
+}
+.login-in .log h1{
+    text-indent: 60px;
+}
+.login-in .login-title h3{
+    font-size: 18px;
+    margin-left: 30px;
+    line-height: 2;
+}
+#form-horizontal{
+    padding-left: 30px;
+    padding-right: 40px;
+}
+#form-horizontal .input-group{
+    margin-bottom: 20px;
+}
+#form-horizontal .login-user{
+    margin-bottom: 30px;
+}
+.btn-login{
+    padding: 20px 0;
+    text-align: center;
+}
+.btn-login button{
+    width: 250px;
+    height: 44px;
+    font-size: 18px;
+    background-color: #0078D7;
+    color: #fff !important;
+}
+.sign{
+    margin-top: 50px;
+    padding-left: 30px;
+    padding-right: 40px;
+}
+.sign p{
+    text-align: right;
+}
+.sign a{
+    color: red;
+}
+.sign a:hover{
+    color: #0078D7;
+}
+.errortip{
+    color: #a94442;
+    top:5px;
+}
+.errorhide{
+    visibility: hidden;
+}
+input{
+    box-sizing: border-box;
+}

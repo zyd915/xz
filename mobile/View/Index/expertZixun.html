@@ -1,0 +1,178 @@
+<div id="page">
+<header class="header">
+    <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+    <span class="page-tit">专家预约咨询</span>
+</header>
+<form name="form_yuyue" action="<?php echo arU('Index/expertZixun')?>" method="post">
+<section class="content">
+<div class="main clearfix">
+<div class="container">
+    <div class="item expert-detail">
+        <p class="detail-font clearfix">
+            您选择了
+            <span style="color:#f70;font-size: .35rem"><?php echo $experts['name']; ?></span>
+            为您提供高考志愿填报咨询,感谢您对我们团队的信任，我们老师会竭心为你做好志愿服务&nbsp;!!&nbsp;<font class="fa fa-smile-o" style="color:orange;font-size: .5rem"></font>
+            <span class="center-block text-center" style="font-size: .3rem;">
+                <a href="<?php echo arU('findExpert'); ?>" style="color:green">[返回选择其他专家]</a>
+            </span>
+        </p>
+    </div>
+    <div>
+        <p class="xzws-required">
+            <i class="fa fa-info-circle"></i>
+            咨询申请须知：申请专家指导前，请认真填写以下资料，整理你想咨询的问题，以便专家提前准备，节省您的通话时间
+        </p>
+    </div>
+    <div class="dbg clearfix">
+        <?php
+            $yids = arRequest('yids');
+            $yuyues = YuyueModel::model()
+            ->getDb()
+            ->where(array('yid' => $yids))
+            ->queryRow();
+        ?>
+        <ul>
+            <li>
+                <h4 class="xzws-info-tit">
+                    <i class="fa fa-hand-o-right orangei"></i>您需要的咨询类型
+                </h4>
+                <div class="lbbg">
+                    <div class="">
+                        <label><i class="fa redi"></i>选择咨询类型：</label>
+                        <span class="zlbbg">
+                            <i class="fa fa-dot-circle-o blocki"></i>
+                            线下一对一咨询
+                            <span class=" orangei"><b>5680</b></span>元
+                        </span>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="xzws-info-tit"><i class="fa fa-hand-o-right  orangei"></i>考生情况</h4>
+                <div class="lbbg">
+                    <div class=" clearfix">
+                        <textarea class="areabor" id="examine" name="scoreinfo" placeholder="范例：高考成绩文科520分，名次1378名，英语比较好，也想学习相关的语言类的专业，最好是报考本省的大学。"><?php echo $yuyues['scoreinfo'];?></textarea>
+                        <div class="tswz  mr20 left">
+                            <span class="orangei">小贴士：<br>请详细填写高考成绩及相关细节，信息越充分，越能节省正式的咨询时间。</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="xzws-info-tit"><i class="fa fa-hand-o-right  orangei"></i>咨询意向</h4>
+                <div class="lbbg">
+                    <div class="mobinput clearfix">
+                        <label><i class="fa redi"></i>咨询主题：</label><input id="theme" class="inputbor" name="theme" type="text" value="<?php echo $yuyues['theme'];?>" placeholder="">
+                    </div>
+                    <div class=" clearfix mobinput">
+                        <label class="left"><i class="fa  mr5 redi"></i>其他：</label>
+                        <textarea class="areabor" id="other"  name="otherinfo" placeholder="范例：儿子平时比较文静，性格内向，平时比较喜欢看书、画画，在学习上语文和英语比较擅长，孩子适合学习语言类专业吗？有哪些合适的大学？具体填志愿需要如何规划？注意哪些方面？"><?php echo $yuyues['otherinfo']; ?></textarea>
+                        <div class="tswz  mr20 left">
+                            <span class="orangei">小贴士：<br>请全面描述要咨询的问题，并提供考生的性格爱好、特长、报考倾向以及未来的职业方向。信息越充分，越能节省正式的咨询时间。</span>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <h4 class="xzws-info-tit"><i class="fa fa-hand-o-right  orangei"></i>期望沟通时间</h4>
+                <div class="lbbg ">
+
+                    <div class="mobinput clearfix">
+                        <label><i class="fa redi"></i>咨询日期：</label>
+                        <input class="areabor" name="startdate" value="<?php echo $yuyues['startdate']; ?>" type="text" placeholder="如：2016-4-12 上午10点">
+                    </div>
+                    <div class="mobinput clearfix">
+                        <label><i class="fa  mr5 redi"></i>咨询时段：</label>
+                        <input class="inputbor" id="talktime" name="ytime" type="text" value="<?php echo $yuyues['ytime']; ?>" placeholder="如：周1-5晚18:00后">
+                    </div>
+                    <div class="mobinput clearfix">
+                        <label><i class="fa fa-asterisk mr5 redi"></i>手机号码：</label>
+                        <input class="inputbor" id="mobile" name="mobile" type="text" value="<?php echo $yuyues['mobile']?>" placeholder="" required="required">
+                    </div>
+                    <input type="hidden" name="yid" value="<?php echo $yuyues['yid']; ?>" />
+                    <input type="hidden" name="eid" value="<?php echo arRequest('eid'); ?>" />
+                </div>
+            </li>
+        </ul>
+        <div class="iback text-center" style="padding-top:.1rem ">
+            <a class="btn btn-primary">提交预约</a>
+        </div>
+    </div>
+</div>
+</div>
+</section>
+</form>
+<script type="text/javascript">
+    $(function(){
+        $('.iback a').tap(function(){
+            if($('input[name="mobile"]').val()==""){
+                layer.open({
+                    title:'<span style="color:#0078D7">提示</span>',
+                    content:'<i class="fa fa-exclamation-circle" style="font-size:22px;color:#ed6517;margin-right:5px;"></i>&nbsp;亲，你还没填写手机号码哟！',
+                    btn:['<span style="color:#0078D7;display:block;width:100%;">确定</span>'],
+                    yes:function(index){
+                        layer.close(index);
+                    }
+                })
+            }else if(!new RegExp(/^1[3|5|7|8|][0-9]\d{8}$/g).test($('input[name="mobile"]').val())){
+                layer.open({
+                    title:'<span style="color:#0078D7">错误信息</span>',
+                    content:'<i class="fa fa-times-circle" style="font-size:22px;color:#ed6517;margin-right:5px;"></i>&nbsp;亲，你的手机号码格式不正确！',
+                    btn:['<span style="color:#0078D7;display:block;width:100%;">确&nbsp;定</span>'],
+                    yes:function(index){
+                        layer.close(index);
+                    }
+                })
+            }else{
+                var yyinfo,objForm={};
+                objForm.scoreinfo=$('#examine').val();
+                objForm.theme=$('#inputbor').val();
+                objForm.other=$('#other').val();
+                objForm.startdate=$('input[name=startdate]').val();
+                objForm.talktime=$('input[name=ytime]').val();
+                objForm.mobile=$('input[name=mobile]').val();
+                window.localStorage.setItem('yyinfo',JSON.stringify(objForm));
+                layer.open({
+                    title:'<span style="color:#0078D7">提示</span>',
+                    content:'<i class="fa fa-smile-o" style="font-size:22px;color:#ed6517;margin-right:5px;"></i>&nbsp;恭喜你，专家预约成功！',
+                    btn:['<span style="color:#0078D7;display:block;width:100%;">查看预约单</span>'],
+                    shadeClose: false,
+                    yes:function(index){
+                        $("[name='form_yuyue']").submit();
+                        layer.close(index);
+                    }
+                })
+            }
+        })
+
+
+
+    })
+
+    $(function(){
+        var da = null;
+        //获取userScore接口数据
+        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post','',spage);
+        function spage(dat){
+            if(dat.ret_code == '1000'){
+                da = dat.data;
+                $('#exam-score').val(dat.data.scorez1);
+            }else{
+                var index = layer.open({
+                    type: 0,
+                    shadeClose: false,
+                    content: '你还没有登录，请登录后在查询！',
+                    btn: ['确定'],
+                    yes: function(){
+                        layer.close(index);
+                        location.href="<?php echo arU('User/login')?>";
+                    }
+                });
+            }
+        }
+        $('#examscore').on('change',function(){
+            esoption($('#examscore').val(),da);
+        });
+
+    });
+</script>

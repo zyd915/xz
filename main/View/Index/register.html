@@ -1,0 +1,502 @@
+<!-- 注册 -->
+<style type="text/css">
+    .reg{ background: white; cursor: pointer; }
+    .regphone{background: red;}
+    .regTrue{display: none;}
+    #choice a{}
+    .tip{font-size: 14px;color: red;padding-left: 15px;display: none;}
+</style>
+
+<div class="register w100 bdr mt20 pt20 mb20 pb20">
+    <div class="main1-bzh auto">
+        <h1 class="fwb mb0 text-center" style="font-size: 25px">新用户注册&nbsp;&nbsp;
+            <small class="roe-signin pull-right" style="margin-right: 15px;margin-top: 8px;">已有账户：<a href="javascript:;" onclick="login();">请登陆</a></small>
+        </h1>
+        <form action="<?php echo arU(''); ?>" method="post" id="form">
+            <div class="clearfix tac">
+                <dt style="border-top:1px solid #ccc;" class="mt30 mb20 tal pr clearfix"><span class="dib pr line-solid-dt-bzh fcb">考生信息</span></dt>
+                <div class="item item-bzh">
+                    <label>所在省市县：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <select id="province" name="province" style="min-width:80px;">
+                            <!-- <option selected="selected" value="0"></option> -->
+                            <option selected="selected" value="22">四川</option>
+                        </select>
+                        <select id="city" name="city" style="width: 150px;">
+                            <option selected="selected" value="0">请选择</option>
+                        </select>
+                        <select id="county" name="county" style="width: 180px;">
+                            <option selected="selected" value="0">请选择</option>
+                        </select>
+                        <span class="tip" style="float:left"></span>
+                    </div>
+                </div>
+                <div class="item item-bzh">
+                    <label>就读中学：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <select id="seniorhigh" name="seniorhigh" style="width: 150px;">
+                            <option selected="selected" value="0">请选择</option>
+                        </select>
+                        <span class="tip"></span>
+                    </div>
+                </div>
+                <div class="item item-bzh">
+                    <label>就读班级：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <?php
+                              // 调用用html seg 直接输出 select标签
+                              arSeg(
+                                 array(
+                                    // seg文件
+                                    'segKey' => 'Html/select',
+                                    // <select name="name">
+                                    'name' => 'junior',
+                                    // 适配器数据 数组
+                                    'map' => UserKaoshengModel::$GRADE_MAP,
+                                    // 选中的value selected = selected
+                                    'selected' => $ad['type']
+                                 )
+                              );
+                        ?>
+                        年级
+                        <input type="text" style="width:50px" name="banji" >
+                        班
+                        <span class="tip" style=""></span>
+                    </div>
+                </div>
+                <div class="item item-bzh">
+                    <label for="name">考生姓名：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <div class="has-feedback form-group" style="width:250px;margin-bottom:0;">
+                            <input style="width:250px;" type="text" id="name" name="truename">
+                            <span style="display:none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <span class="tip" style="float:left;"></span>
+                    </div>
+                </div>
+                <div class="item item-bzh">
+                    <label>考生性别：</label>
+                    <div class="reg-r-bzh dib tal">
+                       <?php
+                         arSeg(
+                             array(
+                                // seg文件
+                                'segKey' => 'Html/input_radio',
+                                // <select name="name">
+                                'name' => 'sex',
+                                // 适配器数据 数组
+                                'map' => UserModel::$TYPE_SEX,
+                                // 选中的value checked =checked
+                                'checked' => UserModel::SEX_MALE,
+                             )
+                          );
+                       ?>
+                    </div>
+                    </div>
+                <div class="item item-bzh">
+                    <label>考生类型：</label>
+                    <div class="reg-r-bzh dib tal">
+                       <?php
+                         arSeg(
+                             array(
+                                // seg文件
+                                'segKey' => 'Html/input_radio',
+                                // <select name="name">
+                                'name' => 'subjecttype',
+                                // 适配器数据 数组
+                                'map' => UserModel::$TYPE_SUBJECT,
+                                // 选中的value checked =checked
+                                'checked' => UserModel::SUBJECT_LIKE,
+                             )
+                          );
+                       ?>
+                    </div>
+                </div>
+                <div class="item item-bzh">
+                    <label for="year">高考年份：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <div class="has-feedback form-group" style="width:250px;margin-bottom:0;">
+                            <input style="width:250px;" type="text" id="year" name="examtime">
+                            <span style="display:none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <span class="tip" style="float:left;"></span>
+                    </div>
+                </div>
+                <dt style="border-top:1px solid #ccc;" class="tal pr mt30 mb20 clearfix"><span class="dib pr line-solid-dt-bzh fcb">注册信息</span></dt>
+
+                <div class="item item-bzh">
+                    <label for="passWord">密码：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <div class="form-group has-feedback" style="width:250px;margin-bottom:0;">
+                            <input type="password" id="passWord" name="pwd" placeholder="密码长度为6-16位">
+                            <span style="display:none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                        </div>
+                        <span class="tip" style="float:left;"></span>
+                    </div>
+                </div>
+                <div class="item item-bzh">
+                    <label for="rePassword">确认密码：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <div class="has-feedback form-group" style="width:250px;margin-bottom:0;">
+                            <input type="password" id="rePassword" name="repwd">
+                            <span style="display:none;" class="form-control-feedback glyphicon glyphicon-remove"></span>
+                        </div>
+                        <span class="tip" style="float:left;"></span>
+                    </div>
+                </div>
+                <div class="item item-bzh" id="choice">
+                    <label for="phone">
+                        <!-- <a href="javascript:;" class="reg dib regphone">手机号码</a>/ -->
+                        <!-- <a href="javascript:;" class="reg">电子邮箱</a>： -->
+                        <span>手机号码：</span>
+                    </label>
+                    <div class="reg-r-bzh dib tal">
+                        <div class="has-feedback form-group" style="width:250px;margin-bottom:0;">
+                            <input style="width:250px;" type="text" id="phone" name="phone" value="" placeholder="电话">
+                            <!-- <input type="text" name="email" class="regTrue" value="" placeholder="email"> -->
+                            <span style="display:none;" class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                        </div>
+                        <span class="tip" style="float:left;"></span>
+                    </div>
+                    <div class="roe-test clearfix">
+                        <!-- <input type="button" class="btn" value="发送验证码"> -->
+                        <div style="display:inline-block;"><button class="btn roe-btn1">短信验证</button></div>
+                        <span style=""><em id="roe-time">60</em>s</span>
+                    <div class="form-group">
+                        <div class="input-icon"><input type="text" class="" placeholder="验证码" id="ckey" name="ckey" style="height:36px; width:35px;" />
+                            <img id="cey" width='80px' height="36px" class="regCodeImg2" src='<?php echo arU('Index/captcha'); ?>' onclick="javascript:this.src='<?php echo arU('Index/captcha'); ?>?tm='+Math.random();" />
+                        </div>
+                    </div>
+                        <!-- <div class="has-feedback form-group">验证码：
+                            <input type="text" name="roe-btn2">
+                            <span class="form-control-feedback glyphicon glyphicon-ok"></span>
+                            <button class="btn" name="phonecheck">确定</button>
+                        </div> -->
+                        <!-- <input type="button" class="btn" value="验证"> -->
+                    </div>
+                </div>
+                <!-- <div class="has-feedback form-group"> -->
+                <div class="item item-bzh">
+                    <label for="">短信校验码：</label>
+                    <div class="reg-r-bzh dib tal">
+                        <input type="text" name="roe-btn2">
+                        <!-- <span class="form-control-feedback glyphicon glyphicon-ok"></span> -->
+                        <!-- <button class="btn" name="phonecheck">确定</button> -->
+                    </div>
+                </div>
+                <div class="tac">
+                    <input type="submit" value="立即注册" class="btn btn-info">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        /*$('#choice a').click(function(){
+            var _index = $(this).index();
+            $('#choice').find('input').eq(_index).show().siblings().hide();
+            $(this).addClass('regphone').siblings().removeClass('regphone');
+        });*/
+
+        $('#form').submit(function(){
+            //alert(tips.nodes.length);
+            var $json = {
+                "#phone" : $('#phone').val(),
+                "#passWord" : $('#passWord').val(),
+                "#rePassword" : $('#rePassword').val(),
+                "#name" : $('#name').val()
+                // "#year" : $('#year').val()
+            };
+            for(var obj in $json){
+                if($json[obj] == ''){
+                    tips(obj, 0, "必填");
+                    //$off = false;
+                }
+            }
+            ////console.log(tips.nodes.length);
+            if(tips.nodes.length ){
+                return false;
+            }else{
+                var code = $('input[name=roe-btn2]').val();
+                if(code == ''){
+                    layer.msg('验证码不能为空，请输入正确的验证码！');
+                    return false;
+                }
+                /*$.post("<?php echo arU('checkPhoneCode');?>",{'code':code},function(ev){
+                    //console.log(ev);
+                    if(ev.success == '1000'){
+
+                    }else{
+                        layer.msg('验证码不正确！');
+                        return false;
+                    }
+                },'json');*/
+            }
+        });
+
+        //obj选择字符串，status表示验证状态，msg提示信息
+        function tips(obj, status, msg){
+            var el = $(obj),
+                node = el.attr('name');
+            switch(status){
+                case 0:
+                    el.nextAll('span').css('display','block').addClass('glyphicon-remove');
+                    el.parent().removeClass('has-success').addClass('has-error').nextAll('span').css('display','block').html(msg);
+                    var re = new RegExp('\\b' + node + '\\b','g');
+                    var tipstr = tips.nodes.join(' ');
+                    if(!re.test(tipstr)){
+                        tips.nodes.push(node);
+                    }
+                    ////console.log(tips.nodes);
+                    break;
+                case 1:
+                    el.nextAll('span').css('display','block').removeClass('glyphicon-remove').addClass('glyphicon-ok');
+                    el.parent().removeClass('has-error').addClass('has-success').nextAll('span').css('display','none').html();
+                    var re = new RegExp('\\b' + node + '\\b','g');
+                    var tipstr = tips.nodes.join(' ');
+                    var arr = tips.nodes;
+                    if(tips.nodes.length){
+                        var index = classIndex(arr,node);
+                        if(re.test(tipstr)){
+                            if(index != -1){
+                                arr.splice(index, 1);
+                            }
+                            tips.nodes = arr;
+                        }
+                    }
+                    break;
+                case 2:
+                    el.nextAll('span').css('display','none').removeClass('glyphicon-remove');
+                    el.parent().removeClass('has-error').addClass('has-success').nextAll('span').css('display','none').html();
+                    var re = new RegExp('\\b' + node + '\\b','g');
+                    var tipstr = tips.nodes.join(' ');
+                    var arr = tips.nodes;
+                    if(tips.nodes.length){
+                        var index = classIndex(arr,node);
+                        ////console.log(index);
+                        if(re.test(tipstr)){
+                            if(index != -1){
+                                arr.splice(index, 1);
+                            }
+                            tips.nodes = arr;
+                        }
+                    }
+                    break;
+            }
+        }
+
+        tips.nodes = []; //有多少个没通过验证
+
+        //验证函数root为form表单name为表单name值 checktype为事件
+        function validate(root, name, json, checktype){
+            checktype = checktype || "blur";
+            $(root).on(checktype, 'input[name='+name+']', function(){
+                var ok = true;
+                for(var msg in json){
+                    if(!json[msg](this)){
+                        tips('input[name='+name+']', 0, msg);
+                        ok = false;
+                        break;
+                    }
+                }
+                if(ok){
+                   tips('input[name='+name+']', 1);
+                }
+            }).on('focus', 'input[name='+name+']', function(){
+                tips('input[name='+name+']', 2);
+            });
+        }
+
+        //判断原有数组中有无需要添加或删除的字符串
+        function classIndex(arrClassName,className){
+
+            for(var i=0; i<arrClassName.length; i++){
+
+                if(arrClassName[i] == className){
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        validate("#form", "truename",{
+            "提示：不能为空" : function(obj){
+                var val = $.trim(obj.value);
+                if( val == ''){
+                    //alert(1);
+                    return false;
+                }else{
+                    //alert(2);
+                    return true;
+                }
+            }
+        });
+
+        /*validate("#form", "examtime",{
+            "提示：格式不正确" : function(obj){
+                var val = $.trim(obj.value);
+                var re = /20\d{2}/;
+                return re.test(val);
+            }
+        });*/
+
+        validate("#form", "phone",{
+            "提示：格式不正确" : function(obj){
+                var val = $.trim(obj.value);
+                var re1 = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+                // var re2 = /^(139|138|137|136|135|134|159|158|152|151|150|157|181|188|187|147|182|183|170|130|131|132|155|156|186|185|133|153|189|180)[0-9]{8}$/;
+                var re2 = /^(13[0-9]|15[012356789]|17[0678]|18[0-9]|14[57])[0-9]{8}$/;
+
+                return re1.test(val)||re2.test(val);
+            }
+        });
+        /*validate("#form", "email",{
+            "不能为空" : function(obj){
+                var val = $.trim(obj.value);
+                var re = /^\w+@[a-z0-9]+(\.[a-z]+){1,3}$/;
+                return re.test(val);
+            }
+        });*/
+        validate("#form", "pwd",{
+            "提示：密码长度至少6位字符" : function(obj){
+                var val = $.trim(obj.value);
+                if(val == '' || val.length < 6 || val.length > 16){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        });
+
+        validate("#form", "repwd",{
+            "提示：两次输入密码不一致" : function(obj){
+                //var val = $.trim(obj.value);
+                var val = $('#passWord').val();
+                //alert(val);
+                if(obj.value == val && obj.value != ''){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+        });
+
+        //$('#phone').focus();
+        //阻止默认事件
+        $('.roe-test button').on('click',function(){
+            return false;
+        });
+       
+        //短信验证
+        $('.roe-btn1').on('click',function(){
+            if($('#phone').val() == ''){
+                layer.close(lid);
+                layer.msg('电话号码不能为空！');
+                return;
+            }
+            if ($('#ckey').val() == ''){
+                layer.alert('请先填入验证码');
+                //document.getElementById('cey').onclick();
+                // $('#cey').click();
+            }else{
+                var lid = layer.load('...');
+                var _this = $(this);
+                $.post("<?php echo AR_SERVER_PATH; ?>Api/ifMobieCanUse",{'checkcode': 1,'ckey':$('#ckey').val(),'mobile':$('input[name=phone]').val()},function(data){
+                    if(data.ret_code == '1000' ){
+                        $.post("<?php echo arU('sendPhoneCode');?>",{'ckey':$('#ckey').val(),'phone':$('input[name=phone]').val()},function(ev){
+                            if(ev.status == 1){
+                                layer.close(lid);
+                                layer.msg('短信发送成功，注意查收');
+                                _this.html('重发',2,-1);
+                                _this.parent().next('span').css('display','inline-block');
+                                $('#roe-time').html('60');
+                                var num = 60;
+                                _this.attr('disabled','disabled');
+                                roeTimer = setInterval(function(){
+                                    num--;
+                                    $('#roe-time').html(num);
+                                    if(num == 0){
+                                        clearInterval(roeTimer);
+                                        $('.roe-btn1').removeAttr('disabled');
+                                    }
+                                }, 1000);
+                            }else{
+                                $('#cey').click();
+                                layer.close(lid);
+                                layer.msg('短信发送失败，请重试');
+                            }
+                        },'json');
+                    }else{
+                        $('#cey').click();
+                        layer.close(lid);
+                        layer.msg(data.error_msg);
+                        // layer.msg('此电话号码已注册，请更换号码！');
+                    }
+                },'json');
+            }
+        });
+        /*$('[name=phonecheck]').click(function(){
+            var code = $('input[name=roe-btn2]').val();
+            $.post("<?php echo arU('checkPhoneCode');?>",{'code':code},function(ev){
+                //console.log(ev);
+                if(ev.success == '1000'){
+
+                }else{
+
+                }
+                return false;
+            },'json');
+        });*/
+    });
+
+    //省option
+    function pOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+data.data[i].region_id+'">'+data.data[i].region_name+'</option>');
+        }
+    }
+    //学校option
+    function sOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+data.data[i].school_id+'">'+data.data[i].school_name+'</option>');
+        }
+    }
+
+    $(document).ready(function(){
+        // AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/provinceList','',pOption,'#province',spage);
+        // $('#province').change(function(){
+        //     var opIndex=$('#province option:selected').attr("value");
+        //     $("#city option[value!='0']").remove();
+        //     $("#county option[value!='0']").remove();
+        //     $("#seniorhigh option[value!='0']").remove();
+        //     if(opIndex != 0){
+        //         AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/subRegionList?','pid='+opIndex+'',pOption,'#city',spage);
+        //     }
+        // });
+
+        var opIndex=$('#province option:selected').attr("value");
+        if(opIndex != 0){
+            AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/subRegionList?','pid='+opIndex+'',pOption,'#city',spage);
+        }
+
+        $('#city').change(function(){
+            var opIndex=$('#city option:selected').attr("value");
+            $("#county option[value!='0']").remove();
+            $("#seniorhigh option[value!='0']").remove();
+            if(opIndex != 0){
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/subRegionList?','pid='+opIndex+'',pOption,'#county',spage);
+            }
+        });
+        $('#county').change(function(){
+            var opIndex=$('#county option:selected').attr("value");
+            $("#seniorhigh option[value!='0']").remove();
+            if(opIndex != 0){
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/schools?','aid='+opIndex+'',sOption,'#seniorhigh',spage);
+            }
+        });
+    });
+    function spage(){
+
+    }
+</script>

@@ -1,0 +1,583 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="profession-title">
+			<h2 class="left">专业对比</h2>
+			<div class="line right mt10"></div>
+		</div>
+	</div>
+	<div class="school-detail mt50 clearfix">
+        <!-- 学校信息模板 -->
+		<div class="box-mb left clearfix"></div>
+        <!-- 添加学校信息模板 -->
+        <div class="detail-add left mb20 yb-select yb-input-submit">
+            <!-- <form action="" class="add" name="add" id="add" method="post" onsubmit="return mnonempty();"> -->
+                <ul>
+                    <li class="tac btitle">
+                        <p class="box-title">添加专业</p>
+                    </li>
+                    <li>
+                        <div class="score tac mt20">
+                            <label class="mr20">科类：</label>
+                            <span class="km"><input type="radio"  name="class" id="" value="文科" checked>&nbsp;文科</span>&nbsp;&nbsp;&nbsp;
+                            <span class="km"><input type="radio"  name="class" id="" value="理科">&nbsp;理科</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="score tac mt5 mb5 school-pc">
+                            <select id="school-pc" name="pc">
+                                <option value="0">学校批次</option>
+                                <!--<option value="提前批">提前批</option>-->
+                                <option value="本科一批">本科一批</option>
+                                <option value="本科二批">本科二批</option>
+                                <option value="本科三批">本科三批</option>
+                                <option value="专科一批">专科一批</option>
+                                <option value="专科二批">专科二批</option>
+                            </select>
+                        </div>
+                    </li>
+                    <!-- <li>
+                        <div class="mt5 mb5 tac school-year">
+                            <select id="school-year" name="year" class="yb-select">
+                                <option value="0">招生年份</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2009">2009</option>
+                                <option value="2008">2008</option>
+                                <option value="2007">2007</option>
+                            </select>
+                        </div>
+                    </li> -->
+                    <!-- <li>
+                        <div class="score tac mt5 mb5">
+                            <select id="school-area" class="yb-select">
+                                <option selected="selected" value="0">院校所在地</option>
+                            </select>
+                        </div>
+                    </li> -->
+                    <li>
+                        <div class="score tac mt5 mb5">
+                            <select id="school-name" class="yb-select">
+                                <option selected="selected" value="0">院校名称</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="score tac mt5 mb5">
+                            <select id="professional-name" class="yb-select">
+                                <option selected="selected" value="0">专业名称</option>
+                            </select>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="score tac mt20 mb20">
+                            <div class="tac">
+                                <input type="submit" name="add-btn" class="add-btn" value="添加"/>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            <!-- </form>     -->
+        </div>
+	</div>
+	<div class="content-chart">
+		<!-- <div class="mess-header">
+            <h4 class="tac">普通用户提供投档分对比，现在立即<a href="">购买</a>、<a href="">激活循证志愿卡</a>，查看更多数据对比！</h4>
+        </div> -->
+		<div id="score-chart" class="score-chart mt20">
+
+		</div>
+        <div class="chart-mes tac">专业信息比较图表，要求：最少两所学校，最多三所学校！</div>
+	</div>
+</div>
+<script type="text/javascript">
+    var del=false,add=false,index,m=0,myChart,option,sArea,sPc,sType,sKm,sName,sZyName,sZyPjf,sZyLqf,sYear,parameter;
+    var year=['2015年','2014年','2013年','2012年','2011年','2010年'];
+    var mes=[{}]; //保存专业对比数据
+
+    var strzy = $.cookie('roezydb'); //取出对比数据cookie
+
+	$(document).ready(function(){
+        //获取学校名称ajax url
+        Parameter();
+        //获取学校列表
+        AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/schoolsQuery?',parameter,snameOption,'#school-name',spage);
+        mes.splice(0,1);
+
+        // 从专业查询页面跳转过来通过cookie自动查询
+        (function(){
+            if(strzy){
+                strzy = $.cookie('roezydb').split(',');
+                var arry =[];
+                for(var i=0; i<strzy.length;){
+                    arry.push([strzy[i],strzy[i+1],strzy[i+2]]);
+                    i+=3;
+                }
+
+                for(var k=0;k<arry.length;k++){
+                    zdSearch(arry[k][0],arry[k][1],arry[k][2]);
+                    add=true;
+                }
+
+                function zdSearch(){
+                    var sName1 = arguments[0],sZyName1=arguments[1],sKm1=arguments[2],sType1;
+                    if(arguments[2] == '理工'){
+                        sKm1 = '理科';
+                        sType1 = 0;
+                    }
+                    if(arguments[2] == '文史'){
+                        sKm1 = '文科';
+                        sType1 = 1;
+                    }
+
+                    ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/majorqueryInfo?','POST','yxname='+sName1+'&zyname='+sZyName1+'&km='+sType1,zyduibi)
+                    var mdata,odata,mpc;
+                    var fs10,fs11,fs12,fs13,fs14,fs15;
+                    //专业信息Option
+                    function zyduibi(data,id){
+                        if(data.ret_code==1000){
+                            mdata=[data];
+                            if(mdata[0].data[2010] instanceof Array && mdata[0].data[2010].length == 0){
+                                fs10=0;
+                            }else{
+                                fs10=mdata[0].data[2010].fsmin;
+                                mpc1=mdata[0].data[2010].pc;
+                            }
+                            if(mdata[0].data[2011] instanceof Array && mdata[0].data[2011].length == 0){
+                                fs11=0;
+                            }else{
+                                fs11=mdata[0].data[2011].fsmin;
+                                mpc1=mdata[0].data[2011].pc;
+                            }
+                            if(mdata[0].data[2012] instanceof Array && mdata[0].data[2012].length == 0){
+                                fs12=0;
+                            }else{
+                                fs12=mdata[0].data[2012].fsmin;
+                                mpc1=mdata[0].data[2012].pc;
+                            }
+                            if(mdata[0].data[2013] instanceof Array && mdata[0].data[2013].length == 0){
+                                fs13=0;
+                            }else{
+                                fs13=mdata[0].data[2013].fsmin;
+                                mpc1=mdata[0].data[2013].pc;
+                            }
+                            if(mdata[0].data[2014] instanceof Array && mdata[0].data[2014].length == 0){
+                                fs14=0;
+                            }else{
+                                fs14=mdata[0].data[2014].fsmin;
+                                mpc1=mdata[0].data[2014].pc;
+                            }
+                            if(mdata[0].data[2015] instanceof Array && mdata[0].data[2015].length == 0){
+                                fs15=0;
+                            }else{
+                                fs15=mdata[0].data[2015].fsmin;
+                                mpc1=mdata[0].data[2015].pc;
+                            }
+                            if(mdata[0].data[2015].length == 0 && mdata[0].data[2014].length == 0 && mdata[0].data[2013].length == 0){
+                                mpc1='';
+                            }
+                            odata=[fs15,fs14,fs13,fs12,fs11,fs10];
+                            prebox(sName1,sZyName1,'',sKm1,mpc1,odata);
+                        }else{
+                            layer.msg('很抱歉！没有查询到相关数据。');
+                        }
+                    }
+                }
+            }
+        })();
+
+        $('.add-btn').click(function(){
+            if(mnonempty('#school-name','请选择院校名称！') && mnonempty('#professional-name','请选择专业名称！')){
+
+                if($('.box-mb').children().length >= 2){
+                    $('.detail-add').hide();
+                }
+
+                Parameter();
+
+                //获取对比信息 取得院校下专业一些数据 添加专业信息模板
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/majorqueryInfo?','yxname='+sName+'&zyname='+sZyName+'&km='+sType,zymoption,'#school-name',spage);
+                //向echarts中添加数据开关
+                add=true;
+
+                $('.km input[type=radio][name=class]').get(0).checked=true;
+                $('.km input[type=radio][name=class]').get(1).checked=false;
+                // $('#wk').attr('checked',true);
+                // $('#lk').attr('checked',false);
+                $('#school-pc')[0].selectedIndex=0;
+                //$('#school-year')[0].selectedIndex=0;
+                // $('#school-area')[0].selectedIndex=0;
+                $('#school-name')[0].selectedIndex=0;
+                $('#professional-name')[0].selectedIndex=0;
+                $('#school-name option[value != 0]').remove();
+                $('#professional-name option[value != 0]').remove();
+
+                //获取学校
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/schoolsQuery?',parameter,snameOption,'#school-name',spage);
+            }
+        });
+
+		//专业信息对比图表
+		//路径配置
+        require.config({
+            paths:{
+                echarts:"<?php echo arCfg('PATH.GPUBLIC'); ?>js/echarts-2.2.6/build/dist"
+            }
+        });
+        //调用，加载K模块
+        require(
+            [
+            'echarts',
+            'echarts/chart/line',
+            'echarts/chart/bar'
+            ],
+            function(ec){
+                option = {
+                    title : {
+                        text: '专业信息对比表',
+                        // subtext: '院校对比',
+                        x: 'left',
+                        y:'top',
+                        textStyle: {
+
+                        }
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:[],
+                        x: 'center',
+                        y: 'bottom'
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: false},
+                            dataZoom : {show : true},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    //关闭拖拽
+                    // calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : true,
+                            //boundaryGap:[0.5,0.5],
+                            data : year
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            name : '最低录取分数',
+                            axisLabel : {
+                                formatter: '{value} 分'
+                            },
+                            scale:true,
+                            //boundaryGap:true,
+                            boundaryGap:[0.05,0.05]
+                        }
+                    ],
+                    series : []
+                };
+
+                //为echarts对象加载数据
+                myChart=ec.init(document.getElementById("score-chart"));
+                // myChart.setOption(option);
+
+            }
+        );
+
+        //获取地区
+        //AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/provinceList','',pOption,'#school-area',spage);
+
+        //获取学校名称
+        $('#school-area,.km input[type=radio],.school-pc,.school-year').change(function(){
+            $('#school-name option[value != 0]').remove();
+            $('#professional-name option[value != 0]').remove();
+
+            Parameter();
+            //获取学校
+            AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/schoolsQuery?',parameter,snameOption,'#school-name',spage);
+        });
+
+        //获取专业名称
+        $('#school-name').change(function(){
+            $('#professional-name option[value != 0]').remove();
+            if($('#school-name option:selected').attr('value') != 0){
+                Parameter();
+                //获取专业
+                AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/schoolZysQuery?','yxname='+sName+'&'+parameter,zynameOption,'#professional-name',spage);
+            }
+        });
+
+        //判断是否选择重复学校专业
+        $('#professional-name').change(function(){
+            for(var i=0;i<mes.length;i++){
+                if(($('#school-name option:selected').text()+'-'+$('#professional-name option:selected').text()) == mes[i].sczname){
+                    message('不能选择同样的学校专业！');
+                    $('#professional-name')[0].selectedIndex=0;
+                }
+            }
+        });
+	});
+
+    //图表指定线
+    clearInterval(timeTicket);
+    var timeTicket = setInterval(function(){
+        if($('.box-mb').children().length < 3){
+            $('.detail-add').show();
+        }
+        //删除
+        if(del){
+            option.legend.data.splice(index,1);
+            option.series.splice(index,1);
+            mes.splice(index,1);
+            myChart.clear();
+            del=false;
+            myChart.setOption(option,true);
+            m=mes.length;
+        }
+        //增加
+        if(add){
+            option.legend.data.splice(0,option.legend.data.length);
+            option.series.splice(0,option.series.length);
+            for(var i=0;i<mes.length;i++){
+                option.legend.data.push({
+                    'name' : mes[i].sczname
+                });
+                option.series.push(
+                {
+                    'name':mes[i].sczname,
+                    'type':'line',
+                    'color': '#ff7f50',
+                    'data':mes[i].fsmin,
+                    'markPoint':{
+                        'data' : [
+                            {
+                                'type' : 'max',
+                                'name' : '最大录取最低分数'
+                            },
+                            {
+                                'type' : 'min',
+                                'name' : '最小录取最低分数'
+                            }
+                        ]
+                    },
+                    'markLine' : {
+                        'data' : [
+                            {
+                                'type' : 'average',
+                                'name' : '平均录取最低分数'
+                            }
+                        ]
+                    }
+                });
+            }
+            myChart.setOption(option,true);
+            add=false;
+        }
+        //图表不显示提示信息
+        if($('.box-mb').children().length >= 2){
+            $('.score-chart').show();
+            $('.chart-mes').hide();
+        } else{
+            $('.score-chart').hide();
+            $('.chart-mes').show();
+        }
+    },1000);
+
+    //删除按钮
+    function btndel(id){
+        index=$(id).parent().index();
+        del=true;
+        $(id).parent().remove();
+    }
+
+    //添加专业信息模板
+    function prebox(scname,zyname,scarea,skm,spc,data){
+        $('.box-mb').append('<div id="detail-box" class="detail-box left mb20" style="width:212px;margin-left:10px;">\
+            <a href="#" title="删除" onclick="btndel(this)"><i class="glyphicon glyphicon-remove-sign right"></i></a>\
+            <div class="ml10 mr10 pt10">\
+                <div class="box-title sczy">'+scname+'-'+zyname+'</div>\
+                <p>'+skm+' '+spc+'</p>\
+                <p class="clear">所在地：<span>'+scarea+'</span></p>\
+            </div>\
+            <div class="box-score mt10">\
+                <div class="score-bg score-border tac">15年最低录取分：<span class="minfs">'+data[0]+'分</span></div>\
+                <div class="score-border tac ">14年最低录取分：<span class="minfs">'+data[1]+'分</span></div>\
+                <div class="score-bg score-border tac">13年最低录取分：<span class="minfs">'+data[2]+'分</span></div>\
+                <div class="score-border tac">12年最低录取分：<span class="minfs">'+data[3]+'分</span></div>\
+                <div class="score-bg score-border tac ">11年最低录取分：<span class="minfs">'+data[4]+'分</span></div>\
+                <div class="score-border tac">10年最低录取分：<span class="minfs">'+data[5]+'分</span></div>\
+            </div>');
+
+        mes.push({
+            'sczname':scname+'-'+zyname,
+            'fsmin':[parseInt(data[0]),parseInt(data[1]),parseInt(data[2]),parseInt(data[3]),parseInt(data[4]),parseInt(data[5])]
+        });
+
+        $('.minfs').each(function(){
+            if($(this).text() == '0分'){
+                $(this).text('-');
+            }
+        });
+
+        if($('.box-mb').children().length >= 3){
+            $('.detail-add').hide();
+        }
+    }
+
+    //输入框非空判断
+    function mnonempty(id,msg){
+        if($(id)[0].selectedIndex == 0){
+            message(msg);
+            return false;
+        }else{
+            return true;
+        }
+    }
+
+    //省option
+    function pOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+data.data[i].region_id+'">'+data.data[i].region_name+'</option>');
+        }
+    }
+
+    //学校Option
+    function snameOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+(i+1)+'">'+data.data[i].yxname+'</option>');
+        }
+    }
+
+    //专业Option
+    function zynameOption(data,id){
+        for(var i=0;i<data.data.length;i++){
+            $(id).append('<option value="'+(i+1)+'">'+data.data[i].zyname+'</option>');
+        }
+    }
+
+    function spage(){}
+    var mdata,odata,mpc;
+    var fs10,fs11,fs12,fs13,fs14,fs15;
+    //专业信息Option
+    function zymoption(data,id){
+        if(data != 'empty'){
+            mdata=[data];
+            if(mdata[0].data[2010] instanceof Array && mdata[0].data[2010].length == 0){
+                fs10=0;
+            }else{
+                fs10=mdata[0].data[2010].fsmin;
+                mpc=mdata[0].data[2010].pc;
+            }
+            if(mdata[0].data[2011] instanceof Array && mdata[0].data[2011].length == 0){
+                fs11=0;
+            }else{
+                fs11=mdata[0].data[2011].fsmin;
+                mpc=mdata[0].data[2011].pc;
+            }
+            if(mdata[0].data[2012] instanceof Array && mdata[0].data[2012].length == 0){
+                fs12=0;
+            }else{
+                fs12=mdata[0].data[2012].fsmin;
+                mpc=mdata[0].data[2012].pc;
+            }
+            if(mdata[0].data[2013] instanceof Array && mdata[0].data[2013].length == 0){
+                fs13=0;
+            }else{
+                fs13=mdata[0].data[2013].fsmin;
+                mpc=mdata[0].data[2013].pc;
+                /*sName = mdata[0].data[2013].yxname;
+                sZyName = mdata[0].data[2013].zyname;
+                sKm = mdata[0].data[2013].kl;*/
+            }
+            if(mdata[0].data[2014] instanceof Array && mdata[0].data[2014].length == 0){
+                fs14=0;
+            }else{
+                fs14=mdata[0].data[2014].fsmin;
+                mpc=mdata[0].data[2014].pc;
+            }
+            if(mdata[0].data[2015] instanceof Array && mdata[0].data[2015].length == 0){
+                fs15=0;
+            }else{
+                fs15=mdata[0].data[2015].fsmin;
+                mpc=mdata[0].data[2015].pc;
+            }
+            if(mdata[0].data[2015].length == 0 && mdata[0].data[2014].length == 0 && mdata[0].data[2013].length == 0){
+                mpc='';
+            }
+
+            odata=[fs15,fs14,fs13,fs12,fs11,fs10];
+
+            prebox(sName,sZyName,sArea,sKm,mpc,odata);
+
+        }
+    }
+
+    function reset(){
+        $('.km input[type=radio][name=class]').get(0).checked=true;
+        $('.km input[type=radio][name=class]').get(1).checked=false;
+        // $('#wk').attr('checked',true);
+        // $('#lk').attr('checked',false);
+        $('#school-pc')[0].selectedIndex=0;
+        //$('#school-year')[0].selectedIndex=0;
+        // $('#school-area')[0].selectedIndex=0;
+        $('#school-name')[0].selectedIndex=0;
+        $('#professional-name')[0].selectedIndex=0;
+        $('#school-name option[value != 0]').remove();
+        $('#professional-name option[value != 0]').remove();
+    }
+
+    function Parameter(){
+        parameter='';
+        //科类
+        if($('.km input[type=radio]:checked').attr('value') == "理科"){
+            sType=0;
+            parameter+='km='+sType;
+        }else{
+            sType=1;
+            parameter+='km='+sType;
+        }
+        //科目名称
+        sKm=$('.km input[type=radio]:checked').attr('value'); //string
+        //批次名称
+        sPcName=$('.school-pc').children().find('option:selected').text(); //string
+        //批次
+        sPc=$('.school-pc').children().find('option:selected').attr('value'); //string
+        //地区
+        //sArea=$('#school-area option:selected').text();
+        //学校名称
+        sName=$('#school-name option:selected').text(); //string
+        //专业名称
+        sZyName=$('#professional-name option:selected').text(); //string
+        //专业录取分
+        sZyLqf=$('#professional-name option:selected').attr('title');
+        //专业平均分
+        sZyPjf=$('#professional-name option:selected').attr('name');
+        //招生年份
+        //sYear=$('#school-year option:selected').attr('value');
+
+        if(sPc != 0){
+            parameter+='&pc='+sPc;
+        }
+        // if(sYear != 0){
+        //     parameter+='&year='+sYear;
+        // }
+        /*if(sYear != 0){
+            parameter+='&year='+sYear;
+        }*/
+        // if(sArea != 0){
+        //     parameter+='&area='+sArea;
+        // }
+    }
+</script>

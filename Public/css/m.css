@@ -1,0 +1,41 @@
+@charset "utf-8";
+/*
+一、使用：
+	图标：
+	1、fontawesome，兼容IE7+
+		图标库（中文版）：http://www.thinkcmf.com/font/icons
+		使用规则（中文版）：http://www.thinkcmf.com/font/examples
+		图标：479个
+	2、bootstrap，兼容IE7+，为http://glyphicons.com/公司的bootstrap免费版本
+		图标库（中文版）：http://v3.bootcss.com/components/
+		使用规则（中文版）：http://v3.bootcss.com/components/#glyphicons-how-to-use
+		图标：260个
+	3、最后建议使用阿里巴巴矢量库
+		图标库：http://www.iconfont.cn/
+		使用规则：搜索下载指定大小、颜色
+		图标个数：阿里妈妈710+淘宝400+天猫340+1688站76+手机淘宝171个
+	类库：
+	1、bootstrap原生类库，兼容IE7，栅格系统为12栅格。
+	2、mb为bootstrap的调整库，采用20栅格。
+	3、public为功能类库，方便对公共标签格式化样式。式。	
+*/
+
+/*
+二、授权与声明：
+此版本原作者并不提供版权、相关商业授权，请自行咨询相关组织、机构、单位等。
+*/
+
+/*bootstrap库*/
+/*3.3.2版本*/
+@import url("mcss/bootstrap.css");
+/*调整*/
+/*@import url("mb.css");*/
+
+/*fontawsome库*/
+/*4.2.0版本*/
+@import url("mcss/mf.css");
+/*IE7兼容*/
+@import url("mcss/mf7.css");
+
+/*公共类*/
+@import url("mcss/mp.css");

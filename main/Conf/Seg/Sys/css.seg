@@ -1,0 +1,23 @@
+<?php
+// 批量 css 插入
+if (isset($cssInsertBundles)) :
+    foreach ($cssInsertBundles as $bundle) :
+        // APP 项目目录
+        $cssFile = AR_APP_PATH . 'Public' . DS . 'css' . DS . $bundle . '.css';
+        $cssFile = realpath($cssFile);
+        $cssServerFile = arCfg('PATH.PUBLIC') . 'css/' . $bundle . '.css';
+        if (!is_file($cssFile)) :
+            // 公共目录
+            $cssFile = AR_ROOT_PATH . 'Public' . DS . 'css' . DS . $bundle . '.css';
+            $cssFile = realpath($cssFile);
+            $cssServerFile = arCfg('PATH.GPUBLIC') . 'css/' . $bundle . '.css';
+            if (!is_file($cssFile)) :
+                continue;
+            endif;
+        endif;
+?>
+    <link href="<?php echo $cssServerFile; ?>" rel="stylesheet" type="text/css"/>
+<?php
+    endforeach;
+endif;
+?>

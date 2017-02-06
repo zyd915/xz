@@ -1,0 +1,240 @@
+<!-- 院校查询详情页 -->
+<div class="schoolSelectInfo">
+    <div class="column1-bzh left mt10 clearfix">
+        <!-- 小导航 -->
+        <div class="minNav w100 bg3-bzh pt10 pb10 fcw clearfix">
+            <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="">循证高考</a>&nbsp;>&nbsp;<a href="">找专业</a>&nbsp;>&nbsp;<a href="">所有专业</a>&nbsp;
+        </div>
+        <!-- 搜索专业 -->
+        <div class="pt20 pb20 pl20 bge-bzh mt10 mb10 tac">
+            <form action="<?php echo arU(''); ?>" id="roe-searchPro">
+                <label for="search">搜索专业:</label>
+                <input name="mname" class="search" id="search" type="text">
+                <button class="btn btn-info btn-sm"><i class="fa fa-search"></i>&nbsp;搜索</button>
+            </form>
+        </div>
+        <!-- 找专业说明 -->
+        <div class="roe-explain">
+            <p>2012教育部公布了最新的《普通高等学校专业目录（2012年）》，对1998年原《普通高等学校本科专业目录》进行了调整。《普通高等学校专业目录（2012年）》分为基本专业(352种)和特设专业(154种)，并确定了62种专业为国家控制布点专业。特设专业和国家控制布点专业分别在专业代码后加“T”和“K”表示，以示区分。</p>
+        </div>
+        <div class="roe-zyList">
+            <ul class="clearfix">
+                <li>专业列表</li>
+            </ul>
+        </div>
+        <?php
+            if (empty($majors)) :
+        ?>
+        <div>没有查到与"<?php echo arRequest('mname'); ?>"相关专业</div>
+        <?php
+            endif;
+        ?>
+        <div class="roe-overList">
+            <div class="roe-anchors">
+                <ul class="clearfix">
+                    <?php
+                        foreach ($majors as $key => $value) :
+                    ?>
+                        <li><a href="#<?php echo $key; ?>"><?php echo $key; ?></a></li>
+                    <?php
+                        endforeach;
+                    ?>
+                </ul>
+            </div>
+            <div class="roe-list">
+                <?php
+                    foreach ($majors as $key => $xks) :
+                ?>
+                <section id="<?php echo $key; ?>">
+                    <div class="clearfix">
+                        <?php
+                            $countMajors = 0;
+                            foreach ($xks as $xk):
+                                $xkdm = substr($xk[0]['dm'], 0, 2);
+                                $countMajors += count($xk);
+                            endforeach;
+                        ?>
+                        <h2><?php echo $key; ?>（<?php echo $xkdm; ?>）</h2>
+                        <small><?php echo count($xks); ?>个专业类，<?php echo $countMajors; ?>个本科专业</small>
+                    </div>
+                    <?php
+                        foreach ($xks as $mkey => $mls) :
+                    ?>
+                        <section>
+                            <?php
+                                $mldm = substr($mls[0]['dm'], 0, 4);
+                            ?>
+                            <h3><?php echo $mkey; ?>（<?php echo $mldm; ?>）</h3>
+                            <ul class="clearfix">
+                                <?php
+                                    foreach ($mls as $major) :
+                                ?>
+                                 <li><a href="<?php echo arU('Index/professionalSelectInfo', array('dm' => $major['dm'])); ?>" title="<?php echo $major['mname']; ?>" target="_blank"><?php echo $major['mname']; ?></a></li>
+                                <?php
+                                    endforeach;
+                                ?>
+                            </ul>
+                        </section>
+                    <?php
+                        endforeach;
+                    ?>
+                </section>
+                <?php
+                    endforeach;
+                ?>
+            </div>
+        </div>
+    </div>
+    <div class="kuang-reg-log-bzh right mt10 clearfix">
+        <div class="bdr p10 mt20 br5 clearfix">
+            <h4 class="fwb mb10">热门专业推荐</h4>
+            <ul class="ranking-bzh">
+                <?php
+                    for ($i = 0; $i < count($hots); $i++) :
+                        if ($i < 5) :
+                            $class = 'bg4-bzh';
+                        else :
+                            $class = 'bge-bzh';
+                        endif;
+                        $hot = $hots[$i];
+                ?>
+                    <li class="mt5 clearfix">
+                        <div class="left w50 word-en word-lf"><span class="min-num-bzh tac mr5 dib fcw <?php echo $class; ?>"><?php echo $i + 1; ?></span><a href="<?php echo arU('Index/professionalSelectInfo', array('dm' => $hot['dm'])); ?>"><?php echo $hot['mname']; ?></a></div><span class="dib right"><?php echo $hot['hot']; ?></span></li>
+                <?php
+                    endfor;
+                ?>
+            </ul>
+        </div>
+        <div class="mt10 pt10 pb10 bdr br5 clearfix">
+            <span class="fwb tac db">高考志愿填报参考数据查询</span>
+            <hr>
+            <div class="min-dataSearch pl10 clearfix">
+                <dt class="fwb ml5">院校投档分数线</dt>
+                <form target="_blank" action="<?php echo arU('Index/schoolSelectInfo'); ?>" id="roe-school">
+                    <select name="km" class="form-control input-sm">
+                        <option value='-1' class="dn">类型</option>
+                        <option value="0" class="">理科</option>
+                        <option value="1" class="">文科</option>
+                    </select>
+                    <select name="pc" class="form-control input-sm">
+                        <option value='-1' class="dn">录取批次</option>
+                        <option value="0" class="">提前批</option>
+                        <option value="1" class="">本一</option>
+                        <option value="2" class="">本二</option>
+                        <option value="3" class="">专一</option>
+                        <option value="4" class="">专二</option>
+                    </select>
+                    <select name="yxaddress" class="form-control input-sm">
+                        <option value='-1'>院校所在地</option>
+                        <!-- <?php foreach ($chinaCityArray as $key => $chinaCityArray) { ?>
+                            <option>
+                                <?php echo $chinaCityArray['name'];?>
+                            </option>
+                            <?php
+                        }?> -->
+                    </select>
+                    <select name="cid" class="form-control input-sm">
+                        <option class="dn" value='-1'>院校名称</option>
+                    </select>
+                    <!-- <a href="javascript:;" class="btn btn-info btn-sm right mr20 mt5" id="yxfxsearch"><i class="fa fa-search"></i>&nbsp;查询</a> -->
+                    <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+                </form>
+            </div>
+            <hr>
+            <div class="min-dataSearch pl10 clearfix">
+                <dt class="fwb ml5">专业录取分数线</dt>
+                <form target="_blank" action="<?php echo arU('Index/professionalSelectInfo'); ?>" id="roe-fraction">
+                    <select name="lb" class="form-control input-sm">
+                        <option value='-1'>专业层次</option>
+                        <option value="0">本科</option>
+                        <option value="1">专科</option>
+                    </select>
+                    <select name="xk" class="form-control input-sm">
+                        <option value='-1'>专业学科</option>
+                    </select>
+                    <select name="ml" class="form-control input-sm">
+                        <option value='-1'>专业门类</option>
+                    </select>
+                    <select name="dm" class="form-control input-sm">
+                        <option value='-1'>专业名称</option>
+                    </select>
+                    <!-- <a href="<?php echo arU('Index/professionalSelect'); ?>" class="btn btn-info btn-sm right mr20 mt5"><i class="fa fa-search"></i>&nbsp;查询</a> -->
+                    <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+$(document).ready(function() {
+    //tab标签切换
+    $(".tab-content:eq(0)").fadeIn();
+    $(".tab-menu .tab:eq(0)").addClass("tab-active");
+    $(".tab-menu").children().click(function() {
+        $(this).children(".tab").addClass("tab-active").parent().siblings().children(".tab").removeClass("tab-active");
+        num = $(this).index();
+        $(".tab-content").hide();
+        $(".tab-content:eq(" + num + ")").fadeIn();
+    });
+    //table行颜色
+    $(".table-tr tr").first().siblings(":odd").addClass("bgf4-bzh");
+    $(".table-tr td").css("border", "1px solid #fff");
+    //最低分样式
+    $(".table-tr tr").first().siblings().each(function() {
+        $(this).children(":eq(3)").addClass("fc6-bzh fwb");
+    });
+
+    $('.scDb').click(function() {
+        if ($(this).children('i').hasClass('fa-square-o')) {
+            $(this).children('i').removeClass('fa-square-o');
+            $(this).children('i').addClass('fa-check-square');
+            $(this).children().css({
+                'color': '#DB5242'
+            });
+        } else {
+            $(this).children('i').addClass('fa-square-o');
+            $(this).children('i').removeClass('fa-check-square');
+            $(this).children().css({
+                'color': '#fff'
+            });
+        }
+    });
+    $('.scGz').click(function() {
+        if ($(this).children('i').hasClass('fa-heart-o')) {
+            $(this).children('i').removeClass('fa-heart-o');
+            $(this).children('i').addClass('fa-heart');
+            $(this).children().css({
+                'color': '#DB5242'
+            });
+        } else {
+            $(this).children('i').addClass('fa-heart-o');
+            $(this).children('i').removeClass('fa-heart');
+            $(this).children().css({
+                'color': '#fff'
+            });
+        }
+    });
+
+    //院校所在地
+    $.post('<?php echo AR_SERVER_PATH; ?>Api/provinceList', function(data) {
+        addData(data, $('#roe-school'), 'yxaddress');
+    }, "json");
+    //院校名称
+    yxnamesearch('<?php echo AR_SERVER_PATH; ?>Api/areaSchools?');
+    //院校投档分数线查询判断
+    $('#roe-school').submit(function(event) {
+        return panduan('#roe-school','km','pc','yxaddress','cid');
+        //return false;
+    });
+    //专业录取分数线判断
+    $('#roe-fraction').submit(function(event) {
+        return panduan('#roe-fraction','dm','xk','ml','lb');
+    });
+    //学科
+    zylqsearchfn('lb','<?php echo AR_SERVER_PATH; ?>Api/majorXks?','xk','xk','专业学科');
+    //门类
+    zylqsearchfn('xk','<?php echo AR_SERVER_PATH; ?>Api/majorMls?','ml','ml','专业门类');
+    //专业名称
+    zylqsearchfn('ml','<?php echo AR_SERVER_PATH; ?>Api/majorsByMl?','dm','mname','专业名称');
+});
+</script>

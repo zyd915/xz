@@ -1,0 +1,548 @@
+<!-- 选择院校专业 -->
+<div id="print">
+    <div class="system-title pl20 pt10 pb10 clearfix">
+        <h2 class="left"><i class="fa fa-gear"></i>&nbsp;四川高考志愿智能填报系统</h2>
+        <ul class="hmenu right">
+            <li>输入真实高考成绩</li>
+            <li>选择填报批次</li>
+            <li>选择院校专业</li>
+            <li class="selected">生成模拟志愿表</li>
+        </ul>
+    </div>
+    <hr>
+    <h4 class="tac fwb fc8-bzh mt20 mb20">我的志愿单--（<span class="scType"></span>）</h4>
+    <div class="bge-bzh pp10-bzh ml20 mr20 mb10">
+        <span class="fwb mr20">本志愿表单使用您的真实高考成绩</span>科类：<span class="fc6-bzh mr20 s-subject"></span>总分：<span class="fc6-bzh mr20 s-score"></span>
+        <!-- <span class="fc6-bzh s-rank"></span> -->
+    </div>
+    <table style="width: 695px;" class="tac table-bordered auto fs14px-bzh xzlh-saTab">
+        <thead>
+        <tr class="fwb">
+            <th style="width: 50px;"></th>
+            <th style="width: 270px;">学校<i class="fa fa-question-circle quest ml10 mr10 quest-s"></i><span class="mfc">志愿知识</span></th>
+            <th style="width: 270px;">专业<i class="fa fa-question-circle quest ml10 mr10 quest-p"></i><span class="mfc">志愿知识</span></th>
+            <th style="width: 80px;">是否服从<br>专业调配</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr><!-- A志愿 -->
+            <td>A<br>志<br>愿</td>
+            <td class="item-bzh pt10 vat-bzh">
+                <span class="schoolMes" value="A" >
+                    <ul class="left tal jgz clear">
+                        <li class="">学校名称：<span class="c-name fwb" value="A"></span></li>
+                        <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                        <!-- <li class="mt10">2015年投档分：<span class="lqf15"></span></li> -->
+                        <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                        <li class="mt10">投档概率：<span class="verifica-sum"></span></li>
+                    </ul>
+                    <!-- <div class="verification">
+                        <div class="verifica-bar"></div>
+                    </div>
+                    <div class="verifica-mes tac">录取概率：&nbsp;&nbsp;</div> -->
+                </span>
+            </td>
+            <td class="item-bzh">
+                <ul class="zymk" value="A">
+                    <li class="mt10">
+                        <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5"></span></span>
+                    </li>
+                    <li class="mt10 mb10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6"></span></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+        <tr><!-- B志愿 -->
+            <td>B<br>志<br>愿</td>
+            <td class="item-bzh pt10 vat-bzh">
+                <span class="schoolMes" value="B">
+                    <ul class="left tal jgz clear">
+                        <li class="">学校名称：<span class="c-name fwb" value="B"></span></li>
+                        <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                        <!-- <li class="mt10">2015年投档分：<span class="lqf15"></span></li> -->
+                        <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                        <li class="mt10">投档概率：<span class="verifica-sum"></span></li>
+                    </ul>
+                </span>
+            </td>
+            <td class="item-bzh">
+                <ul class="zymk" value="B">
+                    <li class="mt10">
+                        <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5"></span></span>
+                    </li>
+                    <li class="mt10 mb10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6"></span></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+        <tr><!-- C志愿 -->
+            <td>C<br>志<br>愿</td>
+            <td class="item-bzh pt10 vat-bzh">
+                <span class="schoolMes" value="C">
+                    <ul class="left tal jgz clear">
+                        <li class="">学校名称：<span class="c-name fwb" value="C"></span></li>
+                        <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                        <!-- <li class="mt10">2015年投档分：<span class="lqf15"></span></li> -->
+                        <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                        <li class="mt10">投档概率：<span class="verifica-sum"></span></li>
+                    </ul>
+                </span>
+            </td>
+            <td class="item-bzh">
+                <ul class="zymk" value="C">
+                    <li class="mt10">
+                        <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5"></span></span>
+                    </li>
+                    <li class="mt10 mb10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6"></span></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+        <tr><!-- D志愿 -->
+            <td>D<br>志<br>愿</td>
+            <td class="item-bzh pt10 vat-bzh">
+                <span class="schoolMes" value="D">
+                    <ul class="left tal jgz clear">
+                        <li class="">学校名称：<span class="c-name fwb" value="D"></span></li>
+                        <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                        <!-- <li class="mt10">2015年投档分：<span class="lqf15"></span></li> -->
+                        <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                        <li class="mt10">投档概率：<span class="verifica-sum"></span></li>
+                    </ul>
+                </span>
+            </td>
+            <td class="item-bzh">
+                <ul class="zymk" value="D">
+                    <li class="mt10">
+                        <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5"></span></span>
+                    </li>
+                    <li class="mt10 mb10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6"></span></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+        <tr><!-- E志愿 -->
+            <td>E<br>志<br>愿</td>
+            <td class="item-bzh pt10 vat-bzh">
+                <span class="schoolMes" value="E">
+                    <ul class="left tal jgz clear">
+                        <li class="">学校名称：<span class="c-name fwb" value="E"></span></li>
+                        <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                        <!-- <li class="mt10">2015年投档分：<span class="lqf15"></span></li> -->
+                        <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                        <li class="mt10">投档概率：<span class="verifica-sum"></span></li>
+                    </ul>
+                </span>
+            </td>
+            <td class="item-bzh">
+                <ul class="zymk" value="E">
+                    <li class="mt10">
+                        <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5"></span></span>
+                    </li>
+                    <li class="mt10 mb10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6"></span></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+        <tr><!-- F志愿 -->
+            <td>F<br>志<br>愿</td>
+            <td class="item-bzh pt10 vat-bzh">
+                <span class="schoolMes" value="F">
+                    <ul class="left tal jgz clear">
+                        <li class="">学校名称：<span class="c-name fwb" value="F"></span></li>
+                        <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                        <!-- <li class="mt10">2015年投档分：<span class="lqf15"></span></li> -->
+                        <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                        <li class="mt10">投档概率：<span class="verifica-sum"></span></li>
+                    </ul>
+                </span>
+            </td>
+            <td class="item-bzh">
+                <ul class="zymk" value="F">
+                    <li class="mt10">
+                        <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4"></span></span>
+                    </li>
+                    <li class="mt10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5"></span></span>
+                    </li>
+                    <li class="mt10 mb10 clearfloat">
+                        <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6"></span></span>
+                    </li>
+                </ul>
+            </td>
+            <td>
+                <span></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="iback mt20 mb20 ml20 tac">
+    <a href="<?php echo arU('User/simulationSystemTwo'); ?>" title="返回" class="zyBack">返回</a>
+    <!-- <a title="修改" class="zyUpdate ml20">修改</a> -->
+    <a title="打印" class="zyPrint ml20">打印</a>
+    <a title="保存" class="zySave ml20">保存</a>
+</div>
+<!-- 保存成功提示 -->
+<div id="z-order" class="t-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml50 clearfix">
+         <i class="fa fa-smile-o ml20 mr10 left"></i>
+         <div class="left conts">恭喜您，保存志愿表单成功！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a href="<?php echo arU('User/myVolunteerForm'); ?>" class="pb5 pt5 right"><div class="mr10">查看志愿表单</div></a>
+         <a href="<?php echo arU('User/simulationSystemTwoSchool'); ?>" class="pb5 pt5 right"><div class="mr10">继续填报</div></a>
+     </div>
+</div>
+
+<script type="text/javascript">
+    var zyForm,zyFormName,score,subject,rank,pc,sname,percent,star,tcolor,tin=0,vin=true,maxscore,minscore,sum=25,zid='';
+    var zyFormA,zyFormB,zyFormC,zyb;
+    var szname=[],szindex=[{}],glsz=[{}],
+    zForm={"scname":[{}],"zyname":[{}]};
+    $(document).ready(function(){
+        $('.s-subject').text($.cookie('subject'));
+        $('.s-score').text($.cookie('score'));
+        $('.s-rank').text($.cookie('rank'));
+        $('.scType').text($.cookie('zyType'));
+        szname.splice(0,szname.length);
+        szindex.splice(0,szindex.length);
+        glsz.splice(0,glsz.length);
+
+        //tips提示框
+        Mtips('.quest-s','考生在本批次可填报A、B、C、D、E、F六所院校。根据平行志愿规则，建议合理拉开六所学校之间的梯度，按照投档风险从高到低的策略组织志愿。');
+        Mtips('.quest-p','本批次每所志愿学校可填报最多6个专业和1个服从志愿。考生成功向学校投档后，按学校事先确定并公布的规则对进档学生进行专业录取。考生应查阅填报学校的招生简章或咨询学校招办，根据学校的专业录取规则，结合自己的实力、兴趣，合理安排专业志愿的顺序。');
+
+        //tips提示框
+        Mtips('.quest-s','考生在本批次可填报A、B、C、D、E、F六所院校。根据平行志愿规则，建议合理拉开六所学校之间的梯度，按照投档风险从高到低的策略组织志愿。');
+        Mtips('.quest-p','本批次每所志愿学校可填报最多6个专业和1个服从志愿。考生成功向学校投档后，按学校事先确定并公布的规则对进档学生进行专业录取。考生应查阅填报学校的招生简章或咨询学校招办，根据学校的专业录取规则，结合自己的实力、兴趣，合理安排专业志愿的顺序。');
+
+        zid='<?php echo arRequest('zid'); ?>';
+        if(zid != ''&& $.cookie('zydUpdate') != '1'){
+            $('.zySave').addClass('clear');
+            AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/getUserZy?','zid='+zid,zybForm,'#school-inform',sc);
+        }
+
+        // zyForm=JSON.parse($.cookie('zyForm'));
+        if($.cookie('zydUpdate') =='1'){
+            if($.cookie('zyFormName') != null){
+                zyFormName=JSON.parse($.cookie('zyFormName'));
+                for(var j=0;j<zyFormName.length;j++){
+                    $('.schoolMes').filter('[value='+zyFormName[j].sctype+']').children().removeClass('clear');
+                    $('.c-name').filter('[value='+zyFormName[j].sctype+']').text(zyFormName[j].scname);
+                    $('.c-name').filter('[value='+zyFormName[j].sctype+']').parent().next().find('.scarea').text(zyFormName[j].scarea);
+                    $('.zymk').filter('[value='+zyFormName[j].sctype+']').parent().next().children().text(zyFormName[j].zyobey);
+                    $('.schoolMes').filter('[value='+zyFormName[j].sctype+']').children('ul').children('li').children('.verifica-sum').text(zyFormName[j].scgl);
+                }
+            }
+        }
+        if($.cookie('zyFormA') != null){
+            zyFormA=JSON.parse($.cookie('zyFormA'));
+            for(var i=0;i<zyFormA.length;i++){
+                $('.zymk').filter('[value='+zyFormA[i].zytype+']').children().children().children().next().filter('[value='+zyFormA[i].zyvalue+']').text(zyFormA[i].zyname);
+            }
+        }
+        if($.cookie('zyFormB') != null){
+            zyFormB=JSON.parse($.cookie('zyFormB'));
+            for(var i=0;i<zyFormB.length;i++){
+                $('.zymk').filter('[value='+zyFormB[i].zytype+']').children().children().children().next().filter('[value='+zyFormB[i].zyvalue+']').text(zyFormB[i].zyname);
+            }
+        }
+        if($.cookie('zyFormC') != null){
+            zyFormC=JSON.parse($.cookie('zyFormC'));
+            for(var i=0;i<zyFormC.length;i++){
+                $('.zymk').filter('[value='+zyFormC[i].zytype+']').children().children().children().next().filter('[value='+zyFormC[i].zyvalue+']').text(zyFormC[i].zyname);
+            }
+        }
+
+        //返回
+        $('.zyBack').click(function(){
+            delCookie();
+        });
+
+
+        //修改
+        $('.zyUpdate').click(function(){
+            $(this).attr('href','<?php echo arU("User/simulationSystemTwoSchool/zid/'+zid+'"); ?>');
+            $.cookie('zydUpdate',0,{expires:date,path:paths});
+        });
+
+        //打印
+        $('.zyPrint').click(function(){
+            $('#print').jqprint();
+            delCookie();
+        });
+
+        //保存
+        $('.zySave').click(function(){
+            $(this).attr('disabled',"true");
+            zyPush();
+            parmer();
+            AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/saveUserZy?','pc='+pc+'&score='+score+'&km='+km+'&ztype='+ztype+'&param='+param+'&zid='+zid,sForm,'#school-inform',sc);
+            delCookie();
+            $.cookie('zydUpdate',3,{expires:date,path:paths});
+        });
+
+        score=$.cookie('score');
+        subject=$.cookie('km');
+        pc=$.cookie('pc');
+
+        //历年录取-->学校信息
+        $('.sc-detail').click(function(){
+            sname=$(this).parent().parent().prev().prev().find('.c-name').text();
+            if($.cookie('ifVip')){
+                window.open('<?php echo arU("Index/schoolSelectInfo?km='+subject+'&pc='+pc+'&name='+sname+'"); ?>','_blank');
+                //window.location.href='<?php echo arU("Index/schoolSelectInfo?km='+subject+'&pc='+pc+'&name='+sname+'"); ?>'
+            }else{
+                CaptruePage('.typeSchool',400,0,'400px','170px','#ln-detail',false,'');
+            }
+        });
+    });
+
+//志愿表储存
+    function zyPush(){
+        $('.c-name').each(function(index){
+            if($('.c-name').eq(index).text() != ''){
+                zForm.scname.push({
+                    'sctype':$('.c-name').eq(index).attr('value'),
+                    'scname':$('.c-name').eq(index).text(),
+                    'scarea':$('.scarea').eq(index).text(),
+                    'scpercent':$('.verifica-sum').eq(index).text(),
+                    'scobey':$.trim($('.c-name').eq(index).parent().parent().parent().parent().next().next().text())
+                });
+            }
+            $('.zymk').filter("[value="+$('.c-name').eq(index).attr('value')+"]").children().children().children().next().each(function(key){
+                if($(this).text() != ''){
+                    zForm.zyname.push({
+                        'zytype':$('.c-name').eq(index).attr('value'),
+                        'zyvalue':$('.zymk').filter("[value="+$('.c-name').eq(index).attr('value')+"]").children().children().children().next().eq(key).attr('value'),
+                        'zyname':$('.zymk').filter("[value="+$('.c-name').eq(index).attr('value')+"]").children().children().children().next().eq(key).text()
+                    });
+                }
+            });
+        });
+    }
+
+    //批次名称
+    function pcname(value){
+        switch(value){
+            case '0':
+                $('.scType').text('提前批');
+                break;
+            case '1':
+                $('.scType').text('普通类第一批本科');
+                break;
+            case '2':
+                $('.scType').text('普通类第二批本科');
+                break;
+            case '3':
+                $('.scType').text('普通类专科一批');
+                break;
+            case '4':
+                $('.scType').text('普通类专科二批');
+                break;
+        }
+    }
+
+    //显示志愿表
+    function zybForm(data,id){
+        if(data.data.km == 1){
+            $('.s-subject').text('文科');
+        }else{
+            $('.s-subject').text('理科');
+        }
+        $('.s-score').text(data.data.score);
+        pcname(data.data.pc);
+
+        if (data.ret_code == 1000) {
+            var obj = JSON.parse(data.data.param),
+                zyform = obj.formData,
+                html = '';
+
+            if (obj.dataType && obj.dataType == 'lh') {
+                for (var tqp in zyform) {
+                    html += '<tr>\
+                        <td>'+tqp+'<br>志<br>愿</td>\
+                        <td class="item-bzh pt10 vat-bzh">\
+                            <span class="schoolMes" value="A" >\
+                                <ul class="left tal jgz">\
+                                    <li class="">学校名称：<span class="c-name fwb" value="'+tqp+'">'+ zyform[tqp].schoolname +'</span></li>\
+                                    <li class="mt10">学校所在地：<span class="scarea">'+ zyform[tqp].scarea +'</span></li>\
+                                    <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>\
+                                    <li class="mt10">投档概率：<span class="verifica-sum">'+ zyform[tqp].odds +'%</span></li>\
+                                </ul>\
+                            </span>\
+                        </td>\
+                        <td class="item-bzh">\
+                            <ul class="zymk" value="'+tqp+'">\
+                                <li class="mt10">\
+                                    <span class="left"><span class="fwb fc8-bzh ml10">1.</span><span class="ml10" value="1">'+ zyform[tqp].zylist[0] +'</span></span>\
+                                </li>\
+                                <li class="mt10 clearfloat">\
+                                    <span class="left"><span class="fwb fc8-bzh ml10">2.</span><span class="ml10" value="2">'+ zyform[tqp].zylist[1] +'</span></span>\
+                                </li>\
+                                <li class="mt10 clearfloat">\
+                                    <span class="left"><span class="fwb fc8-bzh ml10">3.</span><span class="ml10" value="3">'+ zyform[tqp].zylist[2] +'</span></span>\
+                                </li>\
+                                <li class="mt10 clearfloat">\
+                                    <span class="left"><span class="fwb fc8-bzh ml10">4.</span><span class="ml10" value="4">'+ zyform[tqp].zylist[3] +'</span></span>\
+                                </li>\
+                                <li class="mt10 clearfloat">\
+                                    <span class="left"><span class="fwb fc8-bzh ml10">5.</span><span class="ml10" value="5">'+ zyform[tqp].zylist[4] +'</span></span>\
+                                </li>\
+                                <li class="mt10 mb10 clearfloat">\
+                                    <span class="left"><span class="fwb fc8-bzh ml10">6.</span><span class="ml10" value="6">'+ zyform[tqp].zylist[5] +'</span></span>\
+                                </li>\
+                            </ul>\
+                        </td>\
+                        <td>\
+                            <span>'+ zyform[tqp].zytp +'</span>\
+                        </td>\
+                    </tr>';
+                }
+                $('.xzlh-saTab').find('tbody').html( html );
+            }else if(data.data.param != '' && data.data.param != undefined){
+                zyb=JSON.parse(data.data.param);
+                console.log(zyb)
+                for(var i=0;i<zyb.scname.length;i++){
+                    $('.schoolMes').filter('[value='+zyb.scname[i].sctype+']').children().removeClass('clear');
+                    $('.c-name').filter('[value='+zyb.scname[i].sctype+']').text(zyb.scname[i].scname);
+                    $('.c-name').filter('[value='+zyb.scname[i].sctype+']').parent().next().find('.scarea').text(zyb.scname[i].scarea);
+                    $('.zymk').filter('[value='+zyb.scname[i].sctype+']').parent().next().children().text(zyb.scname[i].scobey);
+                    $('.schoolMes').filter('[value='+zyb.scname[i].sctype+']').children('ul').children('li').children('.verifica-sum').text(zyb.scname[i].scpercent);
+                }
+                for(var i=0;i<zyb.zyname.length;i++){
+                    $('.zymk').filter('[value='+zyb.zyname[i].zytype+']').children().children().children().next().filter('[value='+zyb.zyname[i].zyvalue+']').text(zyb.zyname[i].zyname);
+                    $('.zymk').filter("[value="+zyb.zyname[i].zytype+"]").children().children().children().filter("[value="+zyb.zyname[i].zyvaule+"]").text(zyb.zyname[i].zyname);
+                }
+            }
+        }
+    }
+
+    function sForm(data,id){
+        CPage('.typeSchool',400,0,'400px','170px','#z-order',false,'');
+    }
+
+    function sc(){}
+
+    //获取值
+    function parmer(){
+        pc=$.cookie('pc');
+        score=$.cookie('score');
+        km=$.cookie('km');
+        ztype=$.cookie('ztype');
+        param=JSON.stringify(zForm);
+    }
+
+    //捕获页
+    function CPage(id,y,x,w,h,cid,can,url){
+        cindex=layer.open({
+            type: 1,
+            title: false,
+            // offset: [y,x],
+            shade: 0.6,
+            closeBtn: false,
+            scrollbar: false,
+            area: [w, h],
+            content: $(cid)
+        });
+    }
+
+    //清除缓存
+    function delCookie(){
+        $.cookie('zyFormName',null,{expires:-1,path:paths});
+        $.cookie('zyFormA',null,{expires:-1,path:paths});
+        $.cookie('zyFormB',null,{expires:-1,path:paths});
+        $.cookie('zyFormC',null,{expires:-1,path:paths});
+    }
+</script>

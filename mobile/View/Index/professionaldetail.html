@@ -1,0 +1,200 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:window.history.back()" id="xzlh-back"><span class="glyphicon glyphicon-menu-left"></span></a>
+        <span class="page-tit" ><?php echo $majors['xk']; ?></span>
+    </header>
+    <section class="content">
+        <div>
+            <div class="xzlh-profmain">
+                <div class="xzlh-zyname">
+                    <h3 id="roe-zy"><?php echo $majors['mname']; ?></h3><span>(<?php echo $majors['lb']; ?>)</span>
+                    <div>
+                        <span>所属门类:<?php echo $majors['ml']; ?></span>
+                        <span>专业代码:<?php echo $majors['dm']; ?></span>
+                    </div>
+                </div>
+                <div class="xzlh-yxhead clearfix">
+                    <a href="javascript:;" class="active">专业介绍</a>
+                    <a href="javascript:;" class="">开设院校</a>
+                    <a href="javascript:;" class="">就业方向</a>
+                </div>
+                <div class="xzlh-zydetail">
+                    <section>
+
+                        <?php echo $majors['des']; ?>
+                    </section>
+
+                    <!-- 开设院校 -->
+                    <section>
+                        <div class="tab-content">
+                            <div class="roe-filter">
+                                <div class="item clearfix">
+                                    <div class="list fl">
+                                        <span class="list-1">招生年份：</span></div>
+                                    <div class="list fr">
+                                        <span id="roe-year" class="roe-selectbox list-2">
+                                                <select id="" name="year">
+                                                    <option value="2015" selected>2015</option>
+                                                    <option value="2014">2014</option>
+                                                    <option value="2013">2013</option>
+                                                </select>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="item clearfix">
+                                    <div class="list fl">
+                                        <span class="list-1">招生批次：</span>
+                                    </div>
+                                    <div class="list fr">
+                                        <span id="roe-pc" class="roe-selectbox list-2">
+                                                <select id="" name="pc">
+                                                    <option value="1">本科一批</option>
+                                                    <option value="2">本科二批</option>
+                                                    <option value="3">专科一批</option>
+                                                    <option value="4">专科二批</option>
+                                                </select>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="item clearfix">
+                                    <div class="list fl">
+                                        <span class="list-1">科&nbsp;&nbsp;&nbsp;&nbsp; 类：</span>
+                                    </div>
+                                    <div class="list fr">
+                                        <span id="roe-subject" class="roe-selectbox list-2">
+                                              <?php
+                                                  // 调用用html seg 直接输出 select标签
+                                                  arSeg(
+                                                      array(
+                                                      // seg文件
+                                                      'segKey' => 'Html/select',
+                                                      // <select name="name">
+                                                      'name' => 'km',
+                                                      // 适配器数据 数组
+                                                      'map' => DataYxModel::$kmMap,
+                                                      // 选中的value selected = selected
+                                                      'selected' => 0
+                                                      )
+                                                  );
+                                              ?>
+                                          </span>
+
+                                    </div>
+                                </div>
+
+                                <div class="text-center" style="margin-top:.35rem">
+                                    <a id="roe-searchyx" class="btn btn-xs btn-info center-block" style="font-size:.38rem;">查询</a>
+                                </div>
+                            </div>
+                            <div class="chart roe-chart">
+                                <h4>共有&nbsp;<span style="color:#0078D7;font-size:.33rem">10个</span>&nbsp;"<?php echo $majors['mname']; ?>"&nbsp;(<?php echo $majors['lb']; ?>)专业招生：</h4>
+                                <p style="display:none;" class="pt20 pb20">很抱歉，暂未查到符合条件的招生信息，请更改条件后重新查询！</p>
+                                <table id="roe-table" class="table table-bordered roe-table" style="width:100%;">
+                                    <thead>
+                                        <tr class="bg4-bzh">
+                                            <th>开设院校</th>
+                                            <th>最低分</th>
+                                            <th>平均分</th>
+                                            <th>录取位次</th>
+                                            <th>录取线差</th>
+                                            <th>录取人数</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </section>
+
+                    <section>
+                        <?php echo $majors['employment']; ?>
+                    </section>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript">
+        $(function() {
+            (function() {
+                $('.xzlh-zydetail section').hide();
+                $('.xzlh-zydetail section').eq(0).show();
+                $('.xzlh-yxhead a').on('tap', function() {
+                    $(this).addClass('active').siblings().removeClass('active');
+                    var index = $(this).index();
+                    $('.xzlh-zydetail section').eq(index).show().siblings().hide();
+                })
+            })()
+        })
+
+         //查询开设院校
+        $(function(){
+            var dat = {
+                'zyname' : $('#roe-zy').text(),
+                'km' : $('#roe-subject').find('select').val(),
+                'pc' : $('#roe-pc').find('select').val(),
+                'year' : $('#roe-year').find('select').val()
+            };
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zhuanyeList','POST',dat,zyQuery);
+        });
+
+        $('#roe-searchyx').on('tap',function(){
+            var zy = $('#roe-zy').text();
+            var pc = $('#roe-pc').find('select').val();
+            var km = $('#roe-subject').find('select').val();
+            var year = $('#roe-year').find('select').val();
+            // var year = 2014;
+            var dat = {
+                'zyname' : zy,
+                'km' : km,
+                'pc' : pc,
+                'year' : year
+            };
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zhuanyeList','POST',dat,zyQuery);
+        });
+
+        function zyQuery(data){
+            var html = '';
+            if(data.ret_code != 1000){
+                $('.roe-chart').find('h4').html('<span></span>&nbsp;&nbsp;共有&nbsp;<span style="color:#EF3535">0个</span>“'+$('#roe-zy').text()+'”专业招生：');
+                $('.roe-chart').find('p').css('display', 'block');
+                $('.roe-table').find('tbody').html('');
+            }else{
+                var len = data.data.length;
+                $('.roe-chart').find('h4').html('<span></span>&nbsp;&nbsp;共有&nbsp;<span style="color:#EF3535">'+ data.total_lines +'个</span>“'+$('#roe-zy').text()+'”专业招生：');
+                $('.roe-chart').find('p').css('display', 'none');
+                for(var i=0; i<data.total_lines; i++){
+                    html += '<tr>\
+                                <td>\
+                                    <strong><a href="javascript:;" class="xzlh-yxname">'+data.data[i].yxname+'</a></strong><br>\
+                                </td>\
+                                <td>'+data.data[i].slqf+'</td>\
+                                <td>'+data.data[i].sjf+'</td>\
+                                <td>'+tdmc(data.data[i].slqwc)+'</td>\
+                                <td>'+data.data[i].lqxc+'</td>\
+                                <td>'+data.data[i].lqrs+'</td>\
+                            </tr>';
+                }
+                $('.roe-table').find('tbody').html(html);
+                $(".table-tr tbody tr").filter(":odd").css("background-color",'#eee');
+                $(".table-tr td").css("border", "1px solid #ddd");
+            }
+            //点击学校名称查看更多信息
+            $('.xzlh-yxname').tap(function(){
+                var yxname=$(this).text();
+                var weizhi=yxname.indexOf("(");
+                var sub_name=yxname.substring(0,weizhi);
+                if(weizhi==-1){
+                    window.open('<?php echo arU("Index/schooldetail")?>?name='+yxname,target="_blank")
+                }else{
+                    window.open('<?php echo arU("Index/schooldetail")?>?name='+sub_name,target="_blank")
+                }
+            })
+
+            $('.vipCard').tap(function(){
+                window.open('<?php echo arU("User/vipCard")?>',target='_blank')
+            })
+        }
+    </script>

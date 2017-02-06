@@ -1,0 +1,192 @@
+<!-- mainContent -->
+</div>
+<!--链接-->
+<script src="<?php echo arCfg('PATH.PUBLIC'); ?>js/kefu.js"></script>
+<div class="keifu">
+        <div class="keifu_tab">
+            <div class="icon_keifu"></div>
+            <?php
+                if (arCfg('requestRoute.a_c') == 'Index') :
+
+            ?>
+            <div class="keifu_box clear">
+                <div class="keifu_head">
+                    <a href="javascript:void(0)" class="keifu_close"></a>
+                </div>
+                <ul class="keifu_con">
+                    <li><p class="fs1 tac" style="color:#029BDB;">四川高考志愿</p></li>
+                    <li><hr></li>
+                    <li style="color:#029BDB;font-size:12px;">
+                        <p><i class="fa fa-qq"></i> 2016四川高考家长交流群：</p>
+                        <p class="tal"><b>QQ：453926751</b></p>
+                        <p class="tal">
+                            <a style="padding:2px 0;color:#029BDB;font-size:12px;" href="tencent://message/?Menu=yes&amp;uin=938195964&amp;Service=58&amp;SigT=A7F6FEA02730C988E7F705133E3241CCCB94DF18793705C49989091159E0A13AD989A8A667C3C149B6775AF297BD34C8F63A4C778605F943CF797ECFECBC1E63E12B5810C78BE36D57725D04412271CC3A29BB3918DE42B58C2EC0E64DBAF500840DD7C23633A4D59BC9C2A2430F9C35DA03E43BA4C0747D&amp;SigU=30E5D5233A443AB23733444F16C1D6C78A20C09B38276C95E4A22587C79FA1818FDAF4C3FBC5E31C9833EAFFC75A416E95A0E970F8C42B7871EE6EC7C646D1140F25DB75E8307919"><i class="fa fa-qq"></i> 四川高考志愿填报助手</a>
+                        </p>
+                    </li>
+                    <li><hr></li>
+                    <li style="color:#75BA07 ">
+                        <p style="font-size:12px;color:#029BDB;"><i class="fa fa-weixin"></i> 讲座发布公众号：四川高考志愿</p>
+                        <!-- <p style="margin:0;font-size:12px;width:110px;">四川高考志愿</p> -->
+                    </li>
+                    <li class="weixin tac">
+                        <img src="<?php echo arCfg('PATH.PUBLIC'); ?>img/qrcode.png" alt="官方微信" />
+                    </li>
+                </ul>
+                <div class="keifu_bot">
+                    <strong>人工咨询：<br/>400-0668208</strong>
+                </div>
+            </div>
+            <?php
+                endif;
+            ?>
+        </div>
+        <div id="roe-goTop" title="返回顶部">
+            <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+        </div>
+    </div>
+    <!-- <div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+    </div> -->
+<!-- 底部 -->
+<div class="auto mainContent roe-fotter">
+    <div class="footer-bzh clearfix pt20">
+        <div class="fo-list-bzh clearfix tac fcw main1-bzh auto pt20 pb20" style="border-top: 3px solid #ccc;">
+            <!--底部导航-->
+            <?php foreach ($navs as $bottomNav): ?>
+                <?php if ($bottomNav['display'] == NavModel::DISPLAY_BOTTOM) : ?>
+                    <ul class="row5-bzh">
+                        <li class="fs2 mb5"><a href="javascript:;" class="isNa"><?php echo $bottomNav['title'] ?></a></li>
+                        <?php foreach ($bottomNav['children'] as $nav): ?>
+                        <li><a target="_blank" href="<?php echo arU($nav['dowhat']); ?>" class="systemIndex-yb <?php echo $nav['name']; ?>"><?php echo $nav['title'] ?></a></li>
+                        <?php endforeach ?>
+                    </ul>
+                <?php endif ?>
+            <?php endforeach ?>
+        </div>
+        <div class="flink" style="text-align:center;" >友情链接:
+                <?php foreach ($links as $link) : ?>
+                <span style="margin:5px">
+                    <a target="_blank" href="<?php echo $link['url'] ?>"><?php echo $link['name']; ?></a>
+                </span>
+                <?php endforeach ?>
+        </div>
+        <div class="copy main1-bzh auto fs12px-bzh tac">
+            <p>地址：四川省成都市人民南路四段桐梓林北路2号凯莱帝景C座27B &nbsp;&nbsp;电话：4000668208</p>
+            <p>&copy; Copyright 2010-2015 <a href="">www.xzgk.net</a> 循证网 All Rights Reserved
+           <!--      <br /> Powered by <a href="http://mzm.coiu.cn/">www.coiu.cn</a>&nbsp;梦之门科技
+            -->
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    var ajaxURL='<?php echo AR_SERVER_PATH; ?>';
+    $(document).ready(function(){
+        //微信
+        /*$(".wechat").click(function(){
+            $(".qrcode").toggle();
+        });*/
+        //下拉菜单
+        $("li.dropdown").hover(function(){
+            $(this).children(".dropdown-menu").show();
+            },function(){
+            $(this).children(".dropdown-menu").hide();
+        });
+
+        $('.row5-bzh li a').click(function(){
+            if($(this).hasClass('isNa')){
+
+            }else{
+                localStorage.setItem('menuName',$(this).text());
+                localStorage.setItem('menuClass',$(this).attr('class'));
+            }
+        });
+
+        //返回顶部
+        $(window).scroll(function(){
+            if($(window).scrollTop() > 250){
+                $('#roe-goTop').show();
+            }else{
+                $('#roe-goTop').hide();
+            }
+        });
+        $('#roe-goTop').on('click',function(){
+            $('html, body').animate({scrollTop : 0}, 400);
+        });
+
+        $('.iclick').parent().bind({
+            mouseover:function(){
+                $(this).children('.iclick').css({'color':'#3CB38D'});
+            },
+            mouseout:function(){
+                $(this).children('.iclick').css({'color':'#888'});
+            }
+        });
+
+        /* 阻止复制的几种方法 start*/
+
+        // 阻止复制
+        /*$(document.body).on('copy',function(){
+        //document.querySelector('.roe-noCtrlc').oncopy = function(){
+            if (window.getSelection) {
+                if (window.getSelection().empty) {  // Chrome
+                    window.getSelection().empty();
+                } else if (window.getSelection().removeAllRanges) {  // Firefox
+                    window.getSelection().removeAllRanges();
+                }
+            } else if (document.selection) {  // IE
+                document.selection.empty();
+            }
+        });*/
+
+        // 阻止ctrl+c的默然行为  配合阻止右键
+        /*$(document).keydown(function(event) {
+            if(event.keyCode == 67 && event.ctrlKey){
+                return false;
+            }
+        });*/
+        //阻止右键菜单
+        /*$('.roe-noCtrlc').on('contextmenu',function(){
+            return false;
+        });*/
+
+        // 阻止按下鼠标左键选择文本
+        $(document.body).on('selectstart',function(){
+            return false;
+        });
+
+        /* 阻止复制的几种方法 end*/
+
+    });
+
+    function expertf(eid){
+        $.post('<?php echo AR_SERVER_PATH; ?>Api/iflogin?',function(data){
+            if(data.ret_code == 1000){
+                if (eid) {
+                    window.location.href="<?php echo arU('User/expertDetail'); ?>/eid/" + eid;
+                } else {
+                    window.location.href="<?php echo arU('User/index'); ?>";
+                }
+            }else{
+                login();
+            }
+        },'json');
+    }
+
+    //录取位次的显示结果
+    function tdmc(mc){
+        if(typeof mc == 'string'){
+            if(mc==''){
+                return '-';
+            }else{
+                return mc;
+            }
+        }else if(typeof mc == 'number'){
+            return mc;
+        }else {
+            return '<a target="_blank" href="<?php echo arU('Index/vipCard');?>">限VIP用户查看</a>';
+        }
+    };
+</script>
+</body>
+<?php /**必须调用自动加载的js seg*/ include arCfg('DIR.SEG') . 'Sys/js.seg'; ?>
+</html>

@@ -1,0 +1,144 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix"><span>文章新闻管理</span>
+     <a id="cate-add" href="<?php echo arU('articleManager', array('opt' => 'add')); ?>" class="btn btn-success pull-right">添加文章</a>
+  </div>
+  <div class="lqselection4 clearfix">
+    <form action="<?php echo arU('list', array('greedyUrl' => false));?>" method="get">
+       <div class="lqsampleDiv">
+
+               文章搜索: <input type="text" name="title" class="lqselectionInput2" value="<?php echo urldecode(arRequest('title'));?>" placeholder="文章标题">
+      </div>
+      <div class="lqsampleDiv">
+        选择分类：<?php
+         // array_unshift($catMap, '选择分类');
+         $catMap[0] = '选择分类';
+         ksort($catMap);
+      // 调用用html seg 直接输出 select标签
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'cid',
+            // 适配器数据 数组
+            'map' => $catMap,
+            // 选中的value selected = selected
+            'selected' => arRequest('cid'),
+         )
+      );
+      ?>
+      </div>
+
+      <div class="col-md-1" style="padding: 0;">
+              <button type="submit" value="查询 " class="btn btn-success" id="lqselectionBtn"> 查询</button>
+      </div>
+    </from>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>文章名称</th>
+            <th>添加时间</th>
+            <th>查看地址</th>
+            <th>所属分类</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+
+          <?php
+          foreach ($articles as $article) :
+          ?>
+          <tr>
+            <td><?php echo $article['aid']; ?></td>
+            <td><?php echo $article['title']; ?></td>
+            <td><?php echo date('Y-m-d H:i:s', $article['ctime']); ?></td>
+            <td><a target="_blank" href="<?php echo arU('/main/Article/detail', array('aid' => $article['aid'])); ?>">查看</a></td>
+            <td><?php echo $article['catName']; ?></td>
+
+            <td value="<?php echo $article['aid']; ?>">
+              <a href="<?php echo arU('articleManager',array('opt'=>'edit','aid'=>$article['aid']))?>">编辑</a>
+              <button type="button" onclick="delArticle(<?php echo $article['aid']; ?>)" class="btn article-delete">删除</button>
+            </td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>
+<?php
+    // 调用选择地址插件
+    // arSeg(array('select_area' => true));
+    // 调用分类插件
+    arSeg(array('select_cate' => true));
+?>
+<script type="text/javascript">
+       // 删除某文章个
+function delArticle(aid)
+{
+    layer.confirm('确定要删除此文章', function () {
+        var lid = layer.load('...');
+        $.post(JSV.PATH_APP_SERVER + 'Article/ArticleManager/opt/delete', {aid: aid}, function (res) {
+            layer.close(lid);
+            if (res.success == "1") {
+                layer.msg('删除成功');
+                location.reload();
+            } else {
+                layer.msg('删除失败');
+            }
+        }, 'json');
+    });
+
+
+}
+  $(function(){
+    $(".select-cate").select_cate({
+        // 选中时触发
+        onSelected: function (res) {
+            $("[name='cid']").attr('value', res['cid']);
+            var selectString = '';
+            console.log(res.parent);
+            if (res.parent) {
+                selectString = res['name'] + '-' + res['parent']['name'];
+                if (res.parent.parent) {
+                    selectString += '-' + res['parent']['parent']['name'];
+                }
+            } else {
+                selectString = res['name'];
+            }
+            $("[name='cid-show']").attr('value', selectString);
+        },
+    });
+     // $('.datetimepicker').datetimepicker();
+
+       $('.hotart').bind('click',function(){
+        var aid = $(this).attr('name');
+        var hot =  $(this).attr('hot');
+        var data = {'aid' :aid,'hot':hot};
+        var _this = $(this);
+        $.post("<?php echo arU('changeHot')?>",data,function(ev){
+            if(ev.success == 1)
+            {
+                if(hot == 1)
+                {
+                   _this.html('否');
+                   _this.attr('hot',0);
+                }else{
+                    _this.text('是');
+                    _this.attr('hot',1);
+                }
+            }
+          },'json')
+       });
+  })
+
+</script>

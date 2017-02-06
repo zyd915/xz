@@ -1,0 +1,203 @@
+<!-- 批次线scoreLine -->
+<div class="scoreLine column1-bzh left">
+    <!-- 小导航 -->
+    <div class="minNav w100 mt10 bg3-bzh pt10 pb10 fcw clearfix">
+        <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="<?php echo arU('/Index/index'); ?>">循证高考</a>&nbsp;>&nbsp;<a href="<?php echo aru(''); ?>">批次线</a>
+        <?php
+            if ($area) :
+        ?>
+            &nbsp;>&nbsp;<a href="<?php echo arU('', array('area' => $area)); ?>"><?php echo $area; ?></a>
+        <?php
+            endif;
+        ?>
+    </div>
+    <div class="clearfix pt10 pl20 pr20 pb10" style="background-color: #f8f8f8;">
+        <dt class="fs1 fwb">2015年全国高考分数线最新发布</dt>
+        <dd>
+            <?php
+                foreach ($province as $pro) :
+            ?>
+            <a href="<?php echo arU('', array('area' => $pro)) ?>" class="fc2-bzh pr20 pt5 dib"><?php echo $pro; ?></a>
+            <?php
+                endforeach;
+            ?>
+        </dd>
+    </div>
+    <div class="minNav w100 mt10 bg4-bzh pt10 pb10 fcw clearfix tac">
+        <span style="width:59px;" class="dib">招生地区</span>
+        <span style="width:70px;" class="dib">录取批次</span>
+        <span style="width:150px;" class="dib">2015年分数线</span>
+        <span style="width:150px;" class="dib">2014年分数线</span>
+        <span style="width:150px;" class="dib">2013年分数线</span>
+        <span style="width:150px;" class="dib">2012年分数线</span>
+    </div>
+        <?php
+            foreach ($fsxs as $fsx) :
+        ?>
+        <table class="table table-bordered tac fs14px-bzh">
+        <?php
+            for ($i = 0; $i < count($fsx); $i++) :
+        ?>
+            <?php
+                if ($i == 0) :
+            ?>
+                <tr class="bge-bzh">
+                    <th rowspan=10 style="padding:0 3%;width:8%;line-height: 2em;"><?php echo $fsx[$i]['area']; ?></th>
+                    <td style="width:10%;"></td>
+                    <td>文科</td>
+                    <td>理科</td>
+                    <td>文科</td>
+                    <td>理科</td>
+                    <td>文科</td>
+                    <td>理科</td>
+                    <td>文科</td>
+                    <td>理科</td>
+                </tr>
+            <?php
+                endif;
+            ?>
+                 <tr class="tr<?php echo $i; ?>">
+                    <th class="bge-bzh"><?php echo $fsx[$i]['pc']; ?></th>
+                    <td><?php echo $fsx[$i]['sw15']; ?></td>
+                    <td><?php echo $fsx[$i]['sl15']; ?></td>
+                    <td><?php echo $fsx[$i]['sw14']; ?></td>
+                    <td><?php echo $fsx[$i]['sl14']; ?></td>
+                    <td><?php echo $fsx[$i]['sw13']; ?></td>
+                    <td><?php echo $fsx[$i]['sl13']; ?></td>
+                    <td><?php echo $fsx[$i]['sw12']; ?></td>
+                    <td><?php echo $fsx[$i]['sl12']; ?></td>
+                </tr>
+        <?php
+            endfor;
+        ?>
+            </table>
+        <?php
+            endforeach;
+        ?>
+</div>
+    <!-- 高考志愿填报参考数据查询 -->
+<div class="kuang-reg-log-bzh right clearfix">
+    <div class="mt10 pt10 pb10 bdr br5 clearfix">
+        <span class="fwb tac db">高考志愿填报参考数据查询</span>
+        <hr>
+        <div class="min-dataSearch pl10 clearfix">
+            <dt class="fwb ml5">院校投档分数线</dt>
+            <form target="_blank" action="<?php echo arU('Index/schoolSelectInfo'); ?>" id="roe-school">
+                <select name="km" class="form-control input-sm">
+                    <option value='-1' class="dn">类型</option>
+                    <option value="0" class="">理科</option>
+                    <option value="1" class="">文科</option>
+                </select>
+                <select name="pc" class="form-control input-sm">
+                    <option value='-1' class="dn">录取批次</option>
+                    <option value="0" class="">提前批</option>
+                    <option value="1" class="">本一</option>
+                    <option value="2" class="">本二</option>
+                    <option value="3" class="">专一</option>
+                    <option value="4" class="">专二</option>
+                </select>
+                <select name="yxaddress" class="form-control input-sm">
+                    <option value='-1'>院校所在地</option>
+                    <!-- <?php foreach ($chinaCityArray as $key => $chinaCityArray) { ?>
+                        <option>
+                            <?php echo $chinaCityArray['name'];?>
+                        </option>
+                        <?php
+                    }?> -->
+                </select>
+                <select name="cid" class="form-control input-sm">
+                    <option class="dn" value='-1'>院校名称</option>
+                </select>
+                <!-- <a href="javascript:;" class="btn btn-info btn-sm right mr20 mt5" id="yxfxsearch"><i class="fa fa-search"></i>&nbsp;查询</a> -->
+                <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+            </form>
+        </div>
+        <hr>
+        <div class="min-dataSearch pl10 clearfix">
+            <dt class="fwb ml5">专业录取分数线</dt>
+            <form target="_blank" action="<?php echo arU('Index/professionalSelectInfo'); ?>" id="roe-fraction">
+                <select name="lb" class="form-control input-sm">
+                    <option value='-1'>专业层次</option>
+                    <option value="0">本科</option>
+                    <option value="1">专科</option>
+                </select>
+                <select name="xk" class="form-control input-sm">
+                    <option value='-1'>专业学科</option>
+                </select>
+                <select name="ml" class="form-control input-sm">
+                    <option value='-1'>专业门类</option>
+                </select>
+                <select name="dm" class="form-control input-sm">
+                    <option value='-1'>专业名称</option>
+                </select>
+                <!-- <a href="<?php echo arU('Index/professionalSelect'); ?>" class="btn btn-info btn-sm right mr20 mt5"><i class="fa fa-search"></i>&nbsp;查询</a> -->
+                <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+            </form>
+        </div>
+    </div>
+    <!-- 四川2015年省控线 -->
+    <div class="mt10 pt10 bdr br5 clearfix">
+        <dt class="fwb tac">四川2015年省控线</dt>
+        <hr style="margin-bottom: 0;">
+        <div class="pp10-bzh min-table">
+            <table>
+                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                    <td style="width: 130px;">批次</td>
+                    <td style="width: 40px;">文科</td>
+                    <td style="width: 40px;">理科</td>
+                </tr>
+                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                    <td>本科第一批</td>
+                    <td><span class="fc1-bzh">543</span></td>
+                    <td><span class="fc1-bzh">528</span></td>
+                </tr>
+                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                    <td>本科第二批</td>
+                    <td><span class="fc1-bzh">473</span></td>
+                    <td><span class="fc1-bzh">445</span></td>
+                </tr>
+                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                    <td>本科第三批</td>
+                    <td><span class="fc1-bzh">--</span></td>
+                    <td><span class="fc1-bzh">--</span></td>
+                </tr>
+                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                    <td>高职专科一段</td>
+                    <td><span class="fc1-bzh">200</span></td>
+                    <td><span class="fc1-bzh">180</span></td>
+                </tr>
+                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                    <td>高职专科二段</td>
+                    <td><span class="fc1-bzh">--</span></td>
+                    <td><span class="fc1-bzh">--</span></td>
+                </tr>
+            </table>
+            <div class="w100 tar mt10"><a href="<?php echo arU('', array('area' => '四川')); ?>">四川历年分数<span class="fc2-bzh">></span></a></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(".scoreLine tr").each(function(){
+        $(".scoreLine td:even").addClass("bge-bzh");
+    });
+    $(function(){
+        //院校所在地
+        $.post('<?php echo AR_SERVER_PATH; ?>Api/provinceList', function(data) {
+            addData(data, $('#roe-school'), 'yxaddress');
+        }, "json");
+
+        //院校名称
+        yxnamesearch('<?php echo AR_SERVER_PATH; ?>Api/areaSchools?');
+        //院校投档分数线查询判断
+        panduan('#roe-school','km','pc','yxaddress','cid');
+        //专业录取分数线判断
+        panduan('#roe-fraction','dm','xk','ml','lb');
+        //学科
+        zylqsearchfn('lb','<?php echo AR_SERVER_PATH; ?>Api/majorXks?','xk','xk','专业学科');
+        //门类
+        zylqsearchfn('xk','<?php echo AR_SERVER_PATH; ?>Api/majorMls?','ml','ml','专业门类');
+        //专业名称
+        zylqsearchfn('ml','<?php echo AR_SERVER_PATH; ?>Api/majorsByMl?','dm','mname','专业名称');
+    });
+</script>

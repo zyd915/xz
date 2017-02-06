@@ -1,0 +1,30 @@
+<div class="info"><h1>说明:导出保存用户相关 数据库</h1></div>
+<div>
+</div>
+<div>
+    <button id="export">导出用户文件</button>
+    <br>
+    <br>
+    <button id="contact">导出用户联系方式文件</button>
+    <br>
+</div>
+<script>
+$(function() {
+    $('#export').click(function () {
+        var cid = layer.confirm('确定要导出数据吗', function () {
+            layer.close(cid);
+            window.location.href = JSV.PATH_APP_SERVER + 'Data/exportyh';
+            layer.alert('导出成功');
+        });
+    });
+});
+$(function() {
+    $('#contact').click(function () {
+        var cid = layer.confirm('确定要导出数据吗', function () {
+            layer.close(cid);
+            window.location.href = JSV.PATH_APP_SERVER + 'Data/exportyhl';
+            layer.alert('导出成功');
+        });
+    });
+});
+</script>

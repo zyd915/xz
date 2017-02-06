@@ -1,0 +1,127 @@
+    <div id="page">
+        <section class="content xzlh-user">
+            <div>
+                <div class="xzlh-userhead">
+                    <div class="xzlh-head">
+                        <span>
+                            <img src="<?php echo arCfg('PATH.GPUBLIC') . 'img/kaosheng' . $userSessInfo['kaosheng']['gender']; ?>.png" alt="头像">
+                        </span>
+                        <span><?php arEcho($userinfo['type'], UserModel::$TYPE_MAP); ?></span>
+                        <h3><?php echo $userinfo['truename'];?></h3>
+                        <div class="xzlh-vip clearfix text-center">
+                        <?php
+                        if ($userinfo['type'] == UserModel::TYPE_N) :
+                        ?>
+                            <span><a href="<?php echo arU('User/vipCard'); ?>">购买圆梦卡享VIP特权</a></span>
+                        <?php
+                            else :
+                        ?>
+                            <span><a href="">查看权限</a></span>
+                        <?php
+                            endif;
+                        ?>
+                            <span><a href="<?php echo arU('userdetail'); ?>">编辑资料</a></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="xzlh-featuresList">
+                    <ul>
+                        <li>
+                            <a href="<?php echo arU('userdetail'); ?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/user1.jpg') no-repeat 0 0/100% 100%;"></span>
+                                <span>个人资料</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+<!--                         <li>
+                            <a href="" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/user2.jpg') no-repeat 0 0/100% 100%;"></span>
+                                <span>我的成绩</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('User/myVolunteerForm')?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/user3.jpg') no-repeat 0 0/100% 100%;"></span>
+                                <span>我的志愿表</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li> -->
+<!--                         <li>
+                            <a href="" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/user4.jpg') no-repeat 0 0/100% 100%;"></span>
+                                <span>我关注的院校</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('Index/simulationSystemOneSaveForm') ?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/user5.jpg') no-repeat 0 0/100% 100%;"></span>
+                                <span>我的一二三诊模拟志愿</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('Index/gaokaomoniSaveForm') ?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/user6.jpg') no-repeat 0 0/100% 100%;"></span>
+                                <span>我的高考模拟志愿</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li> -->
+                        <li>
+                            <a href="<?php echo arU('Index/testProbability')?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/luqulv-icon.png') no-repeat 0 0/100% 100%;"></span>
+                                <span>测试我的录取概率</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('Index/simulationSystemOne')?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/zhenduan.png') no-repeat 0 0/100% 100%;" width="34" height="34"></span>
+                                <span>我的一二三诊模拟填报</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('Index/gaokaosystem')?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/gaokao-icon.png') no-repeat 0 0/100% 100%;"></span>
+                                <span>我的高考模拟填报</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('User/myVolunteerForm',array('uid' => $userinfo['uid']))?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/list-icon.png') no-repeat 0 0/100% 100%;"></span>
+                                <span>我的志愿表单</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('Index/expertForm')?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/moni-icon.png') no-repeat 0 0/100% 100%;"></span>
+                                <span>专家预约清单</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="<?php echo arU('Index/signUpInfo')?>" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/creatlist-icon.png') no-repeat 0 0/100% 100%;"></span>
+                                <span>讲座报名清单</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="" class="clearfix">
+                                <span style="background:url('<?php echo arCfg('PATH.PUBLIC');?>img/tel-icon.png') no-repeat 0 0/100% 100%;"></span>
+                                <span>客服电话400-066-8208</span>
+                                <span class="glyphicon glyphicon-menu-right"></span>
+                            </a>
+                        </li>
+                        <li style="border: none;">
+                            <!-- <a href="javascript:" class="xzlh-pwsign" id="repaw">修改密码</a> -->
+                            <a href="<?php echo arU('loginOut')?>" class="xzlh-pwsign btn" id="signUp" style="background: #0078D7;color: white;font-size: .36rem;margin: .5rem 0;">退出登录</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>

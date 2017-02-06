@@ -1,0 +1,73 @@
+.jsorder {
+	position: absolute;
+	z-index: 999;
+	display: none;
+}
+
+.jsorder .left {
+	float: left;
+	width: 11px;
+	background: #545454;
+	cursor: pointer;
+	color: white;
+	padding: 3px;
+}
+.jsorder .right {
+	padding: 5px;
+	float: right;
+	width: 200px;
+	background: white;
+	border: #545454 5px solid;
+	display: block;
+	min-height: 100px;
+	border-left: #545454 2px solid;
+}
+
+.jsorder .right li {
+	line-height: 20px;
+	border-bottom: 1px silver dashed;
+	padding: 5px 0px 10px 5px;
+	text-align: left;
+}
+
+.jsorder .button {
+	/*background: url("./but.jpg");*/
+	width: 127px;
+	height: 27px;
+	display: block;
+	margin: 12px auto 3px;
+}
+
+.jsorder .right li b {
+	color: #00A0E9
+}
+
+.jsorder .right li span.add {
+	background: url("./bt.png");
+	width: 11px;
+	height: 11px;
+	display: block;
+	cursor: pointer;
+	float: right;
+	margin: 4px 1px;
+}
+
+.jsorder .right li span.sub {
+	background: url("./bt.png") 0px 22px;
+	width: 11px;
+	height: 11px;
+	display: block;
+	cursor: pointer;
+	float: right;
+	margin: 4px 1px;
+}
+
+.jsorder .right li span.del {
+	background: url("./bt.png") 0px 11px;
+	width: 11px;
+	height: 11px;
+	display: block;
+	cursor: pointer;
+	float: right;
+	margin: 4px 1px;
+}

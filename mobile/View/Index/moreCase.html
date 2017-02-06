@@ -1,0 +1,37 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">成功案例</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container">
+                <?php foreach ($cases as $case): ?>
+                <div class="case-content-yb row">
+                    <div class="case-img-yb col-xs-12">
+                        <a href="javascript:;">
+                            <img <?php if ($case['articlepic']): ?> src="<?php echo $case['articlepic'];?>" <?php else: ?> src="<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner1.jpg ?>" <?php endif; ?> style="width: 2.4rem;height: 1.6rem">
+                        </a>
+                        <div>
+                            <h3 class="title-name-yb"><?php echo $case['title']?></h3>
+                            <p><?php echo arModule('Article')->substr_cut(strip_tags($case['content']), '60');?>.....
+                                <a href="<?php echo arU('Index/caseDetail', array('aid' => $case['aid'])); ?>">查看详情 &gt;</a>
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+                <?php endforeach; ?>
+
+                <div class="iback text-center" style="width:95%;margin:0 auto">
+                   <?php echo $page; ?>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+
+</script>

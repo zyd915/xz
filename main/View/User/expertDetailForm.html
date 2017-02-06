@@ -1,0 +1,65 @@
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="profession-title">
+			<h4 class="mt10 ml20 greenf fwb"><i class="fa fa-plus-square mr10"></i>我的预约单</h4>
+		</div>
+	</div>
+	<div class="mt20 mr20">
+		<?php if ($yuyues): ?>
+		<a href="<?php echo arU('Index/expertConsultation') ?>" class="tjan right mb20">再次预约</a>
+		<table width="100%" class="mb20 expertform">
+			<tbody>
+				<tr>
+					<th width="20%">预约手机号码</th>
+					<th width="30%" class="borderw">预约日期</th>
+					<th width="15%" class="borderw">预约时段</th>
+					<th width="15%" class="borderw">预约专家</th>
+					<th width="20%">订单操作</th>
+				</tr>
+				<?php foreach ($yuyues as $yuyue): ?>
+				<tr>
+					<td class=""><?php echo $yuyue['mobile']; ?></td>
+					<td class=""><?php echo $yuyue['startdate'] ?> 至<?php if($yuyue['endate']):?><?php echo $yuyue['enddate']?> <?php else:?><span></span>&nbsp;-</span><?php endif ?></td>
+					<td class=""><?php echo $yuyue['ytime']; ?></td>
+					<td class=""><?php echo $yuyue['expert']['name']; ?></td>
+					<td class="czform">
+						<a href="<?php echo arU('User/expertDetail', array('yid' => $yuyue['yid'])); ?>">修改</a>
+						<!-- <a href="javascript:layer.alert('暂时不支持在线付款,请联系客服');">去付款</a> -->
+						<a href="javascript:deleteYuyue('<?php echo $yuyue['yid']; ?>');">删除</a>
+					</td>
+				</tr>
+				<?php endforeach ?>
+			</tbody>
+		</table>
+		<?php else: ?>
+		<span>还没有预约专家记录</span>
+		<a href="<?php echo arU('Index/expertConsultation') ?>" class="tjan right">立即预约</a>
+		<?php endif ?>
+	</div>
+</div>
+<script type="text/javascript">
+	// 删除预约
+	function deleteYuyue(yid)
+	{
+		layer.confirm('确定要删除已有预约', function () {
+			window.location.href="<?php echo arU('deleteYuyue'); ?>?yid=" + yid;
+		});
+	}
+
+	$(document).ready(function(){
+		trbgColor();
+		$('tr td').bind({
+			mousemove:function(){
+				$(this).parent().css('background-color','#FFF3E0');
+			},
+			mouseout:function(){
+				trbgColor();
+			}
+		});
+	});
+
+	function trbgColor(){
+		$('tr:odd td').parent().css('background-color','#fff');
+		$('tr:even td').parent().css('background-color','#eee');
+	}
+</script>

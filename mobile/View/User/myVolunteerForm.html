@@ -1,0 +1,159 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">我的志愿单</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="moni center-block">
+                <div>
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li class="active"><a href="javascript:;" data-toggle="tab">所有志愿单</a></li>
+                        <li><a href="javascript:;" data-toggle="tab">高考志愿单</a></li>
+                        <li><a href="javascript:;"  data-toggle="dropdown">诊断志愿单</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane1">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">志愿类型</th>
+                                        <th class="text-center">分数</th>
+                                        <th class="text-center">科目</th>
+                                        <th class="text-center">操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center" style="vertical-align: middle">
+                                    <?php foreach ($zys as $zy): ?>
+                                    <tr>
+                                        <td>
+                                        <?php if ($zy['ztype'] == 0): ?>
+                                            诊断模拟
+                                        <?php else: ?>
+                                            高考模拟
+                                        <?php endif; ?>
+                                        </td>
+                                        <td><?php echo $zy['score']; ?></td>
+                                        <td>
+                                        <?php if ($zy['km'] == 0): ?>
+                                            理科
+                                        <?php else: ?>
+                                            文科
+                                        <?php endif; ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?php echo arU('User/simulationSaveForm', array('zid' => $zy['zid'])); ?>" data-zid="<?php echo $zy['zid']; ?>" class="btn btn-primary btn-xs">查看</a>
+                                            <a onclick="javascript:deleteZy('<?php echo $zy['zid']; ?>')" class="btn btn-warning btn-xs">删除</a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane2" style="display: none">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">志愿类型</th>
+                                    <th class="text-center">分数</th>
+                                    <th class="text-center">科目</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center" style="vertical-align: middle">
+                                <?php foreach ($zys as $gk):
+                                      if ($gk['ztype'] == 1):
+                                ?>
+                                <tr>
+                                    <td>高考模拟</td>
+                                    <td><?php echo $gk['score']; ?></td>
+                                    <td>
+                                    <?php if ($gk['km'] == 0): ?>
+                                        理科
+                                    <?php else: ?>
+                                        文科
+                                    <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo arU('User/simulationSaveForm',array('zid' => $gk['zid']))?>" class="btn btn-primary btn-xs">查看</a>
+                                        <a onclick="javascript:deleteZy('<?php echo $gk['zid']; ?>')" class="btn btn-warning btn-xs">删除</a>
+                                    </td>
+                                </tr>
+                                <?php endif; endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane3" style="display: none">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">志愿类型</th>
+                                    <th class="text-center">分数</th>
+                                    <th class="text-center">科目</th>
+                                    <th class="text-center">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody class="text-center" style="vertical-align: middle">
+                                <?php foreach ($zys as $zd):
+                                      if ($zd['ztype'] == 0):
+                                ?>
+                                <tr>
+                                    <td>诊断模拟</td>
+                                    <td><?php echo $zd['score']; ?></td>
+                                    <td>
+                                    <?php if ($zd['km'] == 0): ?>
+                                        理科
+                                    <?php else: ?>
+                                        文科
+                                    <?php endif; ?>
+                                    </td>
+                                    <td>
+                                        <a href="<?php echo arU('User/simulationSaveForm',array('zid' => $zd['zid']))?>" class="btn btn-primary btn-xs">查看</a>
+                                        <a onclick="javascript:deleteZy('<?php echo $zd['zid']; ?>')" class="btn btn-warning btn-xs">删除</a>
+                                    </td>
+                                </tr>
+                            <?php endif; endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+<script type="text/javascript">
+    $(function(){
+        $('#myTab li').tap(function(){
+            $(this).addClass('active').siblings().removeClass('active');
+            var index=$(this).index()+1;
+            $('.tab-pane'+index).show().siblings().hide();
+        })
+    })
+
+    // 删除
+    function deleteZy(zid)
+    {
+        // layer.open('确定要删除', function(){
+        //     $.post(JSV.PATH_SERVER+ 'mobile' + 'User/deleteZy', {'zid': zid}, function (res) {
+        //         location.reload();
+        //     }, 'json');
+        // });
+        var index = layer.open({
+            content: '确定要删除吗？',
+            btn:['<div style="color:#0078D7">确定</div>','<div style="color:#0078D7">取消</div>'],
+            yes: function(){
+                $.post('/xz'+ '/mobile' + '/User/deleteZy', {'zid': zid}, function (res) {
+                    location.reload();
+                    layer.close(index);
+                }, 'json');
+            },
+            no: function(){
+                layer.close(index);
+            }
+        });
+
+    }
+
+</script>

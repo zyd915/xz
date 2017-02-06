@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="zh-cmn-Hans" class="no-js"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>后台管理系统</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <meta content="" name="后台管理系统" />
+    <meta content="" name="author" />
+    <meta name="MobileOptimized" content="320">
+    <?php include arCfg('DIR.VIEW') . 'Layout/Seg/header.seg'; ?>
+    <link rel="stylesheet" type="text/css" href="<?php echo arCfg('PATH.PUBLIC'); ?>css/revamp.css">
+    <?php /**必须加载的 css seg*/ include arCfg('DIR.SEG') . 'Sys/css.seg'; ?>
+    <!--jquery-->
+     <script src="<?php echo arCfg('PATH.GPUBLIC'); ?>js/jquery.min.js" type="text/javascript"></script>
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body style="background-color: #ffffff;">
+<!-- 详情页面 -->
+<div class="x-card">
+     <h4 class="user-title">考生详细信息</h4>
+     <div class="container-fluid">
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">所在省市</span></div>
+              <div class="col-xs-3"><span class="row-value Province"><?php echo $user['kaosheng']['proname']; ?></span>省</div>
+              <div class="col-xs-3"><span class="row-value City"><?php echo $user['kaosheng']['cityname']; ?></span>市</div>
+              <div class="col-xs-3"><span class="row-value Area"><?php echo $user['kaosheng']['areaname']; ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">就读中学</span></div>
+              <div class="col-xs-9"><span class="row-value School-name"><?php echo $user['kaosheng']['schoolname']; ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">就读班级</span></div>
+              <div class="col-xs-4"><span class="row-value Grade"><?php echo arEcho($user['kaosheng']['grade'], UserKaoshengModel::$GRADE_MAP); ?></span></div>
+              <div class="col-xs-5"><span class="row-value Class"><?php echo $user['kaosheng']['banji']; ?></span>班</div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">考生姓名</span></div>
+              <div class="col-xs-9"><span class="row-value Student-name"><?php echo $user['kaosheng']['name']; ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">考生性别</span></div>
+              <div class="col-xs-9"><span class="row-value Sex"><?php arEcho($user['kaosheng']['gender'], UserModel::$TYPE_SEX);  ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">考生类型</span></div>
+              <div class="col-xs-9"><span class="row-value Subject"><?php arEcho($user['kaosheng']['lx'], UserModel::$TYPE_SUBJECT);  ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">高考年份</span></div>
+              <div class="col-xs-9"><span class="row-value Year"><?php echo $user['kaosheng']['gkyear']; ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">目标大学</span></div>
+              <div class="col-xs-9"><span class="row-value University-name"><?php echo $user['kaosheng']['tschool']; ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">诊断分数</span></div>
+              <div class="col-xs-1"><span class="row-value">一诊分数</span></div>
+              <div class="col-xs-2"><span class="row-value Score-one"><?php echo $user['kaosheng']['scorez1']; ?></span></div>
+              <div class="col-xs-1"><span class="row-value">二诊分数</span></div>
+              <div class="col-xs-2"><span class="row-value Score-two"><?php echo $user['kaosheng']['scorez2']; ?></span></div>
+              <div class="col-xs-1"><span class="row-value">三诊分数</span></div>
+              <div class="col-xs-2"><span class="row-value Score-three"><?php echo $user['kaosheng']['scorez3']; ?></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-3 lborder"><span class="row-name">高考成绩</span></div>
+              <div class="col-xs-2"><span class="row-name">高考分数</span></div>
+              <div class="col-xs-2"><span class="row-value Score-gk"><?php echo $user['kaosheng']['scoregk']; ?></span></div>
+              <div class="col-xs-2"><span class="row-name">高考位次</span></div>
+              <div class="col-xs-3"><span class="row-value Score-rank">123</span></div>
+          </div>
+     </div>
+     <div class="text-center">
+          <button class="btn btn-info btnClose pt20 pb20" type="button">关闭</button>
+     </div>
+</div>
+
+<!-- END FOOTER -->
+<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+<!-- BEGIN CORE PLUGINS -->
+<!--[if lt IE 9]>
+<?php include arCfg('DIR.VIEW') . 'Layout/Seg/footer.seg'; ?>
+<?php /**必须调用自动加载的js seg*/ include arCfg('DIR.SEG') . 'Sys/js.seg'; ?>
+<!-- END PAGE LEVEL SCRIPTS -->
+
+<!-- END JAVASCRIPTS -->
+
+
+
+
+</body>
+<!-- END BODY -->
+</html>
+
+<script type="text/javascript">
+      $(document).ready(function(){
+          //取消绑定
+          $('.btnClose').click(function(){
+              //当你在iframe页面关闭自身时
+              //先得到当前iframe层的索引
+              var index = parent.layer.getFrameIndex(window.name);
+              //再执行关闭
+              parent.layer.close(index);
+              //parent.layer.closeAll();
+          });
+      });
+</script>

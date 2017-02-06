@@ -1,0 +1,40 @@
+<div class="panel-heading clearfix"><span>客服管理</span>
+    <a id="cate-add" href="<?php echo arU('cListManager',array('opt'=>'add'));?>" class="btn btn-success pull-right">添加客服号</a>
+
+
+</div>
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>客服昵称</th>
+        <th>客服号</th>
+        <th>客服号类型</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($cList as $cList) :
+      ?>
+      <tr>
+        <td><?php echo $cList['c_sid']; ?></td>
+        <td><?php echo $cList['c_sname']; ?></td>
+        <td><?php echo $cList['c_snumber']; ?></td>
+        <td><?php arEcho($cList['c_stype'], SettingModel::$SER_MAP); ?></td>
+        <td value="<?php echo $cList['c_sid']; ?>">
+          <button type="button" class="btn product-edit">编辑</button>
+          <button type="button" onclick="delcList(<?php echo $cList['c_sid']; ?>)" class="btn product-delete">删除</button>
+        </td>
+      </tr>
+      <?php
+      endforeach;
+      ?>
+    </tbody>
+  </table>
+</div>
+<nav class="col-md-12 text-center">
+  <?php echo $page; ?>
+</nav>
+

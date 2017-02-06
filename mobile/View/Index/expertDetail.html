@@ -1,0 +1,76 @@
+<div id="page">
+<header class="header">
+    <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+    <span class="page-tit">专家介绍</span>
+</header>
+<section class="content">
+<div class="main clearfix">
+    <!--<div class="xzws-zixun">
+        <h3>专家咨询流程</h3>
+        <div class="container">
+            <div class="col-xs-3">
+                <div class="zixun-1 fl">
+                    <span>选择专家</span>
+                    <div class="yjlogo">
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="zxf col-xs-1">
+                <i class="fa fa-angle-double-right fxright"></i>
+            </div>
+            <div class="col-xs-3">
+                <div class="zixun-1 fl">
+                    <span>预约咨询</span>
+                    <div class="yjlogo" style="background:#0078D7">
+                         <i class="fa fa-clock-o"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="zxf col-xs-1">
+                <i class="fa fa-angle-double-right fxright"></i>
+            </div>
+            <div class="col-xs-3">
+                <div class="zixun-1 fl">
+                    <span>专家1对1</span>
+                    <div class="yjlogo">
+                        <i class="fa fa-group"></i>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>-->
+    <div class="container">
+        <div class="clearfix">
+            <div class="item expert-detail">
+                <p class="detail-font clearfix">
+                    <span style="color:#4168ff;font-size: .35rem"><?php echo $expert['name']; ?></span>
+                </p>
+
+                <p><span><?php echo $expert['shortdes']; ?></span></p>
+
+                <img  style="float: right" src="<?php echo $expert['headpic']; ?>" width="20%" height="20%">
+                <?php echo $expert['des']; ?>
+            </div>
+            <input type="hidden" name="eid" value="4">
+        </div>
+    </div>
+
+
+
+    <!--加载更多-->
+ <!--    <div class="page-list-loading">
+        <a class="btn btn-danger" id="load_more" style="display: block;">加载更多</a>
+        <a class="btn btn-default" style="display: none;"><i class="fa fa-spinner fa-spin"></i>努力加载中...</a>
+    </div> -->
+
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(function(){
+
+
+    })
+</script>

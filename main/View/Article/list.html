@@ -1,0 +1,30 @@
+<div class="left case-yb auto">
+    <div class="ml20 title-border-yb">
+        <div class="case-title-yb">
+            <i class="fa fa-tasks"><span class="ml10"><?php echo $currentCat['name']; ?></span></i>
+        </div>
+        <div>
+            <?php foreach ($articles as $succList) {
+                # code...
+            ?>
+            <div class="mt10 ml20 mr20 pb10 case-content-yb">
+                <div class="case-img-yb right ml20">
+                    <a href="<?php echo arU('Article/detail',array('aid'=>$succList['aid'])); ?>">
+                      <?php if($succList['articlepic']): ?>
+                         <img src="<?php echo $succList['articlepic'];?>" width="120px" height="90px">
+                     <?php endif; ?>
+                    </a>
+                </div>
+                <a href="<?php echo arU('Article/detail',array('aid'=>$succList['aid'])); ?>" class="title-name-yb"><?php echo stripcslashes($succList['title']) ;?></a>
+                <p class="ml20"><?php echo arModule('Article')->substr_cut(strip_tags($succList['content']), 150);?></p>
+                <a href="<?php echo arU('Article/detail',array('aid'=>$succList['aid'])); ?>" class="title-detail-yb">查看详情 ></a>
+            </div>
+            <?php } ?>
+        </div>
+        <div class="case-bar-yb mb20">
+        </div>
+    </div>
+    <div style="text-align:center">
+            <?php echo $page; ?>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<style>
+    .wraper{padding-left: 20px; padding-right: 20px;}
+    .wraper h2{margin-top: 15px;}
+    .roeItem{margin-bottom: 20px;}
+    .article {margin-top: 40px;}
+    .csphone label,.csform label{width: 100px;text-align: right;display: inline-block;}
+    .roeItem input[type="text"],.roeItem input[type="password"]{height: 35px;text-indent: 0.5em;border: 1px solid #ccc;border-radius: 3px;width: 200px;}
+    .roeItem input[name="number"]{width: 100px;}
+    .roeItem .roe_btn{display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;font-weight: normal;line-height: 1.42857143;text-align: center;vertical-align: middle;cursor: pointer;border: 1px solid transparent;border-radius: 4px;background-color: #0078D7;color: #fff;}
+    .roeBtnifo{padding-left: 185px;}
+    .roeItem .yzm{cursor: pointer; background-color: #ddd;display: inline-block; padding: 4px 5px; border-radius: 3px;}
+    .roeItem p{text-indent: 110px;color: #808080;font-size: 12px;}
+</style>
+<div class="wraper">
+    <h2>重设密码：</h2>
+    <div class="article">
+        <div class="csphone" >
+            <div class="roeItem">
+                <label for="phone">手机号：</label>
+                <input id="phone" name="phone" type="text">
+                <p>用于接收更换密码验证码</p>
+            </div>
+            <div class="roeItem">
+                <label for="number">验证码：</label>
+                <input id="number" name="number" type="text">
+                <span class="yzm">获取验证码</span>
+            </div>
+            <div class="roeItem roeBtnifo">
+            <a href="javascript:;" id="next" class="next roe_btn">下一步</a>
+            </div>
+        </div>
+        <div class="csform" style="display:none;">
+            <form id="csform" action="">
+                <div class="roeItem">
+                    <label for="password">新密码：</label>
+                    <input id="password" type="password" name="password">
+                </div>
+                <div class="roeItem">
+                    <label for="repassword">确认密码：</label>
+                    <input id="repassword" type="password" name="repassword">
+                </div>
+                <div class="roeItem roeBtnifo">
+                    <input class="roe_btn" type="submit" value="重设密码">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.yzm').click(function() {
+            var phone = $('#phone').val();
+            if (phone) {
+                var lid = layer.load('短信发送中');
+                $.post(JSV.PATH_APP_SERVER + 'api/sendPhoneCpCode', {'phone': phone}, function (res) {
+                    if (res.success == '1') {
+                        layer.msg('重置密码验证码已发送，请注意查收');
+                    } else {
+                        layer.alert(res.ret_msg);
+                    }
+                    layer.close(lid);
+
+                }, 'json');
+            }
+        });
+
+        $('#csform').submit(function(event) {
+            if($('#csform input[name="password"]').val() == ''){
+                layer.alert('密码不能为空');
+                return false;
+            }else if($('#csform input[name="repassword"]').val() == ''){
+                layer.alert('密码不能为空');
+                return false;
+            }else if($('#csform input[name="repassword"]').val() != $('#csform input[name="password"]').val()){
+                layer.alert('两次输入的密码不一致');
+                return false;
+            }else{
+                var pwd = $('#csform input[name="password"]').val();
+                var code = $('#number').val();
+                var phone = $('#phone').val();
+                $.post(JSV.PATH_APP_SERVER + 'api/changePwd', {'code': code, 'phone': phone, 'new_pwd': pwd}, function (res) {
+                    if (res.success == '1') {
+                        layer.msg(res.ret_msg);
+                        setTimeout(function () {
+                            window.location.href='<?php echo arU('Index/index'); ?>';
+                        }, 2000);
+                        // login();
+                    } else {
+                        layer.alert(res.ret_msg);
+                    }
+                    layer.close(lid);
+
+                }, 'json');
+            }
+            return false;
+        });
+        $('#next').click(function(event) {
+            var phone = $('#phone').val();
+            var code = $('#number').val();
+            if (phone && code) {
+                $('.csform').css('display','block');
+                $('.csphone').css('display','none');
+            }
+            return false;
+        });
+    });
+</script>

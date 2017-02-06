@@ -1,0 +1,85 @@
+<div id="page">
+<header class="header">
+    <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+    <span class="page-tit">高考模拟志愿单</span>
+</header>
+<section class="content">
+<div class="main clearfix">
+<div class="moni center-block">
+
+<!--志愿表单-->
+<h4 class="text-center" style="color: #333;font-weight: bold;background: #fbf8ca;padding: 10px 0;font-size: 16px;">我的志愿单--(<span class="scType">普通类第一批本科</span>)</h4>
+<div class="table-responsive zy-allform">
+<table class="table-bordered fs14px-bzh">
+<thead>
+<tr>
+    <th class="text-center" style="width:10%;"></th>
+    <th class="text-center" style="width:40%;">学校名称</th>
+    <th class="text-center" style="width:35%;">专业名称</th>
+    <th class="text-center" style="width:15%;">是否服从专业调配</th>
+</tr>
+</thead>
+<tbody>
+
+</tbody>
+</table>
+</div>
+<div class="text-center iback iback-a">
+    <a href="<?php echo arU('Index/gaokaomoni') ?>" title="返回" class="zyBack">返回</a>
+    <a href="javascript:history.go(-1)" title="修改" class="zyUpdate">修改</a>
+    <a title="保存" class="zySave">保存</a>
+</div>
+</div>
+</div>
+</section>
+<script type="text/javascript">
+    //console.log( JSON.parse( getCookie('zyform') ) );
+    $(function(){
+        var zyform = JSON.parse( getCookie('zyform') ),
+                html = '';
+        for(var a in zyform){
+            html += '<tr>\
+                        <td>'+ a +'<br>志<br>愿</td>\
+                        <td class="item-bzh vat-bzh">\
+                            <ul class="left ">\
+                                <li class="" style="padding: .1rem 0;">学校名称：<br><span class="c-name " value="A">'+zyform[a].schoolname +'</span></li>\
+                                <li style="padding: .1rem 0">学校所在地：<span class="scarea">'+ zyform[a].scarea +'</span></li>\
+                                <li style="padding: .1rem 0" class="">投档概率：<span class="verifica-sum">'+zyform[a].odds+'%</span></li>\
+                            </ul>\
+                        </td>\
+                        <td class="item-bzh">\
+                            <ul class="zymk" value="A">\
+                                <li class="">\
+                                    <span><span>1.</span><span class="" value="1">'+zyform[a].zylist[0]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>2.</span><span class="" value="2">'+zyform[a].zylist[1]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>3.</span><span class="" value="3">'+zyform[a].zylist[2]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>4.</span><span class="" value="4">'+zyform[a].zylist[3]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>5.</span><span class="" value="5">'+zyform[a].zylist[4]+'</span></span>\
+                                </li>\
+                                <li>\
+                                    <span><span>6.</span><span class="" value="6">'+zyform[a].zylist[5]+'</span></span>\
+                                </li>\
+                            </ul>\
+                        </td>\
+                        <td>\
+                            <span>'+zyform[a].zytp+'</span>\
+                        </td>\
+                    </tr>';
+        }
+        $('.zy-allform').find('tbody').html( html );
+        $('.zyBack').tap(function(){
+            window.location.href="<?php echo arU('Index/gaokaomoni') ?>";
+        })
+        $('.zySave').tap(function(){
+            window.location.href="<?php echo arU('User/myVolunteerForm') ?>";
+        })
+    });
+</script>

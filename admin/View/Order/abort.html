@@ -1,0 +1,90 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix">
+    <a class='btn btn-default pull-right' href='<?php echo arU('Order/abort',array('type' => OrderModel::STATUS_ABORT, 'opt' => OrderRefundModel::STATUS_CANCLE)); ?>'>已作废</a>
+    <span>申请退货/款信息</span>
+    <a class='btn btn-success pull-right' href='<?php echo arU('Order/abort',array('type' => OrderModel::STATUS_ABORT, 'opt' => OrderRefundModel::STATUS_YES)); ?>'>已解决</a>
+    <a class='btn btn-danger pull-right' href='<?php echo arU('Order/abort',array('type' => OrderModel::STATUS_ABORT, 'opt' => OrderRefundModel::STATUS_NO)); ?>'>未解决</a>
+    <div style='margin-top:16px;'>
+     <form action="<?php echo arU('Order/abort');?>" method="get">
+         <div class="lqsampleDiv">
+        订单号：<input type="text" value="" name="otradeno" class="lqselectionInput" style="width:200px;" />
+      </div>
+      <div class="lqsampleDiv">
+          用户：<input type="text" name="uid" value=""  class="lqselectionInput" />
+      </div>
+      <div class="lqsampleDiv">
+          开始时间：<input type="text" name="stime" value="" id="stime" class="lqselectionInput" />
+      </div>
+      <div class="lqsampleDiv">
+          结束时间：<input type="text" name="etime" value="" id="etime" class="lqselectionInput" />
+      </div>
+      <div class="lqsampleDiv">
+        <button type="submit" value="查询 " class="btn btn-success pull-right" id="lqselectionBtn">查询</button>
+      </div>
+       类型：<?php
+            arSeg(
+               array(
+                  'segKey' => 'Html/select',
+                  'name' => 'opt',
+                  'map' => array('0' => '未解决','1' => '已解决', '2' => '已作废'),
+                  'selected' => arGet('opt',0),
+               )
+            );
+          ?>
+      </form>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>对外显示订单号</th>
+            <th>退货时间</th>
+            <th>退货理由</th>
+            <th>交易价</th>
+            <th>商品类型</th>
+            <th>用户名(id)</th>
+            <th>买家邮箱</th>
+            <th>通讯地址</th>
+            <th><?php if(arGet('opt') != OrderRefundModel::STATUS_CANCLE) : echo '操作'; else : echo '作废理由'; endif; ?></th>
+
+
+          </tr>
+        </thead>
+        <tbody>
+            <?php
+              foreach ($abort as $key => $abortDetail) {
+            ?>
+               <tr>
+               <td><?php echo $key+1; ?></td>
+               <td><?php echo $abortDetail['otradeno']; ?></td>
+               <td><?php echo date('Y-m-d',$abortDetail['ctime']);?></td>
+               <td><?php echo $abortDetail['reason'];?></td>
+               <td><?php echo $abortDetail['rmoney'];?></td>
+               <td><?php arEcho($abortDetail['type'],ProductModel::$TYPE_MAP);?></td>
+               <td><?php echo $abortDetail['uname'].'('.$abortDetail['uid'].')';?></td>
+               <td><?php echo $abortDetail['email'];?></td>
+               <td><?php echo $abortDetail['address']; ?></td>
+               <td><?php if(arGet('opt') == OrderRefundModel::STATUS_NO) : ?><a class='btn btn-success btn-xs' href='<?php echo arU('Order/abort',array('type' => OrderModel::STATUS_ABORT, 'rid' => $abortDetail['rid'])); ?>'>标记解决</a><?php endif; ?><?php if(arGet('opt') != OrderRefundModel::STATUS_CANCLE) : ?><a class='btn btn-warning btn-xs' href='javascript:void(0)' onclick="abort(<?php echo $abortDetail['rid']; ?>)">标记作废</a><?php endif; ?><?php if(arGet('opt') == OrderRefundModel::STATUS_CANCLE) : echo $abortDetail['abort']; endif; ?></td>
+              </tr>
+            <?php
+              }
+            ?>
+
+        </tbody>
+      </table>
+    </div>
+    <nav class="col-md-12 text-center">
+      <?php echo $page; ?>
+    </nav>
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function () {
+    // 日期选择
+    $('#stime').datetimepicker();
+    $('#etime').datetimepicker();
+});
+</script>

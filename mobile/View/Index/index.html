@@ -1,0 +1,193 @@
+    <div id="page">
+        <header class="header">
+            <div class="xzlh-option">四川<span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+            </div><span class="page-tit">循证</span>
+            <div class="xzlh-tip">
+                <span>距离2016年6月7日高考：<em>
+                <?php
+                    $year = date('y',time());
+                    $mouth = date('m',time());
+                    $date = date('d',time());
+                    $time1 = mktime(0,0,0,6,7,2016);
+                    $time2 = mktime(0,0,0,$mouth,$date,$year);
+                    $diff =(int)(($time1 - $time2)/(24*3600));
+                    echo $diff;
+                ?>
+                </em>天</span>
+            </div>
+        </header>
+        <section class="content">
+            <div class="">
+                <div class="xzlh-banner">
+                    <ul class="clearfix">
+                        <?php foreach($img as $img):
+                            $curl = GalleryModel::model()
+                                ->getDb()
+                                ->where(array('gid' => $img['galleryid']))
+                                ->queryRow();
+                        ?>
+                        <li>
+                            <a href="<?php $img['url']; ?>">
+                                <img src="<?php echo $curl['url']; ?>" alt="<?php echo $img['name']?>">
+                            </a>
+                        </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <div class="xzlh-main">
+                    <div class="xzlh-features clearfix">
+                        <a href="<?php echo arU('Index/testProbability'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features1.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>测试录取概率</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/simulationSystemOne'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features2.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>一二三诊模拟填报</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/test'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features3.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>性格职业测评</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/schooldata_query'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features4.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>找大学</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/gaokaosystem'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features7.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>四川高考志愿智能推荐</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/professionalSelect'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features6.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>找专业</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/scoreLine'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features5.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>省控线</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/findExpert'); ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features8.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>找专家</strong>
+                        </a>
+                        <a href="<?php echo arU('Index/offlineLecture') ?>">
+                            <span style="background: url(<?php echo arCfg('PATH.PUBLIC');?>img/features9.png) no-repeat 0 0/100% 100%;"></span>
+                            <strong>线下讲座报名</strong>
+                        </a>
+                    </div>
+                    <div class="container xzws-content">
+                        <h3>循证讲堂 <a href="<?php echo arU('Index/lectureRoom') ?>" class="more"><i class="fa fa-hand-o-right" style="color:red"></i>&nbsp;所有视频</a></h3>
+                        <div class="xzws-vedio-list">
+                            <?php foreach ($video as $video): ?>
+                            <div class="item">
+                                <div class="col-xs-4 img" style="padding-left:0 ">
+                                    <a href="<?php echo arU('Index/videoDetail',array('aid'=>$video['aid']))?>">
+                                        <img style="width: 100%;" title="<?php echo $video['title']; ?>" alt="<?php echo $video['title']; ?>" src="<?php echo $video['videoimg']; ?>">
+                                    </a>
+                                </div>
+                                <div class="col-xs-8 font">
+                                    <h4>
+                                        <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>"><?php echo $video['title']; ?></a>
+                                    </h4>
+                                    <div class="description">
+                                        <a class="text" href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>">免费</a>
+                                    </div>
+                                    <p class="expert-info ">
+                                        <span><i class="fa fa-eye"></i><?php echo $video['fnums']; ?></span>
+                                        <span><i class="fa fa-comments"></i>0</span>
+                                        <span>
+                                            <i class="fa fa-user"></i>
+                                            <a href="<?php echo arU('Index/videoDetail',array('aid' => $video['aid']))?>"><?php echo $video['name']; ?></a>
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                            <?php endforeach; ?>
+                            <div class="iback ibackmore" style="margin:0 15px;">
+                                <a class="btn btn-primary" href="javascript:;" id="loadingMore">加载更多 >></a>
+                                <a class="btn btn-primary" style="background-color:#BEBEBE; border:1px solid #BEBEBE;" href="javascript:;" id="loadingOver">加载完成<a/>
+                                <a class="btn btn-default" style="background: #e6e6e6;border-color:#ccc;margin-top:0" id="loading"><i class="fa fa-spinner fa-spin"></i>努力加载中...</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="xzlh-success">
+                        <h2>成功案例</h2>
+                        <ul class="xzlh-case clearfix">
+                            <?php
+                                foreach ($successCases as $key => $cgal) { ?>
+                            <li>
+                                <img src="<?php echo $cgal['articlepic'];?>" alt="">
+                                <p><?php echo $cgal['title'];?></p>
+                                <p class="justify"><?php echo arComp('tools.util')->substr_cut(strip_tags($cgal['content']), '20');?></p>
+                                <a href="<?php echo arU('Index/caseDetail',array('aid' => $cgal['aid']))?>">查看详情</a>
+                            </li>
+                            <?php } ?>
+                        </ul>
+                        <div class="iback" style="width:60%;margin:0 auto">
+                            <a class="btn btn-primary" href="<?php echo arU('Index/moreCase'); ?>">更多案例 >></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <script>
+    $(function(){
+        $("#loadingOver").hide();
+        $("#loading").hide();
+        var page = 2;
+        var lastItemId = 0;
+        $("#loadingMore").tap(function(){
+            $(this).hide(300);
+            $("#loading").show();
+            $.ajax({
+                type:'POST',
+                url:'<?php echo arU('lectureMore'); ?>',
+                dataType:'json',
+                data:{page:page,ajax:"1"},
+                success: function(data){
+                    // alert(page);
+                    console.log(data.data);
+                    var dataArr = data.data;
+
+                    var html = '';
+                    if (page <= data.max_page) {
+                        page++;
+                        for (var i in dataArr) {
+                            html += '<div class="item">\
+                            <div class="col-xs-4 img" style="padding-left:0 ">\
+                                <a href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">\
+                                <img style="width: 100%;" title="'+dataArr[i]['title']+'" alt="'+dataArr[i]['title']+'" src="'+dataArr[i]['videoimg']+'"></a>\
+                            </div>\
+                            <div class="col-xs-8 font">\
+                                <h4>\
+                                    <a href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">'+dataArr[i]['title']+'</a>\
+                                </h4>\
+                                <div class="description">\
+                                    <a class="text" href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">免费</a>\
+                                </div>\
+                                <p class="expert-info ">\
+                                    <span><i class="fa fa-eye"></i>'+dataArr[i]['fnums']+'</span>\
+                                    <span><i class="fa fa-commenting"></i>0</span>\
+                                    <span>\
+                                        <i class="fa fa-user"></i>\
+                                        <a href="<?php echo arU('Index/videoDetail');?>?aid='+dataArr[i]['aid']+'">'+dataArr[i]['name']+'</a>\
+                                    </span>\
+                                </p>\
+                                </div>\
+                            </div>'
+                            $('.xzws-vedio-list').append(html);
+                            $('.xzws-vedio-list').append($('.ibackmore'));                           
+                            $("#loading").hide();
+                            $("#loadingMore").show();
+                             }
+                    } else {
+                        $("#loading").hide();
+                        $("#loadingMore").hide();
+                        $("#loadingOver").show();
+                    }
+                } // 显示操作提示
+            })
+        })
+    })
+
+    </script>

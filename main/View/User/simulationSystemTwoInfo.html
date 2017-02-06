@@ -1,0 +1,321 @@
+<!-- 选择模拟批次 -->
+<div class="system-title pl20 pt10 pb10 clearfix">
+    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;四川高考志愿智能填报系统</h2>
+    <ul class="hmenu right">
+        <li>输入真实高考成绩</li>
+        <li class="selected">选择填报批次</li>
+        <li>选择院校专业</li>
+        <!-- <li>志愿表验证</li> -->
+        <li>生成模拟志愿表</li>
+    </ul>
+</div>
+<hr>
+<div class="bdr auto pb20 pt10 br5 mt20 ml10 mr10 clearfix" >
+    <h4 class="pl10"><span class="fa-stack fa-lg fs14px-bzh"><i class="fa fa-square fa-stack-2x fc3-bzh"></i><i class="fa fa-terminal fa-stack-1x fa-inverse"></i></span>&nbsp;<span class="vam-bzh">输入模拟填报批次</span></h4>
+    <hr>
+    <div class="pl10 pr10 fs12px-bzh auto alert alert-warning ml10 mr10">
+        <b class="fs14px-bzh"><i class="fa fa-info-circle"></i>&nbsp;重要提示：</b>
+        <p>1、本系统提供高考志愿填报智能模拟功能，不等同于实际的网上填报志愿，仅作志愿填报参考；</p>
+        <p>2、本系统依据高校历年录取数据，协助考生筛选学校并科学填报志愿，但我们不对实际录取结果提供担保，建议考生在填报志愿时，结合本系统的推荐，再进一步咨询相关高校，以完善志愿表；</p>
+        <p>3、本系统推荐的专业，依据的是历年录取数据，在正式填报时，以高校公布的最新招生专业为准；</p>
+        <p>4、您正在使用的是四川版，提供“本科第一批，本科第二批，专科第一批，专科第二批”4个批次的志愿智能模拟功能。您可以按系统的重点填报提示选择适合自己的批次模拟，也可直接选择自己关注的批次模拟；</p>
+        <p>5、<a class="fc2-bzh">志愿填报智能模拟系统使用指南</a></p>
+    </div>
+    <hr>
+    <div class="ml10 mr10 ">
+        <div class="bge-bzh pp10-bzh clearfix">
+            <div class="left">
+                <span class="fwb mr20">您的真实高考成绩</span>科类：<span class="fc6-bzh mr20 s-subject"></span>总分：<span class="fc6-bzh mr20 s-score"></span>位次：<span class="fc6-bzh s-rank"></span>
+            </div>
+            <a class="dib right fcl" href="<?php echo arU('User/simulationSystemTwo'); ?>"><i class="fa fa-wrench"></i>&nbsp;修改成绩</a>
+        </div>
+        <div class="bge-bzh p20 pl10 mt10 clearfix">
+            <div class="left"><span class="fwb fs16px-bzh db mb5 pcname">提前批填报院校</span>
+            <!-- 2015年控制线&nbsp;<span class="fc6-bzh fsx ml10">文/理科 : -</span> --></div>
+            <div class="important"></div>
+            <button class="btn btn-info right mt5 pl10 pr10 mr30 typeSchool" value="T">提前批</button>
+        </div>
+        <div class="bge-bzh p20 pl10 mt10 clearfix">
+            <div class="left"><span class="fwb fs16px-bzh db mb5 pcname">普通类第一批本科院校</span>
+            2016年控制线&nbsp;<span class="fc6-bzh fsx"></span></div>
+            <div class="important"></div>
+            <button class="btn btn-info right mt5 pl10 pr10 mr30 typeSchool" value="A"></button>
+        </div>
+        <div class="bge-bzh p20 pl10 mt10 clearfix">
+            <div class="left"><span class="fwb fs16px-bzh db mb5 pcname">普通类第二批本科院校</span>
+            2016年控制线&nbsp;<span class="fc6-bzh fsx"></span></div>
+            <div class="important"></div>
+            <button class="btn btn-info right mt5 pl10 pr10 mr30 typeSchool" value="B"></button>
+        </div>
+        <div class="bge-bzh p20 pl10 mt10 clearfix">
+            <div class="left"><span class="fwb fs16px-bzh db mb5 pcname">普通类专科一批院校</span>
+            2016年控制线&nbsp;<span class="fc6-bzh fsx"></span></div>
+            <div class="important"></div>
+            <button class="btn btn-info right mt5 pl10 pr10 mr30 typeSchool" value="C"></button>
+        </div>
+        <div class="bge-bzh p20 pl10 mt10 clearfix">
+            <div class="left"><span class="fwb fs16px-bzh db mb5 pcname">普通类专科二批院校</span>
+            2016年控制线&nbsp;<span class="fc6-bzh fsx"></span></div>
+            <div class="important"></div>
+            <button class="btn btn-info right mt5 pl10 pr10 mr30 typeSchool" value="D"></button>
+        </div>
+    </div>
+</div>
+
+<!-- 提前批填报信息提示 -->
+<div class="t-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt20 mb30 ml20 mr20 clearfix">
+         <i class="fa fa-smile-o mr10 left"></i>
+         <div class="eft mb10">武警，军校，公安，司法，国防生，免费师范生，小语种，港校等特色院校及专业可以选择提前批！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a href="javascript:" id="lh-tqp" class="right pb5 pt5 mfsy"><div class="mr10">立即填报</div></a>
+     </div>
+</div>
+
+<!-- 重点填报信息提示 -->
+<div class="z-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml50 clearfix">
+         <i class="fa fa-exclamation-triangle ml20 mr10 left"></i>
+         <div class="left conts">仅限已购买圆梦卡用户使用！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a href="<?php echo arU('User/simulationSystemTwoSchool'); ?>?score=<?php echo arRequest('score'); ?>&km=<?php echo arRequest('km'); ?>" class="right pb5 pt5 mfsy use"><div class="mr10">免费试用</div></a>
+         <a href="<?php echo arU('Index/vipCard'); ?>" class="right pb5 pt5 cbuy"><div class="mr10">没有圆梦卡？购买</div></a>
+     </div>
+</div>
+
+<!-- 备选填报信息提示 -->
+<div class="b-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml50 clearfix">
+         <i class="fa fa-question-circle ml20 mr10 left"></i>
+         <div class="left conts">仅限已购买圆梦卡用户使用！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a href="<?php echo arU('User/simulationSystemTwoSchool'); ?>?score=<?php echo arRequest('score'); ?>&km=<?php echo arRequest('km'); ?>" class="right pb5 pt5 mfsy use"><div class="mr10">免费试用</div></a>
+         <a href="<?php echo arU('Index/vipCard'); ?>" class="right pb5 pt5 cbuy"><div class="mr10">没有圆梦卡？购买</div></a>
+     </div>
+</div>
+
+<!-- 不可填报信息提示 -->
+<div class="not-tb n-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml50 clearfix">
+         <i class="fa fa-times-circle ml20 mr10 left"></i>
+         <div class="left">你的分数不够本批次，无法点击选择！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a class="right pb5 pt5"><div class="mr10">重新选择</div></a>
+     </div>
+</div>
+<!-- 尚未开启的志愿填报信息提示 -->
+<div class="not-open n-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml30 clearfix">
+         <i class="fa fa-times-circle ml10 mr10 left"></i>
+         <div class="left">此批次院校填报尚未开启，您不能填报次批次！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a class="right pb5 pt5"><div class="mr10">重新选择</div></a>
+     </div>
+</div>
+
+<script type="text/javascript">
+    var index,btnValue,score,km,tin,bxsum,zdnub,pcType,subject,vclick=true;
+    var lhscore = "<?php echo arRequest('score'); ?>",
+        lhkm = "<?php echo arRequest('km'); ?>";
+    // 进入提前批自愿
+    $('#lh-tqp').click(function(){
+        window.location.href = "<?php echo arU('User/gkmntqp') ?>?score="+lhscore+"&km="+lhkm+"&pc=0";
+    })
+    $(document).ready(function(){
+        $('.s-subject').text($.cookie('subject'));
+        $('.s-score').text($.cookie('score'));
+        $('.s-rank').text($.cookie('rank'));
+
+        if($.cookie('subject') == "理科"){
+            km=0;
+        }else{
+            km=1;
+        }
+        score=$('.s-score').text();
+        subject=$('.s-subject').text();
+
+        //不适合批次关闭弹框
+        $('.n-card .m-menu a').click(function(){
+            layer.close(cindex);
+        })
+
+        //获取批次类型
+        $('.mfsy').click(function(){
+            if(btnValue != ""){
+                $.cookie('valueType',btnValue,{expires:date,path:paths});
+                $.cookie('pcType',pcType,{expires:date,path:paths});
+            }
+        });
+
+//        console.log(score+":"+km);
+        AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/pcinfo?','score='+score+'&isgk=1&km='+km+'',pcx,'.important',pcxf);
+
+
+        //捕获页--提前批次
+        $('.typeSchool').eq(0).click(function(){
+            CaptruePage('.typeSchool',400,0,'400px','170px','.t-card',false,'');
+            btnValue=$(this).attr('value');
+            pcType=0;
+        });
+
+        //tips提示框
+        Mtips($('.typeSchool').eq(0),'如果你考虑包括武警，军校，公安，司法，国防生，免费师范生，小语种，港校等特色院校及专业可以考虑本批次！');
+
+    });
+
+    // 重点填报提示
+    function pcx(data,id){
+        for(var i=1;i<data.data.length;i++){
+            //录取线
+            $('.fsx').eq(i-1).append('<span class="ml10">'+subject+' : <span>'+data.data[i].fsx+'</span></span>');
+
+            // if(data.data[i].pcname == "专二"){
+            //     $('.typeSchool').filter('[value=D]').text('尚未开启');
+            //     $('.typeSchool').filter('[value=D]').addClass('notOpen');
+            //     Mtips($('.typeSchool').filter('[value=D]'),'提前批和普通类专科二批次院校填报尚未开启，您不能填报次批次！');
+            // }else{
+            // }
+            //是否为重点批次
+            if(data.data[i].is_zd == 1){
+                $(id).eq(data.data[i].pcnumber).append('<div class="fill right "><div class="title">推荐</div><div class="bottom ml10"></div></div>');
+                $('.typeSchool').eq(data.data[i].pcnumber).text('重点填报');
+                //重点选按钮
+                $('.typeSchool').eq(data.data[i].pcnumber).css({'backgroundColor':'#06861D','border':'#06861D'});
+                zdnub=data.data[i].pcnumber;
+
+                //捕获页--重点批次
+                $('.typeSchool').eq(data.data[i].pcnumber).click(function(){
+                    CaptruePage('.typeSchool',400,0,'400px','170px','.z-card',false,'');
+                    btnValue=$(this).attr('value');
+                    pcType=1;
+                    if(vclick){
+                        IfVip('<?php echo AR_SERVER_PATH; ?>Api/ifVip?','',ifVipsYes,ifVipsNo);
+                        vclick=false;
+                    }
+                });
+                //tips提示框
+                Mtips($('.typeSchool').eq(data.data[i].pcnumber),'您适合填报'+$(id).eq(data.data[i].pcnumber).prev().children('.pcname').text()+'志愿，本批次是你的成绩有机会进入的批次，建议你报考这个批次中，适合你未来发展，并且和你的实力匹配的院校！');
+            }else{
+                //是否为备选批次
+                if(data.data[i].is_bx == 1){
+                    bxsum=data.data[i].pcnumber-zdnub;
+                    $('.typeSchool').eq(data.data[i].pcnumber).text('备选填报'+bxsum+'');
+                    //备选按钮
+                    $('.typeSchool').eq(data.data[i].pcnumber).css({'backgroundColor':'#3E8755','border':'#3E8755'});
+
+                    //捕获页--备选批
+                    $('.typeSchool').eq(data.data[i].pcnumber).click(function(){
+                        CaptruePage('.typeSchool',400,0,'400px','170px','.b-card',false,'');
+                        btnValue=$(this).attr('value');
+                        pcType=2;
+                        if(vclick){
+                            IfVip('<?php echo AR_SERVER_PATH; ?>Api/ifVip?','',ifVipsYes,ifVipsNo);
+                            vclick=false;
+                        }
+                    });
+                    //tips提示框
+                    Mtips($('.typeSchool').eq(data.data[i].pcnumber),'根据你的成绩，你应该进入重点填报批次。这个批次只是备选批次，但是为了稳妥起见，建议填报本批次最适合你发展的院校！');
+                }else{
+                    $('.typeSchool').eq(data.data[i].pcnumber).text('无效填报');
+                    //无效按钮
+                    $('.typeSchool').eq(data.data[i].pcnumber).css({'backgroundColor':'#8BB5C2','border':'#8BB5C2'});
+                    //捕获页--不适合批次
+                    $('.typeSchool').eq(data.data[i].pcnumber).click(function(){
+                        CaptruePage('.typeSchool',400,0,'400px','170px','.not-tb',false,'');
+                    });
+                    //tips提示框
+                    Mtips($('.typeSchool').eq(data.data[i].pcnumber),'你的分数不够本批次，无法填报本批次，你应该进入重点填报批次！');
+                }
+            }
+            //console.log(data.data[i]);
+        }
+    }
+    function pcxf(){
+        // if($('.typeSchool').attr('value') == 'T'){
+        //     $('.typeSchool').filter('[value=T]').text('尚未开启');
+        //     //不可选按钮
+        //     $('.typeSchool').filter('[value=T]').css({'backgroundColor':'#B0B0B0','border':'#B0B0B0'});
+        //     Mtips($('.typeSchool').filter('[value=T]'),'提前批批次院校填报尚未开启，您不能填报此批次！');
+        // }
+        // $('.typeSchool').filter('[value=T]').click(function(){
+        //     CaptruePage('.typeSchool',400,0,'400px','170px','.not-open',false,'');
+        // });
+    }
+
+    function ifVipsYes(data){
+        $('.conts').text('您马上进入志愿填报，请谨慎填写！');
+        $('.use').children('div').text('马上使用');
+        $('.cbuy').children('div').text('重新选择');
+        $('.cbuy').removeAttr('href');
+        $('.cbuy').click(function(){
+            layer.close(cindex);
+        });
+        $.cookie('ifVip',true,{expires:date,path:paths});
+    }
+    function ifVipsNo(data){
+        $.cookie('ifVip',false,{expires:date,path:paths});
+    }
+
+    function fillAnimation(){
+        $('.fill').animate({marginTop:'-50px'},'slow');
+        $('.fill').animate({marginTop:'-40px'},'slow');
+    }
+    setInterval(fillAnimation,500);
+
+//访问服务器数据
+function IfVip(URL,DATA,fcYes,fcNo){
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        data: DATA,
+        dataType: 'json',
+        cache: false,
+        // contentType: 'application/json',
+        beforeSend: function(){
+            indexLoad=layer.msg('拼命加载中……', {
+                time:false,
+                icon: 16
+            });
+        },
+        complete: function(){
+            layer.close(indexLoad);
+        },
+        success: function(data,status,XHR){
+            layer.close(indexLoad);
+            //console.log(data);
+            if(data.ret_code == 1000){
+                fcYes(data);
+            }
+            if(data.ret_code == 1001){
+                fcNo(data);
+            }
+        },
+        error: function(){
+            layer.alert('',{
+                type:0,
+                title:['错误信息','color:#FF34B3;font-size:28px;font-famliy:"隶书";'],
+                area:['300px','200px'],
+                content:'你放弃吧，服务器是不会理你的，你再等下去也没什么卵用的！',
+                icon:5,
+                btn:['确定','取消'],
+                yes:function(index,layero){
+                    layer.close(index);
+                },
+                cancel:function(index){
+                    layer.close(index);
+                }
+            });
+        }
+    });
+}
+</script>

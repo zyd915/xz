@@ -1,0 +1,262 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">资料填写</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container" >
+                <h4 class="text-center" style="margin: 0;padding: .25rem;">家长报名</h4>
+                <div style="background: #eee;padding: .3rem 0">
+                    <form action="<?php echo arU('Index/signUpInfo')?>" autocomplete="off" method="POST" class="form-wrapper" id="reg-formWrapper">
+                        <div class="xzws-infoItem">
+                            <label>孩子姓名:</label>
+                            <div class="form-group has-success has-feedback">
+                                <input name="name" type="text" class="loginText loginw error" placeholder="请输入孩子姓名" />
+                                <span id="tip-icon" style="display: none" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            </div>
+                            <span class="tip"></span>
+                            <span class="tip-false" style="display: none"></span>
+                        </div>
+                        <div class="xzws-infoItem">
+                            <label>年&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;龄：</label>
+                            <div class="form-group has-feedback has-success">
+                                <input name="age" type="number" class="loginText loginw error" placeholder="请输入孩子年龄" min="1" max="99" />
+                                <span id="tip-icon-age" style="display: none" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            </div>
+                            <span class="tip"></span>
+                            <span class="tip-false-age" style="display: none;"></span>
+                        </div>
+                        <div class="xzws-infoItem">
+                            <label style="display: inline">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</label>
+                            <label for="male" style="width:20px;margin-right:.1rem;">男</label>
+                            <input name="sex" type="radio"  class="" value="1" id="male" checked>
+                            <label for="female" style="width:20px;margin-left:.3rem;margin-right:.1rem ">女</label>
+                            <input name="sex" type="radio"  class="" value="0" id="female">
+                        </div>
+                        <div class="xzws-infoItem">
+                            <label>所在学校：</label>
+                            <div class="form-group has-feedback has-success">
+                                <input name="school" type="text" class="loginText loginw error" placeholder="请输入孩子所在学校" />
+                                <span id="tip-icon-school" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            </div>
+                            <span class="tip"></span>
+                            <span class="tip-false-school" style="display: none;"></span>
+                        </div>
+                        <div class="xzws-infoItem">
+                            <label>手机号码：</label>
+                            <div class="form-group has-feedback has-success">
+                                <input name="phone" type="text" class="loginText loginw error" placeholder="请输入你的联系方式" />
+                                <span id="tip-icon-tel" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            </div>
+                            <span class="tip"></span>
+                            <span class="tip-false-tel" style="display: none;"></span>
+                        </div>
+                        <div class="xzws-infoItem">
+                            <label>预订座位数：</label>
+                            <div class="form-group has-feedback has-success">
+                                <input name="seating" type="number" class="loginText loginw error" placeholder="最多预订5个座位" min="1" max="5" />
+                                <span id="tip-icon-seat" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                            </div>
+                            <span class="tip"></span>
+                            <span class="tip-false-seat" style="display: none;"></span>
+                        </div>
+                        <div class="xzws-infoItem text-center" style="margin-top:.5rem">
+                            <input class="btn btn-primary" type="button" value="完成">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function() {
+        //验证姓名
+        $('input[name="name"]').on('focus', function () {
+            $(this).parent().siblings('.tip').show().html('! 提示：只能输入中文');
+            $('.tip-false').hide();
+        }).on('blur', function () {
+            var str = $(this).val();
+            var strs = str.replace(/\s/g, '');//输入空格时自动忽略，\s表示空格
+            var regExp1 = /^[\u4e00-\u9fa5]{2,}$/g;//汉字
+            if (str == "") {
+                $('.tip').hide();
+                $('#tip-icon').hide();
+                $(this).addClass('error');
+            } else if (!regExp1.test(strs)) {
+                $(this).parent().removeClass('has-success').addClass('has-error');
+                $('#tip-icon').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                $('.tip').hide();
+                $('.tip-false').html('<i class="fa fa-warning"></i>&nbsp;别逗了，好好的输入名字吧!').show().css({
+                    "position": "relative",
+                    top: "-10px",
+                    left: "10px"
+                });
+                $(this).addClass('error');
+            } else {
+                $(this).parent().removeClass('has-error').addClass('has-success');
+                $('#tip-icon').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                $('.tip').hide();
+                $(this).removeClass('error');
+            }
+
+        });
+
+        //验证年龄
+        $('input[name="age"]').on('focus', function () {
+            $(this).parent().siblings('.tip').show().html('! 提示：只能输入100以内的正整数');
+            $('.tip-false-age').hide();
+        }).on('blur', function () {
+            var num = $(this).val();
+            var regExp2 = /^[1-9]\d?$/g;//1-99的正整数
+            if (num == '') {
+                $('.tip').hide();
+                $('#tip-icon-age').hide();
+                $(this).addClass('error');
+            } else if (!regExp2.test(num)) {
+                $(this).parent().removeClass('has-success').addClass('has-error');
+                $('#tip-icon-age').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                $('.tip').hide();
+                $('.tip-false-age').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                    "position": "relative",
+                    top: "-10px",
+                    left: "10px",
+                    color: "red"
+                });
+                $(this).addClass('error');
+            } else {
+                $(this).parent().removeClass('has-error').addClass('has-success');
+                $('#tip-icon-age').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                $('.tip').hide();
+                $(this).removeClass('error');
+            }
+        })
+
+        //验证学校
+        $('input[name="school"]').on('focus', function () {
+            $(this).parent().siblings('.tip').show().html('! 提示：只能输入中文和数字');
+            $('.tip-false-school').hide();
+        }).on('blur', function () {
+            var str = $(this).val();
+            var regExp3 = /^[\u4E00-\u9FA50-9]+$/g;
+            if (str == "") {
+                $('.tip').hide();
+                $('#tip-icon-school').hide();
+                $(this).addClass('error');
+            } else if (!regExp3.test(str)) {
+                $(this).parent().removeClass('has-success').addClass('has-error');
+                $('#tip-icon-school').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                $('.tip').hide();
+                $('.tip-false-school').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                    "position": "relative",
+                    top: "-10px",
+                    left: "10px",
+                    color: "red"
+                });
+                $(this).addClass('error');
+            } else {
+                $(this).parent().removeClass('has-error').addClass('has-success');
+                $('#tip-icon-school').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                $('.tip').hide();
+                $(this).removeClass('error');
+            }
+
+        })
+
+        //验证手机号码
+        $('input[name="phone"]').on('focus', function () {
+            $(this).parent().siblings('.tip').show().html('! 提示：请输入11位的手机号码');
+            $('.tip-false-tel').hide();
+        }).on('blur', function () {
+            var phone = $(this).val();
+            var regExp4 = /^1[3|4|5|8][0-9]\d{8}$/g;
+            if (phone == "") {
+                $('.tip').hide();
+                $('#tip-icon-tel').hide();
+                $(this).addClass('error');
+            } else if (!regExp4.test(phone)) {
+                $(this).parent().removeClass('has-success').addClass('has-error');
+                $('#tip-icon-tel').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                $('.tip').hide();
+                $('.tip-false-tel').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                    "position": "relative",
+                    top: "-10px",
+                    left: "10px",
+                    color: "red"
+                });
+                $(this).addClass('error');
+            } else {
+                $(this).parent().removeClass('has-error').addClass('has-success');
+                $('#tip-icon-tel').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                $('.tip').hide();
+                $(this).removeClass('error');
+            }
+        })
+
+        //验证座位
+        $('input[name="seating"]').on('focus', function () {
+            $('.tip-false-seat').hide();
+        }).on('blur', function () {
+            var seatNum = $(this).val();
+            if (seatNum == "") {
+                $('.tip').hide();
+                $('#tip-icon-seat').hide();
+                $(this).addClass('error');
+            } else if (!(seatNum > 0 && seatNum <= 5)) {
+                $(this).parent().removeClass('has-success').addClass('has-error');
+                $('#tip-icon-seat').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                $('.tip').hide();
+                $('.tip-false-seat').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                    "position": "relative",
+                    top: "-10px",
+                    left: "10px",
+                    color: "red"
+                });
+                $(this).addClass('error');
+            } else {
+                $(this).parent().removeClass('has-error').addClass('has-success');
+                $('#tip-icon-seat').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                $('.tip').hide();
+                $(this).removeClass('error');
+            }
+        })
+
+        //提交表单
+        $('input[type=button]').tap(function () {
+            $('input').blur();
+            if ($('.error').length == 0) {
+                layer.open({
+                    title: "提示",
+                    content: "家长朋友们，资料填写完成！",
+                    btn: ['查看'],
+                    yes: function () {
+                        $('#reg-formWrapper').submit();
+                        layer.closeAll();
+                    }
+                });
+            } else {
+                if ($('.error').val() != '') {
+                    layer.open({
+                        title: "提示",
+                        content: "资料填写有误！",
+                        btn: ['完善'],
+                        yes: function () {
+                            layer.closeAll()
+                        }
+                    });
+                } else {
+                    layer.open({
+                        title: "提示",
+                        content: "有资料未填写！",
+                        btn: ['完善'],
+                        yes: function () {
+                            layer.closeAll()
+                        }
+                    });
+                }
+            }
+        })
+    })
+
+
+</script>

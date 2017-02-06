@@ -1,0 +1,20 @@
+------2016-04-12 17:47:19 1460454439------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:#ec8186;\'>NOTICE</b> [8] Undefined index: uid<br />
+ on line 17 in file E:\\web\\xz\\mobile\\Module\\UserModule.class.php <br />
+<br>&nbsp;&nbsp;<b style=\'color:#ec8186;\'>NOTICE</b> [8] Undefined index: uid<br />
+ on line 23 in file E:\\web\\xz\\mobile\\Module\\UserModule.class.php <br />
+<br>&nbsp;&nbsp;<b style=\'color:#ec8186;\'>NOTICE</b> [8] Undefined index: uid<br />
+ on line 27 in file E:\\web\\xz\\mobile\\Module\\UserModule.class.php <br />
+<br></div>',
+  'footer' => '</div>',
+)
+------2016-04-12 17:47:19 1460454439------
+array (
+  'header' => '<div style="width:98%;bottom:30px"><div style="border-top:1px #666 dashed;background:#f1f1f1;text-align:center;font-size:20px;margin:10px 0px 10px;">[DEBUG SERVER_ERROR INFO] </div>',
+  'showMsg' => '<div style="padding:5px;background:#f3f3f1;line-height:30px">&nbsp;&nbsp;<b style=\'color:red;\'>ERROR</b> [256] class : VipModule does not exist !<br />
+  Fatal error on line 128 in file E:\\web\\xz\\arphp.php, PHP 5.3.29 (WINNT)<br />
+<br></div>',
+  'footer' => '</div>',
+)

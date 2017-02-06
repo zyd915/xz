@@ -1,0 +1,198 @@
+<form name="form-yuyue" action="<?php echo arU('User/yyzj'); ?>" method="post">
+<div class="mainIndex ml20 clearfix">
+	<div class="mainHeader">
+		<div class="o2o-title">
+			<h2 class="left">1对1专家咨询详情</h2>
+			<div class="line right mt10 mb30"></div>
+		</div>
+	</div>
+	<div class="mt20 mb20 clearfix clearfloat">
+		<ul class="tac lbul">
+			<li>
+				<div class="fjyj tac left">
+					<span>选择专家</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-user-plus"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<li>
+				<div class="fjyj tac selection left">
+					<span>预约咨询</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-clock-o"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li>
+			<!-- <li>
+				<div class="fjyj tac left">
+					<span>订单付款</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-cc-visa"></i>
+					</div>
+				</div>
+				<div class="left">
+					<i class="fa fa-angle-double-right fxright"></i>
+				</div>
+			</li> -->
+			<li>
+				<div class="fjyj tac left">
+					<span>专家1对1咨询</span>
+					<div class="yjlogo mt5 tac">
+						<i class="fa fa-group"></i>
+					</div>
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="o2o clearfix">
+		<div class="left ml10 mt20 mb20">
+			<div class="vip-header"><img src="<?php echo $expert['headpic'] ?>"/></div>
+		</div>
+		<div class="left ml20 mr20 mt20 item expert-detail">
+			<p class="detail-font">
+				您选择了
+				<span><?php echo $expert['name'];?></span>
+				专家为您提供高考志愿填报咨询
+				<span class="right mr10">
+					<a href="<?php echo arU('Index/expertConsultation'); ?>">[返回选择其他专家]</a>
+				</span>
+			</p>
+			<p><?php echo $expert['des'];?></p>
+		</div>
+		<input type="hidden" name="eid" value="<?php echo $expert['eid']; ?>" >
+	</div>
+
+	<div class="mt20 mr20">
+		<div class="mr20">
+			<p class="required">
+				<i class="fa "></i>
+				咨询申请须知：申请专家指导前，请认真填写以下资料，整理你想咨询的问题，以便专家提前准备，节省您的通话时间
+			</p>
+		</div>
+		<div class="dbg clearfix mb20">
+			<ul class="ml10 mr10">
+				<li>
+					<h2 class="fs18 fwb pt10 pb10"><i class="fa fa-hand-o-right mr10 orangei"></i>您需要的咨询类型</h2>
+					<div class="lbbg lbwt">
+						<div class="ml20 mt20 mb20">
+							<label><i class="fa  mr5 redi"></i>选择咨询类型：</label>
+							<span class="ml10 zlbbg">
+								<i class="ml10 mr10 fa fa-dot-circle-o blocki"></i>
+								线下一对一咨询
+								<span class="mr10 orangei">5680</span>元
+							</span>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h2 class="fs18 fwb pt10 pb10"><i class="fa fa-hand-o-right mr10 orangei"></i>考生情况<span class="grayf ml10">请填写当前时段可获得的考生准确情况，以便专家提前了解，节省您的通话时间</span></h2>
+					<div class="lbbg">
+						<!-- <div class="mt20 mb10 mobinput">
+							<label><i class="fa  mr5 redi"></i>学生成绩：</label><i class="ml5 mr5 fa fa-dot-circle-o blocki"></i>零诊<i class="ml10 mr5 fa fa-dot-circle-o blocki"></i>一诊<i class="ml10 mr5 fa fa-dot-circle-o blocki"></i>二诊<i class="ml10 mr5 fa fa-dot-circle-o blocki"></i>三诊<i class="ml10 mr5 fa fa-dot-circle-o blocki"></i>高考
+						</div> -->
+						<div class="mb20 clearfix">
+							<label class="ml20 left">&nbsp;</label>
+							<textarea class="areabor tarea left" id="examine" name="scoreinfo" cols="50" rows="5" placeholder="高考成绩文科：560分，名次5689名，英语比较好，想学语言相关专业，最好报考本省大学。
+"><?php echo $yuyue['scoreinfo']; ?></textarea>
+							<div class="tswz ml20 mr20 left">
+								<span class="orangei">小贴士：<br/>请详细填写高考成绩及相关细节，信息越充分，越能节省正式的咨询时间。</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h2 class="fs18 fwb pt10 pb10"><i class="fa fa-hand-o-right mr10 orangei"></i>咨询意向<span class="grayf ml10">请填写您需要咨询的问题，以便专家提前准备，给予更充分的解答</span></h2>
+					<div class="lbbg">
+						<div class="mt20 mb10 mobinput">
+							<label><i class="fa  mr5 redi"></i>主要主题：</label><input id="theme" class="inputbor" name="theme" type="text" value="<?php echo $yuyue['theme']; ?>" placeholder="范例：孩子适合什么学校和专业？填报志愿有哪些需要注意的细节？">
+						</div>
+						<div class="mb20 clearfix mobinput">
+							<label class="left"><i class="fa  mr5 redi"></i>其他：</label>
+							<textarea class="areabor tarea left" id="other" cols="50" name="otherinfo" rows="5" placeholder="范例：儿子平时比较文静，性格内向，平时比较喜欢看书、画画，在学习上语文和英语比较擅长，孩子适合学习语言类专业吗？有哪些合适的大学？具体填志愿需要如何规划？注意哪些方面？"><?php echo $yuyue['otherinfo']; ?></textarea>
+							<div class="tswz ml20 mr20 left">
+								<span class="orangei">小贴士：<br/>请全面描述要咨询的问题，并提供考生的性格爱好、特长、报考倾向以及未来的职业方向。信息越充分，越能节省正式的咨询时间。</span>
+							</div>
+						</div>
+					</div>
+				</li>
+				<li>
+					<h2 class="fs18 fwb pt10 pb10"><i class="fa fa-hand-o-right mr10 orangei"></i>期望沟通时间<span class="grayf ml10">请填写您方便接受咨询解答的时间，避免耽误志愿填报</span></h2>
+					<div class="lbbg mb20">
+						<div class="mt20 mb10 mobinput">
+							<label><i class="fa  mr5 redi"></i>咨询日期：</label>
+							<input class="Wdate areabor" id="before" name="startdate" value="<?php echo $yuyue['startdate']; ?>" type="text" onClick="WdatePicker()">
+							<input class="Wdate areabor ml20" id="after" name="enddate" value="<?php echo $yuyue['enddate']; ?>" type="text" onClick="WdatePicker()">
+							<!-- <input class="areabor" type="date">
+							<input class="areabor ml20" type="date"> -->
+						</div>
+						<div class="mb10 mobinput">
+							<label><i class="fa  mr5 redi"></i>咨询时段：</label>
+							<input class="inputbor" id="talktime" name="ytime" type="text" value="<?php echo $yuyue['ytime']; ?>">
+							<span class="grayf ml10">如：周1-5晚18:00后</span>
+						</div>
+						<div class="mb20 mobinput">
+							<label><i class="fa fa-asterisk mr5 redi"></i>手机号码：</label>
+							<input class="inputbor" id="mobile" name="mobile" type="text" value="<?php echo $yuyue['mobile']; ?>" placeholder="为方便及时联系到您，请确定手机号正确无误">
+						</div>
+						<input type="hidden" name="yid" value="<?php echo $yuyue['yid']; ?>" />
+					</div>
+				</li>
+				<li>
+					<!-- <div class="mt20">
+						<input type="checkbox" class="agree" checked>
+						我已阅读并同意
+						<a href="" class="wzname">《循证网志愿填报咨询服务条款》</a>
+					</div> -->
+					<div class="mt30 mb30 tac">
+						<button value="<?php echo arU('User/expertDetailMessage',array('aid'=>$expect['eid'])); ?>" onclick="return noempty();" class="tjan">提交预约</button>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+</form>
+<script type="text/javascript">
+	var myes=true;
+	$(document).ready(function(){
+		/*$('.agree').click(function(){
+			if($('.agree').attr('checked')){
+				$(this).removeAttr('checked');
+				myes=false;
+				$('.tjan').css('backgroundColor','#DDDDDD');
+			}else{
+				$(this).attr('checked',true);
+				myes=true;
+				$('.tjan').css('backgroundColor','#3CB38D');
+			}
+		});*/
+	});
+
+	function noempty(){
+		// if(myes && nonempty('#examine','考生情况不能为空！') && nonempty('#theme','主题不能为空！') && nonempty('#other','其他不能为空！') && nonempty('#before','咨询日期不能为空！') && nonempty('#after','咨询日期不能为空！') && nonempty('#talktime','通话时段不能为空！') && nonempty('#mobile','手机号码不能为空！') )
+		if(nonempty('#mobile','手机号码不能为空！'))
+		{
+			$("[name='form-yuyue']").submit();
+			$('.tjan').attr('disabled',"true");
+			return true;
+		}else{
+			return false;
+		}
+	}
+
+	/*function check(){
+		if($('.agree').attr('checked',true)){
+			return true;
+		}else{
+			message('');
+			return false;
+		}
+	}*/
+</script>

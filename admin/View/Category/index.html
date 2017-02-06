@@ -1,0 +1,129 @@
+<div class="panel panel-default">
+  <div class="panel-heading fl clearfix"><span>分类管理</span>
+    <a id="cate-add" class="btn pull-right">添加新类</a>
+    <a id="cate-edit" class="btn pull-right">编辑选中的类</a>
+  </div>
+  <div class="panel-body clearfix">
+    <?php
+    /**调用seg显示分类文件片段*/
+    arSeg(array('cates' => $cates));
+
+    ?>
+  </div>
+</div>
+
+<!--模态框start-->
+<div id="div-cate-add" style="width:600px; height:400px;display:none">
+  <form class="form-horizontal" name="form-add" role="form" method="post">
+    <input type="hidden" name="nid" id="nowSelectCid" value="0">
+    <div class="form-body">
+      <div class="form-group">
+        <label class="col-md-3 control-label">名称</label>
+        <div class="col-md-9">
+          <input type="text" name="name" class="form-control input-lg" placeholder="名称">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">链接</label>
+        <div class="col-md-9">
+          <input type="text" name="url" class="form-control" placeholder="链接">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">是否在左侧里面显示</label>
+        <div class="col-md-9">
+          <select name="onleft">
+            <option value="0">不展示</option>
+            <option value="1">展示</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">左侧排序</label>
+        <div class="col-md-9">
+          <input type="text" name="lsort" class="form-control input-sm" placeholder="0">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-3 control-label">是否在底部里面显示</label>
+        <div class="col-md-9">
+
+          <select name="onfoot">
+            <option value="0">不展示</option>
+            <option value="1">展示</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">底部排序</label>
+        <div class="col-md-9">
+          <input type="text" name="fsort" class="form-control input-sm" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="form-actions right">
+      <span id="btn-cate-add" class="btn green">提交</span>
+    </div>
+  </form>
+</div>
+<!--模态框end-->
+
+<!--模态框start-->
+<div id="div-cate-edit" style="width:600px; height:400px;display:none">
+  <form class="form-horizontal" name="form-edit" role="form" method="post">
+    <input type="hidden" name="nid" id="nowSelectCid" value="0">
+    <div class="form-body">
+      <div class="form-group">
+        <label class="col-md-3 control-label">名称</label>
+        <div class="col-md-9">
+          <input type="text" name="name" class="form-control input-lg" placeholder="名称">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">链接</label>
+        <div class="col-md-9">
+          <input type="text" name="url" class="form-control" placeholder="链接">
+        </div>
+      </div>
+
+<div class="form-group">
+        <label class="col-md-3 control-label">是否在左侧里面显示</label>
+        <div class="col-md-9">
+          <select name="onleft">
+            <option value="0">不展示</option>
+            <option value="1">展示</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">左侧排序</label>
+        <div class="col-md-9">
+          <input type="text" name="lsort" class="form-control input-sm" placeholder="0">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-3 control-label">是否在底部里面显示</label>
+        <div class="col-md-9">
+
+          <select name="onfoot">
+            <option value="0">不展示</option>
+            <option value="1">展示</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">底部排序</label>
+        <div class="col-md-9">
+          <input type="text" name="fsort" class="form-control input-sm" placeholder="0">
+        </div>
+      </div>
+    </div>
+    <div class="form-actions right">
+      <span id="btn-cate-delete" class="btn default">删除</span>
+      <span id="btn-cate-edit" class="btn green">提交</span>
+    </div>
+  </form>
+</div>
+<!--模态框end-->

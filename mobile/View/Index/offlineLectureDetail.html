@@ -1,0 +1,383 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">讲座详情</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container">
+                <div class="xzws-title-border-yb">
+                    <div class="case-title-yb">
+                        <i class="fa fa-tasks"><span>公益讲座</span></i>
+                    </div>
+                    <div class="">
+                        <div class="case-content-yb">
+                            <div class="">
+                                <?php if ($join != 1): ?>
+                                <h3 class="title-name-yb join"><?php echo $art['title'];?><a href="javascript:;" class="btn btn-xs btn-danger fr">我要报名</a></h3>
+                                <?php else:?>
+                                <h3 class="title-name-yb"><?php echo $art['title'];?><a href="<?php echo arU('User/index') ?>" class="btn btn-xs btn-success fr">已报名+</a></h3>
+                                <?php endif; ?>
+                                <p>发布日期：<?php echo date('Y-m-d H:i',$art['ctime']);?><span class=""></span></p>
+                            </div>
+                            <div class="case-img-yb" style="padding-bottom:20px;">
+                                <?php if($art['articlepic']):?> <img src="<?php echo $art['articlepic'];?>" style="width:100%; height:auto; "><?php endif;?>
+                            </div>
+                            <div class="text-i2em">
+                                <?php echo $art['content'];?>
+                            </div>
+                            <!--<div class="xzws-baoming">
+                                <p>我要报名&nbsp;&nbsp;<a class="btn btn-success btn-sm" href="<?php echo arU('Index/offlineSubmitInfo') ?>">Go ></a></p>
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="regLecture" style="background: #eee;padding: .3rem 0;display: none">
+        <!-- <div class="xzws-formInfo">
+            <form action="<?php echo arU('Index/signUpinfo',array('aid' => arRequest('aid')))?>"  method="post" class="form-wrapper" id="reg-formWrapper">
+                <div class="xzws-infoItem">
+                    <label>预订座位数：</label>
+                    <div class="form-group has-feedback has-success">
+                        <input name="seating" type="number" class="loginText loginw error" placeholder="最多预订5个座位" min="1" max="5" />
+                        <span id="tip-icon-seat" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+                    <span class="tip"></span>
+                    <span class="tip-false-seat" style="display: none;"></span>
+                </div>
+                <div class="xzws-infoItem">
+                    <label>家长手机号码：</label>
+                    <div class="form-group has-feedback has-success">
+                        <input name="phone" type="text" class="loginText loginw error" placeholder="请输入联系方式" />
+                        <span id="tip-icon-tel" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+                    </div>
+                    <span class="tip"></span>
+                    <span class="tip-false-tel" style="display: none;"></span>
+                </div>
+                <div class="xzws-infoItem text-center">
+                    <input class="btn btn-primary" type="button" value="确定">
+                </div>
+            </form>
+        </div> -->
+    </div>
+    <script type="text/javascript">
+        $(function(){
+            var html = '<div class="xzws-formInfo">\
+            <form action="<?php echo arU('Index/signUpIn',array('aid' => arRequest('aid')))?>" method="post" class="form-wrapper" id="reg-formWrapper">\
+                <div class="xzws-infoItem">\
+                    <label><b style="color:red">*</b>学生姓名：</label>\
+                    <div class="form-group has-feedback has-success">\
+                        <input name="stu" type="text" class="loginText loginw error" placeholder="请输入你的名字" min="1" max="3" />\
+                        <span id="tip-icon-stu" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>\
+                    </div>\
+                    <span class="tip"></span>\
+                    <span class="tip-false-stu" style="display: none;"></span>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label><b style="color:red">*</b>学校名称：</label>\
+                    <div class="form-group has-feedback has-success">\
+                        <input name="school" type="text" class="loginText loginw error" placeholder="请输入你的学校" />\
+                        <span id="tip-icon-school" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>\
+                    </div>\
+                    <span class="tip"></span>\
+                    <span class="tip-false-school" style="display: none;"></span>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label><b style="color:red">*</b>参加人数：</label>\
+                    <div class="form-group has-feedback has-success">\
+                        <input name="seating" type="number" class="loginText loginw error" placeholder="最多3人" min="1" max="3" />\
+                        <span id="tip-icon-seat" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>\
+                    </div>\
+                    <span class="tip"></span>\
+                    <span class="tip-false-seat" style="display: none;"></span>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label><b style="color:red">*</b>家长手机号码：</label>\
+                    <div class="form-group has-feedback has-success">\
+                        <input name="phone" type="text" class="loginText loginw error" data-value="1" placeholder="请输入联系方式" />\
+                        <span id="tip-icon-tel" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>\
+                    </div>\
+                    <span class="tip"></span>\
+                    <span class="tip-false-tel" style="display: none;"></span>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label><b style="color:red">*</b>QQ号码：</label>\
+                    <div class="form-group has-feedback has-success">\
+                        <input name="qqnum" type="text" class="loginText loginw error" data-value="1" placeholder="请输入QQ号"/>\
+                        <span id="tip-icon-qq" style="display:none;" class="glyphicon glyphicon-ok form-control-feedback"></span>\
+                    </div>\
+                    <span class="tip-false-qq" style="display: none;"></span>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label>是否为艺体：</label>\
+                    <div class="form-group has-feedback has-success clearfix" style="border:1px solid #ccc;border-radius:3px;">\
+                        <div class="text-center pull-left art-yes" data-value="是" style="width:50%;height:.6rem;line-height:.6rem;background-color:#3697E4;color:white">是</div>\
+                        <div class="text-center pull-right art-no" data-value="否" style="width:50%;height:.6rem;line-height:.6rem;">否</div>\
+                        <input type="hidden" name="yiti" value="是"/>\
+                    </div>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label>家长主要困惑：</label>\
+                    <textarea class="loginText loginw" style="height:2rem;text-indent:-1.5rem;resize:none" name="puzzle">\
+                    </textarea>\
+                </div>\
+                <div class="xzws-infoItem">\
+                    <label>家长想听内容：</label>\
+                    <textarea class="loginText loginw" style="height:2rem;text-indent:-1.5rem;resize:none" name="xtnr">\
+                    </textarea>\
+                </div>\
+                <div class="xzws-infoItem text-center">\
+                    <input class="btn btn-primary" type="button" value="确定">\
+                </div>\
+            </form>\
+        </div>';
+            $('.join').find('a').eq(0).tap(function () {
+            //.....是否登陆......
+                var da = null;
+                //获取userScore接口数据
+                ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','Post','',spage);
+                function spage(dat){
+                    if(dat.ret_code == '1000'){
+                        // da = dat.data;
+                        // $('#exam-score').val(dat.data.scorez1);
+                        var index = layer.open({
+                            title: '填写资料',
+                            type: 1,
+                            shadeClose: false,
+                            // content: $('.regLecture').html(),
+                            content: html,
+                            //btn: ['完成'],
+                            success: function (elem) {
+                                //判断家长号码是否存在
+                                if(getCookie('tel')!=''&&getCookie('tel')!=undefined){
+                                    $('input[name="phone"]').val(getCookie('tel'));
+                                    $('input[name="phone"]').removeClass('error');
+                                    //$('#reg-formWrapper .xzws-infoItem').eq(1).hide();
+                                }
+                                //判断qq号是否存在
+                                if(getCookie('qqnum')!=''&&getCookie('qqnum')!=undefined){
+                                    $("input[name=qqnum]").val(getCookie('qqnum'));
+                                    $("input[name=qqnum]").removeClass('error');
+                                }
+                                //判断学生姓名是否存在
+                                if(getCookie('stu')!=''&&getCookie('stu')!=undefined){
+                                    $("input[name=stu]").val(getCookie('stu'));
+                                    $("input[name=stu]").removeClass('error');
+                                }
+                                //判断学校是否存在
+                                if(getCookie('school')!=''&&getCookie('school')!=undefined){
+                                    $("input[name=school]").val(getCookie('school'));
+                                    $("input[name=school]").removeClass('error');
+                                }
+
+                                //验证姓名
+                                $("input[name=stu]").on('focus',function(){
+                                    $('.tip-false-stu').hide();
+                                }).on('blur',function(){
+                                    var stu = $(this).val();
+                                    var regExpStu = /^[\u0391-\uFFE5]+$/g;
+                                    if (stu == "") {
+                                        $('.tip').hide();
+                                        $('#tip-icon-stu').hide();
+                                        $(this).addClass('error');
+                                    } else if (!regExpStu.test(stu)) {
+                                        //console.log($('#tip-icon-stu'));
+                                        $(this).parent().removeClass('has-success').addClass('has-error');
+                                        $(elem).find('#tip-icon-stu').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                                        $('.tip').hide();
+                                        $('.tip-false-stu').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                                            "position": "relative",
+                                            top: "-10px",
+                                            left: "10px",
+                                            color: "red"
+                                        });
+                                        $(this).addClass('error');
+                                    } else {
+                                        $(this).parent().removeClass('has-error').addClass('has-success');
+                                        $(elem).find('#tip-icon-stu').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                                        $('.tip').hide();
+                                        $(this).removeClass('error');
+                                        //存储家长手机号码
+                                        setCookie('stu',stu,15);
+                                    }
+                                })
+
+                                //验证学校
+                                $("input[name=school]").on('focus',function(){
+                                    $('.tip-false-school').hide();
+                                }).on('blur',function(){
+                                    var sch = $(this).val();
+                                    var regExpSch = /^[0-9a-zA-Z\u4e00-\u9fa5]+$/g;
+                                    if (sch == "") {
+                                        $('.tip').hide();
+                                        $('#tip-icon-school').hide();
+                                        $(this).addClass('error');
+                                    } else if (!regExpSch.test(sch)) {
+                                        $(this).parent().removeClass('has-success').addClass('has-error');
+                                        $(elem).find('#tip-icon-school').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                                        $('.tip').hide();
+                                        $('.tip-false-school').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                                            "position": "relative",
+                                            top: "-10px",
+                                            left: "10px",
+                                            color: "red"
+                                        });
+                                        $(this).addClass('error');
+                                    } else {
+                                        $(this).parent().removeClass('has-error').addClass('has-success');
+                                        $(elem).find('#tip-icon-school').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                                        $('.tip').hide();
+                                        $(this).removeClass('error');
+                                        //存储学校名称
+                                        setCookie('school',sch,15);
+                                    }
+                                })
+
+                                //验证手机号码
+                                $('input[name="phone"]').on('focus', function () {
+                                    $(this).parent().siblings('.tip').show().html('! 提示：请输入11位的手机号码');
+                                    $('.tip-false-tel').hide();
+                                }).on('blur', function () {
+                                    var phone = $(this).val();
+                                    var regExp4 = /^1[3|4|5|8][0-9]\d{8}$/g;
+                                    if (phone == "") {
+                                        $('.tip').hide();
+                                        $('#tip-icon-tel').hide();
+                                        $(this).addClass('error');
+                                    } else if (!regExp4.test(phone)) {
+                                        console.log($('#tip-icon-tel'));
+                                        $(this).parent().removeClass('has-success').addClass('has-error');
+                                        $(elem).find('#tip-icon-tel').removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                                        $('.tip').hide();
+                                        $('.tip-false-tel').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                                            "position": "relative",
+                                            top: "-10px",
+                                            left: "10px",
+                                            color: "red"
+                                        });
+                                        $(this).addClass('error');
+                                    } else {
+                                        $(this).parent().removeClass('has-error').addClass('has-success');
+                                        $(elem).find('#tip-icon-tel').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                                        $('.tip').hide();
+                                        $(this).removeClass('error');
+                                        //存储家长手机号码
+                                        setCookie('tel',$(this).val(),15);
+                                    }
+                                })
+
+                                //验证座位数
+                                $('input[name="seating"]').on('focus', function () {
+                                    $('.tip-false-seat').hide();
+                                }).on('blur', function () {
+                                    var seatNum = $(this).val();
+                                    if (seatNum == "") {
+                                        $('.tip').hide();
+                                        $('#tip-icon-seat').hide();
+                                        $(this).addClass('error');
+                                    } else if (!(seatNum > 0 && seatNum <= 3)) {
+                                        $(this).parent().removeClass('has-success').addClass('has-error');
+                                        $(elem).find('#tip-icon-seat').removeClass('glyphicon-ok').addClass('glyphicon-remove').css('display','block');
+                                        $('.tip').hide();
+                                        $('.tip-false-seat').html('<i class="fa fa-warning"></i>&nbsp;输入有误!').show().css({
+                                            "position": "relative",
+                                            top: "-10px",
+                                            left: "10px",
+                                            color: "red"
+                                        });
+                                        $(this).addClass('error');
+                                    } else {
+                                        $(this).parent().removeClass('has-error').addClass('has-success');
+                                        $(elem).find('#tip-icon-seat').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                                        $('.tip').hide();
+                                        $(this).removeClass('error');
+                                    }
+                                })
+                                //验证qq号
+                                $("input[name='qqnum']").on('focus',function(){
+                                    $('.tip-false-qq').hide();
+                                }).on('blur',function(){
+                                    if(this.value!=''){
+                                        if(!/^[1-9][0-9]{4,11}$/g.test(this.value)){
+                                            $(this).addClass('error');
+                                            $("#tip-icon-qq").removeClass('glyphicon-ok').addClass('glyphicon-remove').show();
+                                            $(this).parent().removeClass('has-success').addClass('has-error');
+                                        }else{
+                                            $(this).parent().removeClass('has-error').addClass('has-success');
+                                            $(elem).find('#tip-icon-qq').removeClass('glyphicon-remove').addClass('glyphicon-ok').show();
+                                            $(this).removeClass('error');
+                                            //存储qq号码
+                                            setCookie('qqnum',$(this).val(),15);
+                                        }
+                                    }else{
+                                        $('#tip-icon-qq').hide();
+                                    }
+                                })
+                                //选择是否为艺体
+                                $(elem).find('.art-yes,.art-no').click(function(){
+                                    var art=$(this).data('value');
+                                    $("input[type=hidden]").val(art);
+                                    $(this).css({'background-color':'#3697E4','color':'white'}).siblings().css({'background-color':'white','color':'black'})
+                                })
+
+                                //提交表单
+                                $("input[type='button']").tap(function () {
+                                    $('input').blur();
+                                    if ($(elem).find('.error').length == 0) {
+                                        layer.open({
+                                            title: "<span style='color:#0078D7'>提示",
+                                            content: "家长朋友们，资料填写完成！",
+                                            btn: ['<div style="color:#0078D7">查看</div>'],
+                                            yes: function (index) {
+                                                //console.log($('input[name="seating"]').val())
+                                                $('#reg-formWrapper').submit();
+                                                layer.close(index);
+                                            }
+                                        });
+                                    } else {
+                                        if ($(elem).find('.error').val() != '') {
+                                            layer.open({
+                                                title: "<span style='color:#0078D7'>提示</span>",
+                                                content: "资料填写有误！",
+                                                btn: ['<div style="color:#0078D7">完善</div>'],
+                                                yes: function (index) {
+                                                    layer.close(index)
+                                                }
+                                            });
+                                        } else {
+                                            layer.open({
+                                                title: "<span style='color:#0078D7'>提示",
+                                                content: "有资料未填写！",
+                                                btn: ['<div style="color:#0078D7">完善</div>'],
+                                                yes: function (index) {
+                                                    layer.close(index)
+                                                }
+                                            });
+                                        }
+
+                                    }
+                                })
+
+
+                                layer.close(index);
+                            }
+                        });
+                    }else{
+                        var index = layer.open({
+                            type: 0,
+                            shadeClose: false,
+                            content: '你还没有登录，请登录后再报名！',
+                            btn: ['确定'],
+                            yes: function(){
+                                layer.close(index);
+                                location.href="<?php echo arU('User/login')?>";
+                            }
+                        });
+                    }
+                }
+
+            })
+        })
+    </script>

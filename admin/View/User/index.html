@@ -1,0 +1,351 @@
+<div class="panel-heading clearfix"><span>用户管理</span>
+
+<a id="cate-add" href="<?php echo arU('index',array('status' => UserModel::STATUS_APPROVED)); ?>" class="btn btn-success pull-right">正常</a>
+<a id="cate-add" href="<?php echo arU('index',array('status' => UserModel::STATUS_FORBIDDEN)); ?>" class="btn btn-danger pull-right">禁用</a>
+    <a id="cate-add" href="<?php echo arU('index'); ?>" class="btn btn-success pull-right">全部</a>
+</div>
+<div class="lqselection4">
+ <form action="<?php echo arU('User/index', array('greedyUrl' => false));?>" method="get" name="userform">
+
+
+
+        搜索:<input type="text" value="<?php echo arRequest('title'); ?>" name="title" class="lqselectionInput" style="width:200px;" placeholder ="昵称，真实姓名，邮件，电话号码"/>
+            类型:<?php
+            // 调用用html seg 直接输出 select标签
+      UserModel::$TYPE_MAP['not_mind'] = '不计';
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'type',
+                  // 适配器数据 数组
+                  'map' => UserModel::$TYPE_MAP,
+                  // 选中的value selected = selected
+                  'selected' => arRequest('type', 'not_mind'),
+               )
+            );
+          ?>
+ 状态:<?php
+            // 调用用html seg 直接输出 select标签
+      UserModel::$STATUS_MAP['not_mind'] = '不计';
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'status',
+                  // 适配器数据 数组
+                  'map' => UserModel::$STATUS_MAP,
+                  // 选中的value selected = selected
+                  'selected' => arRequest('status', 'not_mind'),
+               )
+            );
+          ?>
+
+      时间段：<?php
+              // 调用用html seg 直接输出 select标签
+              arSeg(
+                 array(
+                    // seg文件
+                    'segKey' => 'Html/select',
+                    // <select name="name">
+                    'name' => 'searchTime',
+                    // 适配器数据 数组
+                    'map' => array('0'=>'不计','rtime' => '注册时间'),
+                    // 选中的value selected = selected
+                    'selected' => arRequest('searchTime','0'),
+                 )
+              );
+            ?>
+        开始时间：<input type="text" name="stime" value="<?php echo arRequest('stime', date('Y-m-d H:i', time())); ?>" class="datetimepicker" class="lqselectionInput" placeholder="不过期则不选" />
+        截止时间：<input type="text" name="etime" value="<?php echo arRequest('etime', date('Y-m-d H:i', time())); ?>" class="datetimepicker" class="lqselectionInput" placeholder="不过期则不选" />
+       <span style="cursor:pointer" id="search" class="btn btn-success" >查询</span>
+  </form>
+    </div>
+
+<div class="table-responsive">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>考生姓名</th>
+        <th>手机</th>
+        <th>注册时间</th>
+        <th>账户类型</th>
+        <th>学校</th>
+        <th>专业测试</th>
+        <th>状态</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      foreach ($users as $user) :
+      ?>
+      <tr>
+        <td class="UserID"><input type="checkbox" name="ids" nest = "<?php echo $user['uname']; ?>" value="<?php echo $user['uid']; ?>"><?php echo $user['uid']; ?></td>
+        <td class="UserName"><?php echo $user['kaosheng']['name']; ?></td>
+        <td class="UserPhone"><?php echo $user['phone']; ?></td>
+
+        <td class="UserRtime"><?php echo date('Y-m-d H:i:s', $user['rtime']); ?></td>
+        <td class="UserType">
+          <?php
+      // 调用用html seg 直接输出 select标签
+      unset(UserModel::$TYPE_MAP['not_mind']);
+      arSeg(
+         array(
+            // seg文件
+            'segKey' => 'Html/select',
+            // <select name="name">
+            'name' => 'type',
+            // 适配器数据 数组
+            'map' => UserModel::$TYPE_MAP,
+            // 选中的value selected = selected
+            'selected' => $user['type'],
+            'oPram' => 'class="type" uid="'.$user['uid'].'" ',
+         )
+      );
+?>
+        </td>
+        <td class="UserSname"><?php echo $user['kaosheng']['schoolname']; ?></td>
+        <td><?php if ($user['serial']): ?>
+        是<a href="javascript:deleteSerial('<?php echo $user['uid']; ?>')">清除记录</a>  
+      <?php else :?>
+        否 
+        <?php endif ?></td>
+        <td class="Userbtn"><button type="button" value="<?php echo $user['uid']; ?>" class="btn <?php if ($user['status']) : echo 'btn-success'; else : echo 'btn-danger'; endif; ?> user-toggle"><?php arEcho($user['status'], UserModel::$STATUS_MAP); ?></button>
+          <!-- <div value="<?php echo $user['uid']; ?>"  class="btn  show-order-info">查看</div>
+          <div value="<?php echo $user['uid']; ?>"  class="btn  show-order-info">绑定卡</div> -->
+          <button class="btn btn-info detail" type="button">详情</button>
+         <button class="btn btn-info " style="background-color:#D9534F; " onclick="deleteUser(<?php echo $user['uid'];?>)">删除</button>
+          <!-- <button class="btn btn-warning bindcare" type="button">绑定卡</button> -->
+        </td>
+      </tr>
+      <?php
+      endforeach;
+      ?>
+    </tbody>
+  </table>
+</div>
+<nav class="col-md-12 text-center">
+  <?php echo $page; ?>
+</nav>
+<!-- 用户信息页面 -->
+<div class="u-card clear">
+     <h4 class="user-title">用户信息</h4>
+     <div class="container-fluid">
+          <div class="row row-bg">
+              <div class="col-xs-4"><span class="row-name">用户ID</span></div>
+              <div class="col-xs-8"><span class="row-value" id="UserID"></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-4"><span class="row-name">用户姓名</span></div>
+              <div class="col-xs-8"><span class="row-value " id="UserName"></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-4"><span class="row-name">手机号码</span></div>
+              <div class="col-xs-8"><span class="row-value" id="UserPhone"></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-4"><span class="row-name">注册时间</span></div>
+              <div class="col-xs-8"><span class="row-value" id="UserRtime"></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-4"><span class="row-name">账户类型</span></div>
+              <div class="col-xs-8"><span class="row-value" id="UserType"></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-4"><span class="row-name">学校名称</span></div>
+              <div class="col-xs-8"><span class="row-value" id="UserSname"></span></div>
+          </div>
+          <div class="row row-bg">
+              <div class="col-xs-12 text-center"><span class="row-mes">您是否要为此用户绑定VIP会员！</span></div>
+          </div>
+     </div>
+     <div class="mt20 text-center">
+          <button class="btn btn-warning btnSure" type="button">确定</button>
+          <button class="btn btn-info btnCancel" type="button">取消</button>
+     </div>
+</div>
+
+<script type="text/javascript">
+  var bindindex,detailindex,userID;
+  $(document).ready(function () {
+      // 修改属性
+      $('.type').change(function() {
+          var val = $(this).val();  
+          var uid = $(this).attr('uid');
+          layer.confirm('确定要改变用户属性吗， 操作不可恢复, 请谨慎操作', function () {
+            var lid = layer.load();
+            $.get(JSV.PATH_APP_SERVER + 'User/updatetype', {uid: uid, type: val}, function(res) {
+                layer.closeAll();
+                if (res.success == '1') {
+
+                } else {
+                    layer.alert(res.ret_msg);
+                }
+            }, 'json');
+          });
+      });
+
+      //详情
+      $('.detail').click(function(){
+          userID=$(this).parent().parent().children('.UserID').text();
+          CaptruePage(detailindex,2,'1000px','503px',"<?php echo arU('User/userMessage/uid/"+userID+"') ?>",false,'');
+      });
+
+      //绑定卡
+      $('.bindcare').click(function(){
+            $('#UserID').text($(this).parent().parent().children('.UserID').text());
+            $('#UserName').text($(this).parent().parent().children('.UserName').text());
+            $('#UserEmail').text($(this).parent().parent().children('.UserEmail').text());
+            $('#UserPhone').text($(this).parent().parent().children('.UserPhone').text());
+            $('#UserRtime').text($(this).parent().parent().children('.UserRtime').text());
+            $('#UserType').text($(this).parent().parent().children('.UserType').text());
+            $('#UserSname').text($(this).parent().parent().children('.UserSname').text());
+            CaptruePage(bindindex,1,'400px','400px',$('.u-card'),false,'');
+      });
+
+      //确定绑定卡
+      $('.btnSure').click(function(){
+          //关闭layer弹框
+          layer.closeAll();
+      });
+
+      //取消绑定
+      $('.btnCancel').click(function(){
+          //关闭layer弹框
+          layer.closeAll();
+      });
+
+    $(".show-order-info").click(function () {
+        var oid = $(this).attr('value');
+        $.layer({
+            title: '用户详情',
+            type: 1,
+            offset: ['0px', ''],
+            // maxmin: true,
+            area: ['800px', 'auto'],
+            page: {
+                url: JSV.PATH_APP_SERVER + 'User/userinfo/uid/' + oid,
+            }
+        });
+    });
+
+ $('.userindent-toggle').bind('click',function(){
+  if($(this).text() =='认证中') {
+    var data = {'uid':$(this).val()};
+      var _this = $(this);
+      $.post("<?php echo arU('indentifyStatus')?>",data,function(ev){
+        if(ev.success==1)
+        {
+          _this.removeClass('btn-danger').text('已认证');
+
+        }
+      },'json');
+  }
+  });
+
+   $('#search').click(function(){
+    $('form[name=userform]').submit();
+   });
+    $('.datetimepicker').datetimepicker();
+    $("[name='selectall']").change(function (){
+    if ($(this).attr('checked') == 'checked') {
+        $("input[name=ids]").each(function () {
+            $(this).attr('checked',true);
+
+        });
+
+    } else {
+        $("input[type=checkbox]").each(function () {
+            $(this).attr('checked', false);
+        });
+    }
+  })
+
+   var uname = [];
+    var uId = [];
+    $('#addNum').click(function(){
+      getChecked();
+      location.href="<?php echo arU('FAccount/doAccount')?>"+'/uid/'+uId+'/uname/'+uname;
+    });
+    $('#addNews').click(function(){
+       getChecked();
+       location.href="<?php echo arU('User/msg');?>"+'/uid/'+uId+'/uname/'+uname;
+    });
+    $('#indentStatus').click(function(){
+       getChecked();
+       location.href="<?php echo arU('User/indentifyStatus',array('opt'=>'lot'));?>"+'/uid/'+uId;
+    });
+
+          function getChecked()
+          {
+            $("input[name=ids]:checked").each(function(){
+
+              uname.push($(this).attr('nest'));
+              uId.push($(this).attr('value'));
+
+          });
+
+        }
+    })
+
+//捕获页
+function CaptruePage(id,value,w,h,cid,can,url){
+    id=layer.open({
+        type: value,
+        title: false,
+        // offset: [y,x],
+        shade: 0.6,
+        scrollbar:false,
+        closeBtn: 2,
+        area: [w, h],
+        content: cid,
+        cancel:function(){
+          if(can){
+            window.location.href=url;
+          }
+        }
+    });
+}
+
+function deleteSerial(uid)
+{
+    layer.confirm('确定要清除测试的记录', function() {
+        layer.load();
+        $.get('<?php echo arU('deleteSerial'); ?>', {uid:uid}, function(data) {
+            layer.closeAll();
+            if (data.success == '1') {
+                window.location.reload();
+            } else {
+               layer.alert('不存在清除的记录');
+            }
+        }, 'json');
+    });
+
+}
+
+function deleteUser(uid){
+  //alert(111)
+  // layer.msg('dd',{time:1000})
+  layer.confirm('确定删除?', {icon: 3, title:'提示'}, function(index){
+  //do something
+  layer.close(index);
+  $.post("<?php echo arU('User/deleteUser')?>",{'uid':uid},function(data){
+    if (data.ret_code == '1000'){
+        layer.msg('删除成功',{icon: 1,time: 1500},function(){
+          window.location.reload();
+        })
+    }else{
+       layer.msg('删除失败',{icon: 2,time: 1500},function(){
+          window.location.reload();
+        })
+    }
+  },'json')
+  
+  },function(index){
+    layer.close(index);
+  });
+}
+</script>

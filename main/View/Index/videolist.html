@@ -1,0 +1,53 @@
+<div class="minNav w100 mt10 bg3-bzh pt10 pb10 fcw clearfix">
+    <i class="fa fa-home fs16px-bzh  pl20"></i>&nbsp;<a href="<?php echo arU('Index/index'); ?>">循证高考</a>&nbsp;>&nbsp;<a href="<?php echo arU('Index/videolist'); ?>">视频讲座</a>&nbsp;
+</div>
+<div class="xzlh-vl-title">
+    <div class="xzlh-vl-tap">
+    <?php foreach ($class as $class): ?>
+        <a href="<?php echo arU('Index/videolist', array('cid'=>$class['cid']))?>"  <?php if($class['cid'] == $clas): ?>class="vl-active"<?php endif; ?>>
+        <?php echo $class['name']; ?>
+        </a>
+    <?php endforeach; ?>
+    </div>
+</div>
+<form action="<?php echo arU('Index/videoSearch'); ?>" method="get">
+    <div class="xzlh-v-warp">
+        <span class="glyphicon glyphicon-search"></span>
+        <div>
+            <input type="text" name="mname" class="xzlh-v-search" placeholder="搜索课程名称/专家名称">
+            <!-- <button class="xzlh-v-btn">搜索</button> -->
+            <input  class="xzlh-v-btn" type="submit" value="搜索"/>
+        </div>
+    </div>
+</form>
+<div class="xzlh-videolist clearfix">
+    <?php
+        foreach($video as $video):
+    ?>
+    <div class="xzlh-cover" id="">
+        <div class="xzlh-cover" id="">
+            <div class="xzlh-wrap">
+                <a target="_blank" class="wrap" href="<?php echo arU('Index/videodetail', array('vid' => $video['aid'])) ?>" data-href="/course/introduction/1218004.htm" data-index="1" data-name="<?php echo $video['title']; ?>">
+                    <div class="img">
+                        <div class="xzlh-pic">
+                            <img class="imgPic" src="<?php echo $video['videoimg']?>" data-originsrc="http://imgsize.ph.126.net/?enlarge=true&amp;imgurl=http://nos.netease.com/edu-image/846B6C7A0DD1455ACCE8F88C00B71FF4.png?imageView&amp;thumbnail=225y142&amp;quality=100_225x142x1x95.png?imageView&amp;thumbnail=225y142&amp;quality=100" alt="<?php echo $video['title']; ?>" id="videoid">
+                            <div class="xzlh-l-watch">
+                                <!-- <span class="xzlh-l-watch1">1课</span> -->
+                                <span class="xzlh-l-watch2">
+                                    <i class="glyphicon glyphicon-eye-open"></i>&nbsp;<i><?php echo $video['fnums']; ?></i>
+                                </span>
+                            </div>
+                        </div>
+                        <h3 class="word-lf"><?php echo $video['title']; ?></h3>
+                        <div class="orgName word-lf"><?php ;echo $video['desc']; ?></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <?php
+        endforeach;
+    ?>
+    <div class="text-center" style="clear:both;"><?php echo $page; ?></div>
+</div>
+<script type="text/javascript"></script>

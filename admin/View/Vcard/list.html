@@ -1,0 +1,115 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading clearfix"><span>序列号管理</span>
+
+     <a id="vcarde-add" href="<?php echo arU('vcardAdd'); ?>" class="btn btn-success pull-right">添加序列号</a>
+  </div>
+ <div id="a" style="border-bottom:1px solid #ccc; padding:10px;">
+ <form action="<?php echo arU('', array('greedyUrl' => false));?>" method="get" name="userform">
+
+      
+
+        搜索:<input type="text" value="<?php echo arRequest('title'); ?>" name="title" class="lqselectionInput" style="width:200px;" placeholder ="卡号，用户名"/>
+            类型:<?php
+            // 调用用html seg 直接输出 select标签
+      UserVcardModel::$VTYPE_MAP['not_mind'] = '不计';
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'vtype',
+                  // 适配器数据 数组
+                  'map' => UserVcardModel::$VTYPE_MAP,
+                  // 选中的value selected = selected
+                  'selected' => arRequest('vtype', 'not_mind'),
+               )
+            );
+          ?>
+ 使用状态:<?php
+            // 调用用html seg 直接输出 select标签
+      UserVcardModel::$STATUS_MAP['not_mind'] = '不计';
+            arSeg(
+               array(
+                  // seg文件
+                  'segKey' => 'Html/select',
+                  // <select name="name">
+                  'name' => 'status',
+                  // 适配器数据 数组
+                  'map' => UserVcardModel::$STATUS_MAP,
+                  // 选中的value selected = selected
+                  'selected' => arRequest('status', 'not_mind'),
+               )
+            );
+          ?>
+       <input style="cursor:pointer" type="submit" class="btn btn-success" value="查询" />
+  </form>
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>激活码</th>
+            <th>密码</th>
+            <th>类型</th>
+            <th>绑定用户</th>
+            <th>添加时间</th>
+            <th>激活时间</th>
+            <th>vip可用状态</th>
+            <!-- <th>操作</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($vcards as $vcard) :
+          ?>
+          <tr>
+            <td><?php echo $vcard['cno']; ?></td>
+            <td><?php echo $vcard['pwd']; ?></td>
+            <td><?php arEcho($vcard['vtype'], UserVcardModel::$VTYPE_MAP); ?></td>
+            <td>
+              <?php if ($vcard['user']): ?>
+               <?php arEcho($vcard['user']['truename'], '用户未填写资料'); ?> 
+               ,uid:<?php echo $vcard['uid']; ?>
+              <?php else: ?>
+               - 
+              <?php endif ?>
+            </td>
+            <td><?php echo date('Y-m-d H:i:s', $vcard['atime']); ?></a>
+            <td>
+            <?php if ($vcard['activetime']): ?>
+                <?php echo date('Y-m-d H:i:s', $vcard['activetime']); ?> 
+            <?php else: ?>
+                -              
+            <?php endif ?>
+            </td>
+            <td><?php arEcho($vcard['status'], UserVcardModel::$STATUS_MAP); ?></td>
+           <!--  <td value="<?php echo $vcard['sid']; ?>">
+              <a href="<?php echo arU('vcardEdit', array('sid' => $vcard['sid'])); ?>" type="button" class="btn ad-edit">编辑</a>
+              <button type="button" onclick="delvcard(<?php echo $vcard['sid']; ?>)" class="btn ad-delete">删除</button>
+            </td> -->
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+// 删除专家
+function delvcard(sid)
+{
+    layer.confirm('确定要删除吗', function (){
+        window.lovcardion.href = '<?php echo arU('vcardDel'); ?>/sid/' + sid;
+    });
+
+}
+</script>
+

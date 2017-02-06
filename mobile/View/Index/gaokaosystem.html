@@ -1,0 +1,127 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">高考模拟填报</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="left moni center-block">
+                <div class="system-title clearfix">
+                    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;高考模拟填报系统</h2>
+                    <ul class="hmenu">
+                        <li class="selected"><b>1</b>输入高考成绩</li>
+                        <li><b>2</b>选择填报批次</li>
+                        <li><b>3</b>选择院校专业</li>
+                        <li><b>4</b>生成模拟志愿表</li>
+                    </ul>
+                </div>
+                <hr class="fgx">
+                <div class="clearfix inputscore">
+                    <h4 class="pl10">
+                        <span class="fa-stack fa-lg fs14px-bzh">
+                            <i class="fa fa-square fa-stack-2x fc3-bzh"></i>
+                            <i class="fa fa-terminal fa-stack-1x fa-inverse "></i>
+                        </span>&nbsp;
+                        <span class="vam-bzh">输入高考成绩</span>
+                    </h4>
+                    <form action="<?php echo arU('Index/gaokaosysteminfo') ?>" method="POST" id="xzlh-zd">
+                        <div class="item-bzh">
+                            <label for="">高考成绩： </label>
+                            <input type="text" name="score" id="exam-score">
+                        </div>
+                        <div class="item-bzh">
+                            <label>您的科类：</label>
+                            <label class="km"><input type="radio" name="km" id="" value="文科" checked>&nbsp;文科</label>&nbsp;&nbsp;&nbsp;
+                            <label class="km"><input type="radio" name="km" id="" value="理科">&nbsp;理科</label>
+                        </div>
+                        <div class="item-bzh">
+                            <label for="">你的位次：</label>
+                            <input type="text" name="wc" id="exam-wc" readonly>
+                        </div>
+                        <div class="item-bzh">
+                            <input type="submit" value="下一步" class="btn btn-success bg3-bzh center-block">
+                        </div>
+                        <hr>
+                        <div class="item-bzh">
+                            <label></label>
+                            诊断成绩模拟填报系统使用方法请参考：<a href="javascript:void(0);" class="text-primary" target="_blank">使用指南</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<script type="text/javascript">
+    $(function(){
+        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/userScore','POST','',function(ev){
+            if (ev.ret_code == 1000) {
+                $('input[name=score]').val(ev.data.scoregk);
+                ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/wc','POST',{score:$('input[name=score]').val(),km:kms($('input[type=radio]:checked').val())},wc);
+                $('input[name=score]').on('blur',function(){
+                    ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/wc','POST',{score:$('input[name=score]').val(),km:kms($('input[type=radio]:checked').val())},wc);
+                })
+            }else {
+                var index = layer.open({
+                    type: 0,
+                    shadeClose: false,
+                    content: '你还没有登录，请登录后再填报！',
+                    btn: ['<div style="color:#0078D7">确定</div>'],
+                    yes: function(){
+                        layer.close(index);
+                        location.href="<?php echo arU('User/login')?>";
+                    }
+                });
+            }
+        });
+
+
+
+        $('input[type=radio]').change(function(){
+            var dat = {score:$('input[name=score]').val(),km:kms($(this).val())}
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/wc','POST',dat,wc)
+        });
+
+        function wc(dat){
+            if (dat.ret_code == 1000) {
+                $('input[name=wc]').val(dat.data.wc);
+            }else{
+                $('input[name=wc]').val(0);
+                layer.open({
+                    content: '抱歉，未查询到相关信息！',
+                    time: 1.5
+                });
+            }
+        }
+
+        $('input[type="submit"]').tap(function(){
+            if($('input[name="score"]').val()==""||$('input[name="score"]').val()==0){
+                var index = layer.open({
+                    type: 0,
+                    content: '你还没有成绩，请先创建成绩！',
+                    btn: ['确定'],
+                    yes: function(){
+                        layer.close(index);
+                        location.href="<?php echo arU('User/userdetail')?>";
+                    }
+                });
+
+            }else{
+                return true
+            }
+        })
+        $('#exam-score').one('focus',function(){
+            layer.open({
+                type:0,
+                content:'<div class="text-left" style="width:4.5rem;margin-bottom:-18px;"><b style="font-size:15px;color:orangered;">温馨提示:</b><br>1、使用原则，一人一卡，有效期至当年9月1日。<br>2、6月22日20：00之前，不限试用次数。<br>3、6月22日20：00之后，每位考生只能输入一次真实高考分数（有加分的考生，请输入加分后的总分），查询次数不限。<div class="text-center" style="margin:15px 0;"><a class="btn btn-primary btn-sm btntip">确定</a></div><div>',
+                //btn:['确定'],
+                success:function(index){
+                    $(elem).find('.btntip').tap(function(){
+                        layer.close(index);
+                    })
+                }
+            })
+        })
+
+
+    });
+</script>

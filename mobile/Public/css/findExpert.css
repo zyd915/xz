@@ -1,0 +1,53 @@
+.modal.province {
+    top: 10%!important;
+    width: 90%!important;
+    margin: 0 auto;
+    left: 0!important;
+}
+.modal.province .modal-content {
+    padding: 45px 10px 15px;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid #dedfe0;
+}
+.modal.province .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    width: .8rem;
+    height: .8rem;
+    color: #e84c33;
+    background: 0 0;
+    text-align: right;
+}
+.modal.province h2 {
+    font-size: .5rem;
+    color: #e84c33;
+    margin-bottom: 1rem;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+.modal.province .modal-content .content {
+    margin-top: .3rem;
+    border-top: 1px solid #dedfe0;
+    padding: .3rem 0 0;
+    min-height: 150px;
+}
+.modal.province .content .search-condition {
+    overflow: hidden;
+}
+.modal.province .content .search-condition a.btn {
+    padding: 5px 0;
+    text-align: center;
+    width: 22%;
+    display: block;
+    float: left;
+    margin: 0 0 5px 5px!important;
+    font-size:.2rem;
+}
+.modal.province .content .search-condition a.btn-default {
+    background: #fff;
+    border: 1px solid #e3e3e3;
+    color: #444;
+}

@@ -1,0 +1,174 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">历年省控线查询</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container">
+                <div class="row" style="margin-top: .2rem">
+                    <div class="col-xs-6">
+                        <a class="targetCity text-center">
+                            <span id="targetCity">目标省市</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                    </div>
+                    <div class="col-xs-6 ">
+                        <a class="targetYear text-center">
+                            <span id="year">2015</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                    </div>
+
+                </div>
+
+                <div class="xzws-score2015" >
+                    <h4 class="text-center" style="margin-top: .35rem;color:green;font-size: .4rem"><?php echo $area; ?>20<?php echo $year; ?>年省控线</h4>
+                    <div class="min-table table-responsive">
+                        <table class="table  table-striped">
+                            <thead>
+                                <tr style="border-bottom:1px dotted #ccc;height: 30px;">
+                                    <th style="width:50%;">批次</th>
+                                    <th style="width:25%;">文科</th>
+                                    <th style="width:25%;">理科</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach ($fsx as $fsx):?>
+                                <tr>
+                                    <td><?php echo $fsx['pc']; ?></td>
+                                    <td><span class="fc1-bzh"><?php echo $fsx["sw$year"]; ?></span></td>
+                                    <td><span class="fc1-bzh"><?php echo $fsx["sl$year"]; ?></span></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- <div class="iback">
+                    <a class="btn btn-primary" href="javascript:;">加载更多</a>
+                </div> -->
+            </div>
+
+        </div>
+    </section>
+
+    <!--目标省市弹出框-->
+    <div id="targetProvince" class="clearfix" style="display: none">
+        <div class="xzws-province-modal">
+            <div class="">
+                <div class="modal-content">
+                    <a class="btn-close gbf"><i class="fa fa-times"></i></a>
+                    <h2>目标省市</h2>
+                    <div class="xzws-modal-content">
+                        <div class="search-condition province" id="cdiProvince">
+                            <a href="<?php echo arU('',array('greedyUrl' => true, 'area' => ''))?>" data-name="全部" title="全部" class="btn active">全部</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--年份弹出框-->
+    <div class="xzws-year-modal" style="display: none">
+        <div class="year-modal">
+            <div class="modal-content">
+                <a class="btn-close gbf"><i class="fa fa-times"></i></a>
+                <h2>选择年份</h2>
+                <div class="xzws-modal-content" style="width: 100%;height: 2.5rem">
+                    <div class="search-condition province" id="">
+                        <a href="<?php echo arU('',array('greedyUrl' => true,'year' => ''))?>" class="btn active">全部</a>
+                        <a href="<?php echo arU('',array('greedyUrl' => true,'year' => 15))?>" class="btn btn-default">2015</a>
+                        <a href="<?php echo arU('',array('greedyUrl' => true,'year' => 14))?>" class="btn btn-default">2014</a>
+                        <a href="<?php echo arU('',array('greedyUrl' => true,'year' => 13))?>" class="btn btn-default">2013</a>
+                        <a href="<?php echo arU('',array('greedyUrl' => true,'year' => 12))?>" class="btn btn-default">2012</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var area = "<?php echo arRequest('area')?>";
+        var year = "<?php echo arRequest('year')?>";
+        if(area){
+            area = decodeURIComponent(area);
+            $('.targetCity span').html(area);
+        }
+        if(year){
+            year = decodeURIComponent(year);
+            $('.targetYear span').html('20'+year);
+        }
+
+        $(function(){
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/provinceList','POST','',province);
+            function province(dat){
+                if(dat.ret_code==1000){
+                    var html='';
+                    for (var i=0; i<dat.total_lines-1; i++){
+                        html+='<a href="<?php echo arU('Index/scoreLine');?>?area='+dat.data[i].region_name+'" class="btn btn-default" data-name="'+dat.data[i].region_name+'">'+dat.data[i].region_name+'</a>'
+                    }
+                    $('#cdiProvince').append(html);
+                    //displayProv();
+                    chooseYear();
+                }else{
+                    layer.open({
+                        content:"请求服务器数据失败！",
+                        time:1.5
+                    })
+                }
+            }
+
+            //选择省（市）
+            //function displayProv(){
+                $('.targetCity').tap(function(){
+                    layer.open({
+                        content:$('#targetProvince').html(),
+                        success: function(){
+                            $('#cdiProvince a').tap(function(){
+                                $(this).addClass('active').siblings().removeClass('active');
+                                setTimeout(function(){
+                                    layer.closeAll();
+                                },300)
+                                //$('.targetCity span').html(area);
+                            });
+                            $('a.gbf').tap(function(){
+                                layer.closeAll()
+                            })
+                        }
+                    })
+
+                })
+
+            //}
+
+            //选择年份
+            function chooseYear(){
+                    $('.targetYear').tap(function(){
+                    layer.open({
+                        content:$('.xzws-year-modal').html(),
+                        success: function(){
+                            $('.search-condition a').tap(function(){
+                                $(this).addClass('active').siblings().removeClass('active');
+                                setTimeout(function(){
+                                    layer.closeAll();
+                                },300)
+                                $('.targetYear span').html($(this).text());
+                            });
+                            $('a.gbf').tap(function(){
+                                layer.closeAll()
+                            })
+                        }
+                    })
+
+                });
+            }
+
+        })
+
+    </script>

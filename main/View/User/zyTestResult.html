@@ -1,0 +1,30 @@
+<?php if (!$this->user['vip']): ?>
+<div class="roe-cslink mt50">
+    <p><i class="fa fa-meh-o"></i>&nbsp;很抱歉，VIP用户有一次免费专业倾向测试机会，你还不是VIP用户。<br>请点下面的链接&nbsp;<i class="fa fa-long-arrow-down"></i></p>
+    <div class="tac">
+        <a href="<?php echo arU('Index/vipCard'); ?>">升级为VIP用户</a>
+    </div>
+</div>
+<?php else : ?>
+    <?php if ($this->user['serial']): ?>
+        <?php if ($this->user['serial']['reportid']): ?>
+            <div class="roe-result mt50">
+            <p><i class="fa fa-smile-o"></i>&nbsp;恭喜你！你在<?php echo date('Y-m-d H:i:s', $this->user['serial']['usetime']); ?>已完成了专业倾向测试，现在你可以查看你的测试报告了。<br>请点下面的链接&nbsp;<i class="fa fa-long-arrow-down"></i></p>
+            <div class="tac">
+                <a target="_blank" href="<?php echo arCfg('lbreport.' . $this->user['serial']['lb']) . $this->user['serial']['reportid']; ?>">查看专业倾向测试报告</a>
+            </div>
+        </div>  
+        <?php else: ?>
+             <div class="roe-result mt50">
+            <p><i class="fa fa-smile-o"></i>很遗憾，你未填写完所有测试，免费次数已用完，请联系客服<i class="fa fa-long-arrow-down"></i></p>
+        </div>  
+        <?php endif ?>
+    <?php else: ?>
+    <div class="roe-cslink mt50">
+        <p><i class="fa fa-meh-o"></i>&nbsp;你还没有做专业倾向测试，VIP用户仅有一次免费机会填写测试报告,现在就去测试。<br>请点下面的链接&nbsp;<i class="fa fa-long-arrow-down"></i></p>
+        <div class="tac">
+            <a href="<?php echo arU('Index/Test'); ?>">专业倾向测试</a>
+        </div>
+    </div>
+    <?php endif; ?>
+<?php endif ?>

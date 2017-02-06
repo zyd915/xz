@@ -1,0 +1,56 @@
+<!-- 志愿模拟系统1选择院校信息页面 -->
+<div class="main1-bzh pa clearfix">
+    <h4 class="fwb fc8-bzh">以下为东北林业大学2015年招生专业，请手动选择：</h4>
+    <div class="alert alert-warning">
+        <p>1、下面推荐的是适合您“冲一冲”的学校，过于冒险和过于保守的学校不会被推荐；</p>
+        <p>2、投档概率为系统估算，仅供考生和家长参考，不代表最终实际投档结果！</p>
+    </div>
+    <table class="table-bordered table-w tac w100 fs14px-bzh">
+        <tr class="bg3-bzh fcw">
+            <td style="width: 350px;height: 40px;">学校名称</td>
+            <td>排名</td>
+            <td>所在地</td>
+            <td>历年录取</td>
+            <td style="width: 120px;">投档概率估算</td>
+            <td>操作</td>
+        </tr>
+        <tr style="height: 55px;">
+            <td class="tal pl10">南京信息工程大学<br>工科类</td>
+            <td style="width: 90px;line-height: 23px;" class="tal fs12px-bzh">
+                <div class="ml10 fcb br3"><span class="bg1-bzh fcw p25 br3">全国</span><span class="angle"></span>&nbsp;2198</div>
+                <div class="ml10 fcb br3" ><span class="bg4-bzh fcw p25 br3">理工</span><span class="angle4"></span>&nbsp;90</div>
+            </td>
+            <td>江苏</td>
+            <td><a href=""><i class="fa fa-bar-chart"></i></a></td>
+            <td class="vab-bzh ">
+                <div style="width: 80px;" class="applyChance auto pt10 pb10 clearfix"></div>
+            </td>
+            <td><button class="btn btn-info btn-sm pl10 pr10">选为A志愿</button></td>
+        </tr>
+        <tr style="height: 55px;">
+            <td class="tal pl10">南京信息工程大学<br>工科类</td>
+            <td style="width: 90px;line-height: 23px;" class="tal fs12px-bzh">
+                <div class="ml10 fcb br3"><span class="bg1-bzh fcw p25 br3">全国</span><span class="angle"></span>&nbsp;2198</div>
+                <div class="ml10 fcb br3" ><span class="bg4-bzh fcw p25 br3">理工</span><span class="angle4"></span>&nbsp;90</div>
+            </td>
+            <td>江苏</td>
+            <td><a href=""><i class="fa fa-bar-chart"></i></a></td>
+            <td>
+                <div style="width: 80px;" class="applyChance auto pt10 pb10 clearfix"></div>
+            </td>
+            <td><button class="btn btn-info btn-sm pl10 pr10">选为A志愿</button></td>
+        </tr>
+    </table>
+    <div class="ssearch tac pt20 bb"><!-- 搜索院校 -->
+        <div class="item-bzh">
+        <span class="fs16px-bzh">搜索院校：</span><input type="text" name="" id="" class="pp5-bzh ml10 mr10" style="width: 400px;"><button class="btn btn-info btn-sm" style="width: 80px;"><i class="fa fa-search"></i>&nbsp;搜索</button></div>
+    </div>
+<script>
+    $(function(){
+        $(".table-w tr:eq(0)").siblings(":odd").addClass("bge-bzh");
+        //投档概率（热度条）
+        $(".applyChance").each(function(){
+            applyChance($(this),6,20);
+        });
+    });
+</script>

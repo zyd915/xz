@@ -1,0 +1,12 @@
+*{margin:0;padding:0;list-style-type:none;}
+a,img{border:0;}
+.demo{margin:100px auto 0 auto;width:400px;text-align:center;font-size:18px;}
+.demo .action{color:#3366cc;text-decoration:none;font-family:"微软雅黑","宋体";}
+
+.overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:998;width:100%;height:100%;_padding:0 20px 0 0;background:#f6f4f5;display:none;}
+.showbox{position:fixed;top:0;left:50%;z-index:9999;opacity:0;filter:alpha(opacity=0);margin-left:-80px;}
+*html,*html body{background-image:url(about:blank);background-attachment:fixed;}
+*html .showbox,*html .overlay{position:absolute;top:expression(eval(document.documentElement.scrollTop));}
+#AjaxLoading{border:0px solid #8CBEDA;color:#37a;font-size:12px;font-weight:bold;}
+/*#AjaxLoading div.loadingWord{width:180px;height:50px;line-height:50px;border:2px solid #D6E7F2;background:#fff;}*/
+#AjaxLoading img{margin:10px 15px;float:left;display:inline;}

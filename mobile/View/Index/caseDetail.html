@@ -1,0 +1,31 @@
+<div id="page">
+    <header class="header">
+        <a href="javascript:history.go(-1);" id="xzlh-back"><span class="glyphicon glyphicon-menu-left tzwz"></span></a>
+        <span class="page-tit">案例详情</span>
+    </header>
+    <section class="content">
+        <div class="main clearfix">
+            <div class="container">
+                <div class="zy-case-xq row">
+                    <div class="zy-case-content1 col-xs-12">
+                        <h3 class="text-center"><?php echo $casedetail['title']; ?></h3>
+                        <p class="text-center">发布日期：<span><?php echo date('Y-m-d H:i', $casedetail['ctime']); ?></span></p>
+                        <p class="zy-caseimg" style="text-align:center;text-indent:1em;">
+                            <img <?php if ($casedetail['articlepic']):?> src="<?php echo $casedetail['articlepic']?>" <?php else: ?> src="<?php echo arCfg('PATH.PUBLIC');?>img/banner/banner1.jpg ?>" <?php endif; ?>alt="">
+                        </p>
+                    </div>
+
+                    <div class="zy-case-content2 col-xs-12">
+                        <div style="text-indent:2em;">
+                           <?php echo stripslashes($casedetail['content']);?>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <script type="text/javascript">
+
+    </script>

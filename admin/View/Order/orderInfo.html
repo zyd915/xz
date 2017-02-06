@@ -1,0 +1,98 @@
+<!--orderinfo-->
+<style type="text/css">
+	.well {
+		padding: 5px 20px;
+	}
+</style>
+
+<div class="col-md-12 portlet box blue" id="div-order-info" style="width: 800px; height:auto; max-height:650px; overflow-y:auto;">
+	<div class="portlet-title">
+		<div class="caption" style="line-height:1.3em;"><i class="icon-cogs"></i>订单查看</div>
+		<div class="text-right">
+			<button class="btn btn-success" value="<?php echo $order['oid']; ?>" id="change-desc" style="position:relative; top:-3px;">修改备注</button>
+			<?php
+				// 未发货判断
+				if ($order['pstatus'] == OrderModel::STATUS_PAY_YES && $order['sstatus'] == OrderModel::STATUS_SHIPPING_NO) :
+			?>
+			<button class="btn btn-success" value="<?php echo $order['oid']; ?>" id="confirm-delivery">确认发货</button>
+			<?php
+				endif;
+			?>
+		</div>
+	</div>
+	<div class="portlet-body">
+		<div class="well">
+			<h4>基本信息</h4>
+			<div> <span>名称:</span> <span><?php echo $order['subject']; ?></span> </div>
+			<div> <span>订单号:</span> <span><?php echo $order['otradeno']; ?></span> </div>
+			<div> <span>用户名:</span> <span ><?php echo $order['uname']; ?></span></div>
+			<?php
+				if ($order['type'] == OrderModel::TYPE_JF) :
+					echo '使用积分：'.$order['quantity']*$order['jf'];
+				else :
+					echo '使用人民币：'.$order['quantity']*$order['price'];
+				endif;
+			?>
+			<div> <span>付款价格:</span> <span><?php echo $order['price']; ?></span> </div>
+			<div> <span>数量:</span> <span><?php echo $order['quantity']; ?></span> </div>
+			<div> <span>下单时间:</span> <span><?php echo date('Y-m-d H:i:s', $order['ctime']); ?></span> </div>
+			<div> <span>支付状态:</span>
+			     <span>
+				<?php arEcho($order['pstatus'], OrderModel::$STATUS_PAY_MAP); ?>
+				</span>
+			</div>
+			<div> <span>发货状态:</span> <span>
+				<?php arEcho($order['sstatus'], OrderModel::$STATUS_SHIPPING_MAP); ?>
+				</span> </div>
+			<div> <span>状态:</span> <span>
+				<?php arEcho($order['status'], OrderModel::$STATUS_MAP); ?>
+				</span> </div>
+		</div>
+		<div class="well">
+			<h4>支付信息</h4>
+			<?php
+				if (empty($order['payInfo'])) :
+			?>
+			暂无支付信息
+			<?php
+				else :
+			?>
+			<div> <span>名称:</span> <span><?php echo $order['payInfo']['subject']; ?></span> </div>
+			<div> <span>付款:</span> <span><?php echo $order['payInfo']['price']; ?></span> </div>
+			<div> <span>支付时间:</span> <span><?php echo date('Y-m-d H:i:s', $order['payInfo']['ctime']); ?></span> </div>
+			<div> <span>状态:</span> <span>
+				<?php arEcho($order['payInfo']['status'], OrderPayModel::$STATUS_MAP); ?>
+				</span></div>
+				<?php
+				endif;
+			?>
+			
+		</div>
+		<div class="well">
+			<h4>物流信息</h4>
+			<div> <span>收货人地址信息：</span> <?php echo $order['raddress']; ?>
+			</div>
+			<div> <span>收货人名：</span> <?php echo $order['uname']; ?>
+			</div>
+			<div> <span>收货联系方式：</span> <?php echo $order['tell']; ?>
+				
+			</div>
+				<?php
+				if ($order['stime']) :
+			?>
+			<div> <span>发货时间:</span> <span><?php echo date('Y-m-d H:i:s', $order['stime']); ?></span></div>
+			<?php
+				else :
+			?>
+			无
+			<?php
+				endif;
+			?>
+		</div>
+		<div class="well">
+			<h4>备注</h4>
+			<p><span class="desc"><?php echo $order['desc']; ?></span></p>
+		</div>
+	</div>
+</div>
+<input type="hidden" id="oid" value="<?php echo $order['oid']; ?>" />

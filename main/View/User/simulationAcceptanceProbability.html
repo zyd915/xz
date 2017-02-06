@@ -1,0 +1,239 @@
+<!-- 志愿模拟填报系统 -->
+<div class="system-title pl20 pt10 pb10 clearfix">
+	<h2 class="left"><i class="fa fa-pie-chart"></i>&nbsp;测录取概率</h2>
+</div>
+<hr>
+<?php if (!arModule('Vip')->ifVip($this->user['uid'])): ?>
+<div class="roe-cslink mt50">
+    <p><i class="fa fa-meh-o"></i>&nbsp;很抱歉，测录取概率仅限VIP用户。<br>请点下面的链接&nbsp;<i class="fa fa-long-arrow-down"></i></p>
+    <div class="tac">
+        <a href="<?php echo arU('Index/vipCard'); ?>">升级为VIP用户</a>
+    </div>
+</div>
+<?php else: ?>
+
+<div class="bdr auto pb20 pt10 br5 mt20 ml10 mr10 clearfix" >
+	<h4 class="pl10"><span class="fa-stack fa-lg fs14px-bzh"><i class="fa fa-square fa-stack-2x fc3-bzh"></i><i class="fa fa-terminal fa-stack-1x fa-inverse"></i></span>&nbsp;<span class="vam-bzh">输入考生成绩和院校名称</span></h4>
+	<hr>
+	<!-- <form class="w80 auto" action="<?php echo arU('User/simulationSystemTwoInfo'); ?>" method="POST" onsubmit="return gnonempty();"> -->
+		<div class="item-bzh mt50"><label>您的科类：</label>
+			<label style="width: 50px;" class="km"><input type="radio"  name="class" id="" value="文科" checked>&nbsp;文科</label>&nbsp;&nbsp;&nbsp;
+			<label style="width: 50px;" class="km"><input type="radio"  name="class" id="" value="理科">&nbsp;理科</label>
+		</div>
+		<div class="item-bzh item-yb mt20">
+        <label for="school-pc">您的批次：</label>
+        <select id="school-pc" name="pc">
+            <option value="0">学校批次</option>
+            <option value="本科一批">本科一批</option>
+            <option value="本科二批">本科二批</option>
+            <option value="专科一批">专科一批</option>
+            <option value="专科二批">专科二批</option>
+        </select>
+    </div>
+		<div class="item-bzh mt20">
+			<label for="exam-score">考生成绩：</label>
+			<input type="text" name="score" class="" id="exam-score" maxlength="3" title="高考分数为3位正整数,并且要小于750" />
+		</div>
+		<div class="item-bzh mt20">
+			<label for="school-name">院校名称：</label>
+			<input type="text" name="" id="school-name" class="brc" title="院校名称">
+		</div>
+		<div class="item-bzh"><label></label>
+			<input type="submit" value="查询" id="select" class="btn btn-success bg3-bzh mb10 hdd">
+		</div>
+	<!-- </form> -->
+</div>
+<table class="table-bordered table-w tac w100 fs14px-bzh mt20 mb20" id="school-inform">
+    <tr class="bg3-bzh fcw">
+        <th style="height: 40px;width:60px;">学校名称</th>
+        <th>全国排名</th>
+        <th>所在地
+        	<!-- <i id="area-chioce" class="fa fa-chevron-circle-down ml5" value="open"></i>
+        	<div id="all-area" class="clearfix tal clear"><div class="Areas"></div><div class="area-header"><button class="btn btn-info btn-sm search"><i class="fa fa-search"></i>&nbsp;搜索</button></div></div> -->
+        </th>
+        <th>历年<br/>录取</th>
+        <th>2015年<br/>录取分数</th>
+        <th>2014年<br/>录取分数</th>
+        <th>2013年<br/>录取分数</th>
+        <th>2015年<br/>录取位次</th>
+        <th>2014年<br/>录取位次</th>
+        <th>2013年<br/>录取位次</th>
+        <th>2015年<br/>招生计划</th>
+        <th>2014年<br/>招生计划</th>
+        <th>2013年<br/>招生计划</th>
+        <th>投档概<br/>率估算</th>
+        <!-- <th>操作</th> -->
+    </tr>
+</table>
+<?php endif ?>
+<!-- 历年录取学校信息提示 -->
+<div id="ln-detail" class="m-card clear">
+     <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+     <div class="m-content mt30 mb30 ml50 clearfix">
+         <i class="fa fa-times-circle ml20 mr10 left"></i>
+         <div class="left">历年录取情况仅限已购买循证卡用户查看！</div>
+     </div>
+     <div class="m-menu clearfix">
+         <a href="javascript:void(0);" class="right pb5 pt5 mfsy"><div class="mr10" onclick="ClosePage(cindex);">返回</div></a>
+         <a href="<?php echo arU('Index/vipCard'); ?>" class="right pb5 pt5"><div class="mr10">没有循证卡？购买</div></a>
+     </div>
+</div>
+<script type="text/javascript">
+	var km,pc,score,sname,area;
+	var areaname=[];
+	var reg=/^[\u4E00-\u9FA5]+$/;
+	$(document).ready(function(){
+		//查询
+		$('#select,.search').click(function(){
+			if(snonempty('#school-pc','请选择学校批次！') && pdval()){
+				Parameter();
+				$('#school-inform tr td').parent().remove();
+            	AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/admissionOdds?','km='+km+'&pc='+pc+'&score='+score+'&sname='+sname,glmes,'#school-inform',gpage);
+            	$('#all-area').hide();
+			}
+		});
+
+		// //获取地区
+  //       AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/provinceList','',pOption,'.Areas',sspage);
+
+		// //地区选择
+  //       $('#area-chioce').click(function(){
+  //           $('#all-area').slideToggle();
+  //           if($(this).attr('value') == 'open'){
+  //               $(this).attr('value','off');
+  //               $(this).removeClass('fa-chevron-circle-down');
+  //               $(this).addClass('fa-chevron-circle-up');
+  //           }else{
+  //               $(this).attr('value','open');
+  //               $(this).removeClass('fa-chevron-circle-up');
+  //               $(this).addClass('fa-chevron-circle-down');
+  //           }
+  //       });
+	});
+
+	//回调函数
+	function glmes(data,id){
+		if(data.ret_code == '1000'){
+			if(data.total_lines != 0){
+	            $(id).append('<tr style="height: 55px;"><td class="school-name">'+data.data.name+'</td><td><div class=" fcb br3"></span>&nbsp;<span class="pm">'+data.data.pm+'</span></div></td><td>'+data.data.dy+'</td><td><a class="sc-detail" target="_blank" style="color:#0078D7"><i class="fa fa-bar-chart"></i></a></td><td class="lqf15">'+data.data.lqf15+'</td><td class="lqf14">'+data.data.lqf14+'</td><td class="lqf13">'+data.data.lqf13+'</td><td class="lqwc15">'+data.data.lqwc15+'</td><td class="lqwc14">'+data.data.lqwc14+'</td><td class="lqwc13">'+data.data.lqwc13+'</td><td class="zsjh15">'+data.data.zsjh15+'</td><td class="zsjh14">'+data.data.zsjh14+'</td><td class="zsjh13">'+data.data.zsjh13+'</td><td><div class="wbox"><div class="nbox">'+data.data.percent.percent+'%</div></div></td></tr>');
+	            //全国排名logo
+	            // <span class="bg1-bzh fcw p25 br3">全国</span><span class="angle">
+
+	            none('.pm',0,'0',' - ');
+              none('.lqf15',0,'0',' - ');
+              none('.lqf14',0,'0',' - ');
+              none('.lqf13',0,'0',' - ');
+	            none('.lqwc15',0,'0',' - ');
+	            none('.lqwc14',0,'0',' - ');
+	            none('.lqwc13',0,'0',' - ');
+	            none('.zsjh15',0,'0',' - ');
+	            none('.zsjh14',0,'0',' - ');
+	            none('.zsjh13',0,'0',' - ');
+
+	            // //非VIP用户设置
+	            // if($.cookie('ifVip') == 'false'){
+	            //     $('.lqwc15,.lqwc14,.lqwc13').children().remove();
+	            //     $('.lqwc15,.lqwc14,.lqwc13').html('<a href="<?php echo arU("Index/vipCard"); ?>" class="vipuser" title="">仅限VIP<br/>用户查看</a>');
+	            // }
+	            //历年录取-->学校信息
+	            $('.sc-detail').click(function(){
+	                //if($.cookie('ifVip')){
+	                	Parameter();
+	                    $(this).attr('href','<?php echo arU("Index/schoolSelectInfo?km='+km+'&pc='+pc+'&name='+sname+'"); ?>');
+	                //}else{
+	                    //CaptruePage('.typeSchool',400,0,'400px','170px','#ln-detail',false,'');
+	                //}
+	            });
+	            //table表格样式
+    			$("#school-inform tr:odd td").parent().addClass("bge-bzh");
+	        }
+		}
+	}
+
+	//数据为0，处理为-
+    function none(id,index,value,data){
+        if($(id).eq(index).text() == value){
+            $(id).eq(index).text(data);
+        }
+    }
+
+	function gpage(){}
+
+	//输入字段验证格式
+	function pdval(){
+		score=$('#exam-score').val();
+		sname=$('#school-name').val();
+		if(nonempty('#exam-score','考生成绩不能为空！')){
+			if(score > 0 && score <= 750){
+				if(nonempty('#school-name','院校名称不能为空！')){
+					if(!reg.test(sname)){
+						message('您输入的院校名称格式不正确！');
+					}else{
+						return true;
+					}
+				}
+			}else{
+				message('您输入的考生分数不正确，考生分数应为3位正整数并且在0-750分之间！');
+			}
+		}
+		return false;
+	}
+
+	//获取值
+	function Parameter(){
+		//科目
+		if($('.km input[type=radio]:checked').attr('value') == "理科"){
+            km=0;
+        }else{
+            km=1;
+        }
+
+        //批次
+        switch($('#school-pc').find('option:selected').attr('value')){
+        	case '本科一批':
+        		pc=1;
+        		break;
+        	case '本科二批':
+        		pc=2;
+        		break;
+        	case '专科一批':
+        		pc=3;
+        		break;
+        	case '专科二批':
+        		pc=4;
+        		break;
+        }
+
+        //成绩
+        score=$.trim($('#exam-score').val());
+    		//院校名称
+    		sname=$.trim($('#school-name').val());
+
+		// areaname.splice(0,areaname.length);
+		// area='';
+		// //地区
+		// $(".Areas label input[type='checkbox']").each(function(index){
+  //           if($(".Areas label input[type='checkbox']").eq(index).is(':checked')){
+  //               // areasz.push($.trim($(".Areas label input[type='checkbox']").eq(index).parent().text()));
+  //               areaname.push($.trim($(".Areas label input[type='checkbox']").eq(index).parent().text()));
+  //           }
+  //       });
+  //       if(areaname.length >= 0){
+  //       	for(var i=0;i<areaname.length;i++){
+  //       		if(i <= 0){
+  //       			area+=areaname[i];
+  //       		}else{
+  //       			area+=','+areaname[i];
+  //       		}
+  //       	}
+  //       }
+	}
+
+	//省option
+    function pOption(data,id){
+        for(var i=0;i<data.total_lines;i++){
+            $(id).append('<label><input type="checkbox" value="'+data.data[i].region_id+'" id="area-name" />&nbsp;'+data.data[i].region_name+'</label>');
+        }
+    }
+    function sspage(){}
+</script>

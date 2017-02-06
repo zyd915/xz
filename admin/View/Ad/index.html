@@ -1,0 +1,66 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading clearfix"><span>广告管理</span>
+
+     <a id="cate-add" href="<?php echo arU('adManager', array('opt' => 'add')); ?>" class="btn btn-success pull-right">添加广告</a>
+  </div>
+ <div id="a" style="border-bottom:1px solid #ccc; padding:10px;">
+
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>广告名称</th>
+            <th>添加时间</th>
+            <th>链接</th>
+            <th>位置</th>
+            <th>状态</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($ads as $ad) :
+          ?>
+          <tr imgurl="<?php echo $ad['gallery']['curl']; ?>">
+            <td><?php echo $ad['aid']; ?></td>
+            <td><?php echo $ad['name']; ?></td>
+            <td><?php echo date('Y-m-d H:i:s', $ad['ctime']); ?></td>
+            <td><?php echo $ad['url']; ?></td>
+            <td><?php arEcho($ad['type'], AdModel::$TYPE_MAP); ?></td>
+            <td><button type="button" value="<?php echo $ad['aid']; ?>" class="btn <?php if ($ad['status']) : echo 'btn-success'; else : echo 'btn-danger'; endif; ?> ad-toggle"><?php arEcho($ad['status'], AdModel::$STATUS_MAP); ?></button></td>
+
+            <td value="<?php echo $ad['aid']; ?>">
+              <a href="<?php echo arU('adManager', array('opt' => 'edit', 'aid' => $ad['aid'], 'level' => $ad['level'])); ?>" type="button" class="btn ad-edit">编辑</a>
+              <button type="button" onclick="delAd(<?php echo $ad['aid']; ?>)" class="btn ad-delete">删除</button>
+            </td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<div id="tips-cate-show" style="display:none">
+  <a href="<?php echo arU('adManager', array('opt' => 'add', 'level' => 1)); ?>">一级分类</a>
+  <a href="<?php echo arU('adManager', array('opt' => 'add', 'level' => 2)); ?>">二级分类</a>
+  <a href="<?php echo arU('adManager', array('opt' => 'add', 'level' => 3)); ?>">三级分类</a>
+</div>
+<script type="text/javascript">
+$(function(){
+   $('#search').click(function(){
+    $('form[name=ad]').submit();
+   });
+})
+
+
+</script>

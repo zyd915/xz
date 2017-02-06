@@ -1,0 +1,58 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading clearfix"><span>分类管理</span>
+
+     <a id="cate-add" href="<?php echo arU('catAdd'); ?>" class="btn btn-success pull-right">添加分类</a>
+  </div>
+ <div id="a" style="border-bottom:1px solid #ccc; padding:10px;">
+
+  </div>
+  <div class="panel-body">
+    <div class="table-responsive">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>是否在新闻页面显示</th>
+            <th>排序</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($cats as $cat) :
+          ?>
+          <tr>
+            <td><?php echo $cat['cid']; ?></td>
+            <td><?php echo $cat['name']; ?></td>
+            <td><?php arEcho($cat['innews'], ArticleCatModel::$NEWS_MAPS); ?></td>
+            <td><?php echo $cat['sorder']; ?></td>
+            <td value="<?php echo $cat['cid']; ?>">
+              <a href="<?php echo arU('catEdit', array('cid' => $cat['cid'])); ?>" type="button" class="btn ad-edit">编辑</a>
+              <button type="button" onclick="delCat(<?php echo $cat['cid']; ?>)" class="btn ad-delete">删除</button>
+            </td>
+          </tr>
+          <?php
+          endforeach;
+          ?>
+        </tbody>
+      </table>
+      <nav class="col-md-12 text-center">
+        <?php echo $page; ?>
+      </nav>
+    </div>
+  </div>
+</div>
+
+<script>
+// 删除专家
+function delCat(cid)
+{
+    layer.confirm('确定要删除吗', function (){
+        window.location.href = '<?php echo arU('catDel'); ?>/cid/' + cid;
+    });
+
+}
+</script>
+

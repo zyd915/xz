@@ -1,0 +1,174 @@
+<!-- 志愿模拟填报系统 -->
+<div class="system-title pl20 pt10 pb10 clearfix">
+	<h2 class="left"><i class="fa fa-gears"></i>&nbsp;四川高考志愿智能填报系统</h2>
+	<ul class="hmenu right">
+		<li class="selected">输入真实高考成绩</li>
+		<li>选择填报批次</li>
+		<li>选择院校专业</li>
+		<!-- <li>志愿表验证</li> -->
+		<li>生成模拟志愿表</li>
+	</ul>
+</div>
+<hr>
+
+<!--<?php //if (!$this->user['vip']): ?>
+<div class="roe-cslink mt50">
+    <p><i class="fa fa-meh-o"></i>&nbsp;很抱歉，该测试仅限VIP用户。<br>请点下面的链接&nbsp;<i class="fa fa-long-arrow-down"></i></p>
+    <div class="tac">
+        <a href="<?php echo arU('Index/vipCard'); ?>">升级为VIP用户</a>
+    </div>
+</div>
+<?php //else: ?>
+-->
+
+<div class="bdr auto pb20 pt10 br5 mt20 ml10 mr10 clearfix" >
+	<h4 class="pl10"><span class="fa-stack fa-lg fs14px-bzh"><i class="fa fa-square fa-stack-2x fc3-bzh"></i><i class="fa fa-terminal fa-stack-1x fa-inverse"></i></span>&nbsp;<span class="vam-bzh">输入您的真实高考成绩</span></h4>
+	<hr>
+	<form class="w80 auto" action="<?php echo arU('User/simulationSystemTwoInfo'); ?>" method="POST" onsubmit="return gnonempty();">
+		<div class="item-bzh mt50">
+			<label for="exam-score">高考成绩：</label>
+			<?php
+				$kaosheng = UserKaoshengModel::model()->getDb()->where(array('uid' => $_SESSION['uid']))->queryRow();
+				if(date('YmdHis',time()) < 20160622200000):
+            ?>
+				<input type="text" name="score" class="" id="exam-score" maxlength="3" title="高考分数为3位正整数,并且要小于750" value="<?php echo $kaosheng['scoregk']?>" />
+			<?php else: ?>
+				<?php $time = UserModel::model()->getDb()->where(array('uid' => $_SESSION['uid']))->queryRow();
+				if ($time['time'] < 1):
+				?>
+
+				<input type="text" name="score" class="" id="exam-score" maxlength="3" title="高考分数为3位正整数,并且要小于750" value="<?php echo $kaosheng['scoregk']?>" />
+				<?php else:?>
+					<input type="text" name="score" class="" id="exam-score" maxlength="3" disabled="true" title="高考分数为3位正整数,并且要小于750" value="<?php echo $kaosheng['scoregk']?>" />
+				<?php endif;?>
+			<?php endif;?>
+		</div>
+		<div class="item-bzh mt20"><label>您的科类：</label>
+			<label style="width: 50px;" class="km"><input type="radio"  name="km" id="" value="文科" checked>&nbsp;文科</label>&nbsp;&nbsp;&nbsp;
+			<label style="width: 50px;" class="km"><input type="radio"  name="km" id="" value="理科">&nbsp;理科</label>
+		</div>
+		<div class="item-bzh mt20">
+			<label>您的位次：</label>
+			<input type="text" name="" id="s-rank" class="brc" title="位次根据高考分数自动获取" readonly>
+		</div>
+		<div class="item-bzh"><label></label>
+			<input type="submit" value="下一步" class="btn btn-success bg3-bzh mb10 hdd">
+		</div>
+
+		<div class="item-bzh mt20">
+			<label></label>
+			高考志愿智能填报系统使用方法请参考 <a href="http://www.xzgk.net/Article/detail/aid/1960?" class="text-primary" target="_blank">使用指南</a>
+		</div>
+	</form>
+</div>
+<!--
+<?php //endif ?>
+-->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		delCookie();
+		$('#exam-score').focus(function(){
+			layer.tips('<b style="font-size:15px;">温馨提示:</b><br>1、使用原则，一人一卡，有效期至当年9月1日。<br>2、6月22日20：00之前，不限试用次数。<br>3、6月22日20：00之后，每位考生只能输入一次真实高考分数（有加分的考生，请输入加分后的总分），查询次数不限。',$(this), {time:false,tips: [2, '#37B68D']});
+		 })
+		$('#exam-score,.km input[type=radio]').change(function(){
+			svalue=($.trim($('#exam-score').val())).replace(/\b(0+)/gi,"");
+			if(svalue == ""){
+				message('请输入真实高考成绩！');
+			}else{
+				if($('.km input[type=radio]:checked').attr('value') == "理科"){
+					skm=0;
+				}else{
+					skm=1;
+				}
+				////console.log($(this).val()+":"+svalue+";"+skm);
+				//AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/wc?','score='+svalue+'&km='+skm,wcoption,'#province',spage);
+				ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/wc?','POST','score='+svalue+'&km='+skm,wcoption);
+			}
+		});
+
+		//获取高考成绩
+		AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/userScore','',esoption,'#province',spage);
+	});
+
+	function esoption(data,id){
+		if(data.data.scoregk != 0){
+			$('#exam-score').val(data.data.scoregk);
+			//$('#exam-score').attr('readonly','readonly');
+			svalue=($.trim($('#exam-score').val())).replace(/\b(0+)/gi,"");
+			if($('.km input[type=radio]:checked').attr('value') == "理科"){
+				skm=0;
+			}else{
+				skm=1;
+			}
+			//AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/wc?','score='+svalue+'&km='+skm,wcoption,'#province',spage);
+			ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/wc?','POST','score='+svalue+'&km='+skm,wcoption);
+		}
+	}
+
+	function wcoption(data,id){
+		if(data.ret_code == '1000'){
+			$('#s-rank').val(data.data.wc);
+			srank=data.data.wc;
+		}
+	}
+
+	function spage(){}
+
+	function gnonempty(){
+		if(nonempty('#exam-score','您的真实高考成绩不能为空！') && valType() && wcpd()){
+			return true;
+		}
+		return false;
+	}
+	var r=/^\d*$/;
+	var svalue,skm,srank;
+	function valType(){
+		svalue=($.trim($('#exam-score').val())).replace(/\b(0+)/gi,"");
+		if($('.km input[type=radio]:checked').attr('value') == "理科"){
+			skm=0;
+		}else{
+			skm=1;
+		}
+		if(r.test(svalue) && svalue.length >= 1 && svalue <= 750){
+			//console.log(skm);
+			if(skm == 1){
+				if(svalue <= 200){
+					message("文科最低分数必须大于200分！");
+				}else{
+					setcookie();
+					return true;
+				}
+			}else{
+				if(svalue <= 180){
+					message("理科最低分数必须大于180分！");
+				}else{
+					setcookie();
+					return true;
+				}
+			}
+		}else{
+			message('您的分数必须为小于750的正整数！');
+		}
+		return false;
+	}
+	function wcpd(){
+		srank=($.trim($('#s-rank').val())).replace(/\b(0+)/gi,"");
+		if(srank > 0){
+			$.cookie('rank',srank,{expires:date,path:paths});
+			return true;
+		}else{
+			$.cookie('rank',1,{expires:date,path:paths});
+			return true;
+			// message('您的高考位次必须是大于0的整数！');
+		}
+		return false;
+	}
+	//cookie
+	function setcookie(){
+		$.cookie('subject',$('.km input[type=radio]:checked').attr('value'),{expires:date,path:paths});
+		$.cookie('score',$('#exam-score').val(),{expires:date,path:paths});
+		$.cookie('km',skm,{expires:date,path:paths});
+		$.cookie('ztype','1',{expires:date,path:paths});
+	}
+</script>

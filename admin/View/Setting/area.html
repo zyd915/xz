@@ -1,0 +1,65 @@
+<div class="panel panel-default">
+  <div class="panel-heading clearfix"><span>地区管理(针对国外的国家地区)</span>
+    <a id="area-country" class="btn pull-right">选择外国国家</a>
+    <a id="area-city-edit" class="btn pull-right">编辑二级城市</a>
+  </div>
+  <div class="panel-body">
+<!--模态框start-->
+<div id="div-area-add" style="width:500px; height:300px;">
+  <form class="form-horizontal" action="<?php echo arU('', array('opt' => 'add')); ?>" name="form-add" role="form" method="post">
+    <input type="hidden" name="nid" id="nowSelectCid" value="0">
+    <div class="form-body">
+      <div class="form-group">
+        <label class="col-md-3 control-label">上级地区</label>
+        <div class="col-md-9">
+          <input type="hidden" name="pid">
+          <span type="text" name="pshow" class="form-control input-lg" placeholder="">
+            上级地区(顶级则不填)
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3 control-label">添加国家</label>
+        <div class="col-md-9">
+          <input type="text" name="name" class="form-control input-lg" placeholder="添加国家">
+        </div>
+      </div>
+    </div>
+ 
+	
+	<div class="form-group">
+				<div style=" margin-left:25%;">
+					<button type="submit" class="btn btn-info">修改</button>
+				</div>
+				</div>
+  </form>
+</div>
+<!--模态框end-->
+
+  </div>
+</div>
+
+
+
+
+<!--模态框start-->
+<div id="div-area-edit" style="width:500px; height:300px;display:none">
+  <form class="form-horizontal" action="<?php echo arU('', array('opt' => 'update')); ?>" name="form-edit" role="form" method="post">
+    <input type="hidden" name="nid" id="nowSelectCid" value="0">
+    <div class="form-body">
+        <input type="hidden" name="rid">
+      <div class="form-group">
+        <label class="col-md-3 control-label">地区名称</label>
+        <div class="col-md-9">
+          <input type="text" name="name" class="form-control input-lg" placeholder="名称">
+        </div>
+      </div>
+    </div>
+    <div class="form-actions right">
+      <span id="btn-area-delete" class="btn default">删除</span>
+      <!-- <span id="btn-area-add" class="btn default">添加</span> -->
+      <input id="btn-area-edit" class="btn green" type="submit" value="提交">
+    </div>
+  </form>
+</div>
+<!--模态框end-->

@@ -1,0 +1,334 @@
+<script type="text/javascript" src="<?php echo arCfg('PATH.PUBLIC'); ?>js/jquery.corner.js"></script>
+<script language="javascript">
+$(function() {
+    var scrtime;
+    $("#con").hover(function() {
+        clearInterval(scrtime);
+    }, function() {
+        scrtime = setInterval(function() {
+            var ul = $("#con ul");
+            var liHeight = ul.find("li:last").height();
+            ul.animate({
+                marginTop: liHeight + 40 + "px"
+            }, 1000, function() {
+                ul.find("li:last").prependTo(ul);
+                ul.find("li:first").hide();
+                ul.css({
+                    marginTop: 0
+                });
+                ul.find("li:first").fadeIn(1000);
+            });
+        }, 3000);
+    }).trigger("mouseleave");
+    $(".face img").corner("5px");
+});
+</script>
+
+<div class="newInfo-bzh bgd-bzh w100">
+    <!-- 最新资讯 -->
+    <div class="main1-bzh auto clearfix">
+        <div class="roe-newstitle">
+            <a class="minTag1-bzh br3 dib">最新资讯</a><span class="angle"></span>
+        </div>
+        <div class="roe-news">
+            <ul id="roe-lb">
+                <?php foreach ($indexNewArticels as $article): ?>
+                <li><span style="color:red;">[<?php echo $article['catName']; ?>]</span><a target="_blank" href="<?php echo arU('Article/detail', array('aid' => $article['aid'])); ?>"><?php echo $article['title']; ?></a></li>
+                <?php endforeach ?>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="main1-bzh mt10 auto clearfix">
+    <!-- 中间框架 -->
+    <hr style="border:1px solid #888;" class="mb20">
+    <div class="tac clearfix">
+        <div class="main2-bzh clearfix auto">
+                <div class="row4-bzh">
+                    <span class="fa-stack fa-lg circle img-circle mb5">
+                    <i class="fa fa-bar-chart fa-stack-2x"></i>
+                    </span>
+                    <dt class="fwb">查数据报志愿</dt>
+                    <dd class="word">已有<span class="fc1-bzh fs5"><?php echo $tjData['total']; ?></span>人申请</dd>
+                </div>
+                <div class="row4-bzh">
+                    <span class="fa-stack fa-lg circle img-circle mb5">
+                    <i class="fa fa-university fa-stack-2x"></i>
+                    </span>
+                    <dt class="fwb">查院校报志愿</dt>
+                    <dd class="word">已有<span class="fc1-bzh fs5"><?php echo $tjData['yx']; ?></span>人申请</dd>
+                </div>
+                <div class="row4-bzh">
+                    <span class="fa-stack fa-lg circle img-circle mb5">
+                    <i class="fa fa-search fa-stack-2x"></i>
+                    </span>
+                    <dt class="fwb">查专业报志愿</dt>
+                    <dd class="word">已有<span class="fc1-bzh fs5"><?php echo $tjData['zy']; ?></span>人申请</dd>
+                </div>
+                <div class="row4-bzh">
+                    <span class="fa-stack fa-lg circle img-circle mb5">
+                    <i class="fa fa-graduation-cap fa-stack-2x"></i>
+                    </span>
+                    <dt class="fwb">专家帮你报志愿</dt>
+                    <dd class="word">已有<span class="fc1-bzh fs5"><?php echo $tjData['zj']; ?></span>人申请</dd>
+                </div>
+            </div>
+    </div>
+    <div class="clearfix mt30">
+        <div class="left clearfix" style="width:33%;box-sizing:border-box;padding-right:10px;margin-top:-10px;">
+            <!-- 最新信息展示轮播图 -->
+            <div class="row3-bzh dataSearch" style="width:100%">
+                <div id="main">
+                    <div class="demo">
+                        <div id="con">
+                            <ul>
+                                <?php foreach ($userLogs as $log) : ?>
+                                <li>
+                                    <p class="ud_content">
+                                        <span class="ud_username"><?php echo $log['where'];?> <?php echo $log['who']; ?>：</span>
+                                        <span class="ud_datetime"><?php echo $log['time']; ?></span>
+                                        <a href="" class="ud_used_item"><?php echo $log['dowhat']; ?></a>
+                                    </p>
+                                </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 代码结束 -->
+        </div>
+        <div class="left clearfix" style="width:65%;">
+            <h3 style="border-top: 10px double #DB5242;" class="fwb clearfix pr">
+            <span class="dib pr line-double-bzh" style="left:95px;">四川高考志愿填报参考数据查询</span></h3>
+
+            <div class="row3-bzh dataSearch" style="width:50%">
+                <dt class="fwb ml5">院校投档分数线</dt>
+                <form target="_blank" action="<?php echo arU('Index/schoolSelectInfo'); ?>" id="roe-school" class="clearfix">
+                    <select name="km" class="form-control input-sm">
+                        <option value='-1' class="">类型</option>
+                        <option value="0" class="">理科</option>
+                        <option value="1" class="">文科</option>
+                    </select>
+                    <select name="pc" class="form-control input-sm">
+                        <option value='-1' class="">录取批次</option>
+                        <option value="0" class="">提前批</option>
+                        <option value="1" class="">本一</option>
+                        <option value="2" class="">本二</option>
+                        <option value="3" class="">专一</option>
+                        <option value="4" class="">专二</option>
+                    </select>
+                    <select name="yxaddress" class="form-control input-sm">
+                        <option value='-1'>院校所在地</option>
+                        <?php foreach ($chinaCityArray as $key => $chinaCityArray) { ?>
+                            <option>
+                                <?php echo $chinaCityArray['name'];?>
+                            </option>
+                            <?php
+                        }?>
+                    </select>
+                    <select name="cid" class="form-control input-sm">
+                        <option value='-1' class="">院校名称</option>
+                    </select>
+                    <!-- <a href="javascript:;" class="btn btn-info btn-sm right mr20 mt5" id="yxfxsearch"><i class="fa fa-search"></i>&nbsp;查询</a> -->
+                    <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+                </form>
+            </div>
+            <div class="row3-bzh dataSearch" style="width:50%">
+                <dt class="fwb ml5">专业录取分数线</dt>
+                <form target="_blank" action="<?php echo arU('Index/professionalSelectInfo'); ?>" id="roe-fraction" class="clearfix">
+                    <select name="lb" class="form-control input-sm">
+                        <option value='-1' >专业层次</option>
+                        <option value="0">本科</option>
+                        <option value="1">专科</option>
+                    </select>
+                    <select name="xk" class="form-control input-sm">
+                        <option value='-1'>专业学科</option>
+                    </select>
+                    <select name="ml" class="form-control input-sm">
+                        <option value='-1'>专业门类</option>
+                    </select>
+                    <select name="dm" class="form-control input-sm">
+                        <option value='-1'>专业名称</option>
+                    </select>
+                    <!-- <a href="<?php echo arU('Index/professionalSelect'); ?>" class="btn btn-info btn-sm right mr20 mt5"><i class="fa fa-search"></i>&nbsp;查询</a> -->
+                    <input type="submit" class="btn btn-info btn-sm right mr20 mt5" value="查询">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="xzlh-i-video">
+        <div class="xzlh-v-title clearfix">
+            <h3>循证讲堂</h3>
+            <div class="xzlh-v-tap">
+                <?php foreach ($class as $class): ?>
+                    <a href="<?php echo arU('Index/videolist', array('cid'=>$class['cid']))?>">
+                    <?php echo $class['name']; ?>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <div class="xzlh-l-list clearfix">
+            <?php foreach($video as $video): ?>
+            <div class="xzlh-cover" id="">
+                <div class="xzlh-wrap">
+                    <a target="_blank" class="wrap" href="<?php echo arU('Index/videodetail', array('vid' => $video['aid'])) ?>" data-href="/course/introduction/1218004.htm" data-index="1" data-name="<?php echo $video['title']; ?>">
+                        <div class="img">
+                            <div class="xzlh-pic">
+                                <img class="imgPic" src="<?php echo $video['videoimg']?>" data-originsrc="http://imgsize.ph.126.net/?enlarge=true&amp;imgurl=http://nos.netease.com/edu-image/846B6C7A0DD1455ACCE8F88C00B71FF4.png?imageView&amp;thumbnail=225y142&amp;quality=100_225x142x1x95.png?imageView&amp;thumbnail=225y142&amp;quality=100" alt="<?php echo $video['title']; ?>" id="videoid">
+                                <div class="xzlh-l-watch">
+                                    <!-- <span class="xzlh-l-watch1">1课</span> -->
+                                    <span class="xzlh-l-watch2">
+                                        <i class="glyphicon glyphicon-eye-open"></i>&nbsp;<i><?php echo $video['fnums']; ?></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <h3 class="word-lf"><?php echo $video['title']; ?></h3>
+                            <div class="orgName word-lf"><?php ;echo $video['desc']; ?></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="tac addmore"><a href="<?php echo arU('Index/videolist'); ?>" target="_blank">更多…</a></div>
+    </div>
+    <div class="clearfix" style="<!-- height: 310px; -->">
+        <h3 style="border-top:10px double #ccc;" class="fwb clearfix pr mt10"><span class="dib pr line-double-bzh">成功案例</span></h3>
+        <div class="main3-bzh main3-bzh-sucCase clearfix auto mb20">
+            <?php
+
+             foreach ($successCases as $key => $cgal) {
+                # code...
+            ?>
+                <div class="row4-bzh tac">
+                    <img <?php if($cgal[ 'articlepic']):?>src="<?php echo $cgal['articlepic'];?>"<?php else :?> src="<?php echo arCfg('PATH.PUBLIC'); ?>img/reg_bg.jpg"<?php endif;?> alt="" class="img-circle img-index1-bzh img-thumbnail">
+                                    <dl class="word-width-bzh">
+                                        <dt class="fcl fwb mt10 wt word-en"><?php echo $cgal['title'];?></dt>
+                                        <dd class="wc word-en" style="height:85px;"><?php echo $cgal['content'];?></dd>
+                                        <dd><a href="<?php echo arU('System/Detail',array('aid'=>$cgal['aid']));?>" class="fcl">查看详情》</a></dd>
+                                    </dl>
+                </div>
+                <?php } ?>
+        </div>
+        <div class="tac addmore"><a href="<?php echo arU('System/index'); ?>">更多…</a></div>
+    </div>
+    <h3 style="border-top:10px double #ccc;" class="fwb clearfix pr mt30"><span class="dib pr line-double-bzh">专家咨询</span></h3>
+    <h3 style="border-top:2px solid #222;" class="pr mt30 clearfix tac"><span class="dib pr line-solid-bzh fcb">循证高考志愿专家一对一服务</span></h3>
+    <div class="clearfix" style="padding-left:10px;">
+        <?php foreach ($experts as $expert) {
+            # code...
+        ?>
+            <div class="row3-bzh roe-row3">
+                <div class="clearfix">
+                    <img src="<?php echo $expert['headpic']; ?>" alt="" class="img-index1-bzh img-circle img-thumbnail left">
+                    <div style="top:20px;" class="pr fwb ml20 dib">
+                        <span class=" dib fs3 mb5"><?php echo $expert['name'];?></span>
+                        <em style="display:block;margin-bottom:15px;">vip咨询师</em>
+                        <input type="submit" value="预约" class="btn btn-info bg1-bzh" style="border:0;" onclick="expertf('<?php echo $expert['eid']; ?>');">
+                    </div>
+                </div>
+                <p class="word-en wc " style="width: 240px;height:38px;">
+                    <?php echo $expert['shortdes'];?>
+                </p>
+                <!-- <div class="tac roe-volunteer">
+                    <input type="submit" value="预约" class="btn btn-info bg1-bzh btn-lg" style="border:0;" onclick="expertf('<?php echo $expert['eid']; ?>');">
+                </div> -->
+            </div>
+            <?php }?>
+
+    </div>
+    <div class="tac addmore"><a href="<?php echo arU('Index/expertConsultation'); ?>">更多…</a></div>
+    <h3 style="border-top:10px double #ccc;" class="fwb clearfix pr mt30"><span class="dib pr line-double-bzh">高考资讯</span></h3>
+    <div class="clearfix" style="padding-bottom:10px;">
+        <?php foreach ($articelsIndexs as $articles): ?>
+            <div style="width: 250px;padding:0 10px;" class="left">
+            <dt style="border-top:1px solid #ccc;" class="pr mt10 clearfix"><span class="dib pr line-solid-dt-bzh fcb"><a href="<?php echo arU('Article/list', array('cid' => $articles['cid'])); ?>"><?php echo $articles['name'] ?></a></span></dt>
+            <ul class="fs12px-bzh pl20 word-lf">
+                <?php foreach ($articles['articles'] as $article) :
+
+               ?>
+                    <li class="roe-hidden">
+                        <a target="_blank" href="<?php echo arU('Article/detail', array('aid' => $article['aid'])); ?>">
+                            <?php echo $article['title'];?>
+                        </a>
+                    </li>
+                <?php
+                endforeach;
+                ?>
+            </ul>
+        </div>
+        <?php endforeach ?>
+    </div>
+</div>
+<script>
+bannerSlider('.slider1',5);
+// slider(".slider1", 5, "#56ABE4", "#ccc", "center");
+textArea(".wt", 24, 1);
+textArea(".wc", 55, 2);
+textArea(".wc-li", 18, 2);
+textArea(".wc-span", 38, 2);
+</script>
+<script type="text/javascript">
+$(function() {
+    $('.login_index').find('input[name=logining]').click(function() {
+        var name = $('.login_index').find('input[name=name]').val();
+        var pwd = $('.login_index').find('input[name=pwd]').val();
+        var rem = $('#rememberpass').is(':checked');
+        var data = {
+            'name': name,
+            'pwd': pwd,
+            'rem': rem
+        };
+        $.post("<?php echo arU('Index/loginMang')?>", data, function(ev) {
+            if (ev.success == '1') {
+                window.location.href = '<?php echo arU('User/index'); ?>';
+            } else {
+                layer.msg(ev.ret_msg, 2, -1);
+            }
+        }, 'json');
+    });
+});
+
+//最新资讯滚动
+news($('#roe-lb'));
+
+$(document).ready(function() {
+
+    // tab选取
+    $(".tabsystem").find('.system').click(function() {
+        if ($(this).index() === 0) {
+            $('.stystemcurrent').html('一二三诊模拟填报系统');
+        } else {
+            $('.stystemcurrent').html('四川高考志愿智能推荐系统');
+        }
+        $('.tabsystem .system').removeClass('selected');
+        $(this).addClass('selected');
+    });
+
+    //院校名称
+    yxnamesearch('<?php echo AR_SERVER_PATH; ?>Api/areaSchools?');
+
+    //院校投档分数线查询判断
+    //panduan('#roe-school','km','pc','yxaddress','cid');
+    $('#roe-school').submit(function(event) {
+        return panduan('#roe-school','km','pc','yxaddress','cid');
+        //return false;
+    });
+
+    //专业录取分数线判断
+    $('#roe-fraction').submit(function(event) {
+        return panduan('#roe-fraction','dm','xk','ml','lb');
+    });
+    //panduan('#roe-fraction','dm','xk','ml','lb');
+
+    //学科
+    zylqsearchfn('lb','<?php echo AR_SERVER_PATH; ?>Api/majorXks?','xk','xk','专业学科');
+
+    //门类
+    zylqsearchfn('xk','<?php echo AR_SERVER_PATH; ?>Api/majorMls?','ml','ml','专业门类');
+
+    //专业名称
+    zylqsearchfn('ml','<?php echo AR_SERVER_PATH; ?>Api/majorsByMl?','dm','mname','专业名称');
+});
+</script>

@@ -1,0 +1,888 @@
+<div class="system-title pl20 pt10 pb10 clearfix">
+    <h2 class="left"><i class="fa fa-gear"></i>&nbsp;四川高考志愿智能填报系统</h2>
+    <ul class="hmenu right">
+        <li>输入真实高考成绩</li>
+        <li>选择填报批次</li>
+        <li class="selected">选择院校专业</li>
+        <li>生成模拟志愿表</li>
+    </ul>
+</div>
+<hr>
+<h4 class="tac fwb fc8-bzh mt20 mb20">四川省2016年<span class="scType">提前批</span>学校志愿智能模拟</h4>
+<div class="bge-bzh pp10-bzh ml20 mr20 mb10">
+    <span class="fwb mr20">您的高考成绩</span> 科类：
+    <span class="fc6-bzh mr20 s-subject"><?php echo arRequest('km'); ?></span> 分数：
+    <span class="fc6-bzh mr20 s-score"><?php echo arRequest('score'); ?></span>位次：
+    <span class="fc6-bzh mr20 s-rank"><script>$(function(){$('.s-rank').text($.cookie('rank'));})</script></span>
+</div>
+<table style="width: 695px;" class="tac table-bordered auto fs14px-bzh">
+    <tr class="fwb">
+        <th style="width: 50px;"></th>
+        <th style="width: 270px;">学校<i class="fa fa-question-circle quest ml10 mr10 quest-s"></i><span class="mfc">志愿知识</span></th>
+        <th style="width: 270px;">专业<i class="fa fa-question-circle quest ml10 mr10 quest-p"></i><span class="mfc">志愿知识</span></th>
+        <th style="width: 80px;">是否服从
+            <br>专业调配</th>
+    </tr>
+    <tr class="xzlh-zylist">
+        <!-- A志愿 -->
+        <td>A
+            <br>志
+            <br>愿</td>
+        <td class="item-bzh pt10 vat-bzh">
+            <input type="text" style="width: 185px;height: 30px;" name="schoolname" id="" class="bdr">
+            <button class="btn btn-info btn-sm type-Volunteer" value="A">选择A志愿</button>
+            <span class="schoolMes" value="A" style="display:none;">
+                <ul class="left tal jgz lh-tqpinfo">
+                    <li class="mt10">学校名称：<span class="c-name fwb"></span></li>
+                    <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                    <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                    <!--<li style="display: none;">录取概率：<span class="odds" value="A"></span></li>-->
+                </ul>
+            </span>
+            <span style="line-height: 25px;" class="fa mt10 ml10 mr10 alert alert-warning fcr message" value="A"><i class="fa fa-info-circle"></i>&nbsp;点击按钮，系统会为您智能推荐适合作为A志愿的学校</span>
+        </td>
+        <td class="item-bzh">
+            <ul class="zymk" value="A">
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">1.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="1">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">2.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="2">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">3.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="3">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">4.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="4">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">5.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="5">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se mb10">
+                    <span class="fwb fc8-bzh">6.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="6">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i></div>
+                </li>
+            </ul>
+            <!-- <hr>
+            <button class="w80 btn btn-default mb10">点此智能排序专业</button> -->
+        </td>
+        <td class="diaopei">
+            <label>
+                <input type="radio" name="checkA" style="margin-bottom: 2px;" value="是" checked>&nbsp;是</label>
+            <br>
+            <br>
+            <label>
+                <input type="radio" name="checkA" style="margin-bottom: 2px;" value="no">&nbsp;否</label>
+        </td>
+    </tr>
+    <tr class="xzlh-zylist">
+        <!-- B1志愿 -->
+        <td>B1
+            <br>志
+            <br>愿</td>
+        <td class="item-bzh pt10 vat-bzh">
+            <input type="text" style="width: 185px;height: 30px;" name="schoolname" id="" class="bdr ml3">
+            <button class="btn btn-info btn-sm type-Volunteer" value="B1">选择B1志愿</button>
+            <span class="schoolMes" value="B1" style="display:none;">
+                <ul class="left tal jgz lh-tqpinfo">
+                    <li class="mt10">学校名称：<span class="c-name fwb"></span></li>
+                    <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                    <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                    <!--<li>录取概率：<span class="odds" value="A"></span></li>-->
+                </ul>
+            </span>
+            <span style="line-height: 25px;" class="fa mt10 ml10 mr10 alert alert-warning fcr" value="B1"><i class="fa fa-info-circle"></i>&nbsp;点击按钮，系统会为您智能推荐适合作为B1志愿的学校</span>
+        </td>
+        <td class="item-bzh">
+            <ul class="zymk" value="B1">
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">1.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="1">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">2.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="2">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">3.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="3">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">4.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="4">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">5.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="5">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se mb10">
+                    <span class="fwb fc8-bzh">6.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="6">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i></div>
+                </li>
+            </ul>
+            <!-- <hr>
+            <button class="w80 btn btn-default mb10">点此智能排序专业</button> -->
+        </td>
+        <td class="diaopei">
+            <label>
+                <input type="radio" name="checkB" style="margin-bottom: 2px;" value="是" checked>&nbsp;是</label>
+            <br>
+            <br>
+            <label>
+                <input type="radio" name="checkB" style="margin-bottom: 2px;" value="否">&nbsp;否</label>
+        </td>
+    </tr>
+    <tr class="xzlh-zylist">
+        <!-- B2志愿 -->
+        <td>B2
+            <br>志
+            <br>愿</td>
+        <td class="item-bzh pt10 vat-bzh">
+            <input type="text" style="width: 185px;height: 30px;" name="schoolname" id="" class="bdr ml3">
+            <button class="btn btn-info btn-sm type-Volunteer" value="B2">选择B2志愿</button>
+            <span class="schoolMes" value="B2" style="display:none;">
+                <ul class="left tal jgz lh-tqpinfo">
+                    <li class="mt10">学校名称：<span class="c-name fwb"></span></li>
+                    <li class="mt10">学校所在地：<span class="scarea"></span></li>
+                    <li class="xbj clearfix mt10">历年录取：<span><a class="sc-detail" target="_blank"><i class="fa fa-bar-chart"></i></a></span></li>
+                    <li style="display:none;">录取概率：<span class="odds" value="A"></span></li>
+                    <!--<li>录取概率：<span class="odds" value="A"></span></li>-->
+                </ul>
+            </span>
+            <span style="line-height: 25px;" class="fa mt10 ml10 mr10 alert alert-warning fcr" value="B2"><i class="fa fa-info-circle"></i>&nbsp;点击按钮，系统会为您智能推荐适合作为B2志愿的学校</span>
+        </td>
+        <td class="item-bzh">
+            <ul class="zymk" value="B2">
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">1.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="1">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">2.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="2">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">3.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="3">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">4.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="4">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se">
+                    <span class="fwb fc8-bzh">5.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="5">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i><i class="fa fa-arrow-circle-down czdown" title="下移"></i></div>
+                </li>
+                <li class="mt10 xzlh-se mb10">
+                    <span class="fwb fc8-bzh">6.</span>
+                    <input readonly="readonly" type="text" style="width: 185px;height: 30px;" name="" id="" class="ml5 mr5 zy-name">
+                    <button class="btn btn-default btn-sm profession" value="6">选择</button>
+                    <div class="czan" style="display:none;"><i class="fa fa-times-circle mr5 czdel" title="删除"></i><i class="fa fa-arrow-circle-up mr5 czup" title="上移"></i></div>
+                </li>
+            </ul>
+            <!-- <hr>
+            <button class="w80 btn btn-default mb10">点此智能排序专业</button> -->
+        </td>
+        <td class="diaopei">
+            <label>
+                <input type="radio" name="checkC" style="margin-bottom: 2px;" value="是" checked>&nbsp;是</label>
+            <br>
+            <br>
+            <label>
+                <input type="radio" name="checkC" style="margin-bottom: 2px;" value="否">&nbsp;否</label>
+        </td>
+    </tr>
+</table>
+<div class="iback mt20 mb20 ml20 tac">
+    <a href="<?php echo arU('User/simulationSystemTwoInfo'); ?>?score=<?php echo arRequest('score'); ?>&km=<?php echo arRequest('km'); ?>">返回批次选择</a>
+    <!-- <a href="javascript:history.back();">返回批次选择</a> -->
+    <a href="javascript:" class="saveForm ml20">保存志愿表单</a>
+</div>
+<!-- 推荐院校 -->
+<div id="zytb" class="clear ml20 mr20">
+    <h4 class="fwb fc8-bzh mt10 mb20">以下学校适合作为<span class="name-zy"></span>志愿填报，请手动选择：</h4>
+    <div class="alert alert-warning">
+        <p class="fsy"><i class="fa fa-info-circle mr10 fcr"></i>1、下面推荐的是对您有意义的学校，过于冒险和过于保守的学校不会被推荐；</p>
+        <p class="mly">2、投档概率为系统估算，仅供考生和家长参考，不代表最终实际投档结果！</p>
+    </div>
+    <div class="mb10 clearfix sxys">
+        <h4 class="fwb fc8-bzh mb5">筛选条件：</h4>
+        <div class="ml30">
+            <p>所在地区：<span class="aname fcr">所有</span></p>
+            <p>院校名称：<span class="yxname fcr">所有</span></p>
+        </div>
+        <div class="ml30 mt10" style="display:none;">
+            <label>概率类型：</label>
+            <button class="btn btn-info btn-sm mr5 tabType" value="a">所 有</button>
+            <button class="btn btn-info btn-sm mr5 mr5 tabType" value="c">冲一冲</button>
+            <button class="btn btn-info btn-sm ml5 mr5 tabType" value="w">稳一稳</button>
+            <button class="btn btn-info btn-sm ml5 mr5 tabType" value="b">保一保</button>
+            <button class="btn btn-info btn-sm ml5 mr5 tabType" value="s">守一守</button>
+        </div>
+    </div>
+    <table class="table-bordered table-w tac w100 fs14px-bzh minw" id="school-inform">
+        <thead>
+            <tr class="bg3-bzh fcw">
+                <th style="width: 15%;height: 40px;">学校名称</th>
+                <th style="width:5.25%;">全国排名</th>
+                <th style="width:9%;">所在地<i id="area-chioce" class="fa fa-chevron-circle-down ml5" value="open"></i>
+                <div id="all-area" class="clearfix tal clear"><div class="Areas"></div><div class="area-header"><button class="btn btn-info btn-sm search searcharea"><i class="fa fa-search"></i>&nbsp;搜索</button></div></div>
+                </th>
+                <th style="width:5.25%;">历年录取</th>
+                <th style="width:5.25%;">2015年<br/>录取位次</th>
+                <th style="width:5.25%;">2014年<br/>录取位次</th>
+                <th style="width:5.25%;">2013年<br/>录取位次</th>
+                <th style="width:5.25%;">近三年平均录取位次</th>
+                <th style="width:5.25%;">2015年录取线差</th>
+                <th style="width:5.25%;">2014年录取线差</th>
+                <th style="width:5.25%;">2013年录取线差</th>
+                <th style="width:5.25%;">近三年平均录取线差</th>
+                <th style="width:5.25%;">2015年<br/>招生计划</th>
+                <th style="width:5.25%;">2014年<br/>招生计划</th>
+                <th style="width:5.25%；">2013年<br/>招生计划</th>
+                <!--<th style="width:5.25%;">2016年投档概率估算</th>-->
+                <th style="width:13%;">操作</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="mask-list clearfix mt10 mb20">
+        <div class="mb20 mhtab">
+        </div>
+        <div class="mht">
+            <img class="bgt"/>
+        </div>
+        <div class="mask tac lh-tjyx" style="left:50%;">
+            <p class="sum-school">本志愿为您推荐的院校共有<em></em>所</p>
+            <a href="javascript:">
+                <div class="xzcard">圆梦卡用户查看全部推荐院校</div>
+            </a>
+            <p class="pb10">
+                <a href="<?php echo arU('Index/vipCard'); ?>">圆梦卡介绍<i class="fa fa-angle-right ml10"></i></a>
+                <a href="javascript:" class="ml20">他们这么说<i class="fa fa-angle-right ml10"></i></a>
+            </p>
+        </div>
+    </div>
+    <div class="none-mes clear mt20">
+        <i class="fa fa-frown-o"></i><span class="ml10">您搜索的院校不存在或者输入有误！</span>
+    </div>
+    <div class="ssearch tac pt20 bb pb50"><!-- 搜索院校 -->
+        <div class="item-bzh">
+            <span class="fs16px-bzh">搜索院校：</span>
+            <input type="text" name="" id="sc-name" class="pp5-bzh ml10 mr10" style="width: 400px;">
+            <button class="btn btn-info btn-sm search searchyxname" style="width: 80px;"><i class="fa fa-search"></i>&nbsp;搜索</button>
+        </div>
+        <!-- <div class="sum-yb mb20">
+            <label class="fs16px-bzh">所在地区：</label>
+            <div class="reg-r-bzh dib tal">
+                <select id="province" name="province" style="min-width:80px;">
+                    <option selected="selected" value="0">请选择</option>
+                </select>
+            </div>
+            <button class="btn btn-info btn-sm search" style="width: 80px;"><i class="fa fa-search"></i>&nbsp;搜索</button>
+        </div> -->
+    </div>
+</div>
+
+<!-- 推荐院校专业 -->
+<div id="zyxz" class="clear ml20 mr20">
+    <h4 class="fwb fc8-bzh mt10 mb20">以下为<span class="tyVolunteer"></span>2015年招生专业，请手动选择：</h4>
+    <div class="alert alert-warning">
+        <p class="fsy"><i class="fa fa-info-circle mr10 fcr"></i>1、以下专业招生计划可能会有变动，以四川省教育考试院公布的为准。</p>
+        <p class="mly">2、实际填报时，请务必对照最新《招生计划》确认招生专业和代码；</p>
+    </div>
+    <table class="table-bordered table-w tac w100 mb50 fs14px-bzh" id="profession-inform">
+        <thead>
+            <tr class="bg3-bzh fcw">
+                <th style="width: 30%;height: 40px;">专业名称</th>
+                <th>专业类别</th>
+                <th>2015年最低分</th>
+                <th>2015年平均分</th>
+                <th>2015年录取位次</th>
+                <th>2015年录取人数</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</div>
+
+<!-- 填报学校顺序提示 -->
+<div id="m-order" class="m-card clear">
+    <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+    <div class="m-content mt30 mb30 ml50 clearfix">
+        <i class="fa fa-frown-o ml20 mr10 left"></i>
+        <div class="left">请先选择前一学校，依次选择填报！</div>
+    </div>
+    <div class="m-menu clearfix">
+        <a href="javascript:void(0);" class="right pb5 pt5">
+            <div class="mr10" onclick="ClosePage(cindex);">重新选择</div>
+        </a>
+    </div>
+</div>
+
+<!-- 填报专业顺序提示 -->
+<div id="z-order" class="m-card clear">
+    <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+    <div class="m-content mt30 mb30 ml50 clearfix">
+        <i class="fa fa-frown-o ml20 mr10 left"></i>
+        <div class="left">请先选择前一学校专业，依次选择填报！</div>
+    </div>
+    <div class="m-menu clearfix">
+        <a href="javascript:void(0);" class="right pb5 pt5">
+            <div class="mr10" onclick="ClosePage(cindex);">重新选择</div>
+        </a>
+    </div>
+</div>
+
+<!-- 填报专业顺序提示 -->
+<div id="t-order" class="m-card clear">
+    <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+    <div class="m-content mt30 mb30 ml50 clearfix">
+        <i class="fa fa-frown-o ml20 mr10 left"></i>
+        <div class="left">请先选择学校，再选择专业！</div>
+    </div>
+    <div class="m-menu clearfix">
+        <a href="javascript:void(0);" class="right pb5 pt5">
+            <div class="mr10" onclick="ClosePage(cindex);">重新选择</div>
+        </a>
+    </div>
+</div>
+
+<!-- 填报超时提示 -->
+<div id="m-timeout" class="m-card clear">
+    <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+    <div class="m-content mt30 mb30 ml50 clearfix">
+        <i class="fa fa-exclamation-triangle ml20 mr10 left"></i>
+        <div class="left">您此次填志愿表超时，请重新开始！</div>
+    </div>
+    <div class="m-menu clearfix">
+        <a href="<?php echo arU('User/index'); ?>" class="right pb5 pt5">
+            <div class="mr10">返回</div>
+        </a>
+    </div>
+</div>
+
+<!-- 历年录取学校信息提示 -->
+<div id="ln-detail" class="m-card clear">
+    <h4 class="fwb fc8-bzh pt10 pb10 pl20">信息</h4>
+    <div class="m-content mt30 mb30 ml50 clearfix">
+        <i class="fa fa-times-circle ml20 mr10 left"></i>
+        <div class="left">历年录取情况仅限已购买圆梦卡用户查看！</div>
+    </div>
+    <div class="m-menu clearfix">
+        <a href="javascript:void(0);" class="right pb5 pt5 mfsy">
+            <div class="mr10" onclick="ClosePage(cindex);">返回</div>
+        </a>
+        <a href="<?php echo arU('Index/vipCard'); ?>" class="right pb5 pt5">
+            <div class="mr10">没有圆梦卡？购买</div>
+        </a>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function(){
+        $('.s-subject').text(kmnum("<?php echo arRequest('km'); ?>"));
+        var score = "<?php echo arRequest('score'); ?>",
+            km = "<?php echo arRequest('km'); ?>",
+            pc = "<?php echo arRequest('pc'); ?>",
+            arr = [],
+            arrobj = {},
+            schoolObj = {};
+            km = kms(km);
+        // 获取志愿学校
+        $('.type-Volunteer').click(function(){
+            // 判断依次选择志愿
+            if ($(this).parents('.xzlh-zylist').index() > 1) {
+                var str = $(this).parents('.xzlh-zylist').prev('.xzlh-zylist').find('.zymk li').eq(0).find('input').val();
+                if (str == '') {
+                    layer.msg('请依次选择志愿！',{
+                        time: 0,
+                        btn: ['确定'],
+                        yes: function(index){
+                            layer.close(index);
+                        }
+                    })
+                    return;
+                }
+            }
+
+            // 获取请求学校数据
+            var type = $(this).val(),
+                dat = {
+                    score: score,
+                    km: km,
+                    type: type
+                },
+                _this = $(this);
+            arr = [];
+            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zySchoolListTqpRel', 'POST', dat, selectzy);
+            function selectzy(dat){
+                var html = '';
+                if (dat.ret_code == 1000 ) {
+                    html = htmlStr(dat, type);
+                    layeralt( html, dat, _this, type );
+                }else{
+                    layer.msg(dat.error_msg,{
+                        time: 1500
+                    });
+                }
+            }
+        });
+
+        function htmlStr(dat, type){
+            var html = '';
+            for (var i = 0; i < dat.total_lines; i++) {
+                html += '<tr style="height: 55px;">\
+                            <td class="tal pl10 school-name">'+dat.data[i].name+'</td>\
+                            <td>\
+                                <div class="ml10 mr10 fcb br3">\
+                                    <span class="pm">'+ tdmc(dat.data[i].pm)+'</span>\
+                                </div>\
+                            </td>\
+                            <td class="">'+dat.data[i].dy+'</td>\
+                            <td><a class="sc-detail" data-sname="'+ dat.data[i].name +'" target="_blank" style="color:#0078D7"><i class="fa fa-bar-chart"></i></a></td>\
+                            <td class="lqwc15">'+ tdmc(dat.data[i].lqwc15)+'</td>\
+                            <td class="lqwc14">'+tdmc(dat.data[i].lqwc14)+'</td>\
+                            <td class="lqwc14">'+tdmc(dat.data[i].lqwc13)+'</td>\
+                            <td class="plqwc16">'+tdmc(dat.data[i].plqwc16)+'</td>\
+                            <td class="fc15">'+tdmc(dat.data[i].fc15)+'</td>\
+                            <td class="fc14">'+ tdmc(dat.data[i].fc14)+'</td>\
+                            <td class="fc14">'+ tdmc(dat.data[i].fc13)+'</td>\
+                            <td class="pfc16">'+tdmc(dat.data[i].pfc16) +'</td>\
+                            <td class="zsjh15">'+ tdmc(dat.data[i].zsjh15)+'</td>\
+                            <td class="zsjh14">'+tdmc(dat.data[i].zsjh14)+'</td>\
+                            <td class="zsjh13">'+ tdmc(dat.data[i].zsjh13)+'</td>\
+                            <!--<td>\
+                                <div class="wbox">\
+                                    <div class="nbox">'+ tdmc(dat.data[i].odds)+'%</div>\
+                                </div>\
+                            </td>-->\
+                            <td class="xzlh-zybtn">\
+                                <button class="btn btn-info btn-sm pl10 pr10 choice-school" data-value="'+type+'" data-dy="'+dat.data[i].dy+'" data-schoolname="'+dat.data[i].name+'" data-odds="'+dat.data[i].odds+'">选为<span class="scsum">'+type+'</span>志愿</button>\
+                                <span class="scupdate clear"><i class="fa fa-check-circle mr5"></i>已选为<span class="scid"></span>志愿</sapn>\
+                            </td>\
+                        </tr>';
+            }
+            return html;
+        }
+
+        function layeralt(data, dat, _this, type){
+            layer.open({
+                type: 1,
+                title: false,
+                shade: 0.6,
+                closeBtn: 2,
+                scrollbar: false,
+                area: ['70%', '95%'],
+                content: $('#zytb'),
+                success: function(elem){
+                    $(elem).click(function(){
+                        $('#all-area').slideUp();
+                    });
+                    $('#all-area').click(function(event){
+                        event.stopPropagation();
+                    })
+                    // 填充数据
+                    $(elem).find('#school-inform tbody').html(data);
+                    glys('.tabType','a');
+                    // 判断学校是否已选
+                    for(var prot in schoolObj){
+                        if ( schoolObj[prot] ) {
+                            $('.school-name').each(function(){
+                                if ($(this).text() == schoolObj[prot] ) {
+                                    $(this).siblings('.xzlh-zybtn').find('button').hide().next('span').show().find('.scid').text(prot);
+                                }
+                            });
+                        }
+                    }
+
+                    $('.lh-tjyx').css('margin-left',function(){
+                        return -($(this).width()/2);
+                    });
+                    // 点击选为志愿
+
+                    $(elem).on('click','.choice-school',function(){
+                        var schoolname = $(this).data('schoolname')
+                        if (_this.html() === '重新选择') {
+                                if (schoolname !== _this.prev().val() ) {
+                                    _this.parents('.xzlh-zylist').find('.zymk').find('input').val('').next().html('选择').attr('falg','no').next('.czan').hide();
+                                    _this.parents('.xzlh-zylist').find('.czan').hide().prevAll('input').css('width','185px');
+                                    arrobj[type] = [];
+                                }
+                            }
+                        schoolObj[type] = schoolname;
+                        _this.prev('input[name=schoolname]').val( schoolname );
+                        var schType = $('.schoolMes[value='+type+']');
+                        schType.show();
+                        schType.find('.c-name').text( schoolname );
+                        schType.find('.scarea').text( $(this).data('dy') );
+                        schType.find('.odds').text( $(this).data('odds') );
+                        schType.find('.sc-detail').data('sname',schoolname);
+
+                        _this.html('重新选择');
+                        setTimeout(function(){
+                            layer.closeAll();
+                        },100);
+                    });
+
+                    $('.sum-school em').text(dat.total_lines);
+                    // 条件筛选
+                    $('.tabType').click(function(event){
+                        var tabType = $(this).attr('value');
+                        switch(tabType){
+                            case 'a':
+                                glys('.tabType',tabType);
+                                addyxmes(0,100);
+                                break;
+                            case 'c':
+                                glys('.tabType',tabType);
+                                addyxmes(0,39);
+                                break;
+                            case 'w':
+                                glys('.tabType',tabType);
+                                addyxmes(40,59);
+                                break;
+                            case 'b':
+                                glys('.tabType',tabType);
+                                addyxmes(60,84);
+                                break;
+                            case 's':
+                                glys('.tabType',tabType);
+                                addyxmes(85,100);
+                                break;
+                        }
+                        event.stopPropagation();
+                    });
+                    var area,name;
+                    $('.searcharea').click(function(event){
+                        area = [];
+                        $(".Areas label input[type='checkbox']").each(function(index){
+                            if($(".Areas label input[type='checkbox']").eq(index).is(':checked')){
+                                area.push($.trim($(".Areas label input[type='checkbox']").eq(index).parent().text()));
+                            }
+                        });
+                        var dat = {
+                            score: score,
+                            km: km,
+                            type: type,
+                            sanme: name,
+                            area: area.join(',')
+                        }
+                        if (area.length != 0) {
+                            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zySchoolListTqpRel', 'POST', dat, function(data){
+                                if (data.ret_code == 1000) {
+                                    $(elem).find('#school-inform tbody').html(htmlStr(data, type));
+                                    $('.sum-school em').text(data.total_lines);
+                                    $('.aname').text(area.join(','));
+                                }else {
+                                    layer.msg('抱歉，未能查询到相关数据',{time: 2000});
+                                }
+                            });
+                            $('#all-area').slideUp();
+                        }else{
+                            layer.msg('至少选择一个地区！',{time:1500});
+                        }
+                        event.stopPropagation();
+                    });
+
+                    $('.searchyxname').click(function(event){
+                        name = $(this).prev().val();
+                        var dat = {
+                            score: score,
+                            km: km,
+                            type: type,
+                            sname: name,
+                            area: area.join(',')
+                        }
+                        if (name != '') {
+                            ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zySchoolListTqpRel', 'POST', dat, function(data){
+                                if (data.ret_code == 1000) {
+                                    $(elem).find('#school-inform tbody').html(htmlStr(data, type));
+                                    $('.sum-school em').text(data.total_lines);
+                                    $('.yxname').text(name);
+                                }else {
+                                    layer.msg('抱歉，未能查询到相关数据,您搜索的院校不存在或者输入有误！',{time:2000})
+                                }
+                            });
+                        }
+                        event.stopPropagation();
+                    });
+                }
+            });
+
+            // vip才可以点击
+            var vip = false;
+            $('.sc-detail').click(function(event){
+                var reg = /^([\u4e00-\u9fa5]+)(\([\u4e00-\u9fa5]+\))*$/g;
+                //var reg = /\([\u4e00-\u9fa5]+\)/g;
+                var sname = $(this).data('sname');
+                var _this = $(this);
+                if (sname == '') {
+                    return;
+                }
+                //sname = sname.replace(reg,'');
+                sname = sname.replace(reg, function($0,$1){
+                    return $1;
+                });
+                if (!vip) {
+                    ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/ifVip', 'POST', '', function(data){
+                        if (data.ret_msg == '你是VIP用户') {
+                            vip = true;
+                            window.open('<?php echo arU("Index/schoolSelectInfo?name='+sname+'"); ?>','_blank');
+                            //_this.attr('href','<?php echo arU("Index/schoolSelectInfo?name='+sname+'"); ?>');
+                        }else{
+                            alert('VIP用户才能查看');
+                        }
+                    });
+                }else{
+                    window.open('<?php echo arU("Index/schoolSelectInfo?name='+sname+'"); ?>','_blank');
+                }
+                event.stopPropagation();
+            });
+        }
+
+        function addyxmes(num1,num2){
+            $('.nbox').each(function(){
+                if ( parseInt($(this).text()) > num2 || parseInt($(this).text()) < num1 ) {
+                    $(this).parents('tr').hide();
+                }else{
+                    $(this).parents('tr').show();
+                }
+            });
+        }
+
+        // 获取专业
+        $('.zymk button').click(function(){
+            var schoolname = $(this).parents('.xzlh-zylist').find('input[name=schoolname]').val(),
+                zytype =  $(this).parents('.xzlh-zylist').find('input[name=schoolname]').next('button').val();
+                dat = {
+                    sname: schoolname,
+                    pc: pc,
+                    km: km
+                },
+                _this = $(this);
+
+            if ( schoolname == '' ) {
+                layer.msg('请选择学校，再选择专业!', {
+                    time: 2000
+                });
+                return;
+            }else{
+                if ($(this).val() == 1) {
+                    if ($(this).attr('falg') != 'yes') {
+                        ajaxdata('<?php echo AR_SERVER_PATH; ?>Api/zhuanyeList', 'POST', dat, selectzhuanye);
+                    }else{
+                        selectzhuanye(callBackData);
+                    }
+                    //$(this).data('falg','yes');
+                }else{
+                    var falg = $(this).parents('.zymk').find('li').eq( $(this).val() - 2 ).find('button').attr('falg');
+                    if (falg != 'yes') {
+                        layer.msg('请依次选择专业',{
+                            time: 2000
+                        });
+                    }else{
+                        selectzhuanye(callBackData);
+                        // $(this).data('falg','yes');
+                    }
+                }
+            }
+
+            function selectzhuanye(dat){
+                callBackData = dat;
+                var html = '';
+                if (dat.ret_code == 1000 ) {
+                    for (var i = 0; i < dat.total_lines; i++) {
+                        html += '<tr style="height: 55px;">\
+                                    <td class="tal pl10 profession-name">'+dat.data[i].zyname+'</td>\
+                                    <td class="tac">'+dat.data[i].lb+'</td>\
+                                    <td class="tac">'+dat.data[i].lqf14+'</td>\
+                                    <td class="tac">'+dat.data[i].jf14+'</td>\
+                                    <td class="tac lqwc">'+dat.data[i].lqwc14+'</td>\
+                                    <td class="tac">'+dat.data[i].lqrs+'</td>\
+                                    <td class="tac xzlh-zyyes">\
+                                        <button class="btn btn-info btn-sm pl10 pr10 choice-profession">选为专业<span class="zysum"></span></button>\
+                                        <span class="zyupdate clear"><i class="fa fa-check-circle mr5"></i>已选为专业<span class="zyid"></span></span>\
+                                    </td>\
+                                </tr>';
+                    }
+                    zhuanyealt( html, _this, zytype);
+                }else{
+                    layer.msg(dat.error_msg,{
+                        time: 1500
+                    });
+                }
+            }
+        });
+
+        function zhuanyealt(html, _this, zytype){
+            layer.open({
+                type: 1,
+                title: false,
+                shade: 0.6,
+                closeBtn: 2,
+                scrollbar: false,
+                area: ['70%', '95%'],
+                content: $('#zyxz'),
+                success: function(elem){
+
+                    $(elem).find('#profession-inform').find('tbody').html( html );
+
+                    if (typeof arrobj[zytype] == 'object' && arrobj[zytype].length > 1) {
+                        for (var i = 1; i < arrobj[zytype].length; i++) {
+                            var ind = i;
+                            $('.profession-name').each(function(){
+                                if ( $(this).text() == arrobj[zytype][ind]) {
+                                    $(this).siblings('.xzlh-zyyes').find('button').hide();
+                                    $(this).siblings('.xzlh-zyyes').find('.zyupdate').show().find('span').text(i);
+                                }
+                            });
+                        }
+                    }
+
+                    $(elem).find('#profession-inform').find('tbody').find('button').click(function(){
+                        $(this).hide();
+                        $(this).next('span').show();
+                        _this.attr('falg','yes');
+                        _this.text('修改');
+                        _this.prev('input').val( $(this).parent().siblings('.profession-name').text() ).css('width','100px');
+                        arr[_this.val()] = $(this).parent().prevAll('.profession-name').text();
+                        arrobj[zytype] = arr;
+                        _this.next('.czan').show();
+                        setTimeout(function(){
+                            layer.closeAll();
+                        },100);
+                    });
+                }
+            });
+        }
+
+        $('.czdown').click(function(){
+            var prev = $(this).parent('.czan').siblings('input').val(),
+                next = $(this).parents('.xzlh-se').next().find('input').val();
+            if (next == '') {
+                $(this).parents('.xzlh-se').next().find('.czan').show().prev('button').text('修改').prev().css('width','100px');
+                $(this).parent().hide().prev('button').text('选择').prev().css('width','185px');
+            }
+            $(this).parents('.xzlh-se').next().find('input').val(prev);
+            $(this).parent('.czan').siblings('input').val(next);
+        });
+
+        $('.czup').click(function(){
+            var prev = $(this).parent('.czan').siblings('input').val(),
+                next = $(this).parents('.xzlh-se').prev().find('input').val();
+            if (next == '') {
+                $(this).parents('.xzlh-se').prev().find('.czan').show().prev('button').text('修改').prev().css('width','100px');
+                $(this).parent().hide().prev('button').text('选择').prev().css('width','185px');
+            }
+            $(this).parents('.xzlh-se').prev().find('input').val(prev);
+            $(this).parent('.czan').siblings('input').val(next);
+        });
+
+
+        //获取地区
+        AjaxURL('<?php echo AR_SERVER_PATH; ?>Api/provinceList','',pOption,'.Areas',sspage);
+        //地区选择
+        $('#area-chioce').click(function(){
+            $('#all-area').slideToggle();
+            $(".Areas label input[type='checkbox']").attr('checked',false);
+            if($(this).attr('value') == 'open'){
+                $(this).attr('value','off');
+                $(this).removeClass('fa-chevron-circle-down');
+                $(this).addClass('fa-chevron-circle-up');
+            }else{
+                $(this).attr('value','open');
+                $(this).removeClass('fa-chevron-circle-up');
+                $(this).addClass('fa-chevron-circle-down');
+            }
+            return false;
+        });
+        // $('#area-chioce').parent('th').click(function(){
+        //     $('#all-area').slideUp();
+        //     $(".Areas label input[type='checkbox']").attr('checked',false);
+        // })
+
+        //省option
+        function pOption(data,id){
+            for(var i=0;i<data.data.length;i++){
+                $(id).append('<label><input type="checkbox" value="'+data.data[i].region_id+'" id="area-name" />&nbsp;'+data.data[i].region_name+'</label>');
+            }
+        }
+        function sspage(){}
+
+        //概率类型选中样式
+        function glys(id,value){
+            $(id).each(function(index){
+                if($(id).eq(index).attr('value') == value){
+                    $(id).eq(index).animate({'fontSize':'16px'});
+                    $(id).eq(index).css({'backgroundColor':'#DB5242','border-color':'#DB5242'});
+                }else{
+                    $(id).eq(index).animate({'fontSize':'12px'});
+                    $(id).eq(index).css({'backgroundColor':'#005AAA','border-color':'#005AAA'});
+                }
+            });
+        }
+
+        $('.saveForm').click(function(){
+            var form = {};
+            var objForm = {};
+            $('.xzlh-zylist').each(function(index){
+                var type = $(this).find('.schoolMes').attr('value'),
+                    zyarr = [],obj={};
+                    form[type] = obj;
+                obj.schoolname = $(this).find('input[name=schoolname]').val();
+                obj.scarea = $(this).find('.schoolMes').find('.scarea').text();
+                obj.odds = $(this).find('.schoolMes').find('.odds').text();
+                obj.zytp = $(this).find('.diaopei').find('input[type=radio]:checked').val();
+                $(this).find('.xzlh-se').each(function(index){
+                    zyarr[index] = $(this).find('input').val();
+                });
+                obj.zylist = zyarr;
+            });
+            objForm.dataType = 'lh';
+            objForm.formData = form;
+            // window.localStorage.setItem('zdzyform',JSON.stringify(form));
+            $.cookie('tqpGkzyform',JSON.stringify(objForm),{path: '/'});
+            window.location.href = "<?php echo arU('user/gkmntqpsave') ?>?pc="+pc+"&km="+km+"&score="+score;
+        });
+    })
+</script>

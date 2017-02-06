@@ -1,0 +1,176 @@
+<ul class="page-sidebar-menu">
+   <li>
+      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+      <div class="sidebar-toggler hidden-phone"></div>
+      <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+   </li>
+   <li <?php if (arCfg('requestRoute.a_c') == 'Vip' ||arCfg('requestRoute.a_c') == 'User') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class="icon-group"></i>
+         <span class="title">会员管理</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+          <li <?php if (arCfg('requestRoute.a_a') == 'index' && arCfg('requestRoute.a_c') != 'Vip') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('User/index'); ?>">用户管理</a>
+         </li>
+      </ul>
+   </li>
+    <li <?php if (arCfg('requestRoute.a_c') == 'Nav') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Nav/index'); ?>">
+         <i class="icon-cogs"></i>
+         <span class="title">导航设置</span>
+      </a>
+   </li>
+
+   <li <?php if (arCfg('requestRoute.a_c') == 'Serials') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Serials/list'); ?>">
+         <i class="icon-bullhorn"></i>
+         <span class="title">序列号管理</span>
+      </a>
+   </li>
+
+    <li <?php if (arCfg('requestRoute.a_c') == 'Vcard') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Vcard/list'); ?>">
+         <i class="icon-bullhorn"></i>
+         <span class="title">激活码管理</span>
+      </a>
+   </li>
+
+   <li <?php if (arCfg('requestRoute.a_c') == 'Expert') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Expert/list'); ?>">
+         <i class="icon-bullhorn"></i>
+         <span class="title">专家管理</span>
+      </a>
+   </li>
+   <li <?php if (arCfg('requestRoute.a_c') == 'Yuyue') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Yuyue/list'); ?>">
+         <i class="icon-bullhorn"></i>
+         <span class="title">预约管理</span>
+      </a>
+   </li>
+   <li <?php if (arCfg('requestRoute.a_c') == 'Ad') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Ad/index'); ?>">
+         <i class="icon-bullhorn"></i>
+         <span class="title">广告管理</span>
+      </a>
+   </li>
+   <li <?php if (arCfg('requestRoute.a_c') == 'Chair') : ?>class="active"<?php endif; ?>>
+      <a href="<?php echo arU('Chair/index'); ?>">
+         <i class="icon-bullhorn"></i>
+         <span class="title">讲座报名管理</span>
+      </a>
+   </li>
+   <li <?php if (arCfg('requestRoute.a_c') == 'Article') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class="icon-cogs"></i>
+         <span class="title">文章管理</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+         <li <?php if (arCfg('requestRoute.a_a') == 'cat') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Article/cat'); ?>">文章分类</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'list') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Article/list'); ?>">文章列表</a>
+         </li>
+      </ul>
+   </li>
+
+   <li <?php if (arCfg('requestRoute.a_c') == 'Video') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class="icon-cogs"></i>
+         <span class="title">视频管理</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+         <li <?php if (arCfg('requestRoute.a_a') == 'cat') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Video/cat'); ?>">视频分类</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'list') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Video/list'); ?>">视频列表</a>
+         </li>
+      </ul>
+   </li>
+
+    <li <?php if (arCfg('requestRoute.a_c') == 'Order') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class=" icon-copy"></i>
+         <span class="title">订单管理</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+          <li <?php if (arCfg('requestRoute.a_a') == 'orderShow') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Order/orderShow'); ?>">订单支付详情</a></li>
+      </ul>
+   </li>
+
+   <li <?php if (arCfg('requestRoute.a_c') == 'Data') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class="icon-cogs"></i>
+         <span class="title">数据管理</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+         <li <?php if (arCfg('requestRoute.a_a') == 'yuanxiao') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/yuanxiao'); ?>">院校</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'zhuanye') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/zhuanye'); ?>">专业</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'search') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/search'); ?>">数据查询</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'section') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/section'); ?>">分段数据</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'zysearch') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/zysearch'); ?>">专业查询</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'userData') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/userData'); ?>">用户数据</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'ytsearch') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Data/ytsearch'); ?>">艺体类数据</a>
+         </li>
+      </ul>
+   </li>
+
+   <li <?php if (arCfg('requestRoute.a_c') == 'Config') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class="icon-cogs"></i>
+         <span class="title">全局配置</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+         <li <?php if (arCfg('requestRoute.a_a') == 'get') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Config/get'); ?>">配置文件</a>
+         </li>
+      </ul>
+   </li>
+
+    <li <?php if (arCfg('requestRoute.a_c') == 'Setting') : ?>class="active"<?php endif; ?>>
+      <a href="javascript:;">
+         <i class="icon-cogs"></i>
+         <span class="title">系统设置</span>
+         <span class="arrow "></span>
+      </a>
+      <ul class="sub-menu">
+         <li <?php if (arCfg('requestRoute.a_a') == 'changePass') : ?>class="active"<?php endif; ?>>
+            <a href="<?php echo arU('Setting/changePass'); ?>">更改密码</a>
+         </li>
+          <li <?php if (arCfg('requestRoute.a_a') == 'sysSetting'||arCfg('requestRoute.a_a') == 'setManager'): ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Setting/sysSetting');?>">网站属性</a>
+         </li>
+         <li <?php if (arCfg('requestRoute.a_a') == 'cListService'||arCfg('requestRoute.a_a') == 'cListManager') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Setting/cListService');?>">客服服务</a>
+         </li>
+		 <li <?php if (arCfg('requestRoute.a_a') == 'clearCache') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Setting/clearCache'); ?>">清除缓存</a>
+         </li>
+       <li <?php if (arCfg('requestRoute.a_a') == 'fLink') : ?>class="active"<?php endif; ?>>
+         <a href="<?php echo arU('Setting/fLink'); ?>">友情链接</a>
+         </li>
+      </ul>
+   </li>
+</ul>
